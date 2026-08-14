@@ -3,20 +3,22 @@
 import { useRouter } from "next/navigation";
 import { locales, type Locale } from "@/lib/locale";
 
+function setLocaleCookie(locale: Locale) {
+  document.cookie = `locale=${locale}; path=/; max-age=31536000`;
+}
+
 export default function LocaleSwitcher({ current }: { current: Locale }) {
   const router = useRouter();
-
-  function setLocale(locale: Locale) {
-    document.cookie = `locale=${locale}; path=/; max-age=31536000`;
-    router.refresh();
-  }
 
   return (
     <div className="flex gap-2 text-sm">
       {locales.map((locale) => (
         <button
           key={locale}
-          onClick={() => setLocale(locale)}
+          onClick={() => {
+            setLocaleCookie(locale);
+            router.refresh();
+          }}
           className={
             locale === current
               ? "font-semibold text-black underline dark:text-zinc-50"
