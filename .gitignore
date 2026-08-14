@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+.env.*
+!.env.example
+
+# prisma generated client
+packages/db/generated/
+
+# python
+apps/worker/__pycache__/
+apps/worker/.venv/
+apps/worker/*.egg-info/

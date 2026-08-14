@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Department {
+  id    String @id @default(uuid())
+  name  String
+  code  String @unique
+  users User[]
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  fullName     String
+  passwordHash String
+  role         String     @default("staff")
+  departmentId String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+  documents    Document[]
+  createdAt    DateTime   @default(now())
+}
+
+model Document {
+  id        String    @id @default(uuid())
+  code      String    @unique
+  titleVi   String
+  titleEn   String?
+  version   String    @default("1.0")
+  status    String    @default("draft")
+  ownerId   String
+  owner     User      @relation(fields: [ownerId], references: [id])
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+}
