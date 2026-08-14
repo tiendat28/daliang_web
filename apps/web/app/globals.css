@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Nền */
+  --color-page: #faf8f5;
+  --color-card: #fffdfb;
+  --color-subtle: #f5f1eb;
+  --color-panel: #fcfaf7;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Viền */
+  --color-border: #e7e2db;
+  --color-border-light: #f0ebe4;
+  --color-border-strong: #d6cfc5;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Chữ */
+  --color-strong: #1c1917;
+  --color-body: #44403c;
+  --color-muted: #78716c;
+  --color-faint: #a8a29e;
+  --color-dim: #57534e;
+
+  /* Highlight khớp từ khóa */
+  --color-mark: oklch(0.85 0.13 90);
+
+  /* Accent (cam đất) */
+  --color-accent: oklch(0.55 0.13 40);
+  --color-accent-hover: oklch(0.45 0.13 40);
+  --color-accent-subtle: oklch(0.55 0.13 40 / 0.1);
+
+  /* Trạng thái */
+  --color-warning-bg: oklch(0.8 0.14 85 / 0.35);
+  --color-warning-text: #78500a;
+  --color-confirm: oklch(0.5 0.11 155);
+
+  /* Huy hiệu loại file */
+  --color-doc: #2b579a;
+  --color-xls: #1d6f42;
+
+  /* Font */
+  --font-sans: var(--font-source-sans), sans-serif;
+  --font-mono: var(--font-source-code), monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-page);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+}
+
+mark {
+  background: var(--color-mark);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
 }
