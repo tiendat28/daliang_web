@@ -1,6 +1,9 @@
 # Daliang Web
 
-Hệ thống quản lý tài liệu nội bộ (kho tài liệu, tra cứu, xử lý OCR/preview) — monorepo gồm frontend Next.js, worker xử lý tài liệu bằng Python/Celery, và các package dùng chung.
+Monorepo chứa hai hệ thống độc lập:
+
+- **DLVC** (`apps/web/app/dlvc`) — website công khai + trang quản trị nội bộ cho Công ty TNHH Hóa chất Daliang VN. Landing page tại `/dlvc`, quản trị (nhân sự/tài liệu/hoá đơn) tại `/dlvc/admin` (yêu cầu đăng nhập, xem `apps/web/auth.ts`).
+- **Hạ tầng quản lý tài liệu nội bộ** (kho tài liệu, tra cứu, xử lý OCR/preview) — `apps/worker` (Python/Celery) + các model `Department/User/Document` trong `packages/db/schema.prisma`. Phần giao diện Next.js của hệ thống này đã được gỡ bỏ; hạ tầng backend vẫn còn để dùng lại sau nếu cần.
 
 ## Cấu trúc thư mục
 
@@ -59,4 +62,5 @@ Các script khác: `npm run build`, `npm run start`, `npm run lint`.
 ## Ghi chú
 
 - `apps/web` dùng Next.js 16 — một số API (vd. `usePathname`) có thay đổi so với bản trước, xem `apps/web/AGENTS.md`.
-- Phần UI hiện tại trong `apps/web/components/mock` và `apps/web/lib/mock-data.ts` là dữ liệu/màn hình mock, chưa nối vào `packages/db`.
+- `apps/web/.env` cần biến `AUTH_SECRET` riêng (NextAuth cho `/dlvc/admin`) ngoài `DATABASE_URL` — xem `apps/web/.env.example`. Next.js đọc env từ `apps/web/`, không phải từ thư mục gốc.
+- `packages/shared` hiện chưa được `apps/web` hay `packages/db` sử dụng — cân nhắc xoá nếu không có kế hoạch dùng lại.

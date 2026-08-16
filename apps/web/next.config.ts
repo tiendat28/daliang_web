@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@daliang/db", "@daliang/shared"],
+  transpilePackages: ["@daliang/db"],
 };
 
 export default nextConfig;
