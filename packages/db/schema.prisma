@@ -7,34 +7,308 @@ datasource db {
   provider = "postgresql"
 }
 
-model Department {
-  id    String @id @default(uuid())
-  name  String
-  code  String @unique
-  users User[]
+// ============================================================
+// DLVC INTERNAL ADMIN SYSTEM (docs/schema.sql)
+// `AdminDepartment` / `AdminUser` / `AdminDocument` keep their prefix
+// for clarity even though the original OCR system's `Department` /
+// `User` / `Document` models have since been removed; @@map keeps the
+// real table names identical to schema.sql.
+// ============================================================
+
+enum DepartmentStatus {
+  active
+  inactive
 }
 
-model User {
-  id           String     @id @default(uuid())
-  email        String     @unique
-  fullName     String
-  passwordHash String
-  role         String     @default("staff")
-  departmentId String?
-  department   Department? @relation(fields: [departmentId], references: [id])
-  documents    Document[]
-  createdAt    DateTime   @default(now())
+enum Gender {
+  male
+  female
+  other
 }
 
-model Document {
-  id        String    @id @default(uuid())
-  code      String    @unique
-  titleVi   String
-  titleEn   String?
-  version   String    @default("1.0")
-  status    String    @default("draft")
-  ownerId   String
-  owner     User      @relation(fields: [ownerId], references: [id])
-  deletedAt DateTime?
-  createdAt DateTime  @default(now())
+enum EmployeeStatus {
+  active
+  probation
+  on_leave
+  terminated
+}
+
+enum UserAccountStatus {
+  active
+  locked
+}
+
+enum DocumentStatus {
+  pending
+  approved
+  rejected
+  expired
+}
+
+enum DocumentAction {
+  uploaded
+  updated
+  approved
+  rejected
+  deleted
+}
+
+enum PartnerType {
+  supplier
+  customer
+  both
+}
+
+enum InvoiceType {
+  purchase
+  sale
+}
+
+enum InvoiceStatus {
+  unpaid
+  paid
+  overdue
+  cancelled
+}
+
+enum PaymentMethod {
+  cash
+  bank_transfer
+  card
+}
+
+enum LeadStatus {
+  newLead @map("new")
+  contacted
+  closed
+}
+
+model AdminDepartment {
+  id               Int              @id @default(autoincrement())
+  departmentCode   String           @unique @map("department_code") @db.VarChar(20)
+  departmentName   String           @map("department_name") @db.VarChar(150)
+  description      String?
+  color            String?          @db.VarChar(7)
+  headEmployeeId   Int?             @unique @map("head_employee_id")
+  headEmployee     Employee?        @relation("DepartmentHead", fields: [headEmployeeId], references: [id], onDelete: SetNull)
+  status           DepartmentStatus @default(active)
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt        DateTime         @updatedAt @map("updated_at") @db.Timestamp(6)
+
+  employees     Employee[]     @relation("DepartmentEmployees")
+  documentTypes DocumentType[]
+  documents     AdminDocument[]
+
+  @@map("departments")
+}
+
+model Position {
+  id           Int    @id @default(autoincrement())
+  positionName String @map("position_name") @db.VarChar(150)
+  level        Int    @default(1) @db.SmallInt
+
+  employees Employee[]
+
+  @@map("positions")
+}
+
+model Employee {
+  id               Int            @id @default(autoincrement())
+  employeeCode     String         @unique @map("employee_code") @db.VarChar(20)
+  fullName         String         @map("full_name") @db.VarChar(150)
+  dateOfBirth      DateTime?      @map("date_of_birth") @db.Date
+  gender           Gender?
+  phone            String?        @db.VarChar(20)
+  email            String?        @unique @db.VarChar(150)
+  address          String?
+  avatarUrl        String?        @map("avatar_url") @db.VarChar(255)
+  departmentId     Int            @map("department_id")
+  department       AdminDepartment @relation("DepartmentEmployees", fields: [departmentId], references: [id], onDelete: Restrict)
+  positionId       Int?           @map("position_id")
+  position         Position?      @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  hireDate         DateTime       @map("hire_date") @db.Date
+  terminationDate  DateTime?      @map("termination_date") @db.Date
+  status           EmployeeStatus @default(active)
+  createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt        DateTime       @updatedAt @map("updated_at") @db.Timestamp(6)
+
+  headOfDepartment    AdminDepartment?   @relation("DepartmentHead")
+  account             AdminUser?
+  uploadedDocuments   AdminDocument[]    @relation("UploadedBy")
+  approvedDocuments   AdminDocument[]    @relation("ApprovedBy")
+  documentHistory     DocumentHistory[]
+  invoicesCreated     Invoice[]
+  paymentsConfirmed   Payment[]
+
+  @@index([departmentId])
+  @@index([status])
+  @@map("employees")
+}
+
+model Role {
+  id          Int     @id @default(autoincrement())
+  roleName    String  @unique @map("role_name") @db.VarChar(100)
+  permissions Json?
+
+  users AdminUser[]
+
+  @@map("roles")
+}
+
+model AdminUser {
+  id           Int                @id @default(autoincrement())
+  employeeId   Int?               @unique @map("employee_id")
+  employee     Employee?          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  username     String             @unique @db.VarChar(50)
+  passwordHash String             @map("password_hash") @db.VarChar(255)
+  roleId       Int                @map("role_id")
+  role         Role               @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  status       UserAccountStatus  @default(active)
+  lastLoginAt  DateTime?          @map("last_login_at") @db.Timestamp(6)
+  createdAt    DateTime           @default(now()) @map("created_at") @db.Timestamp(6)
+
+  @@map("users")
+}
+
+model DocumentType {
+  id           Int              @id @default(autoincrement())
+  typeName     String           @map("type_name") @db.VarChar(150)
+  departmentId Int?             @map("department_id")
+  department   AdminDepartment? @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
+  documents AdminDocument[]
+
+  @@map("document_types")
+}
+
+model AdminDocument {
+  id             Int              @id @default(autoincrement())
+  title          String           @db.VarChar(255)
+  departmentId   Int              @map("department_id")
+  department     AdminDepartment  @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  documentTypeId Int?             @map("document_type_id")
+  documentType   DocumentType?    @relation(fields: [documentTypeId], references: [id], onDelete: SetNull)
+
+  filePath    String         @map("file_path") @db.VarChar(500)
+  fileFormat  String?        @map("file_format") @db.VarChar(10)
+  fileSizeKb  Int?           @map("file_size_kb")
+  version     Int            @default(1)
+
+  uploadedBy  Int            @map("uploaded_by")
+  uploader    Employee       @relation("UploadedBy", fields: [uploadedBy], references: [id], onDelete: Restrict)
+  approvedBy  Int?           @map("approved_by")
+  approver    Employee?      @relation("ApprovedBy", fields: [approvedBy], references: [id], onDelete: SetNull)
+  approvedAt  DateTime?      @map("approved_at") @db.Timestamp(6)
+
+  status      DocumentStatus @default(pending)
+  expiryDate  DateTime?      @map("expiry_date") @db.Date
+  notes       String?
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp(6)
+
+  history DocumentHistory[]
+
+  @@index([departmentId])
+  @@index([status])
+  @@map("documents")
+}
+
+model DocumentHistory {
+  id           Int             @id @default(autoincrement())
+  documentId   Int             @map("document_id")
+  document     AdminDocument   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  action       DocumentAction
+  performedBy  Int             @map("performed_by")
+  performer    Employee        @relation(fields: [performedBy], references: [id], onDelete: Restrict)
+  notes        String?
+  performedAt  DateTime        @default(now()) @map("performed_at") @db.Timestamp(6)
+
+  @@map("document_history")
+}
+
+model Partner {
+  id             Int         @id @default(autoincrement())
+  partnerCode    String      @unique @map("partner_code") @db.VarChar(20)
+  partnerName    String      @map("partner_name") @db.VarChar(255)
+  type           PartnerType
+  taxCode        String?     @map("tax_code") @db.VarChar(20)
+  address        String?
+  phone          String?     @db.VarChar(20)
+  email          String?     @db.VarChar(150)
+  contactPerson  String?     @map("contact_person") @db.VarChar(150)
+
+  invoices Invoice[]
+
+  @@map("partners")
+}
+
+model Invoice {
+  id             Int           @id @default(autoincrement())
+  invoiceNumber  String        @unique @map("invoice_number") @db.VarChar(30)
+  type           InvoiceType
+  partnerId      Int           @map("partner_id")
+  partner        Partner       @relation(fields: [partnerId], references: [id], onDelete: Restrict)
+  createdBy      Int           @map("created_by")
+  creator        Employee      @relation(fields: [createdBy], references: [id], onDelete: Restrict)
+  issueDate      DateTime      @map("issue_date") @db.Date
+  dueDate        DateTime?     @map("due_date") @db.Date
+  totalAmount    Decimal       @default(0) @map("total_amount") @db.Decimal(16, 2)
+  vatAmount      Decimal?      @default(0) @map("vat_amount") @db.Decimal(16, 2)
+  status         InvoiceStatus @default(unpaid)
+  notes          String?
+  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamp(6)
+
+  items    InvoiceItem[]
+  payments Payment[]
+
+  @@index([type])
+  @@index([status])
+  @@index([partnerId])
+  @@map("invoices")
+}
+
+/// `amount` is a PostgreSQL GENERATED ALWAYS AS (quantity * unit_price) STORED
+/// column (see migration SQL) — never write to it from application code.
+model InvoiceItem {
+  id         Int     @id @default(autoincrement())
+  invoiceId  Int     @map("invoice_id")
+  invoice    Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  itemName   String  @map("item_name") @db.VarChar(255)
+  unit       String? @db.VarChar(20)
+  quantity   Decimal @default(1) @db.Decimal(12, 2)
+  unitPrice  Decimal @default(0) @map("unit_price") @db.Decimal(16, 2)
+  /// DB-generated (quantity * unit_price); dbgenerated("") tells Prisma to
+  /// never manage this default so it stays untouched by future migrations.
+  amount     Decimal @default(dbgenerated()) @db.Decimal(16, 2)
+
+  @@map("invoice_items")
+}
+
+model Payment {
+  id           Int            @id @default(autoincrement())
+  invoiceId    Int            @map("invoice_id")
+  invoice      Invoice        @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amount       Decimal        @db.Decimal(16, 2)
+  paymentDate  DateTime       @map("payment_date") @db.Date
+  method       PaymentMethod?
+  confirmedBy  Int?           @map("confirmed_by")
+  confirmer    Employee?      @relation(fields: [confirmedBy], references: [id], onDelete: SetNull)
+  notes        String?
+
+  @@map("payments")
+}
+
+model Lead {
+  id          Int        @id @default(autoincrement())
+  fullName    String     @map("full_name") @db.VarChar(150)
+  companyName String?    @map("company_name") @db.VarChar(255)
+  phone       String?    @db.VarChar(20)
+  email       String?    @db.VarChar(150)
+  message     String?
+  status      LeadStatus @default(newLead)
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamp(6)
+
+  @@map("leads")
 }

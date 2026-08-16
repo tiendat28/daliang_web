@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Source_Code_Pro } from "next/font/google";
+import { Be_Vietnam_Pro, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const beVietnamPro = Be_Vietnam_Pro({
+  variable: "--font-be-vietnam-pro",
   subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const sourceCode = Source_Code_Pro({
-  variable: "--font-source-code",
-  subsets: ["latin", "vietnamese"],
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
+  subsets: ["latin"],
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Daliang Docs",
-  description: "Hệ thống quản lý tài liệu Daliang",
+  title: "Daliang VN",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="vi"
-      className={`${sourceSans.variable} ${sourceCode.variable} h-full antialiased`}
+      className={`${beVietnamPro.variable} ${ibmPlexMono.variable} h-full font-dlvc-sans antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

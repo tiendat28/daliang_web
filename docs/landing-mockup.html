@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daliang VN – Hoá chất xử lý bề mặt kim loại</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --graphite:#171B1F;
+    --graphite-soft:#232930;
+    --paper:#F5F5F2;
+    --surface:#FFFFFF;
+    --cobalt:#22D3EE;
+    --cobalt-deep:#0891B2;
+    --cobalt-soft:#E1F8FB;
+    --cobalt-glow:rgba(34,211,238,.4);
+    --amber:#D68A2D;
+    --amber-soft:#FBF0E1;
+    --chrome:#AEB4BA;
+    --ink:#14181C;
+    --ink-soft:#5B6570;
+    --border:#E2E4DF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Be Vietnam Pro',sans-serif; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; line-height:1.5;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:600;}
+  section{padding:88px 0;}
+  h1,h2,h3,h4{font-family:'Be Vietnam Pro',sans-serif; font-weight:800; letter-spacing:-.01em;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:32px; margin-top:10px;}
+  .section-head p{color:var(--ink-soft); margin-top:12px; font-size:15px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:8px; font-weight:700; font-size:14.5px; text-decoration:none; cursor:pointer; border:none; transition:filter .15s, box-shadow .15s, transform .15s, border-color .15s, color .15s;}
+  .btn-primary{background:var(--cobalt-deep); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.3); box-shadow:0 0 0 4px var(--cobalt-soft), 0 0 26px var(--cobalt-glow); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.35);}
+  .btn-ghost:hover{border-color:var(--cobalt); color:var(--cobalt); box-shadow:0 0 20px var(--cobalt-glow);}
+  .btn-dark{background:var(--graphite); color:#fff;}
+  .btn-dark:hover{box-shadow:0 0 20px var(--cobalt-glow); border:1px solid var(--cobalt);}
+
+  /* ---------- NAV ---------- */
+  header{position:sticky; top:0; z-index:50; background:rgba(23,27,31,.92); backdrop-filter:blur(8px);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+  .nav-left{display:flex; align-items:center; gap:12px;}
+  .nav-left img{height:34px; width:auto; border-radius:4px; background:#fff; padding:3px;}
+  .nav-left .name{color:#fff; font-weight:700; font-size:14.5px; line-height:1.2;}
+  .nav-left .sub{color:#9BA5AD; font-size:10.5px; font-family:'IBM Plex Mono',monospace; letter-spacing:.06em;}
+  .nav-links{display:flex; gap:30px; list-style:none;}
+  .nav-links a{color:#D8DBDE; text-decoration:none; font-size:14px; font-weight:500; transition:color .15s, text-shadow .15s;}
+  .nav-links a:hover{color:var(--cobalt); text-shadow:0 0 12px var(--cobalt-glow);}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .burger{display:none; color:#fff; font-size:22px; cursor:pointer; background:none; border:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{background:var(--graphite); color:#fff; padding:76px 0 0; overflow:hidden;}
+  .hero-inner{display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:center; padding-bottom:60px;}
+  .hero h1{font-size:44px; line-height:1.14; margin:16px 0 18px;}
+  .hero h1 span{color:var(--amber);}
+  .hero p.lead{color:#B7BEC4; font-size:16px; max-width:480px; margin-bottom:30px;}
+  .hero-actions{display:flex; gap:14px; margin-bottom:10px;}
+  .hero-visual{position:relative; aspect-ratio:1/1; border-radius:20px; background:
+      radial-gradient(circle at 30% 30%, #3a4048, transparent 60%),
+      linear-gradient(135deg,#20262c,#12161a);
+      border:1px solid #2b323a; display:flex; align-items:center; justify-content:center;}
+  .hero-visual .ring{width:70%; aspect-ratio:1/1; border-radius:50%; border:2px dashed #3d4650; display:flex; align-items:center; justify-content:center;}
+  .hero-visual .core{width:56%; aspect-ratio:1/1; border-radius:50%; background:conic-gradient(from 210deg, var(--chrome), var(--cobalt), var(--amber), var(--chrome)); box-shadow:0 0 60px rgba(31,95,166,.35);}
+
+  /* process strip – signature element */
+  .process-strip{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #2b323a;}
+  .process-seg{padding:22px 28px; border-right:1px solid #2b323a; display:flex; align-items:center; gap:14px;}
+  .process-seg:last-child{border-right:none;}
+  .process-seg .num{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8A939B; font-weight:600;}
+  .process-seg .label{font-weight:700; font-size:14.5px;}
+  .process-seg .dot{width:9px; height:9px; border-radius:50%; flex-shrink:0;}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--surface);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); font-size:15px; margin-bottom:16px;}
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .stat{background:var(--paper); border:1px solid var(--border); border-radius:12px; padding:20px;}
+  .stat .n{font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:700; color:var(--cobalt);}
+  .stat .l{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
+  /* ---------- PRODUCTS ---------- */
+  .products{background:var(--graphite-soft); color:#fff;}
+  .products .section-head p{color:#AEB6BC;}
+  .products .eyebrow{color:var(--amber);}
+  .pipeline{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .stage-card{background:#1D232A; border:1px solid #2C333B; border-radius:16px; padding:28px 24px; position:relative; overflow:hidden; transition:transform .15s, box-shadow .15s, border-color .15s;}
+  .stage-card:hover{transform:translateY(-4px); border-color:var(--cobalt); box-shadow:0 0 0 1px var(--cobalt-glow), 0 16px 36px -14px rgba(0,0,0,.5);}
+  .stage-card::before{content:""; position:absolute; top:0; left:0; right:0; height:5px;}
+  .stage-card.s1::before{background:var(--chrome);}
+  .stage-card.s2::before{background:var(--cobalt);}
+  .stage-card.s3::before{background:var(--amber);}
+  .stage-card .num{font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8A939B; margin-bottom:14px;}
+  .stage-card h3{font-size:19px; margin-bottom:10px;}
+  .stage-card p{color:#A9B1B7; font-size:13.5px; margin-bottom:20px;}
+  .code-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .code-chip{font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:5px 10px; border-radius:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:#D8DBDE; transition:background .15s, border-color .15s, color .15s;}
+  .code-chip:hover{background:rgba(34,211,238,.16); border-color:var(--cobalt); color:#fff;}
+  .pipeline-note{margin-top:22px; font-size:12.5px; color:#7F8A92; font-style:italic;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--paper);}
+  .service-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .service-card{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; transition:transform .15s, box-shadow .15s, border-color .15s;}
+  .service-card:hover{transform:translateY(-4px); border-color:var(--cobalt); box-shadow:0 14px 32px -12px var(--cobalt-glow);}
+  .service-card .ico{width:42px; height:42px; border-radius:10px; background:var(--cobalt-soft); color:var(--cobalt); display:flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:16px;}
+  .service-card h4{font-size:15.5px; margin-bottom:8px;}
+  .service-card p{font-size:13px; color:var(--ink-soft);}
+
+  /* ---------- TRUST ---------- */
+  .trust{background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .trust-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .trust-item{display:flex; gap:14px;}
+  .trust-item .mark{width:34px; height:34px; border-radius:50%; background:var(--amber-soft); color:var(--amber); display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;}
+  .trust-item h4{font-size:14.5px; margin-bottom:5px;}
+  .trust-item p{font-size:13px; color:var(--ink-soft);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--paper);}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .form-card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:12.5px; font-weight:600; color:var(--ink-soft);}
+  .field input, .field textarea{
+    border:1px solid var(--border); border-radius:9px; padding:11px 13px; font-size:14px; font-family:inherit; background:var(--paper); color:var(--ink);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--cobalt); box-shadow:0 0 0 3px var(--cobalt-glow);}
+  .field textarea{resize:vertical; min-height:90px;}
+  .info-card{background:var(--graphite); color:#fff; border-radius:16px; padding:32px; margin-bottom:18px;}
+  .info-row{display:flex; gap:14px; padding:13px 0; border-bottom:1px solid #2b323a;}
+  .info-row:last-child{border-bottom:none;}
+  .info-row .k{width:16px; color:var(--amber); font-size:15px;}
+  .info-row .v{font-size:13.5px; color:#D8DBDE; line-height:1.5;}
+  .info-row .v b{color:#fff; display:block; font-size:12px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px; font-weight:600;}
+  .map-box{height:150px; border-radius:16px; background:
+    repeating-linear-gradient(45deg, #E9EBE5, #E9EBE5 10px, #E3E5DE 10px, #E3E5DE 20px);
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-size:12.5px; font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--graphite); color:#9BA5AD; padding:50px 0 26px;}
+  .footer-top{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:34px; border-bottom:1px solid #2b323a; margin-bottom:22px;}
+  .footer-brand{display:flex; gap:12px; align-items:center; margin-bottom:14px;}
+  .footer-brand img{height:32px; background:#fff; border-radius:4px; padding:3px;}
+  .footer-brand span{color:#fff; font-weight:700; font-size:14.5px;}
+  .footer-top p{font-size:13px; max-width:280px;}
+  .footer-col h5{color:#fff; font-size:13px; margin-bottom:14px; letter-spacing:.03em;}
+  .footer-col ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .footer-col a{color:#9BA5AD; text-decoration:none; font-size:13.5px;}
+  .footer-bottom{display:flex; justify-content:space-between; font-size:12px; color:#6E7880; flex-wrap:wrap; gap:10px;}
+
+  @media(max-width:900px){
+    .nav-links, .nav-cta .btn-ghost{display:none;}
+    .burger{display:block;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+    .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .pipeline, .service-grid, .trust-grid{grid-template-columns:1fr;}
+    .process-strip{grid-template-columns:1fr;}
+    .process-seg{border-right:none; border-bottom:1px solid #2b323a;}
+    .footer-top{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="nav-left">
+      <img src="LOGO_PLACEHOLDER" alt="Logo Daliang VN">
+      <div>
+        <div class="name">DALIANG VN</div>
+        <div class="sub">HOÁ CHẤT XỬ LÝ BỀ MẶT</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero">Trang chủ</a></li>
+      <li><a href="#about">Giới thiệu</a></li>
+      <li><a href="#products">Sản phẩm</a></li>
+      <li><a href="#services">Dịch vụ</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Liên hệ báo giá</a>
+    </div>
+    <button class="burger">&#9776;</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero" style="padding-top:76px;">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow" style="color:var(--amber)">HOÁ CHẤT CHUYÊN DỤNG NGÀNH XI MẠ</div>
+      <h1>Đồng hành cùng từng lớp mạ –<br>từ tiền xử lý đến <span>hoàn thiện</span>.</h1>
+      <p class="lead">Công ty TNHH Hóa chất Daliang VN cung cấp hoá chất tiền xử lý, phụ gia mạ và dung dịch thụ động cho các nhà máy xi mạ công nghiệp tại Việt Nam, kèm hồ sơ an toàn hoá chất (MSDS) đầy đủ cho từng sản phẩm.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary">Xem sản phẩm</a>
+        <a href="#contact" class="btn btn-ghost">Liên hệ tư vấn kỹ thuật</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring"><div class="core"></div></div>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="process-strip">
+      <div class="process-seg"><span class="dot" style="background:var(--chrome)"></span><span class="num">01</span><span class="label">Tiền xử lý</span></div>
+      <div class="process-seg"><span class="dot" style="background:var(--cobalt)"></span><span class="num">02</span><span class="label">Phụ gia mạ</span></div>
+      <div class="process-seg"><span class="dot" style="background:var(--amber)"></span><span class="num">03</span><span class="label">Thụ động</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--cobalt)">GIỚI THIỆU CÔNG TY</div>
+      <h2 style="font-size:28px; margin:10px 0 18px;">Đối tác hoá chất cho ngành xi mạ công nghiệp</h2>
+      <p>Công ty TNHH Hóa chất Daliang VN (DLVC) chuyên sản xuất và cung cấp hoá chất phục vụ quy trình xử lý bề mặt kim loại – từ tẩy dầu, tẩy gỉ, hoạt hoá bề mặt cho đến phụ gia mạ kẽm, mạ niken, mạ đồng và dung dịch thụ động sau mạ.</p>
+      <p>Nhà máy đặt tại KCN Đất Cuốc, Bắc Tân Uyên, TP. Hồ Chí Minh, phục vụ các nhà máy xi mạ, gia công kim loại trong và ngoài khu vực. Mọi sản phẩm đều đi kèm Phiếu an toàn hoá chất (MSDS) đầy đủ 16 mục theo đúng chuẩn quy định.</p>
+      <a href="#contact" class="btn btn-dark" style="margin-top:6px;">Trao đổi nhu cầu của bạn</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="n">15+</div><div class="l">năm kinh nghiệm ngành hoá chất mạ</div></div>
+      <div class="stat"><div class="n">30+</div><div class="l">sản phẩm hoá chất chuyên dụng</div></div>
+      <div class="stat"><div class="n">50+</div><div class="l">nhà máy đang hợp tác</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">sản phẩm có MSDS đầy đủ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">DÒNG SẢN PHẨM</div>
+      <h2>Hoá chất theo từng giai đoạn xử lý bề mặt</h2>
+      <p>Ba nhóm sản phẩm chính, tương ứng với ba giai đoạn của một quy trình xi mạ hoàn chỉnh.</p>
+    </div>
+    <div class="pipeline">
+      <div class="stage-card s1">
+        <div class="num">GIAI ĐOẠN 01</div>
+        <h3>Tiền xử lý</h3>
+        <p>Tẩy dầu, tẩy gỉ và hoạt hoá bề mặt kim loại, đảm bảo bề mặt sạch, đồng nhất trước khi đưa vào bể mạ.</p>
+        <div class="code-row">
+          <span class="code-chip">EB-C</span>
+          <span class="code-chip">FD-23</span>
+        </div>
+      </div>
+      <div class="stage-card s2">
+        <div class="num">GIAI ĐOẠN 02</div>
+        <h3>Phụ gia mạ</h3>
+        <p>Phụ gia cho mạ kẽm, mạ niken, mạ đồng – kiểm soát độ bóng, độ dày và độ bám dính của lớp mạ.</p>
+        <div class="code-row">
+          <span class="code-chip">NI-534C</span>
+          <span class="code-chip">CU-4</span>
+          <span class="code-chip">CUB-01</span>
+          <span class="code-chip">DN-958</span>
+        </div>
+      </div>
+      <div class="stage-card s3">
+        <div class="num">GIAI ĐOẠN 03</div>
+        <h3>Thụ động</h3>
+        <p>Dung dịch thụ động sau mạ, tăng khả năng chống ăn mòn và kéo dài tuổi thọ lớp mạ hoàn thiện.</p>
+        <div class="code-row">
+          <span class="code-chip">CRT-650</span>
+          <span class="code-chip">CRT-68</span>
+          <span class="code-chip">CHB-9742</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-note">* Tên nhóm sản phẩm và mã sản phẩm ở trên là nội dung ví dụ – vui lòng đối chiếu lại danh mục thực tế trước khi đăng.</div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--cobalt)">DỊCH VỤ</div>
+      <h2>Hỗ trợ kỹ thuật xuyên suốt quy trình</h2>
+      <p>Không chỉ cung cấp hoá chất – đội ngũ kỹ thuật đồng hành cùng nhà máy từ pha chế đến vận hành ổn định.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card"><div class="ico">&#128295;</div><h4>Tư vấn kỹ thuật quy trình mạ</h4><p>Khảo sát quy trình hiện tại và đề xuất giải pháp hoá chất phù hợp với từng dây chuyền.</p></div>
+      <div class="service-card"><div class="ico">&#129514;</div><h4>Hỗ trợ pha chế & vận hành bể</h4><p>Kỹ thuật viên hỗ trợ trực tiếp tại nhà máy trong giai đoạn triển khai và hiệu chỉnh bể mạ.</p></div>
+      <div class="service-card"><div class="ico">&#128218;</div><h4>Đào tạo vận hành</h4><p>Hướng dẫn kỹ thuật viên nhà máy thao tác đúng, an toàn với từng loại hoá chất.</p></div>
+      <div class="service-card"><div class="ico">&#128300;</div><h4>Kiểm tra chất lượng</h4><p>Phân tích mẫu, kiểm soát nồng độ và chất lượng lớp mạ theo yêu cầu khách hàng.</p></div>
+      <div class="service-card"><div class="ico">&#128196;</div><h4>Hồ sơ an toàn hoá chất</h4><p>Cung cấp đầy đủ MSDS 16 mục cho từng sản phẩm, phục vụ hồ sơ pháp lý của nhà máy.</p></div>
+      <div class="service-card"><div class="ico">&#128666;</div><h4>Giao hàng đúng tiến độ</h4><p>Đóng gói an toàn, giao hàng đúng hẹn để không làm gián đoạn sản xuất.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><div class="mark">&#10003;</div><div><h4>Hồ sơ MSDS chuẩn 16 mục</h4><p>Đầy đủ thông tin an toàn, GHS, vận chuyển cho từng sản phẩm.</p></div></div>
+    <div class="trust-item"><div class="mark">&#10003;</div><div><h4>Hỗ trợ kỹ thuật tại nhà máy</h4><p>Đội ngũ đồng hành trực tiếp khi triển khai và xử lý sự cố bể mạ.</p></div></div>
+    <div class="trust-item"><div class="mark">&#10003;</div><div><h4>Nguồn hoá chất ổn định</h4><p>Kiểm soát chất lượng chặt chẽ, đảm bảo tính nhất quán giữa các lô hàng.</p></div></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--amber)">LIÊN HỆ</div>
+      <h2>Trao đổi nhu cầu hoá chất của nhà máy bạn</h2>
+      <p>Để lại thông tin, đội ngũ kỹ thuật sẽ liên hệ tư vấn trong thời gian sớm nhất.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="form-card">
+        <div class="form-row">
+          <div class="field"><label>Họ và tên</label><input type="text" placeholder="Nguyễn Văn A"></div>
+          <div class="field"><label>Công ty / Nhà máy</label><input type="text" placeholder="Tên công ty"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Số điện thoại</label><input type="tel" placeholder="09xx xxx xxx"></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="email@congty.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="field full"><label>Nội dung cần tư vấn</label><textarea placeholder="Mô tả ngắn về quy trình mạ / hoá chất bạn đang cần..."></textarea></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%; justify-content:center;">Gửi yêu cầu tư vấn</button>
+      </div>
+      <div>
+        <div class="info-card">
+          <div class="info-row"><span class="k">&#128205;</span><span class="v"><b>Địa chỉ nhà máy</b>Lô B7, Ô 2, Đường D2, KCN Đất Cuốc, Xã Bắc Tân Uyên, TP. Hồ Chí Minh</span></div>
+          <div class="info-row"><span class="k">&#9742;</span><span class="v"><b>Điện thoại</b>0274-3651 005-009</span></div>
+          <div class="info-row"><span class="k">&#128225;</span><span class="v"><b>Fax</b>0274.3651.010</span></div>
+          <div class="info-row"><span class="k">&#9993;</span><span class="v"><b>Email</b>lienhe@daliangvn.com <span style="opacity:.6">(ví dụ)</span></span></div>
+        </div>
+        <div class="map-box">[ Vị trí bản đồ – KCN Đất Cuốc ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><img src="LOGO_PLACEHOLDER" alt="Logo"><span>DALIANG VN</span></div>
+        <p>Hoá chất chuyên dụng cho ngành xi mạ công nghiệp – tiền xử lý, phụ gia mạ, thụ động – kèm hồ sơ an toàn hoá chất đầy đủ.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <ul>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#products">Sản phẩm</a></li>
+          <li><a href="#services">Dịch vụ</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Liên hệ</h5>
+        <ul>
+          <li>KCN Đất Cuốc, Bắc Tân Uyên, TP.HCM</li>
+          <li>0274-3651 005-009</li>
+          <li>lienhe@daliangvn.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Công ty TNHH Hóa chất Daliang VN. Bảo lưu mọi quyền.</span>
+      <span>Nội dung mẫu – vui lòng chỉnh sửa trước khi sử dụng chính thức.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

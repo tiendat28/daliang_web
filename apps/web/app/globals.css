@@ -1,55 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  /* Nền */
-  --color-page: #faf8f5;
-  --color-card: #fffdfb;
-  --color-subtle: #f5f1eb;
-  --color-panel: #fcfaf7;
+  /* ---------- Admin (VĂN PHÒNG SỐ) ---------- */
+  --color-dlvc-sidebar: #16232e;
+  --color-dlvc-sidebar-soft: #223140;
+  --color-dlvc-bg: #eef0ea;
+  --color-dlvc-accent: #22d3ee;
+  --color-dlvc-accent-dark: #0e7490;
+  --color-dlvc-surface: #ffffff;
+  --color-dlvc-ink: #1b2430;
+  --color-dlvc-ink-soft: #6b7686;
+  --color-dlvc-border: #dde1d8;
 
-  /* Viền */
-  --color-border: #e7e2db;
-  --color-border-light: #f0ebe4;
-  --color-border-strong: #d6cfc5;
+  --color-dlvc-dept-ky-thuat: #2e6e6a;
+  --color-dlvc-dept-hcns: #6b4fa0;
+  --color-dlvc-dept-ke-toan: #c99a3d;
+  --color-dlvc-dept-hoa-don: #b0473f;
 
-  /* Chữ */
-  --color-strong: #1c1917;
-  --color-body: #44403c;
-  --color-muted: #78716c;
-  --color-faint: #a8a29e;
-  --color-dim: #57534e;
+  --color-dlvc-ok: #2f7d5c;
+  --color-dlvc-warn: #c99a3d;
+  --color-dlvc-danger: #b0473f;
+  --color-dlvc-invoice-purchase: #5b7fa6;
 
-  /* Highlight khớp từ khóa */
-  --color-mark: oklch(0.85 0.13 90);
+  /* ---------- Landing (Daliang VN) ---------- */
+  --color-dlvc-graphite: #171b1f;
+  --color-dlvc-graphite-soft: #232930;
+  --color-dlvc-paper: #f5f5f2;
+  --color-dlvc-cobalt: #22d3ee;
+  --color-dlvc-cobalt-deep: #0891b2;
+  --color-dlvc-cobalt-soft: #e1f8fb;
+  --color-dlvc-amber: #d68a2d;
+  --color-dlvc-amber-soft: #fbf0e1;
+  --color-dlvc-chrome: #aeb4ba;
+  --color-dlvc-landing-ink: #14181c;
+  --color-dlvc-landing-ink-soft: #5b6570;
+  --color-dlvc-landing-border: #e2e4df;
 
-  /* Accent (cam đất) */
-  --color-accent: oklch(0.55 0.13 40);
-  --color-accent-hover: oklch(0.45 0.13 40);
-  --color-accent-subtle: oklch(0.55 0.13 40 / 0.1);
-
-  /* Trạng thái */
-  --color-warning-bg: oklch(0.8 0.14 85 / 0.35);
-  --color-warning-text: #78500a;
-  --color-confirm: oklch(0.5 0.11 155);
-
-  /* Huy hiệu loại file */
-  --color-doc: #2b579a;
-  --color-xls: #1d6f42;
-
-  /* Font */
-  --font-sans: var(--font-source-sans), sans-serif;
-  --font-mono: var(--font-source-code), monospace;
-}
-
-body {
-  background: var(--color-page);
-  color: var(--color-body);
-  font-family: var(--font-sans);
-}
-
-mark {
-  background: var(--color-mark);
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
+  /* ---------- Fonts ---------- */
+  --font-dlvc-sans: var(--font-be-vietnam-pro), sans-serif;
+  --font-dlvc-mono: var(--font-ibm-plex-mono), monospace;
 }

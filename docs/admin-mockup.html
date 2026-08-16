@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VĂN PHÒNG SỐ – Quản trị nội bộ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF0EA;
+    --sidebar:#16232E;
+    --sidebar-soft:#223140;
+    --accent:#22D3EE;
+    --accent-dark:#0E7490;
+    --accent-glow:rgba(34,211,238,.45);
+    --surface:#FFFFFF;
+    --ink:#1B2430;
+    --ink-soft:#6B7686;
+    --border:#DDE1D8;
+    --dept-ky-thuat:#2E6E6A;
+    --dept-hcns:#6B4FA0;
+    --dept-ke-toan:#C99A3D;
+    --dept-hoa-don:#B0473F;
+    --ok:#2F7D5C;
+    --warn:#C99A3D;
+    --danger:#B0473F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Be Vietnam Pro', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* ---------- layout ---------- */
+  .app{display:grid; grid-template-columns:248px 1fr; min-height:100vh;}
+
+  /* ---------- sidebar ---------- */
+  .sidebar{background:var(--sidebar); color:#EDEFEA; display:flex; flex-direction:column; padding:22px 16px;}
+  .brand{display:flex; align-items:center; gap:10px; padding:6px 10px 26px;}
+  .brand-mark{width:34px; height:34px; border-radius:8px; background:linear-gradient(155deg,var(--accent),var(--accent-dark)); box-shadow:0 0 14px var(--accent-glow); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#0B1620; flex-shrink:0;}
+  .brand-text{line-height:1.15;}
+  .brand-text .t1{font-weight:700; font-size:14.5px; letter-spacing:.02em;}
+  .brand-text .t2{font-size:11px; color:#9AA6AE; letter-spacing:.03em;}
+
+  .nav-group{margin-bottom:18px;}
+  .nav-label{font-size:10.5px; text-transform:uppercase; letter-spacing:.09em; color:#71818C; padding:0 12px 8px; font-weight:600;}
+  .nav-item{
+    display:flex; align-items:center; gap:11px;
+    padding:9px 12px; border-radius:9px; margin-bottom:2px;
+    font-size:14px; font-weight:500; color:#C9D1D6; cursor:pointer;
+    border-left:3px solid transparent;
+    transition:background .15s, color .15s, box-shadow .15s;
+  }
+  .nav-item:hover{background:var(--sidebar-soft); color:#fff; box-shadow:inset 0 0 0 1px rgba(34,211,238,.25);}
+  .nav-item.active{background:var(--sidebar-soft); color:#fff; border-left:3px solid var(--accent); box-shadow:0 0 16px -4px var(--accent-glow);}
+  .nav-dot{width:7px; height:7px; border-radius:50%; flex-shrink:0;}
+  .nav-icon{width:17px; text-align:center; flex-shrink:0; font-size:14px;}
+  .nav-count{
+    margin-left:auto; font-size:11px; font-family:'IBM Plex Mono',monospace;
+    background:rgba(255,255,255,.08); padding:1px 6px; border-radius:5px; color:#B9C2C8;
+  }
+
+  .sidebar-foot{margin-top:auto; padding:12px; border-top:1px solid rgba(255,255,255,.08);}
+  .user-chip{display:flex; align-items:center; gap:10px;}
+  .avatar{width:32px; height:32px; border-radius:50%; background:#3A4B5A; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:700; color:#EDEFEA;}
+  .user-chip .name{font-size:13px; font-weight:600; color:#EDEFEA;}
+  .user-chip .role{font-size:11px; color:#8B98A1;}
+
+  /* ---------- main ---------- */
+  .main{display:flex; flex-direction:column; min-width:0;}
+  .topbar{
+    height:64px; background:var(--surface); border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; padding:0 26px; gap:20px;
+  }
+  .search{
+    flex:1; max-width:400px; display:flex; align-items:center; gap:9px;
+    background:#F3F4EF; border:1px solid var(--border); border-radius:9px; padding:8px 12px;
+    color:var(--ink-soft); font-size:13.5px;
+  }
+  .top-actions{display:flex; align-items:center; gap:16px;}
+  .icon-btn{
+    width:36px; height:36px; border-radius:9px; border:1px solid var(--border); background:var(--surface);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; font-size:15px;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .icon-btn:hover{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow);}
+  .icon-btn .badge{
+    position:absolute; top:-4px; right:-4px; background:var(--danger); color:#fff; font-size:9.5px;
+    width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; border:2px solid var(--surface);
+  }
+
+  .content{padding:26px 30px; flex:1;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .page-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:12px;}
+  .page-head h1{font-size:21px; font-weight:700; letter-spacing:-.01em;}
+  .page-head p{font-size:13px; color:var(--ink-soft); margin-top:3px;}
+  .btn{
+    background:var(--sidebar); color:#fff; border:none; padding:10px 16px; border-radius:9px;
+    font-size:13.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:7px;
+    transition:filter .15s, box-shadow .15s, transform .15s;
+  }
+  .btn:hover{filter:brightness(1.25); box-shadow:0 0 0 3px var(--accent-glow); transform:translateY(-1px);}
+  .btn.ghost{background:var(--surface); color:var(--ink); border:1px solid var(--border);}
+  .btn.ghost:hover{border-color:var(--accent); color:var(--accent-dark); box-shadow:0 0 0 3px var(--accent-glow);}
+
+  /* ---------- kpi ---------- */
+  .kpi-row{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px;}
+  .kpi{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px;
+    border-left:4px solid var(--accent);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .kpi:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px var(--accent-glow);}
+  .kpi .label{font-size:12px; color:var(--ink-soft); font-weight:600; text-transform:uppercase; letter-spacing:.04em;}
+  .kpi .value{font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:600; margin-top:6px;}
+  .kpi .delta{font-size:12px; margin-top:5px; color:var(--ok); font-weight:500;}
+  .kpi .delta.down{color:var(--danger);}
+
+  /* ---------- two col ---------- */
+  .two-col{display:grid; grid-template-columns:1.5fr 1fr; gap:18px; align-items:start;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden;}
+  .card-head{padding:16px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;}
+  .card-head h3{font-size:14.5px; font-weight:700;}
+  .card-head a{font-size:12.5px; color:var(--ink-soft); text-decoration:none; font-weight:500;}
+  .card-body{padding:6px 0;}
+
+  .activity-row{display:flex; gap:12px; padding:12px 20px; border-bottom:1px solid #F1F2ED;}
+  .activity-row:last-child{border-bottom:none;}
+  .act-tab{width:4px; border-radius:4px; flex-shrink:0;}
+  .activity-row .txt{font-size:13px;}
+  .activity-row .who{font-weight:600;}
+  .activity-row .meta{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+
+  .dept-row{display:flex; align-items:center; gap:12px; padding:13px 20px; border-bottom:1px solid #F1F2ED;}
+  .dept-row:last-child{border-bottom:none;}
+  .dept-swatch{width:10px; height:10px; border-radius:3px; flex-shrink:0;}
+  .dept-row .name{font-size:13px; font-weight:600; flex:1;}
+  .dept-row .n{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
+  .bar-track{height:5px; background:#EEF0EA; border-radius:3px; margin-top:5px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:3px;}
+
+  /* ---------- table ---------- */
+  .table-wrap{background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden;}
+  table{width:100%; border-collapse:collapse;}
+  thead th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft);
+    padding:13px 18px; border-bottom:1px solid var(--border); font-weight:600; background:#FAFAF7;
+  }
+  tbody td{padding:13px 18px; font-size:13.5px; border-bottom:1px solid #F1F2ED;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#FAFAF7;}
+  .cell-main{font-weight:600;}
+  .cell-sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+  .pill-dept{
+    display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:3px 9px 3px 7px;
+    border-radius:20px; background:#F3F4EF;
+  }
+  .pill-dept .dot{width:6px; height:6px; border-radius:50%;}
+
+  /* ---------- stamp badge (signature element) ---------- */
+  .stamp{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600;
+    letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:3px;
+    border:1.5px dashed currentColor; transform:rotate(-2deg); background:transparent;
+  }
+  .stamp.ok{color:var(--ok);}
+  .stamp.warn{color:var(--warn); transform:rotate(1.5deg);}
+  .stamp.danger{color:var(--danger); transform:rotate(-1.5deg);}
+
+  /* ---------- doc tabs ---------- */
+  .dept-tabs{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+  .dept-tab{
+    padding:8px 15px; border-radius:9px; border:1px solid var(--border); background:var(--surface);
+    font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; color:var(--ink-soft);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .dept-tab:hover{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow);}
+  .dept-tab .dot{width:8px; height:8px; border-radius:50%;}
+  .dept-tab.active{border-color:transparent; color:#fff;}
+
+  .doc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .doc-card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; border-top:4px solid var(--accent); transition:transform .15s, box-shadow .15s;}
+  .doc-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px -10px var(--accent-glow);}
+  .doc-card .ftype{font-size:11px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+  .doc-card h4{font-size:14px; font-weight:700; margin:8px 0 10px; line-height:1.3;}
+  .doc-card .meta{font-size:11.5px; color:var(--ink-soft); margin-bottom:12px;}
+  .doc-card .foot{display:flex; justify-content:space-between; align-items:center;}
+
+  .filter-bar{display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;}
+  .chip{padding:7px 13px; border-radius:8px; border:1px solid var(--border); background:var(--surface); font-size:12.5px; font-weight:500; color:var(--ink-soft); cursor:pointer; transition:border-color .15s, box-shadow .15s;}
+  .chip:hover{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow);}
+  .chip.active{background:var(--sidebar); color:#fff; border-color:var(--sidebar);}
+
+  @media (max-width:1000px){
+    .app{grid-template-columns:1fr;}
+    .sidebar{display:none;}
+    .kpi-row{grid-template-columns:repeat(2,1fr);}
+    .two-col{grid-template-columns:1fr;}
+    .doc-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">VP</div>
+      <div class="brand-text">
+        <div class="t1">VĂN PHÒNG SỐ</div>
+        <div class="t2">Quản trị nội bộ</div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Điều hành</div>
+      <div class="nav-item active" data-view="tongquan"><span class="nav-icon">&#9670;</span> Tổng quan</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Quản lý</div>
+      <div class="nav-item" data-view="nhansu"><span class="nav-icon">&#128100;</span> Nhân sự <span class="nav-count">128</span></div>
+      <div class="nav-item" data-view="tailieu"><span class="nav-icon">&#128193;</span> Tài liệu phòng ban <span class="nav-count">14</span></div>
+      <div class="nav-item" data-view="hoadon"><span class="nav-icon">&#128179;</span> Hoá đơn mua bán <span class="nav-count">47</span></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Hệ thống</div>
+      <div class="nav-item"><span class="nav-icon">&#9881;</span> Cài đặt</div>
+      <div class="nav-item"><span class="nav-icon">&#128274;</span> Phân quyền</div>
+    </div>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <div class="avatar">TL</div>
+        <div>
+          <div class="name">Trần Thu Loan</div>
+          <div class="role">Quản trị viên</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="search">&#128269; &nbsp;Tìm nhân sự, tài liệu, hoá đơn…</div>
+      <div class="top-actions">
+        <div class="icon-btn">&#128276;<span class="badge">5</span></div>
+        <div class="icon-btn">&#9998;</div>
+        <div class="avatar" style="background:#C99A3D;color:#16232E;">TL</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ===== TỔNG QUAN ===== -->
+      <div class="view active" id="view-tongquan">
+        <div class="page-head">
+          <div>
+            <h1>Tổng quan</h1>
+            <p>Chủ nhật, 16 tháng 8 năm 2026 – Cập nhật lúc 08:42</p>
+          </div>
+          <button class="btn">&#43; Thêm mới</button>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="label">Nhân sự đang làm việc</div>
+            <div class="value">128</div>
+            <div class="delta">▲ 4 người trong tháng</div>
+          </div>
+          <div class="kpi" style="border-left-color:var(--dept-hcns)">
+            <div class="label">Tài liệu chờ duyệt</div>
+            <div class="value">14</div>
+            <div class="delta down">▼ 3 so với tuần trước</div>
+          </div>
+          <div class="kpi" style="border-left-color:var(--dept-hoa-don)">
+            <div class="label">Hoá đơn tháng này</div>
+            <div class="value">47</div>
+            <div class="delta">2,84 tỷ ₫ tổng giá trị</div>
+          </div>
+          <div class="kpi" style="border-left-color:var(--dept-ky-thuat)">
+            <div class="label">Tài liệu sắp hết hạn</div>
+            <div class="value">6</div>
+            <div class="delta down">Trong 30 ngày tới</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><h3>Hoạt động gần đây</h3><a href="#">Xem tất cả</a></div>
+            <div class="card-body">
+              <div class="activity-row">
+                <div class="act-tab" style="background:var(--dept-ke-toan)"></div>
+                <div class="txt"><span class="who">Nguyễn Văn An</span> đã tải lên <b>Báo cáo tài chính Q2/2026</b>
+                  <div class="meta">Kế toán · 32 phút trước</div></div>
+              </div>
+              <div class="activity-row">
+                <div class="act-tab" style="background:var(--dept-hoa-don)"></div>
+                <div class="txt"><span class="who">Phạm Thu Hà </span> tạo hoá đơn bán <b>HD-2026-0847</b>
+                  <div class="meta">Hoá đơn · 1 giờ trước</div></div>
+              </div>
+              <div class="activity-row">
+                <div class="act-tab" style="background:var(--dept-hcns)"></div>
+                <div class="txt"><span class="who">Vũ Thị Lan</span> duyệt <b>Hợp đồng lao động – Ngô Thanh Trúc</b>
+                  <div class="meta">Hành chính - Nhân sự · 3 giờ trước</div></div>
+              </div>
+              <div class="activity-row">
+                <div class="act-tab" style="background:var(--dept-ky-thuat)"></div>
+                <div class="txt"><span class="who">Đỗ Minh Tuấn</span> cập nhật <b>Quy trình vận hành máy CNC-04</b>
+                  <div class="meta">Kỹ thuật · Hôm qua</div></div>
+              </div>
+              <div class="activity-row">
+                <div class="act-tab" style="background:var(--dept-ke-toan)"></div>
+                <div class="txt"><span class="who">Hoàng Đức Thịnh</span> đánh dấu <b>HD-2026-0801</b> đã thanh toán
+                  <div class="meta">Hoá đơn · Hôm qua</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Tài liệu theo phòng ban</h3></div>
+            <div class="card-body">
+              <div class="dept-row">
+                <div class="dept-swatch" style="background:var(--dept-ky-thuat)"></div>
+                <div style="flex:1">
+                  <div class="name">Kỹ thuật</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--dept-ky-thuat)"></div></div>
+                </div>
+                <div class="n">58</div>
+              </div>
+              <div class="dept-row">
+                <div class="dept-swatch" style="background:var(--dept-hcns)"></div>
+                <div style="flex:1">
+                  <div class="name">Hành chính - Nhân sự</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:54%;background:var(--dept-hcns)"></div></div>
+                </div>
+                <div class="n">41</div>
+              </div>
+              <div class="dept-row">
+                <div class="dept-swatch" style="background:var(--dept-ke-toan)"></div>
+                <div style="flex:1">
+                  <div class="name">Kế toán</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:38%;background:var(--dept-ke-toan)"></div></div>
+                </div>
+                <div class="n">29</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== NHÂN SỰ ===== -->
+      <div class="view" id="view-nhansu">
+        <div class="page-head">
+          <div><h1>Nhân sự</h1><p>128 nhân viên đang hoạt động trên toàn công ty</p></div>
+          <button class="btn">&#43; Thêm nhân viên</button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="chip active">Tất cả</div>
+          <div class="chip">Kỹ thuật</div>
+          <div class="chip">Hành chính - Nhân sự</div>
+          <div class="chip">Kế toán</div>
+          <div class="chip">Kinh doanh</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nhân viên</th><th>Phòng ban</th><th>Chức vụ</th><th>Ngày vào làm</th><th>Trạng thái</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cell-main">Nguyễn Văn An</div><div class="cell-sub mono">NV-0231</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-ke-toan)"></span>Kế toán</span></td>
+                <td>Kế toán trưởng</td><td class="mono">12/03/2019</td><td><span class="stamp ok">đang làm</span></td></tr>
+              <tr><td><div class="cell-main">Trần Thị Bích</div><div class="cell-sub mono">NV-0198</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hcns)"></span>Hành chính - NS</span></td>
+                <td>Trưởng phòng HCNS</td><td class="mono">05/11/2018</td><td><span class="stamp ok">đang làm</span></td></tr>
+              <tr><td><div class="cell-main">Lê Hoàng Nam</div><div class="cell-sub mono">NV-0304</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-ky-thuat)"></span>Kỹ thuật</span></td>
+                <td>Kỹ sư vận hành</td><td class="mono">21/07/2021</td><td><span class="stamp warn">Nghỉ phép</span></td></tr>
+              <tr><td><div class="cell-main">Phạm Thu Hà </div><div class="cell-sub mono">NV-0276</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-ke-toan)"></span>Kế toán</span></td>
+                <td>Kế toán thanh toán</td><td class="mono">14/02/2020</td><td><span class="stamp ok">đang làm</span></td></tr>
+              <tr><td><div class="cell-main">Đỗ Minh Tuấn</div><div class="cell-sub mono">NV-0312</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-ky-thuat)"></span>Kỹ thuật</span></td>
+                <td>Trưởng phòng Kỹ thuật</td><td class="mono">09/09/2017</td><td><span class="stamp ok">đang làm</span></td></tr>
+              <tr><td><div class="cell-main">Vũ Thị Lan</div><div class="cell-sub mono">NV-0155</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hcns)"></span>Hành chính - NS</span></td>
+                <td>Chuyên viên tuyển dụng</td><td class="mono">03/06/2022</td><td><span class="stamp ok">đang làm</span></td></tr>
+              <tr><td><div class="cell-main">Ngô Thanh Trúc</div><div class="cell-sub mono">NV-0341</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hcns)"></span>Hành chính - NS</span></td>
+                <td>Nhân viên hành chính</td><td class="mono">02/08/2026</td><td><span class="stamp warn">Thử việc</span></td></tr>
+              <tr><td><div class="cell-main">Hoàng Đức Thịnh</div><div class="cell-sub mono">NV-0089</div></td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-ke-toan)"></span>Kế toán</span></td>
+                <td>Kế toán công nợ</td><td class="mono">17/01/2016</td><td><span class="stamp danger">đã nghỉ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== TÀI LIỆU ===== -->
+      <div class="view" id="view-tailieu">
+        <div class="page-head">
+          <div><h1>Tài liệu phòng ban</h1><p>Lưu trữ và phê duyệt tài liệu theo từng bộ phận</p></div>
+          <button class="btn">&#43; Tải tài liệu lên</button>
+        </div>
+
+        <div class="dept-tabs">
+          <div class="dept-tab active" style="background:var(--dept-ky-thuat)"><span class="dot" style="background:#fff"></span>Kỹ thuật</div>
+          <div class="dept-tab"><span class="dot" style="background:var(--dept-hcns)"></span>Hành chính - Nhân sự</div>
+          <div class="dept-tab"><span class="dot" style="background:var(--dept-ke-toan)"></span>Kế toán</div>
+        </div>
+
+        <div class="doc-grid">
+          <div class="doc-card" style="border-top-color:var(--dept-ky-thuat)">
+            <div class="ftype">PDF · 4.2 MB</div>
+            <h4>Quy trình vận hành máy CNC-04</h4>
+            <div class="meta">Đỗ Minh Tuấn · Cập nhật 15/08/2026</div>
+            <div class="foot"><span class="stamp ok">đã duyệt</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+          <div class="doc-card" style="border-top-color:var(--dept-ky-thuat)">
+            <div class="ftype">DWG · 1.8 MB</div>
+            <h4>Bản vẽ kỹ thuật – Dây chuyền A</h4>
+            <div class="meta">Lê Hoàng Nam · Cập nhật 10/08/2026</div>
+            <div class="foot"><span class="stamp warn">Chờ duyệt</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+          <div class="doc-card" style="border-top-color:var(--dept-ky-thuat)">
+            <div class="ftype">PDF · 2.1 MB</div>
+            <h4>Tiêu chuẩn an toàn lao động xưởng 2</h4>
+            <div class="meta">Đỗ Minh Tuấn · Cập nhật 02/07/2026</div>
+            <div class="foot"><span class="stamp danger">Hết hạn</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+          <div class="doc-card" style="border-top-color:var(--dept-hcns)">
+            <div class="ftype">DOCX · 320 KB</div>
+            <h4>Hợp đồng lao động – Ngô Thanh Trúc</h4>
+            <div class="meta">Vũ Thị Lan · Cập nhật 14/08/2026</div>
+            <div class="foot"><span class="stamp warn">Chờ duyệt</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+          <div class="doc-card" style="border-top-color:var(--dept-ke-toan)">
+            <div class="ftype">XLSX · 890 KB</div>
+            <h4>Báo cáo tài chính Q2/2026</h4>
+            <div class="meta">Nguyễn Văn An · Cập nhật 16/08/2026</div>
+            <div class="foot"><span class="stamp ok">đã duyệt</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+          <div class="doc-card" style="border-top-color:var(--dept-ke-toan)">
+            <div class="ftype">PDF · 1.1 MB</div>
+            <h4>Sổ sách kế toán tháng 7/2026</h4>
+            <div class="meta">Phạm Thu Hà  · Cập nhật 05/08/2026</div>
+            <div class="foot"><span class="stamp ok">đã duyệt</span><span style="font-size:16px">&#8942;</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== HOÁ ĐƠN ===== -->
+      <div class="view" id="view-hoadon">
+        <div class="page-head">
+          <div><h1>Hoá đơn mua bán</h1><p>47 hoá đơn trong tháng 8/2026 · Tổng giá trị 2,84 tỷ ₫</p></div>
+          <button class="btn">&#43; Tạo hoá đơn</button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="chip active">Tất cả</div>
+          <div class="chip">Hoá đơn bán</div>
+          <div class="chip">Hoá đơn mua</div>
+          <div class="chip">Chưa thanh toán</div>
+          <div class="chip">Quá hạn</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Số hoá đơn</th><th>Loại</th><th>Đối tác</th><th>Ngày lập</th><th>Giá trị</th><th>Trạng thái</th></tr></thead>
+            <tbody>
+              <tr><td class="mono cell-main">HD-2026-0847</td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hoa-don)"></span>Bán</span></td>
+                <td>Công ty CP Xây dựng Đại Phát</td><td class="mono">16/08/2026</td>
+                <td class="mono">86.400.000 ₫</td><td><span class="stamp warn">Chưa thanh toán</span></td></tr>
+              <tr><td class="mono cell-main">HD-2026-0846</td>
+                <td><span class="pill-dept"><span class="dot" style="background:#5B7FA6"></span>Mua</span></td>
+                <td>Công ty TNHH Vật tư Miền Nam</td><td class="mono">15/08/2026</td>
+                <td class="mono">42.150.000 ₫</td><td><span class="stamp ok">Đã thanh toán</span></td></tr>
+              <tr><td class="mono cell-main">HD-2026-0839</td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hoa-don)"></span>Bán</span></td>
+                <td>Siêu thị Bình Minh</td><td class="mono">13/08/2026</td>
+                <td class="mono">128.900.000 ₫</td><td><span class="stamp ok">Đã thanh toán</span></td></tr>
+              <tr><td class="mono cell-main">HD-2026-0812</td>
+                <td><span class="pill-dept"><span class="dot" style="background:#5B7FA6"></span>Mua</span></td>
+                <td>Nhà máy thép Hoà Phát</td><td class="mono">08/08/2026</td>
+                <td class="mono">310.000.000 ₫</td><td><span class="stamp danger">Quá hạn</span></td></tr>
+              <tr><td class="mono cell-main">HD-2026-0801</td>
+                <td><span class="pill-dept"><span class="dot" style="background:var(--dept-hoa-don)"></span>Bán</span></td>
+                <td>Công ty CP Thương mại Việt Tín</td><td class="mono">04/08/2026</td>
+                <td class="mono">57.600.000 ₫</td><td><span class="stamp ok">Đã thanh toán</span></td></tr>
+              <tr><td class="mono cell-main">HD-2026-0788</td>
+                <td><span class="pill-dept"><span class="dot" style="background:#5B7FA6"></span>Mua</span></td>
+                <td>Công ty TNHH Bao bì An Khang</td><td class="mono">01/08/2026</td>
+                <td class="mono">19.850.000 ₫</td><td><span class="stamp ok">Đã thanh toán</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const navItems = document.querySelectorAll('.nav-item[data-view]');
+  const views = document.querySelectorAll('.view');
+  navItems.forEach(item=>{
+    item.addEventListener('click', ()=>{
+      navItems.forEach(i=>i.classList.remove('active'));
+      item.classList.add('active');
+      views.forEach(v=>v.classList.remove('active'));
+      document.getElementById('view-'+item.dataset.view).classList.add('active');
+    });
+  });
+
+  // dept tab toggle (visual only in this mockup)
+  document.querySelectorAll('.dept-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.dept-tab').forEach(t=>{t.classList.remove('active'); t.style.background='';});
+      tab.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chip.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
