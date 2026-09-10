@@ -30,7 +30,7 @@ watch(() => route.name, () => {
       >
         <Menu class="w-4 h-4 text-slate-500 dark:text-slate-300" />
       </button>
-      <div class="min-w-0">
+      <div class="min-w-0 hidden md:block">
         <p class="text-brand-600 dark:text-brand-400 font-medium text-sm mb-1 hidden sm:block">Chào mừng trở lại 👋</p>
         <h1 class="text-xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 truncate">{{ route.meta.title || 'Dashboard' }}</h1>
       </div>
