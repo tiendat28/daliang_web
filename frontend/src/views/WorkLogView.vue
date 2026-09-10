@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
@@ -8,11 +8,8 @@ import { FileText, Loader2 } from 'lucide-vue-next'
 import { exportTablePdf } from '../utils/pdfReport'
 import { formatDate } from '../utils/format'
 import { productSearch } from '../store/productSearch'
+import { useCrudResource } from '../composables/useCrudResource'
 
-const rows = ref([])
-const showModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
 const exporting = ref(false)
 
 const columns = [
@@ -34,9 +31,10 @@ function todayStr() {
   return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`
 }
 
-async function load() {
-  rows.value = await workLogApi.list()
-}
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  workLogApi, emptyForm,
+  { confirmRemove: () => 'Xoá bản ghi nhật ký này?' },
+)
 
 const displayRows = computed(() => {
   const q = productSearch.query.trim().toLowerCase()
@@ -45,35 +43,6 @@ const displayRows = computed(() => {
     : rows.value
   return [...base].sort((a, b) => String(b.log_date ?? '').localeCompare(String(a.log_date ?? '')))
 })
-
-function openAdd() {
-  editingId.value = null
-  form.value = emptyForm()
-  showModal.value = true
-}
-
-function openEdit(row) {
-  editingId.value = row.id
-  form.value = { ...row }
-  showModal.value = true
-}
-
-async function save() {
-  if (editingId.value) {
-    await workLogApi.update(editingId.value, form.value)
-  } else {
-    await workLogApi.create(form.value)
-  }
-  showModal.value = false
-  await load()
-}
-
-async function remove(row) {
-  if (confirm('Xoá bản ghi nhật ký này?')) {
-    await workLogApi.remove(row.id)
-    await load()
-  }
-}
 
 async function exportPdf() {
   exporting.value = true
@@ -91,8 +60,6 @@ async function exportPdf() {
   }
 }
 
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>

@@ -1,15 +1,11 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
 import { companyProductsApi } from '../api/resources'
 import { productSearch } from '../store/productSearch'
-
-const rows = ref([])
-const showModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
+import { useCrudResource } from '../composables/useCrudResource'
 
 const processStageLabels = {
   pre_treatment: 'Tiền xử lý',
@@ -59,41 +55,10 @@ function emptyForm() {
   return { code: '', name: '', field: '', usage_purpose: '', concentration: '', unit: '', process_stage: '', price: null }
 }
 
-async function load() {
-  rows.value = await companyProductsApi.list()
-}
-
-function openAdd() {
-  editingId.value = null
-  form.value = emptyForm()
-  showModal.value = true
-}
-
-function openEdit(row) {
-  editingId.value = row.id
-  form.value = { ...row }
-  showModal.value = true
-}
-
-async function save() {
-  if (editingId.value) {
-    await companyProductsApi.update(editingId.value, form.value)
-  } else {
-    await companyProductsApi.create(form.value)
-  }
-  showModal.value = false
-  await load()
-}
-
-async function remove(row) {
-  if (confirm(`Xoá sản phẩm "${row.name}"?`)) {
-    await companyProductsApi.remove(row.id)
-    await load()
-  }
-}
-
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  companyProductsApi, emptyForm,
+  { confirmRemove: row => `Xoá sản phẩm "${row.name}"?` },
+)
 </script>
 
 <template>

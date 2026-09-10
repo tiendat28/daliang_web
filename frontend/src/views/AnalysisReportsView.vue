@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import { analysisReportsApi, customersApi } from '../api/resources'
@@ -7,13 +7,10 @@ import { Plus, Trash2, Eye, Printer } from 'lucide-vue-next'
 import { formatFormula } from '../utils/chemFormula'
 import { formatDate } from '../utils/format'
 import { productSearch } from '../store/productSearch'
+import { useCrudResource } from '../composables/useCrudResource'
 
-const rows = ref([])
 const customers = ref([])
-const showModal = ref(false)
 const showViewModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
 const viewingReport = ref(null)
 
 const columns = [
@@ -48,38 +45,39 @@ function emptyForm() {
   }
 }
 
-async function load() {
-  const [reportList, customerList] = await Promise.all([analysisReportsApi.list(), customersApi.list()])
-  rows.value = reportList
-  customers.value = customerList
-}
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  analysisReportsApi, emptyForm,
+  {
+    mapRowToForm: row => ({
+      customer_id: row.customer_id,
+      sample_receive_date: row.sample_receive_date || '',
+      issue_date: row.issue_date || '',
+      completed_by: row.completed_by.length ? [...row.completed_by] : [''],
+      approved_by: row.approved_by || '',
+      note: row.note || '',
+      samples: row.samples.length
+        ? row.samples.map(s => ({
+            name: s.name,
+            components: s.components.length
+              ? s.components.map(c => ({ name: c.name, result: c.result, note: c.note || '' }))
+              : [{ name: '', result: '', note: '' }],
+          }))
+        : [{ name: '', components: [{ name: '', result: '', note: '' }] }],
+    }),
+    buildPayload: form => ({
+      ...form,
+      sample_receive_date: form.sample_receive_date || null,
+      issue_date: form.issue_date || null,
+      completed_by: form.completed_by.map(n => n.trim()).filter(Boolean),
+      samples: form.samples
+        .filter(s => s.name)
+        .map(s => ({ ...s, components: s.components.filter(c => c.name) })),
+    }),
+    confirmRemove: row => `Xoá báo cáo phân tích của "${customerName(row.customer_id)}"?`,
+  },
+)
 
-function openAdd() {
-  editingId.value = null
-  form.value = emptyForm()
-  showModal.value = true
-}
-
-function openEdit(row) {
-  editingId.value = row.id
-  form.value = {
-    customer_id: row.customer_id,
-    sample_receive_date: row.sample_receive_date || '',
-    issue_date: row.issue_date || '',
-    completed_by: row.completed_by.length ? [...row.completed_by] : [''],
-    approved_by: row.approved_by || '',
-    note: row.note || '',
-    samples: row.samples.length
-      ? row.samples.map(s => ({
-          name: s.name,
-          components: s.components.length
-            ? s.components.map(c => ({ name: c.name, result: c.result, note: c.note || '' }))
-            : [{ name: '', result: '', note: '' }],
-        }))
-      : [{ name: '', components: [{ name: '', result: '', note: '' }] }],
-  }
-  showModal.value = true
-}
+onMounted(async () => { customers.value = await customersApi.list() })
 
 function addSample() {
   form.value.samples.push({ name: '', components: [{ name: '', result: '', note: '' }] })
@@ -101,32 +99,6 @@ function removeCompletedBy(i) {
   form.value.completed_by.splice(i, 1)
 }
 
-async function save() {
-  const payload = {
-    ...form.value,
-    sample_receive_date: form.value.sample_receive_date || null,
-    issue_date: form.value.issue_date || null,
-    completed_by: form.value.completed_by.map(n => n.trim()).filter(Boolean),
-    samples: form.value.samples
-      .filter(s => s.name)
-      .map(s => ({ ...s, components: s.components.filter(c => c.name) })),
-  }
-  if (editingId.value) {
-    await analysisReportsApi.update(editingId.value, payload)
-  } else {
-    await analysisReportsApi.create(payload)
-  }
-  showModal.value = false
-  await load()
-}
-
-async function remove(row) {
-  if (confirm(`Xoá báo cáo phân tích của "${customerName(row.customer_id)}"?`)) {
-    await analysisReportsApi.remove(row.id)
-    await load()
-  }
-}
-
 function openView(row) {
   viewingReport.value = row
   showViewModal.value = true
@@ -135,9 +107,6 @@ function openView(row) {
 function printReport() {
   window.print()
 }
-
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>

@@ -1,16 +1,12 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import { equipmentApi } from '../api/resources'
 import { Plus, Trash2, FileSpreadsheet, Loader2 } from 'lucide-vue-next'
 import { createReportSheet, styleDataCell, downloadWorkbook } from '../utils/excelReport'
 import { productSearch } from '../store/productSearch'
-
-const rows = ref([])
-const showModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
+import { useCrudResource } from '../composables/useCrudResource'
 
 function currentPeriod() {
   const d = new Date()
@@ -31,9 +27,18 @@ function emptyForm() {
   return { name: '', note: '', variants: [{ classification: '', quantity: 0, unit: 'c', note: '' }] }
 }
 
-async function load() {
-  rows.value = await equipmentApi.list()
-}
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  equipmentApi, emptyForm,
+  {
+    mapRowToForm: row => ({
+      name: row.name,
+      note: row.note,
+      variants: row.variants.length ? row.variants.map(v => ({ ...v, note: v.note || '' })) : [{ classification: '', quantity: 0, unit: 'c', note: '' }],
+    }),
+    buildPayload: form => ({ ...form, variants: form.variants.filter(v => v.classification || v.quantity) }),
+    confirmRemove: row => `Xoá thiết bị "${row.name}"?`,
+  },
+)
 
 const displayRows = computed(() => {
   const q = productSearch.query.trim().toLowerCase()
@@ -87,22 +92,6 @@ async function exportMonthlyExcel() {
   }
 }
 
-function openAdd() {
-  editingId.value = null
-  form.value = emptyForm()
-  showModal.value = true
-}
-
-function openEdit(row) {
-  editingId.value = row.id
-  form.value = {
-    name: row.name,
-    note: row.note,
-    variants: row.variants.length ? row.variants.map(v => ({ ...v, note: v.note || '' })) : [{ classification: '', quantity: 0, unit: 'c', note: '' }],
-  }
-  showModal.value = true
-}
-
 function addVariant() {
   form.value.variants.push({ classification: '', quantity: 0, unit: 'c', note: '' })
 }
@@ -110,27 +99,6 @@ function addVariant() {
 function removeVariant(index) {
   form.value.variants.splice(index, 1)
 }
-
-async function save() {
-  const payload = { ...form.value, variants: form.value.variants.filter(v => v.classification || v.quantity) }
-  if (editingId.value) {
-    await equipmentApi.update(editingId.value, payload)
-  } else {
-    await equipmentApi.create(payload)
-  }
-  showModal.value = false
-  await load()
-}
-
-async function remove(row) {
-  if (confirm(`Xoá thiết bị "${row.name}"?`)) {
-    await equipmentApi.remove(row.id)
-    await load()
-  }
-}
-
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>

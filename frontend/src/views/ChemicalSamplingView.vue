@@ -1,16 +1,13 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
 import { chemicalSamplingApi, companyProductsApi } from '../api/resources'
 import { productSearch } from '../store/productSearch'
+import { useCrudResource } from '../composables/useCrudResource'
 
-const rows = ref([])
 const products = ref([])
-const showModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
 
 const columns = [
   { key: 'company_product_id', label: 'Sản phẩm' },
@@ -46,32 +43,12 @@ function emptyForm() {
   return { company_product_id: '', name: '', quantity: 0, unit: '', sample_date: '', note: '' }
 }
 
-async function load() {
-  const [samplingList, productList] = await Promise.all([chemicalSamplingApi.list(), companyProductsApi.list()])
-  rows.value = samplingList
-  products.value = productList
-}
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  chemicalSamplingApi, emptyForm,
+  { confirmRemove: () => 'Xoá bản ghi lấy mẫu này?' },
+)
 
-function openAdd() { editingId.value = null; form.value = emptyForm(); showModal.value = true }
-function openEdit(row) { editingId.value = row.id; form.value = { ...row }; showModal.value = true }
-async function save() {
-  if (editingId.value) {
-    await chemicalSamplingApi.update(editingId.value, form.value)
-  } else {
-    await chemicalSamplingApi.create(form.value)
-  }
-  showModal.value = false
-  await load()
-}
-async function remove(row) {
-  if (confirm('Xoá bản ghi lấy mẫu này?')) {
-    await chemicalSamplingApi.remove(row.id)
-    await load()
-  }
-}
-
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
+onMounted(async () => { products.value = await companyProductsApi.list() })
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
@@ -8,18 +8,13 @@ import { PackagePlus, FileSpreadsheet, Loader2 } from 'lucide-vue-next'
 import { formatFormula } from '../utils/chemFormula'
 import { createReportSheet, styleDataCell, downloadWorkbook } from '../utils/excelReport'
 import { productSearch } from '../store/productSearch'
+import { useCrudResource } from '../composables/useCrudResource'
 
 const tabs = [
   { key: 'lab-chemicals', label: 'Hóa chất PTN' },
   { key: 'indicators', label: 'Chất chỉ thị' },
 ]
 const activeTab = ref('lab-chemicals')
-
-// ---------- Hóa chất PTN ----------
-const labRows = ref([])
-const labShowModal = ref(false)
-const labEditingId = ref(null)
-const labForm = ref(emptyLabForm())
 
 function currentPeriod() {
   const d = new Date()
@@ -54,9 +49,10 @@ function emptyLabForm() {
   return { code: '', name: '', type: '', box_count: 0, volume_per_box: 500, remaining_volume: null, unit: '', note: '' }
 }
 
-async function loadLabChemicals() {
-  labRows.value = await labChemicalsApi.list()
-}
+const {
+  rows: labRows, showModal: labShowModal, editingId: labEditingId, form: labForm,
+  load: loadLabChemicals, openAdd: openAddLab, openEdit: openEditLab, save: saveLab, remove: removeLab,
+} = useCrudResource(labChemicalsApi, emptyLabForm, { confirmRemove: row => `Xoá hóa chất "${row.name}"?` })
 
 const labDisplayRows = computed(() => {
   const q = productSearch.query.trim().toLowerCase()
@@ -66,35 +62,6 @@ const labDisplayRows = computed(() => {
   return [...base].sort((a, b) => String(a.code ?? '').localeCompare(String(b.code ?? ''), 'vi', { numeric: true }))
 })
 
-function openAddLab() {
-  labEditingId.value = null
-  labForm.value = emptyLabForm()
-  labShowModal.value = true
-}
-
-function openEditLab(row) {
-  labEditingId.value = row.id
-  labForm.value = { ...row }
-  labShowModal.value = true
-}
-
-async function saveLab() {
-  if (labEditingId.value) {
-    await labChemicalsApi.update(labEditingId.value, labForm.value)
-  } else {
-    await labChemicalsApi.create(labForm.value)
-  }
-  labShowModal.value = false
-  await loadLabChemicals()
-}
-
-async function removeLab(row) {
-  if (confirm(`Xoá hóa chất "${row.name}"?`)) {
-    await labChemicalsApi.remove(row.id)
-    await loadLabChemicals()
-  }
-}
-
 async function openBox(row) {
   if (confirm(`Mở hộp mới cho "${row.name}"? Sẽ trừ 1 hộp trong kho và reset phần lẻ.`)) {
     await labChemicalsApi.openBox(row.id)
@@ -103,11 +70,6 @@ async function openBox(row) {
 }
 
 // ---------- Chất chỉ thị ----------
-const indicatorRows = ref([])
-const indicatorShowModal = ref(false)
-const indicatorEditingId = ref(null)
-const indicatorForm = ref(emptyIndicatorForm())
-
 const indicatorColumns = [
   { key: 'name', label: 'Tên' },
   { key: 'type', label: 'Loại' },
@@ -128,44 +90,16 @@ function emptyIndicatorForm() {
   return { name: '', type: '', quantity: 0, unit: '', note: '' }
 }
 
-async function loadIndicators() {
-  indicatorRows.value = await indicatorsApi.list()
-}
+const {
+  rows: indicatorRows, showModal: indicatorShowModal, editingId: indicatorEditingId, form: indicatorForm,
+  openAdd: openAddIndicator, openEdit: openEditIndicator, save: saveIndicator, remove: removeIndicator,
+} = useCrudResource(indicatorsApi, emptyIndicatorForm, { confirmRemove: row => `Xoá chất chỉ thị "${row.name}"?` })
 
 const indicatorDisplayRows = computed(() => {
   const q = productSearch.query.trim().toLowerCase()
   if (!q) return indicatorRows.value
   return indicatorRows.value.filter(r => [r.name, r.type, r.unit, r.note].some(v => String(v ?? '').toLowerCase().includes(q)))
 })
-
-function openAddIndicator() {
-  indicatorEditingId.value = null
-  indicatorForm.value = emptyIndicatorForm()
-  indicatorShowModal.value = true
-}
-
-function openEditIndicator(row) {
-  indicatorEditingId.value = row.id
-  indicatorForm.value = { ...row }
-  indicatorShowModal.value = true
-}
-
-async function saveIndicator() {
-  if (indicatorEditingId.value) {
-    await indicatorsApi.update(indicatorEditingId.value, indicatorForm.value)
-  } else {
-    await indicatorsApi.create(indicatorForm.value)
-  }
-  indicatorShowModal.value = false
-  await loadIndicators()
-}
-
-async function removeIndicator(row) {
-  if (confirm(`Xoá chất chỉ thị "${row.name}"?`)) {
-    await indicatorsApi.remove(row.id)
-    await loadIndicators()
-  }
-}
 
 async function exportCombinedExcel() {
   exporting.value = true
@@ -206,11 +140,6 @@ async function exportCombinedExcel() {
   }
 }
 
-onMounted(() => {
-  loadLabChemicals()
-  loadIndicators()
-})
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>

@@ -1,15 +1,11 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import { customersApi } from '../api/resources'
 import { Plus, Trash2 } from 'lucide-vue-next'
 import { productSearch } from '../store/productSearch'
-
-const rows = ref([])
-const showModal = ref(false)
-const editingId = ref(null)
-const form = ref(emptyForm())
+import { useCrudResource } from '../composables/useCrudResource'
 
 const columns = [
   { key: 'name', label: 'Tên KH', sortable: true },
@@ -34,28 +30,29 @@ function emptyForm() {
   return { name: '', address: '', note: '', fields: [{ field_name: '', product_codes: [''] }] }
 }
 
-async function load() {
-  rows.value = await customersApi.list()
-}
-
-function openAdd() {
-  editingId.value = null
-  form.value = emptyForm()
-  showModal.value = true
-}
-
-function openEdit(row) {
-  editingId.value = row.id
-  form.value = {
-    name: row.name,
-    address: row.address,
-    note: row.note,
-    fields: row.fields.length
-      ? row.fields.map(f => ({ field_name: f.field_name, product_codes: f.products.map(p => p.product_code_text) }))
-      : [{ field_name: '', product_codes: [''] }],
-  }
-  showModal.value = true
-}
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  customersApi, emptyForm,
+  {
+    mapRowToForm: row => ({
+      name: row.name,
+      address: row.address,
+      note: row.note,
+      fields: row.fields.length
+        ? row.fields.map(f => ({ field_name: f.field_name, product_codes: f.products.map(p => p.product_code_text) }))
+        : [{ field_name: '', product_codes: [''] }],
+    }),
+    buildPayload: form => ({
+      ...form,
+      fields: form.fields
+        .filter(f => f.field_name)
+        .map(f => ({
+          field_name: f.field_name,
+          product_codes: f.product_codes.join(',').split(',').map(c => c.trim()).filter(Boolean),
+        })),
+    }),
+    confirmRemove: row => `Xoá khách hàng "${row.name}"?`,
+  },
+)
 
 function addField() {
   form.value.fields.push({ field_name: '', product_codes: [''] })
@@ -64,35 +61,6 @@ function addField() {
 function removeField(i) {
   form.value.fields.splice(i, 1)
 }
-
-async function save() {
-  const payload = {
-    ...form.value,
-    fields: form.value.fields
-      .filter(f => f.field_name)
-      .map(f => ({
-        field_name: f.field_name,
-        product_codes: f.product_codes.join(',').split(',').map(c => c.trim()).filter(Boolean),
-      })),
-  }
-  if (editingId.value) {
-    await customersApi.update(editingId.value, payload)
-  } else {
-    await customersApi.create(payload)
-  }
-  showModal.value = false
-  await load()
-}
-
-async function remove(row) {
-  if (confirm(`Xoá khách hàng "${row.name}"?`)) {
-    await customersApi.remove(row.id)
-    await load()
-  }
-}
-
-onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>
