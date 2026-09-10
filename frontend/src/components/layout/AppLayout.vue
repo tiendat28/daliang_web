@@ -9,7 +9,7 @@ import Topbar from './Topbar.vue'
     <main class="flex-1 p-4 flex flex-col overflow-hidden">
       <div class="bg-white/40 dark:bg-slate-800/40 rounded-3xl p-6 flex flex-col flex-1 overflow-hidden">
         <Topbar />
-        <div class="flex-1 overflow-y-auto">
+        <div class="flex-1 overflow-y-auto pb-6">
           <slot />
         </div>
       </div>
