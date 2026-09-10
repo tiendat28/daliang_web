@@ -151,11 +151,11 @@ function openView(row) {
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
-          <div v-for="(c, ci) in s.components" :key="ci" class="flex gap-2 mb-2 pl-4">
-            <input v-model="c.name" placeholder="TP (VD: SnO2, Ni, pH)" class="flex-1 field-input" />
-            <input v-model="c.result" placeholder="KQ" class="w-24 field-input" />
-            <input v-model="c.note" placeholder="Ghi chú" class="w-28 field-input" />
-            <button type="button" class="text-red-400" @click="removeComponent(si, ci)">
+          <div v-for="(c, ci) in s.components" :key="ci" class="flex flex-wrap gap-2 mb-2 pl-4 items-center">
+            <input v-model="c.name" placeholder="TP (VD: SnO2, Ni, pH)" class="flex-1 min-w-[140px] field-input" />
+            <input v-model="c.result" placeholder="KQ" class="w-20 field-input" />
+            <input v-model="c.note" placeholder="Ghi chú" class="flex-1 min-w-[100px] field-input" />
+            <button type="button" class="text-red-400 shrink-0" @click="removeComponent(si, ci)">
               <Trash2 class="w-4 h-4" />
             </button>
           </div>

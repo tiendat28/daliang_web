@@ -143,12 +143,12 @@ function removeVariant(index) {
 
       <div>
         <label class="field-label mb-2">Phân loại / Số lượng</label>
-        <div v-for="(v, i) in form.variants" :key="i" class="flex gap-2 mb-2">
-          <input v-model="v.classification" placeholder="Phân loại" class="flex-1 field-input" />
+        <div v-for="(v, i) in form.variants" :key="i" class="flex flex-wrap gap-2 mb-2 items-center">
+          <input v-model="v.classification" placeholder="Phân loại" class="flex-1 min-w-[120px] field-input" />
           <input v-model.number="v.quantity" type="number" placeholder="SL" class="w-20 field-input" />
           <input v-model="v.unit" placeholder="Đ.vị" class="w-16 field-input" />
-          <input v-model="v.note" placeholder="Ghi chú" class="w-28 field-input" />
-          <button type="button" class="text-red-400" @click="removeVariant(i)">
+          <input v-model="v.note" placeholder="Ghi chú" class="flex-1 min-w-[100px] field-input" />
+          <button type="button" class="text-red-400 shrink-0" @click="removeVariant(i)">
             <Trash2 class="w-4 h-4" />
           </button>
         </div>

@@ -246,8 +246,8 @@ onUnmounted(() => { productSearch.query = '' })
         <label class="field-label mb-2">
           Hóa chất trong đơn{{ editingId ? '' : ' (có thể thêm nhiều nếu 1 đơn pha nhiều hóa chất, VD pH 10)' }}
         </label>
-        <div v-for="(line, i) in form.lines" :key="i" class="grid grid-cols-5 gap-2 mb-2 items-start">
-          <select v-model="line.lab_chemical_id" class="field-input">
+        <div v-for="(line, i) in form.lines" :key="i" class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-2 items-start">
+          <select v-model="line.lab_chemical_id" class="field-input col-span-2 sm:col-span-1">
             <option value="" disabled>-- Chọn hóa chất --</option>
             <option v-for="c in labChemicals" :key="c.id" :value="c.id">{{ c.code }} - {{ c.name }}</option>
           </select>
