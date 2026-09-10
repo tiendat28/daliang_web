@@ -154,7 +154,7 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
         <div
           v-for="doc in displayDocuments"
           :key="doc.id"
-          class="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 cursor-pointer"
+          class="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer"
           @click="openPreview(doc)"
         >
           <span class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" :class="fileKind(doc.original_filename).className">
@@ -164,7 +164,7 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
             <p class="text-sm font-medium text-slate-700 dark:text-slate-200 truncate">{{ doc.name }}</p>
             <p class="text-xs text-slate-400 truncate">{{ doc.uploaded_by }} · {{ formatDateTime(doc.uploaded_at) }}</p>
           </div>
-          <button class="text-slate-400 hover:text-red-500 shrink-0 p-1" @click.stop="remove(doc)">
+          <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-slate-700 shrink-0" @click.stop="remove(doc)">
             <Trash2 class="w-4 h-4" />
           </button>
         </div>

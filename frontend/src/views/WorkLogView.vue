@@ -63,7 +63,11 @@ async function exportPdf() {
 </script>
 
 <template>
-  <DataTable :columns="columns" :rows="displayRows" title="Nhật ký công tác" @add="openAdd" @edit="openEdit" @delete="remove">
+  <DataTable
+    :columns="columns" :rows="displayRows" title="Nhật ký công tác"
+    mobile-primary-key="content" mobile-secondary-key="log_date"
+    @add="openAdd" @edit="openEdit" @delete="remove"
+  >
     <template #header-actions>
       <button
         class="flex items-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50"

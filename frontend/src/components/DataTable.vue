@@ -6,6 +6,8 @@ const props = defineProps({
   columns: { type: Array, required: true }, // [{ key, label, sortable, filterable }]
   rows: { type: Array, required: true },
   title: { type: String, default: '' },
+  mobilePrimaryKey: { type: String, default: null },
+  mobileSecondaryKey: { type: String, default: null },
 })
 
 const emit = defineEmits(['add', 'edit', 'delete'])
@@ -61,6 +63,14 @@ function toggleSort(col) {
     sortState.dir = 'asc'
   }
 }
+
+const primaryCol = computed(() => props.columns.find(c => c.key === props.mobilePrimaryKey) || props.columns[0])
+const secondaryCol = computed(() => props.columns.find(c => c.key === props.mobileSecondaryKey) || props.columns[1] || null)
+const chipCols = computed(() => props.columns.filter(c => c !== primaryCol.value && c !== secondaryCol.value))
+
+function visibleChips(row) {
+  return chipCols.value.filter(col => row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '')
+}
 </script>
 
 <template>
@@ -78,7 +88,7 @@ function toggleSort(col) {
       </div>
     </div>
 
-    <div class="overflow-auto px-5 max-h-[65vh]">
+    <div class="hidden sm:block overflow-auto px-5 max-h-[65vh]">
       <table class="w-full text-sm">
         <thead>
           <tr class="text-left text-slate-800 dark:text-slate-100 border-b-2 border-slate-300 dark:border-slate-600 sticky top-0 z-10 bg-white dark:bg-slate-800">
@@ -144,6 +154,44 @@ function toggleSort(col) {
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="sm:hidden overflow-y-auto px-4 max-h-[65vh] flex flex-col gap-2 py-1">
+      <div v-if="displayRows.length === 0" class="py-6 text-center text-slate-400 text-sm">Chưa có dữ liệu</div>
+      <div
+        v-for="row in pagedRows"
+        :key="row.id"
+        class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm p-3"
+      >
+        <div class="flex items-start gap-3">
+          <div class="min-w-0 flex-1">
+            <p class="font-semibold text-slate-800 dark:text-slate-100 truncate">
+              <slot :name="`cell-${primaryCol.key}`" :row="row">{{ displayValue(primaryCol, row[primaryCol.key]) }}</slot>
+            </p>
+            <p v-if="secondaryCol" class="text-xs text-slate-400 dark:text-slate-500 truncate mt-0.5">
+              <slot :name="`cell-${secondaryCol.key}`" :row="row">{{ displayValue(secondaryCol, row[secondaryCol.key]) }}</slot>
+            </p>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <slot name="row-actions" :row="row" />
+            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-600 hover:bg-brand-50 dark:hover:bg-slate-700" @click="emit('edit', row)">
+              <Pencil class="w-4 h-4" />
+            </button>
+            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-slate-700" @click="emit('delete', row)">
+              <Trash2 class="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+        <div v-if="visibleChips(row).length" class="flex flex-wrap gap-1.5 mt-2">
+          <span
+            v-for="col in visibleChips(row)"
+            :key="col.key"
+            class="text-[11px] font-medium px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300"
+          >
+            {{ col.label }}: <slot :name="`cell-${col.key}`" :row="row">{{ displayValue(col, row[col.key]) }}</slot>
+          </span>
+        </div>
+      </div>
     </div>
 
     <div v-if="displayRows.length > 0" class="flex flex-wrap items-center justify-between gap-3 p-5 pt-4 mt-0 border-t border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400 shrink-0">

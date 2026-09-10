@@ -196,9 +196,9 @@ onUnmounted(() => { productSearch.query = '' })
 
     <!-- Mobile: mỗi lô 1 thẻ, các hóa chất trong lô liệt kê bên trong -->
     <div v-if="groupedRows.length > 0" class="sm:hidden flex flex-col gap-3 px-5 pb-5">
-      <div v-for="batch in batches" :key="batch.stt" class="rounded-2xl bg-slate-50 dark:bg-slate-700/50 p-3">
+      <div v-for="batch in batches" :key="batch.stt" class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm p-3">
         <p class="text-xs text-slate-400">#{{ batch.stt }} · {{ customerName(batch.lines[0].customer_id) }}</p>
-        <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">
+        <p class="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">
           {{ batch.lines[0].product_name || labChemicalName(batch.lines[0].lab_chemical_id) }}
         </p>
         <p class="text-xs text-slate-400 mb-2">Pha: {{ formatDate(batch.lines[0].mix_date) }} · Xuất: {{ formatDate(batch.lines[0].issue_date) }}</p>
@@ -206,17 +206,17 @@ onUnmounted(() => { productSearch.query = '' })
         <div
           v-for="line in batch.lines"
           :key="line.id"
-          class="flex items-center justify-between gap-2 py-2 border-t border-slate-200 dark:border-slate-600"
+          class="flex items-center justify-between gap-2 py-2 border-t border-slate-100 dark:border-slate-700"
         >
           <div class="min-w-0 text-sm text-slate-600 dark:text-slate-300">
             <p class="truncate">{{ labChemicalName(line.lab_chemical_id) }} · {{ line.concentration }}</p>
             <p class="text-xs text-slate-400">{{ line.used_amount }} {{ line.unit }}</p>
           </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <button class="text-slate-400 hover:text-brand-600" @click="openEdit(line)">
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-600 hover:bg-brand-50 dark:hover:bg-slate-700" @click="openEdit(line)">
               <Pencil class="w-4 h-4" />
             </button>
-            <button class="text-slate-400 hover:text-red-500" @click="remove(line)">
+            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-slate-700" @click="remove(line)">
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
