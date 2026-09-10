@@ -34,12 +34,12 @@ const navItems = [
     class="w-64 shrink-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl p-5 flex flex-col gap-1 shadow-sm transition-transform duration-300 fixed inset-y-4 left-4 z-50 md:static md:inset-auto md:m-4 md:mr-0 md:h-[calc(100vh-2rem)] md:translate-x-0"
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-[150%]'"
   >
-    <div class="flex items-center gap-2 px-2 pb-6">
+    <RouterLink to="/" class="flex items-center gap-2 px-2 pb-6">
       <div class="w-9 h-9 rounded-xl bg-brand-gradient flex items-center justify-center">
         <Boxes class="w-5 h-5 text-white" />
       </div>
       <span class="font-bold text-lg text-slate-800 dark:text-slate-100">Daliang VN</span>
-    </div>
+    </RouterLink>
 
     <RouterLink
       v-for="item in navItems"

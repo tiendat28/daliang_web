@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', redirect: '/customers' },
-  { path: '/customers', name: 'customers', component: () => import('../views/CustomersView.vue'), meta: { title: 'Khách hàng' } },
+  { path: '/customers', alias: '/', name: 'customers', component: () => import('../views/CustomersView.vue'), meta: { title: 'Khách hàng' } },
   { path: '/company-products', name: 'company-products', component: () => import('../views/CompanyProductsView.vue'), meta: { title: 'Sản phẩm công ty' } },
   { path: '/lab-chemicals', name: 'lab-chemicals', component: () => import('../views/LabChemicalsView.vue'), meta: { title: 'Hóa chất' } },
   { path: '/equipment', name: 'equipment', component: () => import('../views/EquipmentView.vue'), meta: { title: 'Thiết bị' } },
