@@ -1,0 +1,8 @@
+node_modules/
+__pycache__/
+*.pyc
+backend/app/uploads/
+.env
+frontend/dist/
+.claude/
+*.timestamp-*.mjs
