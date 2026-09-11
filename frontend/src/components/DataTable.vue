@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, computed, ref, watch } from 'vue'
+import { reactive, computed, ref, watch, useSlots } from 'vue'
 import { Pencil, Trash2, Plus, ArrowUp, ArrowDown, ArrowUpDown, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -64,12 +64,17 @@ function toggleSort(col) {
   }
 }
 
+const slots = useSlots()
+
 const primaryCol = computed(() => props.columns.find(c => c.key === props.mobilePrimaryKey) || props.columns[0])
 const secondaryCol = computed(() => props.columns.find(c => c.key === props.mobileSecondaryKey) || props.columns[1] || null)
 const chipCols = computed(() => props.columns.filter(c => c !== primaryCol.value && c !== secondaryCol.value))
 
 function visibleChips(row) {
-  return chipCols.value.filter(col => row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '')
+  // A column with a custom cell slot may render content derived from a nested
+  // field (e.g. row.fields / row.variants) rather than row[col.key] itself,
+  // so it can't be filtered by checking row[col.key].
+  return chipCols.value.filter(col => !!slots[`cell-${col.key}`] || (row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== ''))
 }
 </script>
 
@@ -80,10 +85,12 @@ function visibleChips(row) {
       <div class="flex flex-wrap items-center gap-2">
         <slot name="header-actions" />
         <button
-          class="flex items-center gap-1 text-sm bg-brand-gradient text-white px-4 py-2 rounded-xl shadow"
+          class="flex items-center justify-center gap-1 text-sm bg-brand-gradient text-white w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl shadow shrink-0"
+          title="Thêm mới"
           @click="emit('add')"
         >
-          <Plus class="w-4 h-4" /> Thêm mới
+          <Plus class="w-4 h-4" />
+          <span class="hidden sm:inline">Thêm mới</span>
         </button>
       </div>
     </div>

@@ -107,16 +107,17 @@ function removeVariant(index) {
       <input
         v-model="selectedPeriod"
         type="month"
-        class="field-input"
+        class="field-input w-auto text-xs px-2 py-1.5 sm:text-sm sm:px-3 sm:py-2"
       />
       <button
-        class="flex items-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50"
+        class="flex items-center justify-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50 shrink-0"
         :disabled="exporting"
+        title="Xuất Excel"
         @click="exportMonthlyExcel"
       >
         <Loader2 v-if="exporting" class="w-4 h-4 animate-spin" />
         <FileSpreadsheet v-else class="w-4 h-4" />
-        Xuất Excel
+        <span class="hidden sm:inline">Xuất Excel</span>
       </button>
     </template>
     <template #cell-classification="{ row }">
