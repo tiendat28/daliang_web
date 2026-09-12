@@ -1,7 +1,7 @@
 import enum
 
 from sqlalchemy import (
-    Column, Integer, String, Float, Date, DateTime, ForeignKey, Enum, Text, func
+    Column, Integer, String, Float, Date, DateTime, ForeignKey, Enum, LargeBinary, Text, func
 )
 from sqlalchemy.orm import relationship
 
@@ -229,6 +229,7 @@ class Document(Base):
     name = Column(String(255), nullable=False)
     original_filename = Column(String(255), nullable=False)
     stored_filename = Column(String(255), nullable=False)
+    content = Column(LargeBinary)   # noi dung file luu thang trong DB (o dia container bi xoa moi lan deploy)
     mime_type = Column(String(150))
     file_size = Column(Integer)
     uploaded_by = Column(String(150))
