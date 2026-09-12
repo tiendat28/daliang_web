@@ -27,7 +27,7 @@ const displayRows = computed(() => {
 })
 
 function emptyForm() {
-  return { name: '', address: '', note: '', fields: [{ field_name: '', product_codes: [''] }] }
+  return { name: '', address: '', note: '', fields: [{ field_name: '', product_codes: '' }] }
 }
 
 const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
@@ -38,8 +38,8 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
       address: row.address,
       note: row.note,
       fields: row.fields.length
-        ? row.fields.map(f => ({ field_name: f.field_name, product_codes: f.products.map(p => p.product_code_text) }))
-        : [{ field_name: '', product_codes: [''] }],
+        ? row.fields.map(f => ({ field_name: f.field_name, product_codes: f.products.map(p => p.product_code_text).join(', ') }))
+        : [{ field_name: '', product_codes: '' }],
     }),
     buildPayload: form => ({
       ...form,
@@ -47,7 +47,7 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
         .filter(f => f.field_name)
         .map(f => ({
           field_name: f.field_name,
-          product_codes: f.product_codes.join(',').split(',').map(c => c.trim()).filter(Boolean),
+          product_codes: f.product_codes.split(',').map(c => c.trim()).filter(Boolean),
         })),
     }),
     confirmRemove: row => `Xoá khách hàng "${row.name}"?`,
@@ -55,7 +55,7 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
 )
 
 function addField() {
-  form.value.fields.push({ field_name: '', product_codes: [''] })
+  form.value.fields.push({ field_name: '', product_codes: '' })
 }
 
 function removeField(i) {
@@ -97,9 +97,9 @@ function removeField(i) {
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
+          <!-- Giu nguyen chuoi nguoi dung go, chi tach theo dau phay luc luu (buildPayload) -->
           <input
-            :value="f.product_codes.join(', ')"
-            @input="f.product_codes = $event.target.value.split(',')"
+            v-model="f.product_codes"
             placeholder="Mã SP dùng, cách nhau bởi dấu phẩy (VD: ZK835, ZK838)"
             class="w-full field-input"
           />
