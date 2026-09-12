@@ -1,6 +1,7 @@
 // Nhóm các dòng đơn hàng theo lô (cùng KH + cùng ngày pha) — cùng quy tắc gộp
-// STT/Tên sản phẩm/Nồng độ/Khách hàng/Ngày xuất đang dùng khi xuất Excel (xem reportSheets.js).
-const MERGE_FIELDS = ['stt', 'product_name', 'concentration', 'customer_id', 'mix_date', 'issue_date']
+// STT/Tên sản phẩm/Nồng độ/Số lượng/Khách hàng/Ngày xuất đang dùng khi xuất Excel (xem reportSheets.js).
+// Tên sản phẩm + Nồng độ + Số lượng cùng một cấp: 1 lô có thể gồm nhiều sản phẩm, mỗi sản phẩm nhiều hóa chất.
+const MERGE_FIELDS = ['stt', 'product_name', 'concentration', 'order_quantity', 'customer_id', 'mix_date', 'issue_date']
 
 export function groupChemicalOrders(orders) {
   const sorted = [...orders].sort((a, b) => {
