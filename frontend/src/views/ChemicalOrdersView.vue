@@ -17,6 +17,10 @@ const form = ref(emptyForm())
 function labChemicalName(id) {
   return labChemicals.value.find(c => c.id === id)?.name || id
 }
+// Bảng / thẻ mobile chỉ hiển thị mã hóa chất (VD "HCL" thay vì "Axit clohydric")
+function labChemicalCode(id) {
+  return labChemicals.value.find(c => c.id === id)?.code || id
+}
 function customerName(id) {
   return customers.value.find(c => c.id === id)?.name || id
 }
@@ -25,7 +29,7 @@ const displayRows = computed(() => {
   const q = productSearch.query.trim().toLowerCase()
   if (!q) return rows.value
   return rows.value.filter(r => [
-    r.product_name, labChemicalName(r.lab_chemical_id), customerName(r.customer_id),
+    r.product_name, labChemicalCode(r.lab_chemical_id), labChemicalName(r.lab_chemical_id), customerName(r.customer_id),
     r.concentration, r.amount, r.order_quantity, r.unit, r.note,
   ].some(v => String(v ?? '').toLowerCase().includes(q)))
 })
@@ -44,12 +48,12 @@ const batches = computed(() => {
 })
 
 function emptyLine() {
-  return { lab_chemical_id: '', concentration: '', amount: '', used_amount: 0, unit: '' }
+  return { lab_chemical_id: '', amount: '', used_amount: 0, unit: '' } // nồng độ là của cả đơn, không theo từng hóa chất
 }
 
 function emptyForm() {
   return {
-    customer_id: '', order_quantity: '',
+    customer_id: '', concentration: '', order_quantity: '',
     product_name: '',
     mix_date: '', issue_date: '', note: '',
     lines: [emptyLine()],
@@ -75,6 +79,7 @@ function openEdit(row) {
   editingId.value = row.id
   form.value = {
     customer_id: row.customer_id,
+    concentration: row.concentration || '',
     order_quantity: row.order_quantity || '',
     product_name: row.product_name || '',
     mix_date: row.mix_date || '',
@@ -82,7 +87,6 @@ function openEdit(row) {
     note: row.note || '',
     lines: [{
       lab_chemical_id: row.lab_chemical_id,
-      concentration: row.concentration || '',
       amount: row.amount || '',
       used_amount: row.used_amount ?? 0,
       unit: row.unit || '',
@@ -101,6 +105,7 @@ function removeLine(i) {
 async function save() {
   const shared = {
     product_name: form.value.product_name || null,
+    concentration: form.value.concentration,
     customer_id: form.value.customer_id,
     order_quantity: form.value.order_quantity,
     mix_date: form.value.mix_date || null,
@@ -152,8 +157,8 @@ onUnmounted(() => { productSearch.query = '' })
           <tr class="text-left text-slate-800 dark:text-slate-100 border-b-2 border-slate-300 dark:border-slate-600 sticky top-0 z-10 bg-white dark:bg-slate-800">
             <th class="py-2 pr-4 font-semibold w-12">STT</th>
             <th class="py-2 pr-4 font-semibold">Tên sản phẩm</th>
-            <th class="py-2 pr-4 font-semibold">Hóa chất</th>
             <th class="py-2 pr-4 font-semibold">Nồng độ</th>
+            <th class="py-2 pr-4 font-semibold">Hóa chất</th>
             <th class="py-2 pr-4 font-semibold">Sử dụng</th>
             <th class="py-2 pr-4 font-semibold">Đơn vị</th>
             <th class="py-2 pr-4 font-semibold">Khách hàng</th>
@@ -172,8 +177,8 @@ onUnmounted(() => { productSearch.query = '' })
             <td v-if="row.spans.product_name" :rowspan="row.spans.product_name" class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200 font-medium">
               {{ row.order.product_name || labChemicalName(row.order.lab_chemical_id) }}
             </td>
-            <td class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ labChemicalName(row.order.lab_chemical_id) }}</td>
-            <td class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ row.order.concentration }}</td>
+            <td v-if="row.spans.concentration" :rowspan="row.spans.concentration" class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ row.order.concentration }}</td>
+            <td class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ labChemicalCode(row.order.lab_chemical_id) }}</td>
             <td class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ row.order.used_amount }}</td>
             <td class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ row.order.unit }}</td>
             <td v-if="row.spans.customer_id" :rowspan="row.spans.customer_id" class="py-3 pr-4 align-top text-slate-700 dark:text-slate-200">{{ customerName(row.order.customer_id) }}</td>
@@ -199,7 +204,8 @@ onUnmounted(() => { productSearch.query = '' })
       <div v-for="batch in batches" :key="batch.stt" class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm p-3">
         <p class="text-xs text-slate-400">#{{ batch.stt }} · {{ customerName(batch.lines[0].customer_id) }}</p>
         <p class="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">
-          {{ batch.lines[0].product_name || labChemicalName(batch.lines[0].lab_chemical_id) }}
+          {{ batch.lines[0].product_name || labChemicalCode(batch.lines[0].lab_chemical_id) }}
+          <span v-if="batch.lines[0].concentration" class="font-normal text-slate-500 dark:text-slate-400">· {{ batch.lines[0].concentration }}</span>
         </p>
         <p class="text-xs text-slate-400 mb-2">Pha: {{ formatDate(batch.lines[0].mix_date) }} · Xuất: {{ formatDate(batch.lines[0].issue_date) }}</p>
 
@@ -209,7 +215,7 @@ onUnmounted(() => { productSearch.query = '' })
           class="flex items-center justify-between gap-2 py-2 border-t border-slate-100 dark:border-slate-700"
         >
           <div class="min-w-0 text-sm text-slate-600 dark:text-slate-300">
-            <p class="truncate">{{ labChemicalName(line.lab_chemical_id) }} · {{ line.concentration }}</p>
+            <p class="truncate">{{ labChemicalCode(line.lab_chemical_id) }}</p>
             <p class="text-xs text-slate-400">{{ line.used_amount }} {{ line.unit }}</p>
           </div>
           <div class="flex items-center gap-1 shrink-0">
@@ -240,18 +246,25 @@ onUnmounted(() => { productSearch.query = '' })
       </div>
 
       <div class="col-span-2 rounded-2xl border border-slate-200 dark:border-slate-600 p-4">
-        <label class="field-label mb-1">Tên sản phẩm (để trống nếu đơn chỉ có 1 hóa chất)</label>
-        <input v-model="form.product_name" placeholder="VD: pH 10" class="w-full field-input mb-3" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-3">
+          <div>
+            <label class="field-label mb-1">Tên sản phẩm </label>
+            <input v-model="form.product_name" placeholder="VD: pH 10" class="w-full field-input" />
+          </div>
+          <div>
+            <label class="field-label mb-1">Nồng độ</label>
+            <input v-model="form.concentration" placeholder="VD: 10%" class="w-full field-input" />
+          </div>
+        </div>
 
         <label class="field-label mb-2">
           Hóa chất trong đơn{{ editingId ? '' : ' (có thể thêm nhiều nếu 1 đơn pha nhiều hóa chất, VD pH 10)' }}
         </label>
-        <div v-for="(line, i) in form.lines" :key="i" class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-2 items-start">
+        <div v-for="(line, i) in form.lines" :key="i" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2 items-start">
           <select v-model="line.lab_chemical_id" class="field-input col-span-2 sm:col-span-1">
             <option value="" disabled>-- Chọn hóa chất --</option>
-            <option v-for="c in labChemicals" :key="c.id" :value="c.id">{{ c.code }} - {{ c.name }}</option>
+            <option v-for="c in labChemicals" :key="c.id" :value="c.id">{{ c.code }}</option>
           </select>
-          <input v-model="line.concentration" placeholder="Nồng độ" class="field-input" />
           <input v-model="line.amount" placeholder="Lượng" class="field-input" />
           <input v-model.number="line.used_amount" type="number" placeholder="Sử dụng" class="field-input" />
           <div class="flex gap-1">

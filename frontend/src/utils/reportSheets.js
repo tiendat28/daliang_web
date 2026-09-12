@@ -82,7 +82,7 @@ function formatDateSlash(dateStr) {
 
 /**
  * Sheet "Đơn hàng HCTN" — gộp theo lô đơn (cùng KH + cùng ngày pha) cho STT/Khách hàng/
- * Ngày pha, và gộp thêm Tên sản phẩm/Số lượng/Ngày xuất/Ghi chú khi giá trị trùng với
+ * Ngày pha, và gộp thêm Tên sản phẩm/Nồng độ/Số lượng/Ngày xuất/Ghi chú khi giá trị trùng với
  * dòng liền trước trong cùng lô (đúng mẫu ảnh: 1 lô có thể gồm nhiều hóa chất).
  */
 export async function addChemicalOrdersSheet(wb, orders, chemicals, customers, period) {
@@ -94,7 +94,7 @@ export async function addChemicalOrdersSheet(wb, orders, chemicals, customers, p
   })
 
   const leftCols = new Set([2, 3, 8, 11]) // Tên sản phẩm, Hóa chất, Khách hàng, Ghi chú
-  const mergeCols = [1, 2, 6, 8, 9, 10, 11] // STT, Tên sản phẩm, Số lượng, Khách hàng, Ngày pha, Ngày xuất, Ghi chú
+  const mergeCols = [1, 2, 4, 6, 8, 9, 10, 11] // STT, Tên sản phẩm, Nồng độ, Số lượng, Khách hàng, Ngày pha, Ngày xuất, Ghi chú
 
   const sorted = [...orders].sort((a, b) => String(a.mix_date ?? '').localeCompare(String(b.mix_date ?? '')))
 
