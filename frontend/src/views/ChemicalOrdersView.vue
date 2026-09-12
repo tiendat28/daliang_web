@@ -298,7 +298,7 @@ onUnmounted(() => { productSearch.query = '' })
           </div>
           <div>
             <label class="field-label mb-1">Số lượng</label>
-            <input v-model="product.order_quantity" class="w-full field-input" />
+            <input v-model="product.order_quantity" placeholder="VD: 1L" class="w-full field-input" />
           </div>
         </div>
 
@@ -310,7 +310,7 @@ onUnmounted(() => { productSearch.query = '' })
             <option value="" disabled>-- Chọn hóa chất --</option>
             <option v-for="c in labChemicals" :key="c.id" :value="c.id">{{ c.code }}</option>
           </select>
-          <input v-model="line.amount" placeholder="Lượng" class="field-input" />
+          <input v-model="line.amount" placeholder="1g/L" class="field-input" />
           <input v-model.number="line.used_amount" type="number" placeholder="Sử dụng" class="field-input" />
           <div class="flex gap-1">
             <input v-model="line.unit" placeholder="Đ.vị" class="field-input flex-1 min-w-0" />

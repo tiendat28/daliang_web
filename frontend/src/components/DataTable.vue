@@ -70,6 +70,14 @@ const primaryCol = computed(() => props.columns.find(c => c.key === props.mobile
 const secondaryCol = computed(() => props.columns.find(c => c.key === props.mobileSecondaryKey) || props.columns[1] || null)
 const chipCols = computed(() => props.columns.filter(c => c !== primaryCol.value && c !== secondaryCol.value))
 
+// Thẻ mobile: ít cột thì xếp thành bảng nhỏ có tiêu đề (như Thiết bị) cho thẳng hàng,
+// nhiều cột thì mỗi dòng một cặp nhãn - giá trị để khỏi bị bóp chật.
+const MOBILE_TABLE_MAX_COLS = 3
+
+function mobileGrid(count) {
+  return { gridTemplateColumns: `minmax(0,1.4fr) repeat(${Math.max(count - 1, 0)}, minmax(0,1fr))` }
+}
+
 function visibleChips(row) {
   // A column with a custom cell slot may render content derived from a nested
   // field (e.g. row.fields / row.variants) rather than row[col.key] itself,
@@ -175,7 +183,7 @@ function visibleChips(row) {
             <p class="font-semibold text-slate-800 dark:text-slate-100 truncate">
               <slot :name="`cell-${primaryCol.key}`" :row="row">{{ displayValue(primaryCol, row[primaryCol.key]) }}</slot>
             </p>
-            <p v-if="secondaryCol" class="text-xs text-slate-400 dark:text-slate-500 truncate mt-0.5">
+            <p v-if="secondaryCol && !$slots['mobile-details']" class="text-xs text-slate-400 dark:text-slate-500 truncate mt-0.5">
               <slot :name="`cell-${secondaryCol.key}`" :row="row">{{ displayValue(secondaryCol, row[secondaryCol.key]) }}</slot>
             </p>
           </div>
@@ -189,14 +197,43 @@ function visibleChips(row) {
             </button>
           </div>
         </div>
-        <div v-if="visibleChips(row).length" class="flex flex-wrap gap-1.5 mt-2">
-          <span
-            v-for="col in visibleChips(row)"
-            :key="col.key"
-            class="text-[11px] font-medium px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300"
-          >
-            {{ col.label }}: <slot :name="`cell-${col.key}`" :row="row">{{ displayValue(col, row[col.key]) }}</slot>
-          </span>
+        <!-- Bảng có dữ liệu con (vd thiết bị có nhiều phân loại) tự dựng phần thân riêng
+             cho gọn hàng lối, thay cho dãy chip mặc định. -->
+        <div v-if="$slots['mobile-details']" class="mt-2">
+          <slot name="mobile-details" :row="row" />
+        </div>
+        <div v-else-if="visibleChips(row).length" class="mt-2 rounded-xl bg-slate-50 dark:bg-slate-700/40 px-3 py-2">
+          <template v-if="visibleChips(row).length <= MOBILE_TABLE_MAX_COLS">
+            <div
+              class="grid gap-x-2 pb-1 text-[11px] uppercase tracking-wide text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-600"
+              :style="mobileGrid(visibleChips(row).length)"
+            >
+              <span v-for="(col, i) in visibleChips(row)" :key="col.key" :class="i === 0 ? '' : 'text-right'">{{ col.label }}</span>
+            </div>
+            <div class="grid gap-x-2 pt-1 text-sm text-slate-700 dark:text-slate-200" :style="mobileGrid(visibleChips(row).length)">
+              <span
+                v-for="(col, i) in visibleChips(row)"
+                :key="col.key"
+                class="truncate"
+                :class="i === 0 ? '' : 'text-right'"
+              >
+                <slot :name="`cell-${col.key}`" :row="row">{{ displayValue(col, row[col.key]) }}</slot>
+              </span>
+            </div>
+          </template>
+
+          <template v-else>
+            <div
+              v-for="col in visibleChips(row)"
+              :key="col.key"
+              class="flex items-start justify-between gap-3 py-1 border-b border-slate-100 dark:border-slate-700/60 last:border-0"
+            >
+              <span class="text-xs text-slate-400 dark:text-slate-500 shrink-0">{{ col.label }}</span>
+              <span class="min-w-0 text-sm text-right text-slate-700 dark:text-slate-200">
+                <slot :name="`cell-${col.key}`" :row="row">{{ displayValue(col, row[col.key]) }}</slot>
+              </span>
+            </div>
+          </template>
         </div>
       </div>
     </div>
