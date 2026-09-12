@@ -122,13 +122,16 @@ async function buildChemicalOrders() {
   const [orders, chemicals, customers] = await Promise.all([
     chemicalOrdersApi.list(), labChemicalsApi.list(), customersApi.list(),
   ])
-  const headers = ['STT', 'Tên sản phẩm', 'Hóa chất', 'Khách hàng', 'Nồng độ', 'Lượng', 'Số lượng', 'Sử dụng', 'Đơn vị', 'Ngày pha', 'Ngày xuất', 'Ghi chú']
+  // Cùng thứ tự cột với sheet Excel "Đơn hàng HCTN" (xem addChemicalOrdersSheet)
+  const headers = ['STT', 'Tên sản phẩm', 'Nồng độ', 'Số lượng', 'Hóa chất', 'Lượng', 'Sử dụng', 'Khách hàng', 'Ngày pha', 'Ngày xuất', 'Ghi chú']
   const rows = orders.map((o, i) => [
     i + 1, o.product_name || '',
-    chemicals.find(c => c.id === o.lab_chemical_id)?.name || o.lab_chemical_id,
+    o.concentration || '', o.order_quantity || '',
+    chemicals.find(c => c.id === o.lab_chemical_id)?.code || o.lab_chemical_id,
+    o.amount || '',
+    [o.used_amount ?? '', o.unit || ''].filter(v => v !== '').join(' '),
     customers.find(c => c.id === o.customer_id)?.name || o.customer_id,
-    o.concentration || '', o.amount || '', o.order_quantity || '', o.used_amount ?? '',
-    o.unit || '', o.mix_date || '', o.issue_date || '', o.note || '',
+    o.mix_date || '', o.issue_date || '', o.note || '',
   ])
   return { headers, rows }
 }

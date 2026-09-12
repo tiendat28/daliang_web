@@ -86,15 +86,15 @@ function formatDateSlash(dateStr) {
  * dòng liền trước trong cùng lô (đúng mẫu ảnh: 1 lô có thể gồm nhiều hóa chất).
  */
 export async function addChemicalOrdersSheet(wb, orders, chemicals, customers, period) {
-  const headerLabels = ['STT', 'Tên sản phẩm', 'Hóa chất', 'Nồng độ', 'Lượng', 'Số lượng', 'Sử dụng', 'Khách hàng', 'Ngày pha', 'Ngày xuất', 'Ghi chú']
+  const headerLabels = ['STT', 'Tên sản phẩm', 'Nồng độ', 'Số lượng', 'Hóa chất', 'Lượng', 'Sử dụng', 'Khách hàng', 'Ngày pha', 'Ngày xuất', 'Ghi chú']
   const ws = await createReportSheet(wb, {
     sheetName: `Đơn hàng HCTN${periodSheetSuffix(period)}`, title: `ĐƠN HÀNG HCTN${periodTitleSuffix(period)}`,
-    columnWidths: [6, 18, 14, 10, 10, 10, 10, 16, 12, 12, 20],
+    columnWidths: [6, 18, 10, 10, 14, 10, 10, 16, 12, 12, 20],
     headerLabels, titleSpan: 5, companySpan: 4,
   })
 
-  const leftCols = new Set([2, 3, 8, 11]) // Tên sản phẩm, Hóa chất, Khách hàng, Ghi chú
-  const mergeCols = [1, 2, 4, 6, 8, 9, 10, 11] // STT, Tên sản phẩm, Nồng độ, Số lượng, Khách hàng, Ngày pha, Ngày xuất, Ghi chú
+  const leftCols = new Set([2, 5, 8, 11]) // Tên sản phẩm, Hóa chất, Khách hàng, Ghi chú
+  const mergeCols = [1, 2, 3, 4, 8, 9, 10, 11] // STT, Tên sản phẩm, Nồng độ, Số lượng, Khách hàng, Ngày pha, Ngày xuất, Ghi chú
 
   const sorted = [...orders].sort((a, b) => String(a.mix_date ?? '').localeCompare(String(b.mix_date ?? '')))
 
@@ -118,10 +118,10 @@ export async function addChemicalOrdersSheet(wb, orders, chemicals, customers, p
     const values = [
       stt,
       o.product_name || chem?.name || '',
-      chem ? formatFormula(chem.code) : '',
       o.concentration || '',
-      o.amount || '',
       o.order_quantity || '',
+      chem ? formatFormula(chem.code) : '',
+      o.amount || '',
       [o.used_amount ?? '', o.unit || ''].filter(v => v !== '').join(' '),
       customers.find(c => c.id === o.customer_id)?.name || '',
       formatDateSlash(o.mix_date),
