@@ -4,7 +4,7 @@ import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
 import { labChemicalsApi, indicatorsApi } from '../api/resources'
-import { PackagePlus, FileSpreadsheet, Loader2 } from 'lucide-vue-next'
+import { PackagePlus, FileSpreadsheet, Loader2, CalendarDays } from 'lucide-vue-next'
 import { formatFormula } from '../utils/chemFormula'
 import { createReportSheet, styleDataCell, downloadWorkbook } from '../utils/excelReport'
 import { productSearch } from '../store/productSearch'
@@ -158,10 +158,19 @@ async function exportCombinedExcel() {
       </button>
     </div>
     <div class="flex items-center gap-2">
+      <!-- Mobile: ô chọn tháng co thành nút icon lịch cho thanh công cụ gọn 1 dòng.
+           Ô tháng thật nằm chồng lên, trong suốt, nên bấm vào icon là mở đúng bộ chọn của máy. -->
+      <label
+        class="sm:hidden relative flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 shrink-0"
+        title="Chọn tháng"
+      >
+        <CalendarDays class="w-4 h-4" />
+        <input v-model="selectedPeriod" type="month" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+      </label>
       <input
         v-model="selectedPeriod"
         type="month"
-        class="field-input w-auto text-xs px-2 py-1.5 sm:text-sm sm:px-3 sm:py-2"
+        class="hidden sm:block field-input w-auto text-sm px-3 py-2"
       />
       <button
         class="flex items-center justify-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50 shrink-0"

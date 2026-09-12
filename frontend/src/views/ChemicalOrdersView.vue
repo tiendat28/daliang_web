@@ -226,7 +226,10 @@ onUnmounted(() => { productSearch.query = '' })
     <!-- Mobile: mỗi lô 1 thẻ, trong thẻ tách theo sản phẩm, dưới mỗi sản phẩm là các hóa chất -->
     <div v-if="groupedRows.length > 0" class="sm:hidden flex flex-col gap-3 px-5 pb-5">
       <div v-for="batch in batches" :key="batch.stt" class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm p-3">
-        <p class="text-xs text-slate-400">#{{ batch.stt }} · {{ customerName(batch.head.customer_id) }}</p>
+        <p class="text-xs text-slate-400">
+          #{{ batch.stt }} ·
+          <span class="text-base font-bold text-slate-800 dark:text-slate-100">{{ customerName(batch.head.customer_id) }}</span>
+        </p>
         <p class="text-xs text-slate-400 mb-2">Pha: {{ formatDate(batch.head.mix_date) }} · Xuất: {{ formatDate(batch.head.issue_date) }}</p>
 
         <div v-for="product in batch.products" :key="product.key" class="border-t border-slate-100 dark:border-slate-700 pt-2 mt-2">
