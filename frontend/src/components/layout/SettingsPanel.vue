@@ -8,6 +8,8 @@ import {
   equipmentApi, chemicalOrdersApi, chemicalSamplingApi, analysisReportsApi, workLogApi,
 } from '../../api/resources'
 import { exportMultiTablePdf } from '../../utils/pdfReport'
+import { currentPeriod, todayStamp } from '../../utils/format'
+import { processStageLabel } from '../../constants/processStages'
 import { downloadWorkbook } from '../../utils/excelReport'
 import {
   addLabChemicalsSheet, addIndicatorsSheet, addEquipmentSheet, addChemicalOrdersSheet, addGenericSheet,
@@ -15,8 +17,6 @@ import {
 
 defineProps({ show: Boolean })
 const emit = defineEmits(['close'])
-
-const PROCESS_STAGE_LABEL = { pre_treatment: 'Tiền xử lý', plating: 'Mạ', post_plating: 'Sau mạ' }
 
 const exportTables = [
   { key: 'customers', label: 'Khách hàng', build: buildCustomers },
@@ -38,15 +38,6 @@ const restoring = ref(false)
 const fileInput = ref(null)
 const statusMessage = ref('')
 
-function todayStr() {
-  const d = new Date()
-  return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`
-}
-
-function currentPeriod() {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
-}
 const includePeriod = ref(true)
 const selectedPeriod = ref(currentPeriod())
 
@@ -67,7 +58,7 @@ function suggestedFilename() {
 
 function outputFilename(ext) {
   const base = sanitizeFilename(customFilename.value) || suggestedFilename()
-  return `${base}_${todayStr()}.${ext}`
+  return `${base}_${todayStamp()}.${ext}`
 }
 
 async function buildCustomers() {
@@ -86,7 +77,7 @@ async function buildCompanyProducts() {
   const headers = ['STT', 'Mã', 'Tên', 'Lĩnh vực', 'Công dụng', 'Nồng độ', 'Đơn vị', 'Công đoạn', 'Giá']
   const rows = list.map((p, i) => [
     i + 1, p.code, p.name, p.field || '', p.usage_purpose || '', p.concentration || '',
-    p.unit || '', PROCESS_STAGE_LABEL[p.process_stage] || '', p.price ?? '',
+    p.unit || '', processStageLabel(p.process_stage), p.price ?? '',
   ])
   return { headers, rows }
 }
@@ -168,8 +159,8 @@ async function buildAnalysisReports() {
 
 async function buildWorkLogs() {
   const list = await workLogApi.list()
-  const headers = ['STT', 'Ngày', 'Nội dung']
-  const rows = list.map((r, i) => [i + 1, r.log_date || '', r.content || ''])
+  const headers = ['STT', 'Ngày', 'Nội dung', 'OT (giờ)']
+  const rows = list.map((r, i) => [i + 1, r.log_date || '', r.content || '', r.ot_hours ?? ''])
   return { headers, rows }
 }
 
@@ -261,7 +252,7 @@ async function backupData() {
       equipment, chemical_orders: chemicalOrders, chemical_sampling: chemicalSampling,
       analysis_reports: analysisReports, work_logs: workLogs,
     }
-    downloadBlob(JSON.stringify(backup, null, 2), `daliang-backup_${todayStr()}.json`, 'application/json')
+    downloadBlob(JSON.stringify(backup, null, 2), `daliang-backup_${todayStamp()}.json`, 'application/json')
     statusMessage.value = 'Đã tải file sao lưu.'
   } catch (e) {
     statusMessage.value = 'Sao lưu thất bại, thử lại.'
@@ -326,7 +317,9 @@ async function handleImportFile(e) {
         classification: v.classification, quantity: v.quantity, unit: v.unit, note: v.note,
       })),
     })))
-    tally(await restoreList(data.work_logs, workLogApi.create, w => ({ log_date: w.log_date, content: w.content })))
+    tally(await restoreList(data.work_logs, workLogApi.create, w => ({
+      log_date: w.log_date, content: w.content, ot_hours: w.ot_hours ?? null,
+    })))
     tally(await restoreList(data.chemical_orders, chemicalOrdersApi.create, o => ({
       product_name: o.product_name, lab_chemical_id: o.lab_chemical_id, customer_id: o.customer_id,
       concentration: o.concentration, amount: o.amount, order_quantity: o.order_quantity,

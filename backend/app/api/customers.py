@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session, joinedload
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import get_or_404
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
+
+NOT_FOUND = "Khong tim thay khach hang"
 
 
 def _sync_fields(db: Session, customer: models.Customer, fields_in):
@@ -20,7 +23,7 @@ def _sync_fields(db: Session, customer: models.Customer, fields_in):
             code = code.strip()
             if not code:
                 continue
-            product = db.query(models.CompanyProduct).filter(models.CompanyProduct.code == code).first()
+            product = db.query(models.CompanyProduct).filter_by(code=code).first()
             db.add(models.CustomerFieldProduct(
                 customer_field_id=field.id,
                 company_product_id=product.id if product else None,
@@ -37,10 +40,7 @@ def list_customers(db: Session = Depends(get_db)):
 
 @router.get("/{customer_id}", response_model=schemas.CustomerOut)
 def get_customer(customer_id: int, db: Session = Depends(get_db)):
-    customer = db.query(models.Customer).get(customer_id)
-    if not customer:
-        raise HTTPException(404, "Khong tim thay khach hang")
-    return customer
+    return get_or_404(db, models.Customer, customer_id, NOT_FOUND)
 
 
 @router.post("", response_model=schemas.CustomerOut)
@@ -56,9 +56,7 @@ def create_customer(payload: schemas.CustomerCreate, db: Session = Depends(get_d
 
 @router.put("/{customer_id}", response_model=schemas.CustomerOut)
 def update_customer(customer_id: int, payload: schemas.CustomerUpdate, db: Session = Depends(get_db)):
-    customer = db.query(models.Customer).get(customer_id)
-    if not customer:
-        raise HTTPException(404, "Khong tim thay khach hang")
+    customer = get_or_404(db, models.Customer, customer_id, NOT_FOUND)
     customer.name = payload.name
     customer.address = payload.address
     customer.note = payload.note
@@ -70,9 +68,7 @@ def update_customer(customer_id: int, payload: schemas.CustomerUpdate, db: Sessi
 
 @router.delete("/{customer_id}")
 def delete_customer(customer_id: int, db: Session = Depends(get_db)):
-    customer = db.query(models.Customer).get(customer_id)
-    if not customer:
-        raise HTTPException(404, "Khong tim thay khach hang")
+    customer = get_or_404(db, models.Customer, customer_id, NOT_FOUND)
     db.delete(customer)
     db.commit()
     return {"ok": True}

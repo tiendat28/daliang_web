@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
+import FormActions from '../components/FormActions.vue'
 import { customersApi } from '../api/resources'
 import { Plus, Trash2 } from 'lucide-vue-next'
-import { productSearch } from '../store/productSearch'
 import { useCrudResource } from '../composables/useCrudResource'
+import { useSearchedRows } from '../composables/useSearchedRows'
 
 const columns = [
   { key: 'name', label: 'Tên KH', sortable: true },
@@ -13,18 +13,6 @@ const columns = [
   { key: 'field_names', label: 'Lĩnh vực' },
   { key: 'field_products', label: 'SP dùng' },
 ]
-
-const displayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return rows.value
-  return rows.value.filter(r => {
-    const fieldNames = r.fields.map(f => f.field_name)
-    const productCodes = r.fields.flatMap(f => f.products.map(p => p.product_code_text))
-    return [r.name, r.address, r.note, ...fieldNames, ...productCodes].some(v =>
-      String(v ?? '').toLowerCase().includes(q)
-    )
-  })
-})
 
 function emptyForm() {
   return { name: '', address: '', note: '', fields: [{ field_name: '', product_codes: '' }] }
@@ -53,6 +41,12 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
     confirmRemove: row => `Xoá khách hàng "${row.name}"?`,
   },
 )
+
+const displayRows = useSearchedRows(rows, r => [
+  r.name, r.address, r.note,
+  ...r.fields.map(f => f.field_name),
+  ...r.fields.flatMap(f => f.products.map(p => p.product_code_text)),
+])
 
 function addField() {
   form.value.fields.push({ field_name: '', product_codes: '' })
@@ -115,8 +109,7 @@ function removeField(i) {
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500 dark:text-slate-400" @click="showModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="showModal = false" />
       </div>
     </form>
   </Modal>

@@ -5,20 +5,23 @@ from pydantic import BaseModel, ConfigDict
 
 from app.models import ProcessStage, DocumentCategory
 
+# Cac schema *Out doc thang tu doi tuong SQLAlchemy
+ORM_CONFIG = ConfigDict(from_attributes=True)
+
 
 # ---------- Customer ----------
 class CustomerFieldProductOut(BaseModel):
     id: int
     product_code_text: Optional[str] = None
     company_product_id: Optional[int] = None
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 class CustomerFieldOut(BaseModel):
     id: int
     field_name: str
     products: List[CustomerFieldProductOut] = []
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 class CustomerFieldIn(BaseModel):
@@ -43,7 +46,7 @@ class CustomerUpdate(CustomerBase):
 class CustomerOut(CustomerBase):
     id: int
     fields: List[CustomerFieldOut] = []
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Company Product ----------
@@ -68,7 +71,7 @@ class CompanyProductUpdate(CompanyProductBase):
 
 class CompanyProductOut(CompanyProductBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Lab Chemical ----------
@@ -94,7 +97,7 @@ class LabChemicalOut(LabChemicalBase):
     id: int
     total_volume: Optional[float] = None
     remaining_volume: Optional[float] = None
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Indicator (Chat chi thi) ----------
@@ -116,7 +119,7 @@ class IndicatorUpdate(IndicatorBase):
 
 class IndicatorOut(IndicatorBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Equipment ----------
@@ -129,7 +132,7 @@ class EquipmentVariantIn(BaseModel):
 
 class EquipmentVariantOut(EquipmentVariantIn):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 class EquipmentBase(BaseModel):
@@ -148,7 +151,7 @@ class EquipmentUpdate(EquipmentBase):
 class EquipmentOut(EquipmentBase):
     id: int
     variants: List[EquipmentVariantOut] = []
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Chemical Order ----------
@@ -176,7 +179,7 @@ class ChemicalOrderUpdate(ChemicalOrderBase):
 
 class ChemicalOrderOut(ChemicalOrderBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Chemical Sampling ----------
@@ -199,7 +202,7 @@ class ChemicalSamplingUpdate(ChemicalSamplingBase):
 
 class ChemicalSamplingOut(ChemicalSamplingBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Analysis Report (Bao cao phan tich) ----------
@@ -211,7 +214,7 @@ class AnalysisComponentIn(BaseModel):
 
 class AnalysisComponentOut(AnalysisComponentIn):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 class AnalysisSampleIn(BaseModel):
@@ -223,7 +226,7 @@ class AnalysisSampleOut(BaseModel):
     id: int
     name: str
     components: List[AnalysisComponentOut] = []
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 class AnalysisReportBase(BaseModel):
@@ -248,13 +251,14 @@ class AnalysisReportOut(AnalysisReportBase):
     id: int
     completed_by: List[str] = []
     samples: List[AnalysisSampleOut] = []
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Work Log (Nhat ky cong tac) ----------
 class WorkLogBase(BaseModel):
     log_date: Optional[date] = None
     content: str
+    ot_hours: Optional[float] = None
 
 
 class WorkLogCreate(WorkLogBase):
@@ -267,7 +271,7 @@ class WorkLogUpdate(WorkLogBase):
 
 class WorkLogOut(WorkLogBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG
 
 
 # ---------- Document (Tai lieu) ----------
@@ -280,4 +284,4 @@ class DocumentOut(BaseModel):
     file_size: Optional[int] = None
     uploaded_by: Optional[str] = None
     uploaded_at: Optional[datetime] = None
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ORM_CONFIG

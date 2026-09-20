@@ -8,6 +8,11 @@ const emit = defineEmits(['update:modelValue', 'submit'])
 function updateField(key, value) {
   emit('update:modelValue', { ...props.modelValue, [key]: value })
 }
+
+// O so de trong phai gui len null, khong phai Number('') === 0
+function numberOrNull(value) {
+  return value === '' ? null : Number(value)
+}
 </script>
 
 <template>
@@ -38,7 +43,7 @@ function updateField(key, value) {
         :type="field.type || 'text'"
         :value="modelValue[field.key]"
         class="w-full field-input focus:outline-none focus:ring-2 focus:ring-brand-400"
-        @input="updateField(field.key, field.type === 'number' ? Number($event.target.value) : $event.target.value)"
+        @input="updateField(field.key, field.type === 'number' ? numberOrNull($event.target.value) : $event.target.value)"
       />
     </div>
 

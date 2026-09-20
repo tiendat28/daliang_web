@@ -1,13 +1,14 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Search, Bell, Menu } from 'lucide-vue-next'
 import { productSearch } from '../../store/productSearch'
 import { sidebarOpen } from '../../store/sidebar'
 
 const route = useRoute()
 const searchOpen = ref(false)
-const searchable = ['customers', 'company-products', 'lab-chemicals', 'equipment', 'chemical-orders', 'chemical-sampling', 'analysis-reports', 'work-log', 'documents']
+// Mọi trang nghiệp vụ đều có ô tìm kiếm (xem composable useSearchedRows)
+const searchable = useRouter().getRoutes().map(r => r.name)
 
 function toggleSearch() {
   if (!searchable.includes(route.name)) return

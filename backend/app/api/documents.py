@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import get_or_404
 
 # Noi dung file duoc luu thang trong DB (cot documents.content): o dia cua container
 # bi xoa sach moi lan deploy lai nen file tung bi mat trong khi ban ghi van con.
@@ -80,13 +81,6 @@ def _convert_to_pdf(data: bytes, stored_filename: str) -> str:
     return pdf_path
 
 
-def _get_or_404(db: Session, document_id: int) -> models.Document:
-    doc = db.query(models.Document).get(document_id)
-    if not doc:
-        raise HTTPException(404, "Khong tim thay tai lieu")
-    return doc
-
-
 @router.get("", response_model=list[schemas.DocumentOut])
 def list_documents(category: models.DocumentCategory | None = None, db: Session = Depends(get_db)):
     query = db.query(models.Document)
@@ -126,7 +120,7 @@ def upload_document(
 
 @router.get("/{document_id}/file")
 def get_document_file(document_id: int, inline: bool = False, db: Session = Depends(get_db)):
-    doc = _get_or_404(db, document_id)
+    doc = get_or_404(db, models.Document, document_id, "Khong tim thay tai lieu")
     data = _document_bytes(doc)
 
     if inline and _is_office_document(doc):
@@ -145,7 +139,7 @@ def get_document_file(document_id: int, inline: bool = False, db: Session = Depe
 
 @router.delete("/{document_id}")
 def delete_document(document_id: int, db: Session = Depends(get_db)):
-    doc = _get_or_404(db, document_id)
+    doc = get_or_404(db, models.Document, document_id, "Khong tim thay tai lieu")
     for path in (_legacy_path(doc), _pdf_cache_path(doc.stored_filename)):
         if os.path.exists(path):
             os.remove(path)

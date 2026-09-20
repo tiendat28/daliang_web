@@ -3,8 +3,11 @@ from sqlalchemy.orm import Session, joinedload
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import get_or_404
 
 router = APIRouter(prefix="/api/analysis-reports", tags=["analysis-reports"])
+
+NOT_FOUND = "Khong tim thay bao cao"
 
 _LOAD_OPTIONS = (
     joinedload(models.AnalysisReport.samples).joinedload(models.AnalysisSample.components),
@@ -46,11 +49,9 @@ def list_analysis_reports(db: Session = Depends(get_db)):
 
 @router.get("/{report_id}", response_model=schemas.AnalysisReportOut)
 def get_analysis_report(report_id: int, db: Session = Depends(get_db)):
-    report = db.query(models.AnalysisReport).options(*_LOAD_OPTIONS).filter(
-        models.AnalysisReport.id == report_id
-    ).first()
+    report = db.query(models.AnalysisReport).options(*_LOAD_OPTIONS).filter_by(id=report_id).first()
     if not report:
-        raise HTTPException(404, "Khong tim thay bao cao")
+        raise HTTPException(404, NOT_FOUND)
     return report
 
 
@@ -74,9 +75,7 @@ def create_analysis_report(payload: schemas.AnalysisReportCreate, db: Session = 
 
 @router.put("/{report_id}", response_model=schemas.AnalysisReportOut)
 def update_analysis_report(report_id: int, payload: schemas.AnalysisReportUpdate, db: Session = Depends(get_db)):
-    report = db.query(models.AnalysisReport).get(report_id)
-    if not report:
-        raise HTTPException(404, "Khong tim thay bao cao")
+    report = get_or_404(db, models.AnalysisReport, report_id, NOT_FOUND)
     report.customer_id = payload.customer_id
     report.sample_receive_date = payload.sample_receive_date
     report.issue_date = payload.issue_date
@@ -91,9 +90,7 @@ def update_analysis_report(report_id: int, payload: schemas.AnalysisReportUpdate
 
 @router.delete("/{report_id}")
 def delete_analysis_report(report_id: int, db: Session = Depends(get_db)):
-    report = db.query(models.AnalysisReport).get(report_id)
-    if not report:
-        raise HTTPException(404, "Khong tim thay bao cao")
+    report = get_or_404(db, models.AnalysisReport, report_id, NOT_FOUND)
     db.delete(report)
     db.commit()
     return {"ok": True}

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import Modal from '../Modal.vue'
+import FormActions from '../FormActions.vue'
 import { UploadCloud } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -61,14 +62,11 @@ function submit() {
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500" @click="emit('close')">Huỷ</button>
-        <button
-          type="submit"
-          class="px-4 py-2 rounded-xl bg-brand-gradient text-white disabled:opacity-50"
+        <FormActions
+          :submit-label="saving ? 'Đang tải lên...' : 'Tải lên'"
           :disabled="saving || !file || !uploadedBy.trim()"
-        >
-          {{ saving ? 'Đang tải lên...' : 'Tải lên' }}
-        </button>
+          @cancel="emit('close')"
+        />
       </div>
     </form>
   </Modal>

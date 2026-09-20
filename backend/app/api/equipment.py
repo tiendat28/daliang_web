@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session, joinedload
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import get_or_404
 
 router = APIRouter(prefix="/api/equipment", tags=["equipment"])
+
+NOT_FOUND = "Khong tim thay thiet bi"
 
 
 def _sync_variants(db: Session, equipment: models.Equipment, variants_in):
@@ -39,9 +42,7 @@ def create_equipment(payload: schemas.EquipmentCreate, db: Session = Depends(get
 
 @router.put("/{equipment_id}", response_model=schemas.EquipmentOut)
 def update_equipment(equipment_id: int, payload: schemas.EquipmentUpdate, db: Session = Depends(get_db)):
-    equipment = db.query(models.Equipment).get(equipment_id)
-    if not equipment:
-        raise HTTPException(404, "Khong tim thay thiet bi")
+    equipment = get_or_404(db, models.Equipment, equipment_id, NOT_FOUND)
     equipment.name = payload.name
     equipment.note = payload.note
     _sync_variants(db, equipment, payload.variants)
@@ -52,9 +53,7 @@ def update_equipment(equipment_id: int, payload: schemas.EquipmentUpdate, db: Se
 
 @router.delete("/{equipment_id}")
 def delete_equipment(equipment_id: int, db: Session = Depends(get_db)):
-    equipment = db.query(models.Equipment).get(equipment_id)
-    if not equipment:
-        raise HTTPException(404, "Khong tim thay thiet bi")
+    equipment = get_or_404(db, models.Equipment, equipment_id, NOT_FOUND)
     db.delete(equipment)
     db.commit()
     return {"ok": True}

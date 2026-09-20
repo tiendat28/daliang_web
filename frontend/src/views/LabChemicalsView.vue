@@ -3,12 +3,17 @@ import { ref, computed } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import DynamicForm from '../components/DynamicForm.vue'
+import FormActions from '../components/FormActions.vue'
+import MonthPicker from '../components/MonthPicker.vue'
+import ToolbarButton from '../components/ToolbarButton.vue'
 import { labChemicalsApi, indicatorsApi } from '../api/resources'
-import { PackagePlus, FileSpreadsheet, Loader2, CalendarDays } from 'lucide-vue-next'
+import { PackagePlus, FileSpreadsheet } from 'lucide-vue-next'
 import { formatFormula } from '../utils/chemFormula'
-import { createReportSheet, styleDataCell, downloadWorkbook } from '../utils/excelReport'
-import { productSearch } from '../store/productSearch'
+import { downloadWorkbook } from '../utils/excelReport'
+import { addLabChemicalsSheet, addIndicatorsSheet } from '../utils/reportSheets'
+import { currentPeriod, periodParts } from '../utils/format'
 import { useCrudResource } from '../composables/useCrudResource'
+import { useSearchedRows } from '../composables/useSearchedRows'
 
 const tabs = [
   { key: 'lab-chemicals', label: 'Hóa chất PTN' },
@@ -16,10 +21,6 @@ const tabs = [
 ]
 const activeTab = ref('lab-chemicals')
 
-function currentPeriod() {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
-}
 const selectedPeriod = ref(currentPeriod())
 const exporting = ref(false)
 
@@ -54,13 +55,12 @@ const {
   load: loadLabChemicals, openAdd: openAddLab, openEdit: openEditLab, save: saveLab, remove: removeLab,
 } = useCrudResource(labChemicalsApi, emptyLabForm, { confirmRemove: row => `Xoá hóa chất "${row.name}"?` })
 
-const labDisplayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  const base = q
-    ? labRows.value.filter(r => [r.code, r.name].some(v => String(v ?? '').toLowerCase().includes(q)))
-    : labRows.value
-  return [...base].sort((a, b) => String(a.code ?? '').localeCompare(String(b.code ?? ''), 'vi', { numeric: true }))
-})
+const searchedLabRows = useSearchedRows(labRows, r => [r.code, r.name])
+
+// Hóa chất PTN luôn xếp theo mã cho dễ tra
+const labDisplayRows = computed(() =>
+  [...searchedLabRows.value].sort((a, b) => String(a.code ?? '').localeCompare(String(b.code ?? ''), 'vi', { numeric: true }))
+)
 
 async function openBox(row) {
   if (confirm(`Mở hộp mới cho "${row.name}"? Sẽ trừ 1 hộp trong kho và reset phần lẻ.`)) {
@@ -95,46 +95,18 @@ const {
   openAdd: openAddIndicator, openEdit: openEditIndicator, save: saveIndicator, remove: removeIndicator,
 } = useCrudResource(indicatorsApi, emptyIndicatorForm, { confirmRemove: row => `Xoá chất chỉ thị "${row.name}"?` })
 
-const indicatorDisplayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return indicatorRows.value
-  return indicatorRows.value.filter(r => [r.name, r.type, r.unit, r.note].some(v => String(v ?? '').toLowerCase().includes(q)))
-})
+const indicatorDisplayRows = useSearchedRows(indicatorRows, r => [r.name, r.type, r.unit, r.note])
 
+// Xuất 1 file gồm 2 sheet, dùng chung mẫu sheet với phần Xuất dữ liệu ở Cài đặt
 async function exportCombinedExcel() {
   exporting.value = true
   try {
     const ExcelJS = await import('exceljs')
-    const [year, month] = selectedPeriod.value.split('-')
+    const period = periodParts(selectedPeriod.value)
     const wb = new ExcelJS.Workbook()
-
-    const wsLab = await createReportSheet(wb, {
-      sheetName: 'Hóa chất PTN', title: `QUẢN LÝ HÓA CHẤT THÁNG ${Number(month)}/${year}`,
-      columnWidths: [6, 26, 12, 11, 11, 11, 9, 38],
-      headerLabels: ['STT', 'TÊN', 'PHÂN LOẠI', 'Nguyên', 'Lẻ', 'Tổng', 'ĐƠN VỊ', 'GHI CHÚ'],
-      titleSpan: 3, companySpan: 3,
-    })
-    labDisplayRows.value.forEach((r, i) => {
-      const nguyen = r.total_volume ?? 0
-      const le = r.remaining_volume ?? 0
-      const values = [i + 1, formatFormula(r.code), r.type || '', nguyen, le, nguyen + le, r.unit || '', r.note || '']
-      const row = wsLab.getRow(4 + i)
-      values.forEach((v, ci) => styleDataCell(row.getCell(ci + 1), v, { align: ci === 1 || ci === 7 ? 'left' : 'center' }))
-    })
-
-    const wsIndicator = await createReportSheet(wb, {
-      sheetName: 'Chất chỉ thị', title: `CHẤT CHỈ THỊ THÁNG ${Number(month)}/${year}`,
-      columnWidths: [6, 26, 16, 14, 12, 30],
-      headerLabels: ['STT', 'TÊN', 'PHÂN LOẠI', 'KHỐI LƯỢNG', 'ĐƠN VỊ', 'GHI CHÚ'],
-      titleSpan: 2, companySpan: 2,
-    })
-    indicatorDisplayRows.value.forEach((r, i) => {
-      const values = [i + 1, r.name, r.type || '', r.quantity ?? 0, r.unit || '', r.note || '']
-      const row = wsIndicator.getRow(4 + i)
-      values.forEach((v, ci) => styleDataCell(row.getCell(ci + 1), v, { align: ci === 1 || ci === 5 ? 'left' : 'center' }))
-    })
-
-    await downloadWorkbook(wb, `QUẢN LÝ HÓA CHẤT THÁNG ${Number(month)}/${year}.xlsx`)
+    await addLabChemicalsSheet(wb, labDisplayRows.value, period)
+    await addIndicatorsSheet(wb, indicatorDisplayRows.value, period)
+    await downloadWorkbook(wb, `QUAN LY HOA CHAT THANG ${period.month}-${period.year}.xlsx`)
   } finally {
     exporting.value = false
   }
@@ -143,7 +115,7 @@ async function exportCombinedExcel() {
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4 shrink-0">
     <div class="flex gap-2">
       <button
         v-for="tab in tabs"
@@ -158,30 +130,12 @@ async function exportCombinedExcel() {
       </button>
     </div>
     <div class="flex items-center gap-2">
-      <!-- Mobile: ô chọn tháng co thành nút icon lịch cho thanh công cụ gọn 1 dòng.
-           Ô tháng thật nằm chồng lên, trong suốt, nên bấm vào icon là mở đúng bộ chọn của máy. -->
-      <label
-        class="sm:hidden relative flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 shrink-0"
-        title="Chọn tháng"
-      >
-        <CalendarDays class="w-4 h-4" />
-        <input v-model="selectedPeriod" type="month" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-      </label>
-      <input
-        v-model="selectedPeriod"
-        type="month"
-        class="hidden sm:block field-input w-auto text-sm px-3 py-2"
-      />
-      <button
-        class="flex items-center justify-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50 shrink-0"
-        :disabled="exporting"
+      <MonthPicker v-model="selectedPeriod" />
+      <ToolbarButton
+        :icon="FileSpreadsheet" label="Xuất Excel" :loading="exporting"
         title="Xuất 1 file Excel gồm cả 2 sheet: Hóa chất PTN + Chất chỉ thị"
         @click="exportCombinedExcel"
-      >
-        <Loader2 v-if="exporting" class="w-4 h-4 animate-spin" />
-        <FileSpreadsheet v-else class="w-4 h-4" />
-        <span class="hidden sm:inline">Xuất Excel</span>
-      </button>
+      />
     </div>
   </div>
 
@@ -207,8 +161,7 @@ async function exportCombinedExcel() {
   <Modal :show="labShowModal" :title="labEditingId ? 'Sửa hóa chất' : 'Thêm hóa chất'" @close="labShowModal = false">
     <DynamicForm v-model="labForm" :fields="labFields" @submit="saveLab">
       <template #actions>
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500" @click="labShowModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="labShowModal = false" />
       </template>
     </DynamicForm>
   </Modal>
@@ -216,8 +169,7 @@ async function exportCombinedExcel() {
   <Modal :show="indicatorShowModal" :title="indicatorEditingId ? 'Sửa chất chỉ thị' : 'Thêm chất chỉ thị'" @close="indicatorShowModal = false">
     <DynamicForm v-model="indicatorForm" :fields="indicatorFields" @submit="saveIndicator">
       <template #actions>
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500" @click="indicatorShowModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="indicatorShowModal = false" />
       </template>
     </DynamicForm>
   </Modal>

@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import text
 
 from app.core.config import settings
 from app.core.database import Base, engine
+from app.core.migrations import run_startup_migrations
 from app.api import (
     customers,
     company_products,
@@ -18,12 +18,7 @@ from app.api import (
 )
 
 Base.metadata.create_all(bind=engine)
-
-# create_all chi tao bang con thieu, khong them cot vao bang da ton tai -> them tay
-# cot moi de khong phai tao lai bang (se mat du lieu dang co).
-if engine.dialect.name == "postgresql":
-    with engine.begin() as conn:
-        conn.execute(text("ALTER TABLE documents ADD COLUMN IF NOT EXISTS content BYTEA"))
+run_startup_migrations(engine)
 
 app = FastAPI(title="Lab Chemical Manager API")
 

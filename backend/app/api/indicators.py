@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import apply_payload, get_or_404
 
 router = APIRouter(prefix="/api/indicators", tags=["indicators"])
+
+NOT_FOUND = "Khong tim thay chat chi thi"
 
 
 @router.get("", response_model=list[schemas.IndicatorOut])
@@ -23,11 +26,8 @@ def create_indicator(payload: schemas.IndicatorCreate, db: Session = Depends(get
 
 @router.put("/{indicator_id}", response_model=schemas.IndicatorOut)
 def update_indicator(indicator_id: int, payload: schemas.IndicatorUpdate, db: Session = Depends(get_db)):
-    indicator = db.query(models.Indicator).get(indicator_id)
-    if not indicator:
-        raise HTTPException(404, "Khong tim thay chat chi thi")
-    for k, v in payload.model_dump().items():
-        setattr(indicator, k, v)
+    indicator = get_or_404(db, models.Indicator, indicator_id, NOT_FOUND)
+    apply_payload(indicator, payload)
     db.commit()
     db.refresh(indicator)
     return indicator
@@ -35,9 +35,7 @@ def update_indicator(indicator_id: int, payload: schemas.IndicatorUpdate, db: Se
 
 @router.delete("/{indicator_id}")
 def delete_indicator(indicator_id: int, db: Session = Depends(get_db)):
-    indicator = db.query(models.Indicator).get(indicator_id)
-    if not indicator:
-        raise HTTPException(404, "Khong tim thay chat chi thi")
+    indicator = get_or_404(db, models.Indicator, indicator_id, NOT_FOUND)
     db.delete(indicator)
     db.commit()
     return {"ok": True}

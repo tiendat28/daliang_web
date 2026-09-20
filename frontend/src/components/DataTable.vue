@@ -1,9 +1,11 @@
 <script setup>
 import { reactive, computed, ref, watch, useSlots } from 'vue'
-import { Pencil, Trash2, Plus, ArrowUp, ArrowDown, ArrowUpDown, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { Pencil, Trash2, ArrowUp, ArrowDown, ArrowUpDown, ChevronDown } from 'lucide-vue-next'
+import TableCard from './TableCard.vue'
+import TablePagination from './TablePagination.vue'
 
 const props = defineProps({
-  columns: { type: Array, required: true }, // [{ key, label, sortable, filterable }]
+  columns: { type: Array, required: true }, // [{ key, label, sortable, filterable, format }]
   rows: { type: Array, required: true },
   title: { type: String, default: '' },
   mobilePrimaryKey: { type: String, default: null },
@@ -11,12 +13,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['add', 'edit', 'delete'])
+const slots = useSlots()
 
 const sortState = reactive({ key: null, dir: 'asc' })
 const columnFilters = reactive({})
 const pageSize = ref(10)
 const currentPage = ref(1)
-const pageSizeOptions = [10, 20, 50, 100]
 
 function optionsFor(col) {
   const values = new Set(props.rows.map(r => r[col.key]).filter(v => v !== null && v !== undefined && v !== ''))
@@ -64,8 +66,6 @@ function toggleSort(col) {
   }
 }
 
-const slots = useSlots()
-
 const primaryCol = computed(() => props.columns.find(c => c.key === props.mobilePrimaryKey) || props.columns[0])
 const secondaryCol = computed(() => props.columns.find(c => c.key === props.mobileSecondaryKey) || props.columns[1] || null)
 const chipCols = computed(() => props.columns.filter(c => c !== primaryCol.value && c !== secondaryCol.value))
@@ -78,32 +78,27 @@ function mobileGrid(count) {
   return { gridTemplateColumns: `minmax(0,1.4fr) repeat(${Math.max(count - 1, 0)}, minmax(0,1fr))` }
 }
 
+// Cột có slot riêng có thể lấy dữ liệu từ trường lồng nhau (row.fields, row.variants...)
+// chứ không phải row[col.key], nên không loại nó theo row[col.key] được.
+const chipsByRow = computed(() => new Map(
+  pagedRows.value.map(row => [
+    row.id,
+    chipCols.value.filter(col => !!slots[`cell-${col.key}`] || (row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '')),
+  ])
+))
+
 function visibleChips(row) {
-  // A column with a custom cell slot may render content derived from a nested
-  // field (e.g. row.fields / row.variants) rather than row[col.key] itself,
-  // so it can't be filtered by checking row[col.key].
-  return chipCols.value.filter(col => !!slots[`cell-${col.key}`] || (row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== ''))
+  return chipsByRow.value.get(row.id) ?? []
 }
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm flex flex-col">
-    <div class="flex flex-wrap items-center justify-between gap-3 p-5 pb-4 sticky top-0 z-20 bg-white dark:bg-slate-800 rounded-t-2xl shrink-0">
-      <h2 class="font-semibold text-slate-700 dark:text-slate-200">{{ title }}</h2>
-      <div class="flex flex-wrap items-center gap-2">
-        <slot name="header-actions" />
-        <button
-          class="flex items-center justify-center gap-1 text-sm bg-brand-gradient text-white w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl shadow shrink-0"
-          title="Thêm mới"
-          @click="emit('add')"
-        >
-          <Plus class="w-4 h-4" />
-          <span class="hidden sm:inline">Thêm mới</span>
-        </button>
-      </div>
-    </div>
+  <TableCard :title="title" @add="emit('add')">
+    <template #actions>
+      <slot name="header-actions" />
+    </template>
 
-    <div class="hidden sm:block overflow-auto px-5 max-h-[65vh]">
+    <div class="hidden sm:block overflow-auto px-5 min-h-0">
       <table class="w-full text-sm">
         <thead>
           <tr class="text-left text-slate-800 dark:text-slate-100 border-b-2 border-slate-300 dark:border-slate-600 sticky top-0 z-10 bg-white dark:bg-slate-800">
@@ -171,7 +166,7 @@ function visibleChips(row) {
       </table>
     </div>
 
-    <div class="sm:hidden overflow-y-auto px-4 max-h-[65vh] flex flex-col gap-2 py-1">
+    <div class="sm:hidden overflow-y-auto px-4 min-h-0 flex flex-col gap-2 py-1">
       <div v-if="displayRows.length === 0" class="py-6 text-center text-slate-400 text-sm">Chưa có dữ liệu</div>
       <div
         v-for="row in pagedRows"
@@ -238,31 +233,14 @@ function visibleChips(row) {
       </div>
     </div>
 
-    <div v-if="displayRows.length > 0" class="flex flex-wrap items-center justify-between gap-3 p-5 pt-4 mt-0 border-t border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400 shrink-0">
-      <div class="flex items-center gap-2">
-        <span>Hiển thị</span>
-        <select v-model.number="pageSize" class="rounded-lg border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 px-2 py-1 text-sm">
-          <option v-for="opt in pageSizeOptions" :key="opt" :value="opt">{{ opt }}</option>
-        </select>
-        <span>/ trang · {{ displayRows.length }} dòng</span>
-      </div>
-      <div class="flex items-center gap-1">
-        <button
-          class="w-8 h-8 rounded-lg flex items-center justify-center disabled:opacity-30 hover:bg-brand-50 dark:hover:bg-slate-700"
-          :disabled="currentPage <= 1"
-          @click="currentPage--"
-        >
-          <ChevronLeft class="w-4 h-4" />
-        </button>
-        <span class="px-2">Trang {{ currentPage }} / {{ totalPages }}</span>
-        <button
-          class="w-8 h-8 rounded-lg flex items-center justify-center disabled:opacity-30 hover:bg-brand-50 dark:hover:bg-slate-700"
-          :disabled="currentPage >= totalPages"
-          @click="currentPage++"
-        >
-          <ChevronRight class="w-4 h-4" />
-        </button>
-      </div>
-    </div>
-  </div>
+    <template #footer>
+      <TablePagination
+        v-if="displayRows.length > 0"
+        v-model:page="currentPage"
+        v-model:page-size="pageSize"
+        :total-pages="totalPages"
+        :total-rows="displayRows.length"
+      />
+    </template>
+  </TableCard>
 </template>

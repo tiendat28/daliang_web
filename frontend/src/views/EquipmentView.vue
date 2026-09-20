@@ -1,17 +1,18 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
+import FormActions from '../components/FormActions.vue'
+import MonthPicker from '../components/MonthPicker.vue'
+import ToolbarButton from '../components/ToolbarButton.vue'
 import { equipmentApi } from '../api/resources'
-import { Plus, Trash2, FileSpreadsheet, Loader2, CalendarDays } from 'lucide-vue-next'
-import { createReportSheet, styleDataCell, downloadWorkbook } from '../utils/excelReport'
-import { productSearch } from '../store/productSearch'
+import { Plus, Trash2, FileSpreadsheet } from 'lucide-vue-next'
+import { downloadWorkbook } from '../utils/excelReport'
+import { addEquipmentSheet } from '../utils/reportSheets'
+import { currentPeriod, periodParts } from '../utils/format'
 import { useCrudResource } from '../composables/useCrudResource'
+import { useSearchedRows } from '../composables/useSearchedRows'
 
-function currentPeriod() {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
-}
 const selectedPeriod = ref(currentPeriod())
 const exporting = ref(false)
 
@@ -23,8 +24,12 @@ const columns = [
   { key: 'note', label: 'Ghi chú' },
 ]
 
+function emptyVariant() {
+  return { classification: '', quantity: 0, unit: 'c', note: '' }
+}
+
 function emptyForm() {
-  return { name: '', note: '', variants: [{ classification: '', quantity: 0, unit: 'c', note: '' }] }
+  return { name: '', note: '', variants: [emptyVariant()] }
 }
 
 const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
@@ -33,67 +38,33 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
     mapRowToForm: row => ({
       name: row.name,
       note: row.note,
-      variants: row.variants.length ? row.variants.map(v => ({ ...v, note: v.note || '' })) : [{ classification: '', quantity: 0, unit: 'c', note: '' }],
+      variants: row.variants.length ? row.variants.map(v => ({ ...v, note: v.note || '' })) : [emptyVariant()],
     }),
     buildPayload: form => ({ ...form, variants: form.variants.filter(v => v.classification || v.quantity) }),
     confirmRemove: row => `Xoá thiết bị "${row.name}"?`,
   },
 )
 
-const displayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return rows.value
-  return rows.value.filter(r => {
-    const variantVals = r.variants.flatMap(v => [v.classification, v.unit, v.note])
-    return [r.name, r.note, ...variantVals].some(v => String(v ?? '').toLowerCase().includes(q))
-  })
-})
+const displayRows = useSearchedRows(rows, r => [
+  r.name, r.note,
+  ...r.variants.flatMap(v => [v.classification, v.unit, v.note]),
+])
 
 async function exportMonthlyExcel() {
   exporting.value = true
   try {
     const ExcelJS = await import('exceljs')
-    const [year, month] = selectedPeriod.value.split('-')
-    const title = `DỤNG CỤ THÍ NGHIỆM THÁNG ${Number(month)}/${year}`
-
+    const { year, month } = periodParts(selectedPeriod.value)
     const wb = new ExcelJS.Workbook()
-    const ws = await createReportSheet(wb, {
-      sheetName: `Tháng ${month}-${year}`, title, titleFontSize: 12,
-      columnWidths: [6, 26, 16, 11, 9, 30],
-      headerLabels: ['STT', 'TÊN', 'PHÂN LOẠI', 'SỐ LƯỢNG', 'ĐƠN VỊ', 'GHI CHÚ'],
-      titleSpan: 2, companySpan: 2,
-    })
-
-    let excelRow = 4
-    rows.value.forEach((eq, i) => {
-      const variants = eq.variants.length ? eq.variants : [{ classification: '', quantity: 0, unit: '', note: '' }]
-      const startRow = excelRow
-
-      variants.forEach((v, vi) => {
-        const noteText = vi === 0 && eq.note ? [eq.note, v.note].filter(Boolean).join(' — ') : (v.note || '')
-        const values = [vi === 0 ? i + 1 : null, null, v.classification || '', v.quantity ?? 0, v.unit || '', noteText]
-        const row = ws.getRow(excelRow)
-        values.forEach((val, ci) => styleDataCell(row.getCell(ci + 1), val, { align: ci === 1 || ci === 5 ? 'left' : 'center' }))
-        excelRow++
-      })
-
-      const endRow = excelRow - 1
-      if (endRow > startRow) {
-        ws.mergeCells(startRow, 1, endRow, 1)
-        ws.mergeCells(startRow, 2, endRow, 2)
-      }
-      ws.getCell(startRow, 2).value = eq.name
-      ws.getCell(startRow, 2).font = { name: 'Times New Roman', bold: true, size: 11 }
-    })
-
-    await downloadWorkbook(wb, `${title}.xlsx`)
+    await addEquipmentSheet(wb, rows.value, { year, month })
+    await downloadWorkbook(wb, `DUNG CU THI NGHIEM THANG ${month}-${year}.xlsx`)
   } finally {
     exporting.value = false
   }
 }
 
 function addVariant() {
-  form.value.variants.push({ classification: '', quantity: 0, unit: 'c', note: '' })
+  form.value.variants.push(emptyVariant())
 }
 
 function removeVariant(index) {
@@ -104,30 +75,8 @@ function removeVariant(index) {
 <template>
   <DataTable :columns="columns" :rows="displayRows" title="Thiết bị" @add="openAdd" @edit="openEdit" @delete="remove">
     <template #header-actions>
-      <!-- Mobile: ô chọn tháng co thành nút icon lịch cho thanh công cụ gọn 1 dòng.
-           Ô tháng thật nằm chồng lên, trong suốt, nên bấm vào icon là mở đúng bộ chọn của máy. -->
-      <label
-        class="sm:hidden relative flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 shrink-0"
-        title="Chọn tháng"
-      >
-        <CalendarDays class="w-4 h-4" />
-        <input v-model="selectedPeriod" type="month" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-      </label>
-      <input
-        v-model="selectedPeriod"
-        type="month"
-        class="hidden sm:block field-input w-auto text-sm px-3 py-2"
-      />
-      <button
-        class="flex items-center justify-center gap-1 text-sm border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-full sm:rounded-xl hover:bg-brand-50 dark:hover:bg-slate-700 disabled:opacity-50 shrink-0"
-        :disabled="exporting"
-        title="Xuất Excel"
-        @click="exportMonthlyExcel"
-      >
-        <Loader2 v-if="exporting" class="w-4 h-4 animate-spin" />
-        <FileSpreadsheet v-else class="w-4 h-4" />
-        <span class="hidden sm:inline">Xuất Excel</span>
-      </button>
+      <MonthPicker v-model="selectedPeriod" />
+      <ToolbarButton :icon="FileSpreadsheet" label="Xuất Excel" :loading="exporting" @click="exportMonthlyExcel" />
     </template>
     <template #cell-classification="{ row }">
       <div v-for="v in row.variants" :key="v.id" class="text-slate-700 dark:text-slate-200 mb-1 last:mb-0">{{ v.classification }}</div>
@@ -196,8 +145,7 @@ function removeVariant(index) {
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500 dark:text-slate-400" @click="showModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="showModal = false" />
       </div>
     </form>
   </Modal>

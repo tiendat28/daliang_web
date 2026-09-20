@@ -1,11 +1,13 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Modal from '../components/Modal.vue'
+import FormActions from '../components/FormActions.vue'
+import TableCard from '../components/TableCard.vue'
 import { chemicalOrdersApi, labChemicalsApi, customersApi } from '../api/resources'
 import { Plus, Trash2, Pencil } from 'lucide-vue-next'
-import { productSearch } from '../store/productSearch'
 import { formatDate } from '../utils/format'
 import { groupChemicalOrders } from '../utils/orderGrouping'
+import { useSearchedRows } from '../composables/useSearchedRows'
 
 const rows = ref([])
 const labChemicals = ref([])
@@ -25,14 +27,10 @@ function customerName(id) {
   return customers.value.find(c => c.id === id)?.name || id
 }
 
-const displayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return rows.value
-  return rows.value.filter(r => [
-    r.product_name, labChemicalCode(r.lab_chemical_id), labChemicalName(r.lab_chemical_id), customerName(r.customer_id),
-    r.concentration, r.amount, r.order_quantity, r.unit, r.note,
-  ].some(v => String(v ?? '').toLowerCase().includes(q)))
-})
+const displayRows = useSearchedRows(rows, r => [
+  r.product_name, labChemicalCode(r.lab_chemical_id), labChemicalName(r.lab_chemical_id), customerName(r.customer_id),
+  r.concentration, r.amount, r.order_quantity, r.unit, r.note,
+])
 
 // Gộp các dòng cùng lô (cùng KH + cùng ngày pha) để hiển thị chung 1 STT — xem utils/orderGrouping.js
 const groupedRows = computed(() => groupChemicalOrders(displayRows.value))
@@ -155,25 +153,14 @@ async function remove(row) {
 }
 
 onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm flex flex-col">
-    <div class="flex flex-wrap items-center justify-between gap-3 p-5 pb-4">
-      <h2 class="font-semibold text-slate-700 dark:text-slate-200">Đơn hàng HCTN</h2>
-      <button
-        class="flex items-center gap-1 text-sm bg-brand-gradient text-white px-4 py-2 rounded-xl shadow"
-        @click="openAdd"
-      >
-        <Plus class="w-4 h-4" /> Thêm mới
-      </button>
-    </div>
-
+  <TableCard title="Đơn hàng HCTN" @add="openAdd">
     <div v-if="groupedRows.length === 0" class="py-10 text-center text-slate-400 text-sm px-5">Chưa có đơn hàng nào</div>
 
     <!-- Desktop / tablet: bảng gộp theo lô, dùng rowspan cho STT/Tên sản phẩm/Nồng độ/Số lượng/KH/Ngày -->
-    <div v-else class="hidden sm:block overflow-auto px-5 pb-5 max-h-[65vh]">
+    <div v-else class="hidden sm:block overflow-auto px-5 pb-5 min-h-0">
       <table class="w-full text-sm">
         <thead>
           <tr class="text-left text-slate-800 dark:text-slate-100 border-b-2 border-slate-300 dark:border-slate-600 sticky top-0 z-10 bg-white dark:bg-slate-800">
@@ -224,7 +211,7 @@ onUnmounted(() => { productSearch.query = '' })
     </div>
 
     <!-- Mobile: mỗi lô 1 thẻ, trong thẻ tách theo sản phẩm, dưới mỗi sản phẩm là các hóa chất -->
-    <div v-if="groupedRows.length > 0" class="sm:hidden flex flex-col gap-3 px-5 pb-5">
+    <div v-if="groupedRows.length > 0" class="sm:hidden flex flex-col gap-3 px-5 pb-5 min-h-0 overflow-y-auto">
       <div v-for="batch in batches" :key="batch.stt" class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm p-3">
         <p class="text-xs text-slate-400">
           #{{ batch.stt }} ·
@@ -260,7 +247,7 @@ onUnmounted(() => { productSearch.query = '' })
         </div>
       </div>
     </div>
-  </div>
+  </TableCard>
 
   <Modal :show="showModal" :title="editingId ? 'Sửa đơn hàng' : 'Thêm đơn hàng'" @close="showModal = false">
     <form class="grid grid-cols-2 gap-x-4 gap-y-4" @submit.prevent="save">
@@ -355,8 +342,7 @@ onUnmounted(() => { productSearch.query = '' })
       </div>
 
       <div class="col-span-2 flex justify-end gap-2 pt-2">
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500" @click="showModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="showModal = false" />
       </div>
     </form>
   </Modal>

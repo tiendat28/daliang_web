@@ -3,8 +3,11 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app import models, schemas
+from app.api.common import apply_payload, get_or_404
 
 router = APIRouter(prefix="/api/company-products", tags=["company_products"])
+
+NOT_FOUND = "Khong tim thay san pham"
 
 
 @router.get("", response_model=list[schemas.CompanyProductOut])
@@ -25,11 +28,8 @@ def create_product(payload: schemas.CompanyProductCreate, db: Session = Depends(
 
 @router.put("/{product_id}", response_model=schemas.CompanyProductOut)
 def update_product(product_id: int, payload: schemas.CompanyProductUpdate, db: Session = Depends(get_db)):
-    product = db.query(models.CompanyProduct).get(product_id)
-    if not product:
-        raise HTTPException(404, "Khong tim thay san pham")
-    for k, v in payload.model_dump().items():
-        setattr(product, k, v)
+    product = get_or_404(db, models.CompanyProduct, product_id, NOT_FOUND)
+    apply_payload(product, payload)
     db.commit()
     db.refresh(product)
     return product
@@ -37,9 +37,7 @@ def update_product(product_id: int, payload: schemas.CompanyProductUpdate, db: S
 
 @router.delete("/{product_id}")
 def delete_product(product_id: int, db: Session = Depends(get_db)):
-    product = db.query(models.CompanyProduct).get(product_id)
-    if not product:
-        raise HTTPException(404, "Khong tim thay san pham")
+    product = get_or_404(db, models.CompanyProduct, product_id, NOT_FOUND)
     db.delete(product)
     db.commit()
     return {"ok": True}

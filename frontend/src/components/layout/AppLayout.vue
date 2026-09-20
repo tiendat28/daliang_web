@@ -8,8 +8,8 @@ import Topbar from './Topbar.vue'
     <Sidebar />
     <main class="flex-1 p-3 sm:p-4 flex flex-col overflow-hidden">
       <div class="bg-white/40 dark:bg-slate-800/40 rounded-2xl sm:rounded-3xl p-0 sm:p-6 flex flex-col flex-1 overflow-hidden">
-        <Topbar />
-        <div class="flex-1 overflow-y-auto pb-6">
+        <Topbar class="shrink-0" />
+        <div class="flex-1 min-h-0 overflow-y-auto pb-3 sm:pb-6 flex flex-col">
           <slot />
         </div>
       </div>

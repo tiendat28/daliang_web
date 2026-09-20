@@ -218,6 +218,7 @@ class WorkLog(Base):
     id = Column(Integer, primary_key=True, index=True)
     log_date = Column(Date)
     content = Column(Text, nullable=False)
+    ot_hours = Column(Float)  # so gio tang ca, de trong neu khong OT
 
 
 class Document(Base):

@@ -11,10 +11,8 @@
   "dependencies": {
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
-    "pinia": "^2.1.7",
     "axios": "^1.7.2",
     "lucide-vue-next": "^0.427.0",
-    "xlsx": "^0.18.5",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
     "exceljs": "^4.4.0"

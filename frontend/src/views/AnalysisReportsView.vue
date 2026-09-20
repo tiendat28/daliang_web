@@ -3,11 +3,12 @@ import { ref, computed, onMounted } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import Modal from '../components/Modal.vue'
 import ReportPrintPreview from '../components/analysis-reports/ReportPrintPreview.vue'
+import FormActions from '../components/FormActions.vue'
 import { analysisReportsApi, customersApi } from '../api/resources'
 import { Plus, Trash2, Eye } from 'lucide-vue-next'
 import { formatDate } from '../utils/format'
-import { productSearch } from '../store/productSearch'
 import { useCrudResource } from '../composables/useCrudResource'
+import { useSearchedRows } from '../composables/useSearchedRows'
 
 const customers = ref([])
 const showViewModal = ref(false)
@@ -24,18 +25,6 @@ const columns = [
 function customerName(id) {
   return customers.value.find(c => c.id === id)?.name || id
 }
-
-const displayRows = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return rows.value
-  return rows.value.filter(r => {
-    const sampleVals = r.samples.flatMap(s => [s.name, ...s.components.flatMap(c => [c.name, c.result, c.note])])
-    return [
-      customerName(r.customer_id), r.approved_by, r.note,
-      ...(r.completed_by || []), ...sampleVals,
-    ].some(v => String(v ?? '').toLowerCase().includes(q))
-  })
-})
 
 function emptyForm() {
   return {
@@ -76,6 +65,12 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
     confirmRemove: row => `Xoá báo cáo phân tích của "${customerName(row.customer_id)}"?`,
   },
 )
+
+const displayRows = useSearchedRows(rows, r => [
+  customerName(r.customer_id), r.approved_by, r.note,
+  ...(r.completed_by || []),
+  ...r.samples.flatMap(s => [s.name, ...s.components.flatMap(c => [c.name, c.result, c.note])]),
+])
 
 onMounted(async () => { customers.value = await customersApi.list() })
 
@@ -192,8 +187,7 @@ function openView(row) {
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button type="button" class="px-4 py-2 rounded-xl text-slate-500 dark:text-slate-400" @click="showModal = false">Huỷ</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-gradient text-white">Lưu</button>
+        <FormActions @cancel="showModal = false" />
       </div>
     </form>
   </Modal>

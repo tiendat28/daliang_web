@@ -1,10 +1,11 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import { Plus, Trash2 } from 'lucide-vue-next'
+import { ref, computed, onMounted, watch } from 'vue'
+import { Trash2 } from 'lucide-vue-next'
 import { documentsApi } from '../api/resources'
 import { fileKind } from '../utils/fileIcon'
 import { formatDateTime } from '../utils/format'
-import { productSearch } from '../store/productSearch'
+import { useSearchedRows } from '../composables/useSearchedRows'
+import TableCard from '../components/TableCard.vue'
 import DocumentUploadModal from '../components/documents/DocumentUploadModal.vue'
 import DocumentPreviewModal from '../components/documents/DocumentPreviewModal.vue'
 
@@ -25,13 +26,7 @@ const previewDoc = ref(null)
 
 const activeCategoryLabel = computed(() => categories.find(c => c.key === activeCategory.value)?.label || '')
 
-const displayDocuments = computed(() => {
-  const q = productSearch.query.trim().toLowerCase()
-  if (!q) return documents.value
-  return documents.value.filter(d =>
-    [d.name, d.uploaded_by, d.original_filename].some(v => String(v ?? '').toLowerCase().includes(q))
-  )
-})
+const displayDocuments = useSearchedRows(documents, d => [d.name, d.uploaded_by, d.original_filename])
 
 async function load() {
   loading.value = true
@@ -44,7 +39,6 @@ async function load() {
 
 watch(activeCategory, load)
 onMounted(load)
-onUnmounted(() => { productSearch.query = '' })
 
 async function handleUpload({ file, name, uploadedBy }) {
   uploading.value = true
@@ -79,18 +73,8 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm flex flex-col">
-    <div class="flex flex-wrap items-center justify-between gap-3 p-5 pb-4">
-      <h2 class="font-semibold text-slate-700 dark:text-slate-200">Tài liệu</h2>
-      <button
-        class="flex items-center gap-1 text-sm bg-brand-gradient text-white px-4 py-2 rounded-xl shadow"
-        @click="showUpload = true"
-      >
-        <Plus class="w-4 h-4" /> Thêm
-      </button>
-    </div>
-
-    <div class="flex gap-2 px-5 pb-4 overflow-x-auto">
+  <TableCard title="Tài liệu" add-label="Thêm" @add="showUpload = true">
+    <div class="flex gap-2 px-5 pb-4 overflow-x-auto shrink-0">
       <button
         v-for="cat in categories"
         :key="cat.key"
@@ -112,7 +96,7 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
       </div>
 
       <!-- Desktop / tablet table -->
-      <div v-else class="hidden sm:block overflow-auto px-5 pb-5 max-h-[65vh]">
+      <div v-else class="hidden sm:block overflow-auto px-5 pb-5 min-h-0">
         <table class="w-full text-sm">
           <thead>
             <tr class="text-left text-slate-800 dark:text-slate-100 border-b-2 border-slate-300 dark:border-slate-600 sticky top-0 z-10 bg-white dark:bg-slate-800">
@@ -150,7 +134,7 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
       </div>
 
       <!-- Mobile card list -->
-      <div v-if="displayDocuments.length > 0" class="sm:hidden flex flex-col gap-2 px-5 pb-5">
+      <div v-if="displayDocuments.length > 0" class="sm:hidden flex flex-col gap-2 px-5 pb-5 min-h-0 overflow-y-auto">
         <div
           v-for="doc in displayDocuments"
           :key="doc.id"
@@ -170,7 +154,7 @@ const downloadUrl = computed(() => previewDoc.value ? documentsApi.fileUrl(previ
         </div>
       </div>
     </template>
-  </div>
+  </TableCard>
 
   <DocumentUploadModal
     :show="showUpload"

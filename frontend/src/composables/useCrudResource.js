@@ -1,5 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
-import { productSearch } from '../store/productSearch'
+import { ref, onMounted } from 'vue'
 
 // Chuẩn hoá pattern CRUD lặp lại ở các view: rows + modal + form + load/save/remove.
 export function useCrudResource(api, emptyForm, options = {}) {
@@ -7,7 +6,6 @@ export function useCrudResource(api, emptyForm, options = {}) {
     mapRowToForm = row => ({ ...row }),
     buildPayload = form => form,
     confirmRemove = () => 'Xoá bản ghi này?',
-    resetSearchOnUnmount = true,
   } = options
 
   const rows = ref([])
@@ -50,9 +48,6 @@ export function useCrudResource(api, emptyForm, options = {}) {
   }
 
   onMounted(load)
-  if (resetSearchOnUnmount) {
-    onUnmounted(() => { productSearch.query = '' })
-  }
 
   return { rows, showModal, editingId, form, load, openAdd, openEdit, save, remove }
 }
