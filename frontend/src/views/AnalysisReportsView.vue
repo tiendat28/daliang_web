@@ -126,12 +126,12 @@ function openView(row) {
         </select>
       </div>
 
-      <div class="grid grid-cols-2 gap-3">
-        <div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="min-w-0">
           <label class="field-label mb-1">Ngày nhận mẫu</label>
           <input v-model="form.sample_receive_date" type="date" class="w-full field-input" />
         </div>
-        <div>
+        <div class="min-w-0">
           <label class="field-label mb-1">Ngày phân tích</label>
           <input v-model="form.issue_date" type="date" class="w-full field-input" />
         </div>

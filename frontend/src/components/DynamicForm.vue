@@ -5,6 +5,12 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue', 'submit'])
 
+// Trên điện thoại form xếp 1 cột: ô ngày của iOS không co hẹp được nên xếp đôi
+// sẽ đè lên ô bên cạnh, mà ô ngắn đứng lẻ nửa dòng cũng xấu.
+function fieldClass(field) {
+  return field.full || field.type === 'textarea' ? 'sm:col-span-2 min-w-0' : 'min-w-0'
+}
+
 function updateField(key, value) {
   emit('update:modelValue', { ...props.modelValue, [key]: value })
 }
@@ -16,8 +22,8 @@ function numberOrNull(value) {
 </script>
 
 <template>
-  <form class="grid grid-cols-2 gap-x-4 gap-y-4" @submit.prevent="emit('submit')">
-    <div v-for="field in fields" :key="field.key" :class="field.full || field.type === 'textarea' ? 'col-span-2' : ''">
+  <form class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4" @submit.prevent="emit('submit')">
+    <div v-for="field in fields" :key="field.key" :class="fieldClass(field)">
       <label class="field-label mb-1">{{ field.label }}</label>
 
       <select
@@ -47,7 +53,7 @@ function numberOrNull(value) {
       />
     </div>
 
-    <div class="col-span-2 flex justify-end gap-2 pt-2">
+    <div class="sm:col-span-2 flex justify-end gap-2 pt-2">
       <slot name="actions" />
     </div>
   </form>

@@ -327,11 +327,11 @@ onMounted(load)
         </button>
       </div>
 
-      <div>
+      <div class="col-span-2 sm:col-span-1 min-w-0">
         <label class="field-label mb-1">Ngày pha</label>
         <input v-model="form.mix_date" type="date" class="w-full field-input" />
       </div>
-      <div>
+      <div class="col-span-2 sm:col-span-1 min-w-0">
         <label class="field-label mb-1">Ngày xuất</label>
         <input v-model="form.issue_date" type="date" class="w-full field-input" />
       </div>

@@ -393,7 +393,7 @@ async function handleImportFile(e) {
           placeholder="Tên file xuất (để trống sẽ tự đặt tên)"
           class="w-full field-input mb-2"
         />
-        <label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 mb-2">
+        <label class="flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-300 mb-2">
           <input v-model="includePeriod" type="checkbox" class="rounded" />
           Ghi tháng/năm vào tiêu đề (chỉ áp dụng khi xuất Excel)
           <input

@@ -72,11 +72,11 @@ function removeField(i) {
   <Modal :show="showModal" :title="editingId ? 'Sửa khách hàng' : 'Thêm khách hàng'" @close="showModal = false">
     <form class="space-y-4" @submit.prevent="save">
       <div class="grid grid-cols-2 gap-3">
-        <div>
+        <div class="min-w-0">
           <label class="field-label mb-1">Tên khách hàng</label>
           <input v-model="form.name" class="w-full field-input" />
         </div>
-        <div>
+        <div class="min-w-0">
           <label class="field-label mb-1">Địa chỉ</label>
           <input v-model="form.address" class="w-full field-input" />
         </div>

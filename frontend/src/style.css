@@ -12,7 +12,19 @@ body {
 }
 
 .field-input {
-  @apply rounded-xl border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 px-3 py-2 text-sm;
+  @apply rounded-xl border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 px-3 py-2 text-sm min-w-0 max-w-full;
+}
+
+/* Safari trên iOS gán cho ô ngày/tháng một bề rộng tối thiểu riêng và bỏ qua
+   width của mình, nên ô bị tràn khỏi cột và đè lên ô bên cạnh. Bỏ giao diện
+   mặc định thì ô co đúng theo cột (vẫn mở bộ chọn ngày của máy như cũ). */
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
 }
 
 .field-label {
