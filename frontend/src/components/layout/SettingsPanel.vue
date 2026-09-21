@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { Sun, Moon, FileSpreadsheet, FileText, DatabaseBackup, Upload, Loader2 } from 'lucide-vue-next'
+import { Sun, Moon, FileSpreadsheet, FileText, DatabaseBackup, Upload, Loader2, Building2 } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
 import Modal from '../Modal.vue'
 import { themeStore, setTheme } from '../../store/theme'
 import {
@@ -448,6 +449,18 @@ async function handleImportFile(e) {
           </button>
           <input ref="fileInput" type="file" accept="application/json" class="hidden" @change="handleImportFile" />
         </div>
+      </section>
+
+      <section>
+        <h4 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">Phiếu in</h4>
+        <RouterLink
+          :to="{ name: 'company-profile' }"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700"
+          @click="emit('close')"
+        >
+          <Building2 class="w-4 h-4" />
+          Thông tin công ty in trên phiếu
+        </RouterLink>
       </section>
 
       <p v-if="statusMessage" class="text-xs text-center text-brand-600 dark:text-brand-400">{{ statusMessage }}</p>

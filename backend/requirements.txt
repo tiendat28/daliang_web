@@ -6,3 +6,15 @@ pydantic==2.9.2
 pydantic-settings==2.5.2
 python-dotenv==1.0.1
 python-multipart==0.0.9
+jinja2==3.1.4
+weasyprint==70.0
+# pydyf doi API o 0.11 -> ghim cung ca stack render de build tren may sach
+# khong keo ve mot to hop khong tuong thich.
+pydyf==0.12.1
+tinycss2==1.5.1
+cssselect2==0.10.1
+pyphen==0.18.1
+Pillow==12.3.0
+fonttools[woff]==4.65.0
+pytest==8.3.3
+httpx==0.27.2

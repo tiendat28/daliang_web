@@ -1,6 +1,11 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import Sidebar from './Sidebar.vue'
 import Topbar from './Topbar.vue'
+
+// Vài trang (module "Lưu trình test mẫu") tự dựng đầu trang riêng theo mockup,
+// nên bỏ thanh trên chung đi cho khỏi hai tiêu đề chồng nhau.
+const route = useRoute()
 </script>
 
 <template>
@@ -8,7 +13,7 @@ import Topbar from './Topbar.vue'
     <Sidebar />
     <main class="flex-1 p-3 sm:p-4 flex flex-col overflow-hidden">
       <div class="bg-white/40 dark:bg-slate-800/40 rounded-2xl sm:rounded-3xl p-0 sm:p-6 flex flex-col flex-1 overflow-hidden">
-        <Topbar class="shrink-0" />
+        <Topbar v-if="!route.meta.hideTopbar" class="shrink-0" />
         <div class="flex-1 min-h-0 overflow-y-auto pb-3 sm:pb-6 flex flex-col">
           <slot />
         </div>

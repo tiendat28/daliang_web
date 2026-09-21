@@ -1,8 +1,10 @@
 import enum
 
 from sqlalchemy import (
-    Column, Integer, String, Float, Date, DateTime, ForeignKey, Enum, LargeBinary, Text, func
+    CheckConstraint, Column, Date, DateTime, Enum, Float, ForeignKey, Integer,
+    LargeBinary, Numeric, String, Text, UniqueConstraint, func
 )
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
 from app.core.database import Base
@@ -248,3 +250,161 @@ class AnalysisComponent(Base):
     note = Column(Text)                            # Ghi chu rieng cho TP nay
 
     sample = relationship("AnalysisSample", back_populates="components")
+
+
+# ---------- Luu trinh test mau ----------
+
+class TestProcessStatus(str, enum.Enum):
+    draft = "draft"               # Nhap
+    in_progress = "in_progress"   # Dang test
+    completed = "completed"       # Hoan thanh
+    cancelled = "cancelled"       # Da huy
+
+
+class TemperatureMode(str, enum.Enum):
+    none = "none"         # de trong
+    ambient = "ambient"   # in ra "Thuong"
+    range = "range"       # in ra khoang do C, vd "20-30"
+
+
+class CompanyProfile(Base):
+    """Letterhead dung chung cho moi phieu in. Bang chi co dung 1 dong (id = 1)."""
+    __tablename__ = "company_profile"
+
+    id = Column(Integer, primary_key=True, index=True)
+    logo_path = Column(String(255))       # duong dan tuong doi trong app/static
+    name_zh = Column(String(255))
+    name_en = Column(String(255))
+    address_zh = Column(String(255))
+    phone = Column(String(100))
+    fax = Column(String(100))
+
+
+class TestProcess(Base):
+    """Luu trinh test mau - 1 to phieu A4, gom n buoc."""
+    __tablename__ = "test_processes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    code = Column(String(20), unique=True, nullable=False, index=True)  # LT-YYYY-NNN
+    customer_id = Column(Integer, ForeignKey("customers.id", ondelete="SET NULL"), nullable=True, index=True)
+    # Ten in tren phieu: luu rieng khoi customers de doi ten KH khong lam doi phieu da phat hanh,
+    # va de nhan duoc ca KH chua co trong danh muc.
+    customer_name = Column(String(255), nullable=False)
+    requirement = Column(Text)
+    sample_quantity = Column(Integer, nullable=False, default=1)
+    test_month = Column(Date, nullable=False)          # luon la ngay 01 cua thang
+    prepared_by = Column(String(100))
+    status = Column(String(20), nullable=False, default=TestProcessStatus.draft.value, index=True)
+    internal_note = Column(Text)                        # khong in ra phieu
+    source_process_id = Column(Integer, ForeignKey("test_processes.id", ondelete="SET NULL"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    deleted_at = Column(DateTime(timezone=True), nullable=True, index=True)   # xoa mem
+
+    __table_args__ = (
+        CheckConstraint("sample_quantity > 0", name="ck_test_processes_sample_quantity_positive"),
+    )
+
+    customer = relationship("Customer")
+    source_process = relationship("TestProcess", remote_side=[id])
+    steps = relationship(
+        "TestProcessStep", back_populates="process",
+        cascade="all, delete-orphan", order_by="TestProcessStep.position",
+    )
+
+
+class TestProcessStep(Base):
+    """1 buoc trong luu trinh = 1 hang cua bang tren phieu."""
+    __tablename__ = "test_process_steps"
+
+    id = Column(Integer, primary_key=True, index=True)
+    process_id = Column(Integer, ForeignKey("test_processes.id", ondelete="CASCADE"), nullable=False, index=True)
+    position = Column(Integer, nullable=False)          # 1..n, cung la STT in ra
+    operation = Column(String(255), nullable=False)     # Hang muc
+
+    time_min = Column(Numeric(8, 2))
+    time_max = Column(Numeric(8, 2))
+    time_unit = Column(String(10))                      # sec / min / hour
+
+    temp_mode = Column(String(10), nullable=False, default=TemperatureMode.none.value)
+    temp_min = Column(Numeric(6, 1))
+    temp_max = Column(Numeric(6, 1))
+
+    ph_min = Column(Numeric(4, 2))
+    ph_max = Column(Numeric(4, 2))
+
+    # Chu in thay the cho truong hop dac biet: co gia tri thi in nguyen van,
+    # bo qua cac o so o tren.
+    time_text = Column(String(100))
+    temp_text = Column(String(100))
+    ph_text = Column(String(100))
+
+    note = Column(Text)                                 # khong in ra phieu
+
+    __table_args__ = (
+        UniqueConstraint("process_id", "position", name="uq_test_process_steps_position"),
+        CheckConstraint("ph_min IS NULL OR (ph_min >= 0 AND ph_min <= 14)", name="ck_test_process_steps_ph_min_range"),
+        CheckConstraint("ph_max IS NULL OR (ph_max >= 0 AND ph_max <= 14)", name="ck_test_process_steps_ph_max_range"),
+    )
+
+    process = relationship("TestProcess", back_populates="steps")
+    concentrations = relationship(
+        "TestProcessStepConcentration", back_populates="step",
+        cascade="all, delete-orphan", order_by="TestProcessStepConcentration.position",
+    )
+    chemicals = relationship(
+        "TestProcessStepChemical", back_populates="step",
+        cascade="all, delete-orphan", order_by="TestProcessStepChemical.position",
+    )
+
+
+class TestProcessStepConcentration(Base):
+    """1 dong nong do trong o NONG DO. 1 buoc co 0..n dong, doc lap voi danh sach hoa chat."""
+    __tablename__ = "test_process_step_concentrations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    step_id = Column(Integer, ForeignKey("test_process_steps.id", ondelete="CASCADE"), nullable=False, index=True)
+    position = Column(Integer, nullable=False)
+    component = Column(String(50))          # "Zn^2+", "NaOH" - de trong neu la nong do cua chinh hoa chat
+    value_min = Column(Numeric(10, 3))
+    value_max = Column(Numeric(10, 3))
+    unit = Column(String(20))               # g/l, ml/l, %, mg/l...
+    text_override = Column(String(100))     # chu in thay the
+
+    step = relationship("TestProcessStep", back_populates="concentrations")
+
+
+class TestProcessStepChemical(Base):
+    """1 hoa chat trong o HOA CHAT. Tro toi SP cong ty hoac HC PTN, hoac chi la chu tu do."""
+    __tablename__ = "test_process_step_chemicals"
+
+    id = Column(Integer, primary_key=True, index=True)
+    step_id = Column(Integer, ForeignKey("test_process_steps.id", ondelete="CASCADE"), nullable=False, index=True)
+    position = Column(Integer, nullable=False)
+    product_id = Column(Integer, ForeignKey("company_products.id", ondelete="SET NULL"), nullable=True, index=True)
+    lab_chemical_id = Column(Integer, ForeignKey("lab_chemicals.id", ondelete="SET NULL"), nullable=True, index=True)
+    # Chu in, chot lai tai thoi diem chon: doi ten SP ve sau khong lam doi phieu da phat hanh.
+    display_name = Column(String(100), nullable=False)
+
+    __table_args__ = (
+        CheckConstraint(
+            "product_id IS NULL OR lab_chemical_id IS NULL",
+            name="ck_test_process_step_chemicals_single_source",
+        ),
+    )
+
+    step = relationship("TestProcessStep", back_populates="chemicals")
+    product = relationship("CompanyProduct")
+    lab_chemical = relationship("LabChemical")
+
+
+class ProcessTemplate(Base):
+    """Quy trinh chuan = bo buoc dung lai. steps luu jsonb, cung cau truc voi mang steps cua API."""
+    __tablename__ = "process_templates"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), unique=True, nullable=False)
+    description = Column(Text)
+    steps = Column(JSONB, nullable=False, default=list)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

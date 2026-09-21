@@ -1,0 +1,270 @@
+{#
+  To phieu "Luu trinh test mau" - dung chung cho ca khung xem truoc tren web
+  (screen = True) lan file PDF (screen = False), de xem the nao in ra the ay.
+
+  Bien truyen vao:
+    sheet       - du lieu da qua formatter (app/services/test_process_sheet.py)
+    asset_base  - goc duong dan font/logo: "file://..." khi xuat PDF,
+                  URL static cua API khi tra HTML cho iframe
+    screen      - True khi render cho khung xem truoc
+#}<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>{{ sheet.code }} - Luu trinh test mau</title>
+<style>
+  @font-face { font-family: 'Tinos'; src: url('{{ asset_base }}/fonts/Tinos-Regular.ttf'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: 'Tinos'; src: url('{{ asset_base }}/fonts/Tinos-Bold.ttf'); font-weight: 700; font-style: normal; }
+  @font-face { font-family: 'Tinos'; src: url('{{ asset_base }}/fonts/Tinos-Italic.ttf'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: 'Tinos'; src: url('{{ asset_base }}/fonts/Tinos-BoldItalic.ttf'); font-weight: 700; font-style: italic; }
+
+  /* Ban rut gon cua Noto Serif CJK TC, chi chua chu Han cua letterhead - de khung
+     xem truoc trong trinh duyet ra dung font nhu PDF ma khong phai tai ca goi 20MB.
+     Xuat PDF thi WeasyPrint dung font he thong (goi fonts-noto-cjk) nen luon du chu. */
+  @font-face { font-family: 'Noto Serif TC Letterhead'; src: url('{{ asset_base }}/fonts/NotoSerifTC-letterhead.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+
+  @page {
+    size: A4 portrait;
+    margin: 13mm 15mm 15mm 21mm;
+  }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Tinos', 'Times New Roman', serif;
+    font-size: 12pt;
+    color: #000;
+  }
+
+  .cjk {
+    font-family: 'Noto Serif TC Letterhead', 'Noto Serif CJK TC', 'Noto Serif TC',
+                 'Songti TC', 'PMingLiU', 'MingLiU', 'Tinos', serif;
+  }
+
+  /* ---------- Letterhead (block thuong, nen chi xuat hien o trang 1) ---------- */
+  .letterhead {
+    position: relative;
+    height: 18mm;
+  }
+
+  /* Logo an sang trai 3.2mm so voi vung noi dung: tren mau giay no nam cach mep
+     trai trang ~17.8mm, tuc lan ra ngoai le trai 21mm cua phan chu. */
+  .letterhead__logo {
+    position: absolute;
+    left: -3.2mm;
+    top: 0.7mm;
+    height: 16mm;
+  }
+
+  /* Cach mep trai TRANG ~51mm = 30mm tinh tu mep trai vung noi dung (le trai 21mm) */
+  .letterhead__name {
+    position: absolute;
+    left: 30mm;
+    top: 0.7mm;
+  }
+
+  .letterhead__name-zh {
+    font-size: 18pt;
+    line-height: 1;
+    padding-top: 1.3mm;
+  }
+
+  /* Chan chu cach chan chu dong tren ~6mm */
+  .letterhead__name-en {
+    font-size: 10pt;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 2.6mm;   /* 3.9mm tru 1.3mm padding cua dong tieng Trung o tren */
+  }
+
+  /* Mep phai cach mep phai TRANG ~20mm = 5mm tinh tu mep phai vung noi dung */
+  /* Rong 70mm chu khong phai 66mm nhu so do tren mau giay: Noto Serif CJK TC
+     dat chu thua hon font cua ban Word goc, 66mm lam dong dia chi bi xuong dong. */
+  .letterhead__contact {
+    position: absolute;
+    right: 5mm;
+    top: 1.6mm;
+    width: 70mm;
+    text-align: center;
+    font-size: 10pt;
+    line-height: 1.42;
+  }
+
+  /* ---------- Tieu de ---------- */
+  .sheet-title {
+    font-size: 16pt;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    margin: 13.4mm 0 0;
+  }
+
+  /* ---------- 5 dong thong tin ---------- */
+  .info {
+    font-size: 13pt;
+    margin-top: 5.4mm;
+  }
+
+  .info__line {
+    line-height: 22.4pt;   /* chan chu 2 dong lien nhau cach nhau 7.9mm */
+  }
+
+  .info__label { font-weight: 700; }
+  .info__value--strong { font-weight: 700; }
+
+  /* ---------- Bang quy trinh ---------- */
+  .steps {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 1.7mm;
+    font-size: 12pt;
+    line-height: 1.15;
+  }
+
+  .steps th,
+  .steps td {
+    box-sizing: border-box;   /* height la chieu cao ca o, da gom padding */
+    border: 0.5pt solid #000;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1mm 1.2mm;
+    height: {{ '8mm' if sheet.compact_rows else '11.7mm' }};
+  }
+
+  .steps thead th {
+    background: #D9D9D9;
+    font-weight: 400;   /* mau giay khong in dam hang tieu de */
+    height: 11.7mm;
+  }
+
+  .steps tbody tr { page-break-inside: avoid; }
+
+  .col-no   { width: 6.5%; }
+  .col-op   { width: 15.8%; }
+  .col-time { width: 15.2%; }
+  .col-temp { width: 15%; }
+  .col-ph   { width: 9.7%; }
+  .col-conc { width: 20%; }
+  .col-chem { width: 17.8%; }
+
+  /* Cac dong nong do cach nhau them ~4mm; hoa chat thi xep sat */
+  .conc-line + .conc-line { margin-top: 4mm; }
+
+  /* ---------- Chu ky ---------- */
+  .signature {
+    margin-top: 9mm;
+    page-break-inside: avoid;   /* khong tach "Nguoi lap" khoi ho ten */
+    font-size: 11pt;
+    font-style: italic;
+    line-height: 1.2;
+  }
+
+  /* Khoi chu ky can giua tai diem cach mep trai trang ~141mm = 120mm trong vung noi dung */
+  .signature__inner {
+    width: 60mm;
+    margin-left: 90mm;
+    text-align: center;
+  }
+
+  .signature__name { margin-top: 8.4mm; }   /* chan chu 2 dong cach nhau ~13mm */
+
+{% if screen %}
+  /* ---------- Rieng khung xem truoc: to giay lien mot khoi tren nen xam ---------- */
+  body {
+    background: #F2F6F6;
+  }
+
+  .sheet {
+    box-sizing: border-box;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 13mm 15mm 15mm 21mm;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(13, 42, 45, .10), 0 20px 44px -18px rgba(13, 42, 45, .32);
+  }
+{% endif %}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="letterhead">
+    {% if sheet.profile.logo_url %}
+      <img class="letterhead__logo" src="{{ sheet.profile.logo_url }}" alt="">
+    {% endif %}
+    <div class="letterhead__name">
+      <div class="letterhead__name-zh cjk">{{ sheet.profile.name_zh }}</div>
+      <div class="letterhead__name-en">{{ sheet.profile.name_en }}</div>
+    </div>
+    <div class="letterhead__contact cjk">
+      <div>{{ sheet.profile.address_zh }}</div>
+      <div>電話：{{ sheet.profile.phone }} 傳真：{{ sheet.profile.fax }}</div>
+    </div>
+  </header>
+
+  <h1 class="sheet-title">LƯU TRÌNH TEST MẪU</h1>
+
+  <div class="info">
+    <div class="info__line">
+      <span class="info__label">1. Tên khách hàng:</span>
+      <span class="info__value info__value--strong">{{ sheet.customer_name }}</span>
+    </div>
+    <div class="info__line">
+      <span class="info__label">2. Yêu cầu:</span>
+      <span class="info__value">{{ sheet.requirement }}</span>
+    </div>
+    <div class="info__line">
+      <span class="info__label">3. Số lượng mẫu test :</span>
+      <span class="info__value">{{ sheet.sample_quantity }}</span>
+    </div>
+    <div class="info__line">
+      <span class="info__label">4. Thời gian test</span>: <span class="info__value">{{ sheet.test_month }}</span>
+    </div>
+    <div class="info__line">
+      <span class="info__label">5. Chi tiết quy trình test</span>
+    </div>
+  </div>
+
+  <table class="steps">
+    <thead>
+      <tr>
+        <th class="col-no">STT</th>
+        <th class="col-op">HẠNG MỤC</th>
+        <th class="col-time">THỜI GIAN</th>
+        <th class="col-temp">NHIỆT ĐỘ</th>
+        <th class="col-ph">pH</th>
+        <th class="col-conc">NỒNG ĐỘ</th>
+        <th class="col-chem">HÓA CHẤT</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for step in sheet.steps %}
+      <tr>
+        <td class="col-no">{{ step.position }}</td>
+        <td class="col-op">{{ step.operation|safe }}</td>
+        <td class="col-time">{{ step.time|safe }}</td>
+        <td class="col-temp">{{ step.temperature|safe }}</td>
+        <td class="col-ph">{{ step.ph|safe }}</td>
+        <td class="col-conc">
+          {%- for line in step.concentrations %}<div class="conc-line">{{ line|safe }}</div>{% endfor -%}
+        </td>
+        <td class="col-chem">
+          {%- for line in step.chemicals %}<div class="chem-line">{{ line|safe }}</div>{% endfor -%}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="signature">
+    <div class="signature__inner">
+      <div class="signature__role">Người lập</div>
+      <div class="signature__name">{{ sheet.prepared_by }}</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
