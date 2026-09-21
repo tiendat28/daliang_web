@@ -65,54 +65,57 @@ function isChildActive(child) {
   />
 
   <aside
-    class="w-64 shrink-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl p-5 flex flex-col gap-1 shadow-sm transition-transform duration-300 fixed inset-y-4 left-4 z-50 md:static md:inset-auto md:m-4 md:mr-0 md:h-[calc(100vh-2rem)] md:translate-x-0 overflow-y-auto"
+    class="w-64 shrink-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl p-4 flex flex-col shadow-sm transition-transform duration-300 fixed inset-y-4 left-4 z-50 md:static md:inset-auto md:m-4 md:mr-0 md:h-[calc(100vh-2rem)] md:translate-x-0 overflow-hidden"
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-[150%]'"
   >
-    <RouterLink to="/" class="flex items-center gap-2 px-2 pb-6">
+    <RouterLink to="/" class="flex items-center gap-2 px-2 pb-3 shrink-0">
       <div class="w-9 h-9 rounded-xl bg-brand-gradient flex items-center justify-center">
         <Boxes class="w-5 h-5 text-white" />
       </div>
       <span class="font-bold text-lg text-slate-800 dark:text-slate-100">Daliang VN</span>
     </RouterLink>
 
-    <div v-for="group in navGroups" :key="group.label" class="flex flex-col gap-1">
-      <span class="px-4 pt-2 pb-1 text-[11.5px] font-semibold text-slate-400 dark:text-slate-500">
-        {{ group.label }}
-      </span>
+    <!-- Chỉ phần này được cuộn, để logo và nút Cài đặt luôn nhìn thấy -->
+    <nav class="flex-1 min-h-0 overflow-y-auto flex flex-col gap-0.5">
+      <div v-for="group in navGroups" :key="group.label" class="flex flex-col gap-0.5">
+        <span class="px-3.5 pt-1.5 pb-0.5 text-[11.5px] font-semibold text-slate-400 dark:text-slate-500">
+          {{ group.label }}
+        </span>
 
-      <template v-for="item in group.items" :key="item.name">
-        <RouterLink
-          :to="{ name: item.name }"
-          class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors"
-          :class="isActive(item)
-            ? 'bg-brand-gradient text-white shadow'
-            : 'text-slate-500 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700 hover:text-brand-700 dark:hover:text-brand-300'"
-          @click="sidebarOpen = false"
-        >
-          <component :is="item.icon" class="w-4 h-4" />
-          {{ item.label }}
-        </RouterLink>
-
-        <div v-if="item.children && isActive(item)" class="flex flex-col gap-0.5 pl-7 py-1">
+        <template v-for="item in group.items" :key="item.name">
           <RouterLink
-            v-for="child in item.children"
-            :key="child.key"
-            :to="{ name: child.name }"
-            class="px-3 py-1.5 rounded-xl text-[13px] transition-colors"
-            :class="isChildActive(child)
-              ? 'font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-slate-700'
-              : 'font-medium text-slate-500 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-300'"
+            :to="{ name: item.name }"
+            class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-[13.5px] font-medium transition-colors"
+            :class="isActive(item)
+              ? 'bg-brand-gradient text-white shadow'
+              : 'text-slate-500 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700 hover:text-brand-700 dark:hover:text-brand-300'"
             @click="sidebarOpen = false"
           >
-            {{ child.label }}
+            <component :is="item.icon" class="w-4 h-4" />
+            {{ item.label }}
           </RouterLink>
-        </div>
-      </template>
-    </div>
 
-    <div class="mt-auto pt-2 border-t border-slate-200 dark:border-slate-700">
+          <div v-if="item.children && isActive(item)" class="flex flex-col gap-0.5 pl-7 py-0.5">
+            <RouterLink
+              v-for="child in item.children"
+              :key="child.key"
+              :to="{ name: child.name }"
+              class="px-3 py-1 rounded-xl text-[13px] transition-colors"
+              :class="isChildActive(child)
+                ? 'font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-slate-700'
+                : 'font-medium text-slate-500 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-300'"
+              @click="sidebarOpen = false"
+            >
+              {{ child.label }}
+            </RouterLink>
+          </div>
+        </template>
+      </div>
+    </nav>
+
+    <div class="shrink-0 mt-1 pt-1.5 border-t border-slate-200 dark:border-slate-700">
       <button
-        class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-slate-500 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700 hover:text-brand-700 dark:hover:text-brand-300"
+        class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-[13.5px] font-medium transition-colors text-slate-500 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700 hover:text-brand-700 dark:hover:text-brand-300"
         @click="showSettings = true"
       >
         <Settings class="w-4 h-4" />
