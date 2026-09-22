@@ -90,7 +90,7 @@ chemical-manager/
 | `customers` | Bảng 1 – KH | |
 | `customer_fields` | (lĩnh vực của KH) | 1 KH – n lĩnh vực |
 | `customer_field_products` | (SP dùng theo lĩnh vực) | tự map sang `company_products` nếu trùng mã |
-| `company_products` | Bảng 2 – SP Cty | `process_stage`: pre_treatment / plating / post_plating |
+| `company_products` / `company_product_components` | Bảng 2 – SP Cty | `process_stage`: pre_treatment / plating / post_plating; 1 mã có nhiều thành phần (810 → 810A, 810B, 810C), pH / nhiệt độ / thời gian cũng là một dòng thành phần |
 | `lab_chemicals` | Bảng 3 – HC PTN | `box_count` × `volume_per_box` = `total_volume`; `remaining_volume` là phần "Lẻ" đang dùng |
 | `indicators` | Chất chỉ thị | |
 | `equipment` / `equipment_variants` | Bảng 4 – Thiết bị | 1 thiết bị có nhiều phân loại |

@@ -51,29 +51,48 @@ class CustomerOut(CustomerBase):
 
 
 # ---------- Company Product ----------
+class CompanyProductComponentBase(BaseModel):
+    component: Optional[str] = None     # "CHB-89A", "pH", "Nhiet do"
+    standard: Optional[str] = None      # "100 ml/L"
+    spec_range: Optional[str] = None    # "80-120 ml/L"
+
+
+class CompanyProductComponentOut(CompanyProductComponentBase):
+    id: int
+    model_config = ORM_CONFIG
+
+
 class CompanyProductBase(BaseModel):
     code: str
     name: str
     field: Optional[str] = None
     usage_purpose: Optional[str] = None
-    concentration: Optional[str] = None     # "5 ml/L"
-    temperature: Optional[str] = None       # "50oC"
-    duration: Optional[str] = None          # "10s", "10 phut"
-    ph: Optional[str] = None                # "1.8"
     process_stage: Optional[ProcessStage] = None
     price: Optional[float] = None
 
+    # O chon de trong gui len "" chu khong phai null; coi nhu chua chon thay vi
+    # bat nguoi dung phai chon mot cong doan.
+    @field_validator("process_stage", mode="before")
+    @classmethod
+    def _blank_stage_is_none(cls, value):
+        return None if value == "" else value
 
-class CompanyProductCreate(CompanyProductBase):
+
+class CompanyProductWrite(CompanyProductBase):
+    components: List[CompanyProductComponentBase] = []
+
+
+class CompanyProductCreate(CompanyProductWrite):
     pass
 
 
-class CompanyProductUpdate(CompanyProductBase):
+class CompanyProductUpdate(CompanyProductWrite):
     pass
 
 
 class CompanyProductOut(CompanyProductBase):
     id: int
+    components: List[CompanyProductComponentOut] = []
     model_config = ORM_CONFIG
 
 

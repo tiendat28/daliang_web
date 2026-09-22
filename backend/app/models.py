@@ -71,16 +71,33 @@ class CompanyProduct(Base):
     name = Column(String(255), nullable=False)
     field = Column(String(255))
     usage_purpose = Column(String(255))
-    # Cac thong so ky thuat deu la chuoi tu do co san don vi trong do
-    # ("5 ml/L", "50oC", "10 phut", "1.8") nen khong con cot don vi rieng.
-    concentration = Column(String(100))
-    temperature = Column(String(100))
-    duration = Column(String(100))
-    ph = Column(String(50))
     process_stage = Column(Enum(ProcessStage))
     price = Column(Float)
 
+    components = relationship(
+        "CompanyProductComponent", back_populates="product",
+        cascade="all, delete-orphan", order_by="CompanyProductComponent.id",
+    )
     sampling_records = relationship("ChemicalSampling", back_populates="company_product")
+
+
+class CompanyProductComponent(Base):
+    """Mot dong trong bang thong so cua san pham.
+
+    Mot ma co the gom nhieu thanh phan (vd 810 co 810A, 810B, 810C), va cac
+    thong so pH / nhiet do / thoi gian cung la mot dong o day - dung nhu bang
+    giay phong thi nghiem dang dung. Tat ca deu la chu tu do co san don vi
+    ("100 ml/L", "1.8", "30 oC", "60 giay") nen khong co cot don vi rieng.
+    """
+    __tablename__ = "company_product_components"
+
+    id = Column(Integer, primary_key=True, index=True)
+    product_id = Column(Integer, ForeignKey("company_products.id", ondelete="CASCADE"), nullable=False)
+    component = Column(String(255))      # Thanh phan: "CHB-89A", "pH", "Nhiet do"
+    standard = Column(String(100))       # Tieu chuan: "100 ml/L"
+    spec_range = Column(String(100))     # Pham vi: "80-120 ml/L"
+
+    product = relationship("CompanyProduct", back_populates="components")
 
 
 class LabChemical(Base):

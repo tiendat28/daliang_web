@@ -34,6 +34,38 @@ SCHEMA_STATEMENTS = (
         END IF;
     END $$;
     """,
+    # Mot ma co the co nhieu thanh phan (810 -> 810A, 810B, 810C) nen bon cot
+    # thong so tren san pham chuyen thanh cac dong cua company_product_components.
+    # Gia tri co dang "a - b" thi la Pham vi, con lai la Tieu chuan.
+    r"""
+    DO $$
+    BEGIN
+        IF EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_name = 'company_products' AND column_name = 'concentration'
+        ) THEN
+            INSERT INTO company_product_components (product_id, component, standard, spec_range)
+            SELECT p.id, v.component,
+                   CASE WHEN v.value ~ '[0-9]\s*-\s*[0-9]' THEN NULL ELSE v.value END,
+                   CASE WHEN v.value ~ '[0-9]\s*-\s*[0-9]' THEN v.value ELSE NULL END
+            FROM company_products p
+            CROSS JOIN LATERAL (VALUES
+                (1, p.code::text, btrim(p.concentration)::text),
+                (2, 'pH', btrim(p.ph)),
+                (3, 'Nhiệt độ', btrim(p.temperature)),
+                (4, 'Thời gian', btrim(p.duration))
+            ) AS v(ord, component, value)
+            WHERE nullif(v.value, '') IS NOT NULL
+            ORDER BY p.id, v.ord;
+
+            ALTER TABLE company_products
+                DROP COLUMN concentration,
+                DROP COLUMN temperature,
+                DROP COLUMN duration,
+                DROP COLUMN ph;
+        END IF;
+    END $$;
+    """,
 )
 
 
