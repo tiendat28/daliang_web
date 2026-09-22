@@ -135,7 +135,7 @@ function send(event) {
           </button>
           <button
             type="button"
-            class="h-[38px] px-[18px] rounded-[11px] bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-teal disabled:opacity-50"
+            class="h-[38px] px-[18px] rounded-[11px] bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-accent disabled:opacity-50"
             :disabled="!selected"
             @click="send('insert')"
           >

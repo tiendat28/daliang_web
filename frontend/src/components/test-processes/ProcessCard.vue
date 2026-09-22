@@ -34,7 +34,7 @@ const meta = computed(() => formatProcessMeta({
          selected
            ? 'bg-lt-sel dark:bg-slate-700/60 shadow-[inset_3px_0_0_#0D8FA0]'
            : 'bg-white dark:bg-slate-800 hover:bg-lt-sel/60 dark:hover:bg-slate-700/40']
-      : ['p-3.5 rounded-[18px] bg-white dark:bg-slate-800 shadow-lt-soft']"
+      : ['p-3.5 rounded-[18px] bg-white dark:bg-slate-800 shadow-lt-raise']"
   >
     <div class="flex items-center justify-between gap-2">
       <span class="text-[12.5px] font-semibold tracking-[0.2px] text-lt-muted dark:text-slate-400">{{ item.code }}</span>

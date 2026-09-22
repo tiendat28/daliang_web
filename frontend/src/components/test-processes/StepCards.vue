@@ -25,7 +25,7 @@ function chemicals(step) {
     <div
       v-for="(step, index) in steps"
       :key="step.id ?? index"
-      class="flex flex-col gap-2.5 p-3.5 rounded-[18px] bg-white dark:bg-slate-800 shadow-lt-soft"
+      class="flex flex-col gap-2.5 p-3.5 rounded-[18px] bg-white dark:bg-slate-800 shadow-lt-raise"
     >
       <div class="flex items-center gap-2.5">
         <span class="flex items-center justify-center w-6 h-6 rounded-lg bg-lt-step dark:bg-slate-700 text-[12px] font-semibold text-lt-label dark:text-slate-300">

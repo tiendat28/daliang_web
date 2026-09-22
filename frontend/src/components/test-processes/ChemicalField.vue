@@ -106,7 +106,7 @@ function onBlur() {
 
     <ul
       v-if="open && matches.length"
-      class="absolute left-0 right-0 top-[44px] z-30 max-h-64 overflow-y-auto p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-card"
+      class="absolute left-0 right-0 top-[44px] z-30 max-h-64 overflow-y-auto p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-panel"
     >
       <li v-for="option in matches" :key="option.key">
         <button

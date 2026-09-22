@@ -61,11 +61,14 @@ export default {
       fontFamily: {
         lt: ['Be Vietnam Pro', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
+      // Tên bóng đổ không được trùng tên màu trong lt.* ở trên: gặp
+      // shadow-lt-card, Tailwind hiểu luôn là "đổ bóng màu lt.card" và ghi đè
+      // màu của bóng, nên thẻ hóa ra viền sáng trắng khi xem ở nền tối.
       boxShadow: {
-        'lt-card': '0 1px 2px rgba(13,42,45,.04), 0 14px 34px -18px rgba(13,42,45,.18)',
-        'lt-soft': '0 1px 2px rgba(13,42,45,.04), 0 10px 26px -16px rgba(13,42,45,.22)',
+        'lt-panel': '0 1px 2px rgba(13,42,45,.04), 0 14px 34px -18px rgba(13,42,45,.18)',
+        'lt-raise': '0 1px 2px rgba(13,42,45,.04), 0 10px 26px -16px rgba(13,42,45,.22)',
         'lt-sheet': '0 2px 6px rgba(13,42,45,.10), 0 20px 44px -18px rgba(13,42,45,.32)',
-        'lt-teal': '0 8px 18px -8px rgba(13,143,160,.8)',
+        'lt-accent': '0 8px 18px -8px rgba(13,143,160,.8)',
         'lt-fab': '0 12px 26px -10px rgba(13,143,160,.85)',
         'lt-dialog': '0 24px 60px -20px rgba(13,42,45,.42)',
       },

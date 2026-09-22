@@ -124,7 +124,7 @@ async function uploadLogo(event) {
         </button>
         <button
           type="button"
-          class="flex items-center gap-1.5 h-[38px] px-5 rounded-[11px] bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-teal disabled:opacity-50"
+          class="flex items-center gap-1.5 h-[38px] px-5 rounded-[11px] bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-accent disabled:opacity-50"
           :disabled="saving || loading"
           @click="save"
         >

@@ -14,7 +14,9 @@ const route = useRoute()
     <main class="flex-1 p-3 sm:p-4 flex flex-col overflow-hidden">
       <div class="bg-white/40 dark:bg-slate-800/40 rounded-2xl sm:rounded-3xl p-0 sm:p-6 flex flex-col flex-1 overflow-hidden">
         <Topbar v-if="!route.meta.hideTopbar" class="shrink-0" />
-        <div class="flex-1 min-h-0 overflow-y-auto pb-3 sm:pb-6 flex flex-col">
+        <!-- Trên máy tính khung ngoài đã chừa 24px, thêm pb nữa thì đáy hụt gấp đôi
+             so với trên và hai bên, nên chỉ chừa thêm ở màn hình hẹp. -->
+        <div class="flex-1 min-h-0 overflow-y-auto pb-3 sm:pb-0 flex flex-col">
           <slot />
         </div>
       </div>

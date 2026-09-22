@@ -28,7 +28,7 @@ defineExpose({ close })
     <div v-if="open" class="fixed inset-0 z-10" @click="close" />
     <div
       v-if="open"
-      class="absolute top-[38px] z-20 p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-card"
+      class="absolute top-[38px] z-20 p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-panel"
       :class="[align === 'right' ? 'right-0' : 'left-0', width]"
     >
       <slot :close="close" />

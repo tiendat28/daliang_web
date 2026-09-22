@@ -115,7 +115,7 @@ async function remove(template) {
       <div class="flex-1" />
       <button
         type="button"
-        class="flex items-center gap-2 h-10 px-4 rounded-xl bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-teal"
+        class="flex items-center gap-2 h-10 px-4 rounded-xl bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-accent"
         @click="openEditor()"
       >
         <Plus class="w-[18px] h-[18px]" />Tạo quy trình chuẩn

@@ -229,7 +229,7 @@ function openPdf({ download }) {
         <!-- Máy tính: nút nằm trên thanh công cụ; điện thoại: nút nổi ở đáy màn hình -->
         <button
           type="button"
-          class="hidden md:flex items-center gap-2 h-10 px-4 rounded-xl bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-teal"
+          class="hidden md:flex items-center gap-2 h-10 px-4 rounded-xl bg-lt-gradient text-white text-[13.5px] font-semibold shadow-lt-accent"
           @click="router.push({ name: 'test-process-new' })"
         >
           <Plus class="w-[18px] h-[18px]" />Tạo lưu trình
