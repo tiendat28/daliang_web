@@ -19,12 +19,12 @@ const columns = [
   { key: 'note', label: 'Ghi chú' },
 ]
 
-function productName(id) {
-  return products.value.find(p => p.id === id)?.name || id
+function productCode(id) {
+  return products.value.find(p => p.id === id)?.code || id
 }
 
 const fields = computed(() => [
-  { key: 'company_product_id', label: 'Sản phẩm công ty', type: 'select', options: products.value.map(p => ({ value: p.id, label: `${p.code} - ${p.name}` })) },
+  { key: 'company_product_id', label: 'Sản phẩm công ty', type: 'select', options: products.value.map(p => ({ value: p.id, label: p.code })) },
   { key: 'name', label: 'Tên mẫu' },
   { key: 'quantity', label: 'Số lượng', type: 'number' },
   { key: 'unit', label: 'Đơn vị' },
@@ -41,14 +41,14 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
   { confirmRemove: () => 'Xoá bản ghi lấy mẫu này?' },
 )
 
-const displayRows = useSearchedRows(rows, r => [productName(r.company_product_id), r.name, r.unit, r.note])
+const displayRows = useSearchedRows(rows, r => [productCode(r.company_product_id), r.name, r.unit, r.note])
 
 onMounted(async () => { products.value = await companyProductsApi.list() })
 </script>
 
 <template>
   <DataTable :columns="columns" :rows="displayRows" title="Lấy mẫu hóa chất" @add="openAdd" @edit="openEdit" @delete="remove">
-    <template #cell-company_product_id="{ row }">{{ productName(row.company_product_id) }}</template>
+    <template #cell-company_product_id="{ row }">{{ productCode(row.company_product_id) }}</template>
   </DataTable>
 
   <Modal :show="showModal" :title="editingId ? 'Sửa bản ghi' : 'Thêm bản ghi'" @close="showModal = false">

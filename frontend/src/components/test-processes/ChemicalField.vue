@@ -18,31 +18,39 @@ const emit = defineEmits(['update:modelValue'])
 const query = ref('')
 const open = ref(false)
 
-const options = computed(() => [
-  ...props.products.map(product => ({
-    key: `p-${product.id}`,
-    label: product.code,
-    hint: product.name && product.name !== product.code ? product.name : 'SP công ty',
-    chemical: { product_id: product.id, lab_chemical_id: null, display_name: product.code },
-  })),
-  ...props.labChemicals.map(chemical => ({
-    key: `l-${chemical.id}`,
-    label: chemical.code,
-    hint: chemical.name || 'HC PTN',
-    // Mã hóa chất PTN thường là công thức nên tự đánh dấu chỉ số: HNO3 -> HNO_3
-    chemical: { product_id: null, lab_chemical_id: chemical.id, display_name: applyFormulaMarkers(chemical.code) },
-  })),
-])
+const productOptions = computed(() => props.products.map(product => ({
+  key: `p-${product.id}`,
+  label: product.code,
+  hint: product.name && product.name !== product.code ? product.name : '',
+  chemical: { product_id: product.id, lab_chemical_id: null, display_name: product.code },
+})))
 
-const matches = computed(() => {
+const labChemicalOptions = computed(() => props.labChemicals.map(chemical => ({
+  key: `l-${chemical.id}`,
+  label: chemical.code,
+  hint: chemical.name && chemical.name !== chemical.code ? chemical.name : '',
+  // Mã hóa chất PTN thường là công thức nên tự đánh dấu chỉ số: HNO3 -> HNO_3
+  chemical: { product_id: null, lab_chemical_id: chemical.id, display_name: applyFormulaMarkers(chemical.code) },
+})))
+
+// Mỗi nguồn một nhóm riêng: gộp chung thì 214 mã SP công ty chiếm hết chỗ,
+// hóa chất PTN không bao giờ hiện ra nếu chưa gõ đúng tên.
+const GROUP_LIMIT = 5
+
+const groups = computed(() => {
   const needle = foldAccents(query.value).trim().toLowerCase()
   const taken = new Set(props.modelValue.map(row => (row.display_name || '').toLowerCase()))
-  const pool = options.value.filter(option => !taken.has(option.chemical.display_name.toLowerCase()))
-  if (!needle) return pool.slice(0, 8)
-  return pool
-    .filter(option => foldAccents(`${option.label} ${option.hint}`).toLowerCase().includes(needle))
-    .slice(0, 8)
+  const pick = options => options
+    .filter(option => !taken.has(option.chemical.display_name.toLowerCase()))
+    .filter(option => !needle || foldAccents(`${option.label} ${option.hint}`).toLowerCase().includes(needle))
+    .slice(0, GROUP_LIMIT)
+  return [
+    { title: 'Sản phẩm công ty', options: pick(productOptions.value) },
+    { title: 'Hóa chất PTN', options: pick(labChemicalOptions.value) },
+  ].filter(group => group.options.length)
 })
+
+const matches = computed(() => groups.value.flatMap(group => group.options))
 
 function add(chemical) {
   emit('update:modelValue', [...props.modelValue, chemical])
@@ -52,8 +60,8 @@ function add(chemical) {
 function addTyped() {
   const name = query.value.trim()
   if (!name) return
-  const chosen = matches.value[0]
-  if (chosen && chosen.label.toLowerCase() === name.toLowerCase()) add({ ...chosen.chemical })
+  const chosen = matches.value.find(option => option.label.toLowerCase() === name.toLowerCase())
+  if (chosen) add({ ...chosen.chemical })
   else add({ product_id: null, lab_chemical_id: null, display_name: name })
 }
 
@@ -106,18 +114,23 @@ function onBlur() {
 
     <ul
       v-if="open && matches.length"
-      class="absolute left-0 right-0 top-[44px] z-30 max-h-64 overflow-y-auto p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-panel"
+      class="absolute left-0 right-0 top-[44px] z-30 max-h-96 overflow-y-auto p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-lt-line dark:border-slate-600 shadow-lt-panel"
     >
-      <li v-for="option in matches" :key="option.key">
-        <button
-          type="button"
-          class="w-full flex items-center justify-between gap-3 px-2 py-1.5 rounded-lg text-left text-[13px] text-lt-ink dark:text-slate-100 hover:bg-lt-wash dark:hover:bg-slate-700"
-          @mousedown.prevent="add({ ...option.chemical })"
-        >
-          <span class="font-medium truncate" v-html="renderMarkers(option.chemical.display_name)" />
-          <span class="text-[11.5px] text-lt-faint dark:text-slate-500 truncate max-w-[55%]">{{ option.hint }}</span>
-        </button>
-      </li>
+      <template v-for="group in groups" :key="group.title">
+        <li class="px-2 pt-2 pb-1 text-[10.5px] font-semibold uppercase tracking-wider text-lt-faint dark:text-slate-500 first:pt-1">
+          {{ group.title }}
+        </li>
+        <li v-for="option in group.options" :key="option.key">
+          <button
+            type="button"
+            class="w-full flex items-center justify-between gap-3 px-2 py-1.5 rounded-lg text-left text-[13px] text-lt-ink dark:text-slate-100 hover:bg-lt-wash dark:hover:bg-slate-700"
+            @mousedown.prevent="add({ ...option.chemical })"
+          >
+            <span class="font-medium truncate" v-html="renderMarkers(option.chemical.display_name)" />
+            <span class="text-[11.5px] text-lt-faint dark:text-slate-500 truncate max-w-[55%]">{{ option.hint }}</span>
+          </button>
+        </li>
+      </template>
     </ul>
   </div>
 </template>

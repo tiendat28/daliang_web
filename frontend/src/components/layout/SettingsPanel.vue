@@ -137,7 +137,7 @@ async function buildChemicalSampling() {
   const headers = ['STT', 'Sản phẩm', 'Tên mẫu', 'SL', 'Đơn vị', 'Ngày', 'Ghi chú']
   const rows = list.map((s, i) => [
     i + 1,
-    products.find(p => p.id === s.company_product_id)?.name || s.company_product_id,
+    products.find(p => p.id === s.company_product_id)?.code || s.company_product_id,
     s.name || '', s.quantity ?? '', s.unit || '', s.sample_date || '', s.note || '',
   ])
   return { headers, rows }
