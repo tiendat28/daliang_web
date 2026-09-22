@@ -210,6 +210,14 @@ async function removeEditing() {
             class="text-[11.5px] text-slate-500 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-2 py-0.5 rounded-full truncate"
             :title="p.category"
           >{{ p.category }}</span>
+          <button
+            class="ml-auto -mr-1.5 p-1.5 rounded-lg shrink-0 text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-900/40"
+            :title="`Sửa mã ${p.code}`"
+            :aria-label="`Sửa mã ${p.code}`"
+            @click="startEdit(p)"
+          >
+            <Pencil class="w-4 h-4" />
+          </button>
         </div>
         <h3 class="text-[15.5px] font-semibold leading-snug text-slate-800 dark:text-slate-100">{{ p.name }}</h3>
         <p v-if="p.name_en" class="text-[12.5px] italic text-slate-400 dark:text-slate-400 mt-0.5">{{ p.name_en }}</p>
@@ -261,14 +269,6 @@ async function removeEditing() {
         </div>
       </div>
 
-      <footer class="mt-auto px-4 py-2.5 border-t border-slate-100 dark:border-slate-700 flex justify-end">
-        <button
-          class="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700"
-          @click="startEdit(p)"
-        >
-          <Pencil class="w-3.5 h-3.5" /> Sửa
-        </button>
-      </footer>
     </article>
   </div>
 
