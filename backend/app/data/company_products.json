@@ -1,0 +1,4643 @@
+[
+ {
+  "code": "DU-252",
+  "name": "Chất tẩy dầu điện phân",
+  "name_en": "Electro-cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Thép và hợp kim đồng",
+  "description": "Bột tẩy dầu điện phân có khả năng nhũ hóa mạnh, loại bỏ nhiều loại dầu mỡ. Có thể gia nhiệt để dùng cho công đoạn nhúng nóng. Dùng được cho cả mạ treo và mạ quay.",
+  "modes": [
+   {
+    "name": "Thép - Nhúng nóng",
+    "params": [
+     "Nồng độ DU-252: 25-100 g/L",
+     "Nhiệt độ: 50-75°C",
+     "Thời gian: 2-15 phút"
+    ]
+   },
+   {
+    "name": "Thép - Điện phân",
+    "params": [
+     "Nồng độ DU-252: 50-100 g/L",
+     "Nhiệt độ: 40-60°C",
+     "Thời gian (catot): 1-9 phút",
+     "Thời gian (anot): 1-5 phút",
+     "Mật độ dòng (mạ treo): 4.0-10 A/dm²",
+     "Mật độ dòng anot (mạ quay): 3.0-5.0 A/dm²",
+     "Mật độ dòng catot (mạ quay): 1.5-3.0 A/dm²"
+    ]
+   },
+   {
+    "name": "Hợp kim đồng - Nhúng nóng",
+    "params": [
+     "Nồng độ DU-252: 25-75 g/L",
+     "Nhiệt độ: 40-65°C",
+     "Thời gian: 2-8 phút"
+    ]
+   },
+   {
+    "name": "Hợp kim đồng - Điện phân",
+    "params": [
+     "Nồng độ DU-252: 50-60 g/L",
+     "Nhiệt độ: 35-50°C",
+     "Thời gian (catot): 1-6 phút",
+     "Thời gian (anot): 0.5-3 phút",
+     "Mật độ dòng (mạ treo): 1.0-4.0 A/dm²",
+     "Mật độ dòng anot (mạ quay): 1.0-2.0 A/dm²",
+     "Mật độ dòng catot (mạ quay): 1.0-1.5 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-E88",
+  "name": "Chất tẩy dầu điện phân (hợp kim kẽm)",
+  "name_en": "Electro-cleaner (zinc alloy)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Kẽm, đồng, hợp kim đồng",
+  "description": "Chuyên dùng tẩy dầu điện phân cho hợp kim kẽm đúc áp lực, không ăn mòn nền, cũng dùng được cho đồng và hợp kim đồng. Kiềm nhẹ nhưng dẫn điện mạnh, dễ làm sạch.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-E88: 20-40 g/L",
+     "Thời gian: 1-3 phút",
+     "Nhiệt độ: 50-70°C",
+     "Mật độ dòng: 1.0-3.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-140",
+  "name": "Chất tẩy dầu siêu âm",
+  "name_en": "Ultrasonic degreasing agent",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Sắt, hợp kim đồng, hợp kim kẽm và kim loại màu khác",
+  "description": "Bột tẩy dầu đa năng dùng cho nhúng nóng kết hợp siêu âm, không ăn mòn nền. Kiềm thấp, nhũ hóa tốt, ít bọt, dễ rửa.",
+  "modes": [
+   {
+    "name": "Sắt",
+    "params": [
+     "Nồng độ DU-140: 30-70 g/L",
+     "Nhiệt độ: 50-95°C",
+     "Thời gian: 3-10 phút"
+    ]
+   },
+   {
+    "name": "Hợp kim đồng",
+    "params": [
+     "Nồng độ DU-140: 30-60 g/L",
+     "Nhiệt độ: 40-80°C",
+     "Thời gian: 3-7 phút"
+    ]
+   },
+   {
+    "name": "Hợp kim kẽm",
+    "params": [
+     "Nồng độ DU-140: 20-60 g/L",
+     "Nhiệt độ: 45-65°C",
+     "Thời gian: 2-8 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-55",
+  "name": "Chất tẩy dầu ngâm",
+  "name_en": "Soak cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Sắt, thép, thép không gỉ",
+  "description": "Hiệu quả cao loại bỏ dầu động thực vật, dầu khoáng, dầu chống gỉ, dầu gia công kim loại và cặn đánh bóng/mài rung. Chịu axit/kiềm tốt, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-55: 40-60 g/L",
+     "Nhiệt độ: 25-85°C",
+     "Thời gian: 5-20 phút",
+     "Khuấy trộn: sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-101",
+  "name": "Chất tẩy dầu ngâm (không phốt pho)",
+  "name_en": "Soaker cleaner (phosphorus free)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Sắt, thép, đồng thau, đồng và hợp kim khác",
+  "description": "Chất tẩy dầu đa năng không phốt pho, nước thải xử lý đơn giản, dễ rửa sạch. Hiệu quả cao trên chi tiết thép; dùng được cho đồng/đồng thau nhưng có thể giảm nhẹ độ bóng.",
+  "modes": [
+   {
+    "name": "Mạ treo - bể thép",
+    "params": [
+     "Nồng độ DU-101: 60-90 g/L",
+     "Nhiệt độ: 65-98°C",
+     "Thời gian: 1-3 phút"
+    ]
+   },
+   {
+    "name": "Mạ quay - bể thép",
+    "params": [
+     "Nồng độ DU-101: 30-60 g/L",
+     "Nhiệt độ: 65-98°C",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-142",
+  "name": "Chất tẩy dầu ngâm (không phốt pho)",
+  "name_en": "Soaker cleaner (phosphorus free)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Sắt, đồng, nhôm, kẽm và hợp kim khác (trừ magie)",
+  "description": "Chất xử lý bề mặt không phốt pho, nước thải xử lý đơn giản, dùng cho hầu hết kim loại trừ magie. Phân tán, nhũ hóa, xà phòng hóa khoáng chất và tạp hữu cơ.",
+  "modes": [
+   {
+    "name": "Thép",
+    "params": [
+     "Nồng độ: 60-75 g/L",
+     "Nhiệt độ: 66-96°C",
+     "Thời gian: 1-5 phút"
+    ]
+   },
+   {
+    "name": "Đồng / đồng thau / nhôm",
+    "params": [
+     "Nồng độ: 60-75 g/L",
+     "Nhiệt độ: 60-71°C",
+     "Thời gian: 3-5 phút"
+    ]
+   },
+   {
+    "name": "Hợp kim kẽm",
+    "params": [
+     "Nồng độ: 80-100 g/L",
+     "Nhiệt độ: 68-72°C",
+     "Thời gian: 6-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-283",
+  "name": "Chất tẩy dầu điện phân (không phốt pho)",
+  "name_en": "Electro-cleaner (phosphorus free)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Sắt, đồng, nhôm, kẽm và hợp kim khác",
+  "description": "Chất tẩy dầu điện phân đa năng không phốt pho, thiết kế riêng cho mạ kẽm; rửa được thép, đồng, hợp kim đồng. Vận hành được cả anot hoặc catot.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-283: 45-75 g/L",
+     "Thời gian: 15-120 giây",
+     "Nhiệt độ: 55-65°C",
+     "Mật độ dòng: 1.5-2.0 A/dm²",
+     "Điện áp: 6-9V",
+     "Catot: thép / thép mạ niken"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-11",
+  "name": "Chất tẩy dầu dạng phun (không phốt pho)",
+  "name_en": "Spraying cleaner (phosphorus free)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Tất cả kim loại, trừ magie",
+  "description": "Chất biến tính bề mặt không phốt pho dạng phun, phân tán/nhũ hóa/xà phòng hóa tạp chất trên kim loại thông thường. Không cần rửa nước trước bước tẩy dầu điện phân.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-11: 40-60 g/L",
+     "Nhiệt độ: phòng",
+     "Thời gian phun: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-251",
+  "name": "Chất tẩy dầu điện phân (nhúng nóng, cho hợp kim đồng)",
+  "name_en": "Electro-cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Thép và hợp kim kẽm",
+  "description": "Bột tẩy dầu điện phân đa năng, kiềm nhẹ, chuyên dùng nhúng nóng cho hợp kim đồng. Nhũ hóa mạnh, tuổi thọ dài, ít bọt, giảm mang theo dung dịch.",
+  "modes": [
+   {
+    "name": "Sắt",
+    "params": [
+     "Nồng độ DU-251: 30-70 g/L",
+     "Nhiệt độ: 50-95°C",
+     "Thời gian: 2-10 phút",
+     "Mật độ dòng: 4.0-10 A/dm²"
+    ]
+   },
+   {
+    "name": "Hợp kim đồng",
+    "params": [
+     "Nồng độ DU-251: 30-60 g/L",
+     "Nhiệt độ: 40-80°C",
+     "Thời gian: 2-10 phút",
+     "Mật độ dòng: 2.0-4.0 A/dm²"
+    ]
+   },
+   {
+    "name": "Hợp kim kẽm",
+    "params": [
+     "Nồng độ DU-251: 20-40 g/L",
+     "Nhiệt độ: 40-60°C",
+     "Thời gian: 2-6 phút",
+     "Mật độ dòng: 1.0-3.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SC-30",
+  "name": "Chất tẩy dầu ngâm",
+  "name_en": "Soak cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Thép, đồng, hợp kim đồng, thép không gỉ",
+  "description": "Tẩy dầu hiệu quả với dầu động thực vật, dầu khoáng, dầu chống gỉ, dầu gia công kim loại và sáp đánh bóng. Ổn định nhiệt, tuổi thọ dài, an toàn khi chuyển tiếp sang công đoạn axit/kiềm mạnh.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ: 70-100 g/L",
+     "Nhiệt độ: 50-90°C",
+     "Thời gian: 10-20 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-26",
+  "name": "Chất tẩy dầu điện phân (đầu quy trình)",
+  "name_en": "Electro-cleaner (initial stage)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu mỡ",
+  "materials": "Thép và thép không gỉ",
+  "description": "Độ dẫn điện và khả năng bóc tách tốt, loại bỏ hiệu quả dầu gia công kim loại và cặn đánh bóng. Ổn định nhiệt cao, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-26: 45-120 g/L",
+     "Thời gian: 30 giây - 3 phút",
+     "Nhiệt độ: 50-85°C",
+     "Mật độ dòng: 8.0-10 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-189",
+  "name": "Chất tẩy sáp đánh bóng",
+  "name_en": "Buffing compound remover",
+  "category": "Chất tẩy sáp đánh bóng",
+  "usage_stage": "Tẩy sáp đánh bóng",
+  "materials": "Đồng, sắt, kẽm, hợp kim nhôm",
+  "description": "Chất tẩy sáp đánh bóng đa năng, hiệu quả cao khi kết hợp siêu âm/lắc cơ học, không ăn mòn nền hay bề mặt đã đánh bóng. Vận hành ở nồng độ/nhiệt độ thấp, tiết kiệm chi phí.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-189: 20-50 mL/L",
+     "Nhiệt độ: 40-70°C",
+     "Thời gian: 4-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-22",
+  "name": "Chất tẩy dầu gốc axit",
+  "name_en": "Acid degreasing agent",
+  "category": "Chất tẩy gỉ / ức chế axit",
+  "usage_stage": "Tẩy dầu / tẩy gỉ",
+  "materials": "Đồng, sắt, kẽm và hợp kim kẽm",
+  "description": "Thay thế tẩy dầu kiềm ngâm dài hạn, không ăn mòn nền, không cần gia nhiệt. Chu kỳ thay dung dịch dài, nước thải trung tính.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-22: 5-10 mL/L",
+     "Axit sulfuric: 100-500 g/L",
+     "Nhiệt độ: 20-40°C",
+     "Thời gian: 2-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-34",
+  "name": "Chất ức chế điện phân axit",
+  "name_en": "Acid electrolytic inhibitor",
+  "category": "Chất tẩy gỉ / ức chế axit",
+  "usage_stage": "Tẩy gỉ điện phân",
+  "materials": null,
+  "description": "Chứa axit phức hợp, tăng hiệu quả tẩy gỉ axit, loại bỏ oxit kim loại, cặn bám, bẩn hữu cơ/vô cơ và Fe2+. Tiêu hao ít, bọt vừa phải, không mùi kích thích; chứa chất ức chế ăn mòn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-34: 1-4 ‰",
+     "Axit sulfuric: 5-10%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-15 phút",
+     "Mật độ dòng: 2.0-4.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-16",
+  "name": "Chất ức chế axit clohydric (HCl)",
+  "name_en": "Hydrochloric acid inhibitor",
+  "category": "Chất tẩy gỉ / ức chế axit",
+  "usage_stage": "Tẩy dầu + tẩy gỉ (gộp công đoạn)",
+  "materials": null,
+  "description": "Thay thế tẩy dầu kiềm và tẩy gỉ axit, gộp 2 công đoạn thành 1, loại bỏ hoàn toàn dầu bẩn và muội do rèn/hàn. Rút ngắn quy trình, nước thải trung hòa.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Axit HCl: 200-400 mL/L",
+     "Chất ức chế bọt axit HCl: 20-150 mL/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-15 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-691",
+  "name": "Chất tẩy gỉ",
+  "name_en": "Rust remover",
+  "category": "Chất tẩy gỉ / ức chế axit",
+  "usage_stage": "Tẩy dầu + tẩy gỉ (gộp công đoạn)",
+  "materials": null,
+  "description": "Kết hợp tẩy dầu kiềm và tẩy gỉ axit trong 1 thao tác, loại bỏ hoàn toàn dầu và bẩn đen từ nấu chảy/hàn. Hiệu quả tẩy dầu vượt trội, rút ngắn thời gian xử lý.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-691: 30-80 mL/L",
+     "Axit HCl: 170-350 mL/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 15-30 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-190",
+  "name": "Chất chống gỉ tạm thời",
+  "name_en": "Short antirust agent",
+  "category": "Chất tẩy gỉ / ức chế axit",
+  "usage_stage": "Chống gỉ tạm thời",
+  "materials": null,
+  "description": "Chứa muối kim loại đặc biệt, tăng khả năng chống gỉ của lớp phủ; có thể khắc phục lớp phủ bị khiếm khuyết trong quá trình phủ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DU-190: 10-20 g/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 10-30 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-35",
+  "name": "Chất tẩy dầu cho nhôm (không chứa silicat)",
+  "name_en": "Aluminum Degreasing agent (no silicate)",
+  "category": "Chất xử lý bề mặt nhôm",
+  "usage_stage": "Tẩy dầu / ăn mòn nhôm",
+  "materials": "Nhôm, kẽm, hợp kim kẽm và kim loại hoạt động khác",
+  "description": "Chuyên dùng cho nhôm và hợp kim nhôm, không ăn mòn nền. Lý tưởng cho oxy hóa anot, nhúng bóng, mạ niken hóa học và tiền xử lý mạ điện. Không chứa silicat.",
+  "modes": [
+   {
+    "name": "Chế độ ăn mòn vi mô",
+    "params": [
+     "Nồng độ DU-35: 45-60 g/L",
+     "Nhiệt độ: 71-82°C",
+     "Thời gian: 1-5 phút"
+    ]
+   },
+   {
+    "name": "Chế độ không ăn mòn vi mô",
+    "params": [
+     "Nồng độ DU-35: 15-45 g/L",
+     "Nhiệt độ: 49-66°C",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AE-14",
+  "name": "Chất ăn mòn vi mô bề mặt nhôm (kiềm)",
+  "name_en": "Alkaline aluminum surface micro etching agent",
+  "category": "Chất xử lý bề mặt nhôm",
+  "usage_stage": "Ăn mòn vi mô bề mặt nhôm",
+  "materials": "Nhôm và hợp kim nhôm",
+  "description": "Ăn mòn nhanh và đồng đều, kháng ố tốt, tuổi thọ dung dịch dài, dải nồng độ/nhiệt độ vận hành rộng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AE-14: 30-45 g/L",
+     "Nhiệt độ: 70°C",
+     "Thời gian: 5-30 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AE-10",
+  "name": "Chất ăn mòn vi mô bề mặt nhôm (axit)",
+  "name_en": "Acidic aluminum surface micro etching agent",
+  "category": "Chất xử lý bề mặt nhôm",
+  "usage_stage": "Ăn mòn vi mô bề mặt nhôm",
+  "materials": "Nhôm và hợp kim nhôm (đặc biệt hàm lượng magie cao như 5086/5052)",
+  "description": "Dung dịch đậm đặc gốc axit tiền xử lý hợp kim nhôm, không chứa chelate, hiệu quả tốt với vật liệu khó mạ. Kháng ố tốt, ăn mòn nhanh và đều.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AE-10: 100-150 mL/L",
+     "Nhiệt độ: 66-71°C",
+     "Thời gian: 2-4 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AT-70",
+  "name": "Chất tẩy gỉ và hoạt hóa kim loại",
+  "name_en": "Metal pickling and activating agent",
+  "category": "Chất tẩy gỉ / hoạt hóa kim loại",
+  "usage_stage": "Tẩy gỉ / hoạt hóa",
+  "materials": "Nhôm, magie, titan, thép không gỉ",
+  "description": "Tinh thể axit chứa flo dùng tẩy gỉ và ăn mòn kim loại, có thể thay thế axit hydrofluoric. Ăn mòn nhanh, đều, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AT-70: 120 g/L",
+     "Axit nitric (36Be°): 400-500 mL/L",
+     "Axit sulfuric (66Be°): 200-250 mL/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 5-15 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AT-788",
+  "name": "Chất tẩy cặn (cho vành nhôm)",
+  "name_en": "Detergents",
+  "category": "Chất tẩy gỉ / hoạt hóa kim loại",
+  "usage_stage": "Tẩy cặn bề mặt nhôm",
+  "materials": "Nhôm (chuyên dùng vành nhôm - aluminum wheels)",
+  "description": "Thêm vào dung dịch tẩy cặn cho vành nhôm, loại bỏ cặn bám sau ăn mòn nhẹ, ngăn ăn mòn quá mức. Hiệu quả ở vùng dòng điện thấp/khuất, giảm áp lực đánh bóng sau đó.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AT-788: 150 mL/L",
+     "HNO3 (68%): 250 mL/L",
+     "H3PO4 (85%): 500 mL/L",
+     "AT-70: 40-60 g/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 0.5-2.0 phút (tốt nhất 1.0 phút)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AM-EN",
+  "name": "Chất nhúng kẽm (Zincate)",
+  "name_en": "Zincate",
+  "category": "Chất nhúng kẽm (Zincate)",
+  "usage_stage": "Nhúng kẽm trước mạ",
+  "materials": "Hợp kim nhôm",
+  "description": "Nhúng kẽm không xyanua, thân thiện môi trường, tạo màng kẽm mịn/đồng đều làm lớp chuyển tiếp giúp bám dính tốt cho lớp mạ tiếp theo, hiệu quả ở vị trí khó như lỗ, rãnh, ren.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AM-EN: 200-300 mL/L",
+     "Nước: 700-800 mL/L",
+     "Thời gian: 15-120 giây",
+     "Nhiệt độ: 21-46°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AM-948",
+  "name": "Chất nhúng kẽm (Zincate)",
+  "name_en": "Zincate",
+  "category": "Chất nhúng kẽm (Zincate)",
+  "usage_stage": "Nhúng kẽm trước mạ",
+  "materials": "Hợp kim nhôm (kể cả hợp kim đúc như A376)",
+  "description": "Dùng cho nhiều hợp kim nhôm và dây chuyền tự động, hiệu quả tốt với hợp kim đúc bề mặt nhám cao, tạo màng kẽm đồng đều đảm bảo bám dính tối ưu.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AM-948: 30-60 %V/V",
+     "Nhiệt độ: 21-32°C",
+     "Thời gian: 30-90 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AC-5",
+  "name": "Muối hoạt hóa (axit hoạt hóa)",
+  "name_en": "Activation of salt",
+  "category": "Chất hoạt hóa",
+  "usage_stage": "Hoạt hóa bề mặt",
+  "materials": "Hợp kim kẽm đúc áp lực",
+  "description": "Công thức riêng cho hợp kim kẽm đúc áp lực, làm bề mặt nền mịn/sáng hơn, cải thiện bám dính giữa nền và lớp phủ, tránh bong tróc/phồng rộp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AC-5: 10-50 g/L",
+     "Thời gian: 10-60 giây",
+     "Nhiệt độ: 20-30°C",
+     "Khuấy trộn: sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AC-9",
+  "name": "Chất hoạt hóa",
+  "name_en": "Activation of salt",
+  "category": "Chất hoạt hóa",
+  "usage_stage": "Hoạt hóa bề mặt / bóc crom",
+  "materials": "Thép, kẽm, đồng thau, đồng, nhôm, niken",
+  "description": "Hoạt hóa vượt trội dùng trong điện phân anot, loại bỏ oxit hiệu quả; dùng bóc crom mà không thụ động lớp niken. Dạng bột rắn, an toàn, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AC-9: 30-360 g/L",
+     "Thời gian: 15-180 giây",
+     "Nhiệt độ: 15-80°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AC-345",
+  "name": "Muối hoạt hóa",
+  "name_en": "Activation of salt",
+  "category": "Chất hoạt hóa",
+  "usage_stage": "Hoạt hóa bề mặt / bóc crom",
+  "materials": "Thép, kẽm, đồng thau, đồng, nhôm, niken",
+  "description": "Bột muối axit dạng rắn, an toàn khi bảo quản, dùng bóc crom không thụ động lớp niken và không ảnh hưởng bám dính. Tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ: 70-100 g/L",
+     "Nhiệt độ: 50-90°C",
+     "Thời gian: 10-20 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GH-208",
+  "name": "Chất làm sạch và đánh bóng đa năng",
+  "name_en": "Universal cleaning and polishing agent",
+  "category": "Chất đánh bóng / tạo bóng rung mài",
+  "usage_stage": "Đánh bóng rung mài",
+  "materials": "Nhôm, đồng, hợp kim kẽm, thép không gỉ",
+  "description": "Tan trong nước, thân thiện môi trường, không F/Cl/Br, không axit mạnh, không độc. Đánh bóng hiệu quả khi làm sạch dầu và gỉ, nước thải dễ phân hủy sinh học.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ GH-208: 0.5%-3%",
+     "Nhiệt độ: phòng",
+     "pH: 2.0-3.0"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GH-602",
+  "name": "Chất tạo bóng rung mài cho đồng và hợp kim đồng",
+  "name_en": "Copper and copper alloys vibration grinding luster agent",
+  "category": "Chất đánh bóng / tạo bóng rung mài",
+  "usage_stage": "Đánh bóng rung mài",
+  "materials": "Đồng và hợp kim đồng",
+  "description": "Tan trong nước, thân thiện môi trường, thiết kế riêng cho đồng/hợp kim đồng. Không axit mạnh, không phụ gia độc hại, tẩy dầu/gỉ và đánh bóng hiệu quả cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ GH-602: 0.5%-3%",
+     "Nhiệt độ: phòng",
+     "pH: 5.5-6.5"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GH-606",
+  "name": "Chất tạo bóng rung mài (thép không gỉ và sắt)",
+  "name_en": "Vibration grinding luster agent (stainless steel and iron)",
+  "category": "Chất đánh bóng / tạo bóng rung mài",
+  "usage_stage": "Đánh bóng rung mài",
+  "materials": "Sắt và thép",
+  "description": "Tan trong nước, thân thiện môi trường, không lưu huỳnh/phốt pho/phụ gia độc hại, không axit mạnh, tẩy dầu/gỉ hiệu quả, tạo độ bóng bề mặt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ GH-606: 0.5%-3%",
+     "Nhiệt độ: phòng",
+     "pH: 6.5-7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GH-608",
+  "name": "Chất tạo bóng rung mài hợp kim",
+  "name_en": "Alloy vibration polishing luster agent",
+  "category": "Chất đánh bóng / tạo bóng rung mài",
+  "usage_stage": "Đánh bóng rung mài",
+  "materials": "Nhôm, hợp kim nhôm, đồng và hợp kim đồng, hợp kim kẽm",
+  "description": "Công thức mới, tan trong nước, thân thiện môi trường, không lưu huỳnh/phốt pho/phụ gia độc hại, tẩy gỉ hiệu quả, tạo độ bóng bề mặt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ GH-608: 0.5%-3%",
+     "Nhiệt độ: phòng",
+     "pH: 8.2-9.2"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AD-25",
+  "name": "Chất tẩy dầu gốc axit (không phốt pho)",
+  "name_en": "Acid degreasing agent (phosphorus free)",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Tẩy dầu",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Thay thế chất tẩy dầu kiềm, ngâm lâu không ăn mòn nền, vận hành ở nhiệt độ phòng, chu kỳ thay dung dịch dài, nước thải chỉ cần trung hòa.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ AD-25: 5-15 mL/L",
+     "Axit sulfuric: 100-500 g/L",
+     "Nhiệt độ: phòng-40°C",
+     "Thời gian: 2-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-953",
+  "name": "Chất ưa nước (親水劑)",
+  "name_en": "Hydrophilic agent",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Xử lý bề mặt nhựa PC",
+  "materials": "Nhựa PC (polycarbonate)",
+  "description": "Làm giãn nở bề mặt nhựa PC đặc biệt giúp lớp mạ tiếp theo bám dính tốt hơn; cải thiện tính ưa nước, thúc đẩy ăn mòn bề mặt nền.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-953: 5-20 mL/L",
+     "Nhiệt độ: 25-40°C",
+     "Thời gian: 0.5-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-917",
+  "name": "Chất trương nở (膨潤劑)",
+  "name_en": "Swelling agent",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Trương nở bề mặt nhựa ABS",
+  "materials": "Nhựa ABS",
+  "description": "Không chứa phức chất, nước thải xử lý đơn giản; trương nở bề mặt nhựa ABS trước khi ăn mòn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DN-917A: 250 mL/L",
+     "DN-917B: 400 mL/L",
+     "Nhiệt độ: phòng-66°C",
+     "Thời gian: 3-20 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-918",
+  "name": "Chất điều chỉnh độ nhám (粗化調整劑)",
+  "name_en": "Coarse adjustment agent",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Điều chỉnh độ nhám sau ăn mòn",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Cải thiện độ đồng đều độ nhám bề mặt và hoạt tính bề mặt sau ăn mòn; giảm tiêu hao palladium keo, tăng bám dính lớp mạ kim loại.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-918: 90-100 mL/L",
+     "Axit hydrochloric: 90-120 mL/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 2-3 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-958",
+  "name": "Chất thấm ướt dung dịch ăn mòn (蝕化溶潤劑)",
+  "name_en": "Etching liquid wetting agent",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Ăn mòn axit cromic/sulfuric",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Dùng cho ăn mòn axit cromic và sulfuric; giảm sức căng bề mặt dung dịch giúp lớp mạ bám dính tốt hơn sau ăn mòn; dạng lỏng dễ dùng; ức chế sinh khói axit cromic.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-958: 0.2-0.4 mL/L",
+     "Nhiệt độ: 63-71°C",
+     "Sức căng bề mặt: 20-40 dyn/cm"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-962",
+  "name": "Chất trung hòa (khử) (中和劑)",
+  "name_en": "Neutralizing agent",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Trung hòa dư lượng Cr6+",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Trung hòa (khử) dư lượng ion Cr6+ trên phụ kiện/phần cứng, tăng tốc độ bám dính bề mặt sau ăn mòn, ngăn Cr6+ nhiễm chéo sang dung dịch khác.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-962: 20-80 mL/L",
+     "Nhiệt độ: 25-50°C",
+     "Thời gian: 0.5-3 phút",
+     "Khuấy trộn: sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-977",
+  "name": "Dung dịch hoạt hóa (活化液)",
+  "name_en": "Activation Solution",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Hoạt hóa trước mạ hóa học",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Dung dịch đậm đặc palladium hoạt tính và ion clorua, xúc tác hiệu quả cho mạ hóa học (electroless).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-977: 20-50 mL/L",
+     "Natri clorua: 40-100 g/L",
+     "Axit hydrochloric đậm đặc: 170-250 mL/L",
+     "Thời gian: 3-10 phút",
+     "Nhiệt độ: 21-32°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-985",
+  "name": "Chất giải keo / tăng tốc (加速劑)",
+  "name_en": "Peptization",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Giải keo (loại thiếc dư) sau hoạt hóa",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Không chứa florua, chịu tạp kim loại tốt; loại thiếc dư trên bề mặt nhựa để tăng hoạt hóa mạ hóa học; ổn định, nước thải chỉ cần trung hòa.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-985: 75 g/L",
+     "Axit sulfuric: 10 mL/L",
+     "Nhiệt độ: 57°C",
+     "Thời gian: 1.5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-986",
+  "name": "Chất giải keo / tăng tốc (加速劑)",
+  "name_en": "Peptization",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Giải keo (loại thiếc dư) sau hoạt hóa",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Dùng kết hợp chất xúc tác DN, loại bỏ ion thiếc còn dư, tăng hoạt tính bề mặt nhựa.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-986: 120 g/L",
+     "Axit hydrochloric: 100 mL/L",
+     "Nhiệt độ: 40°C",
+     "Thời gian: 1 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-987",
+  "name": "Chất giải keo / tăng tốc (加速劑)",
+  "name_en": "Peptization",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Giải keo (loại thiếc dư) sau hoạt hóa",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Chứa florua, dùng kết hợp axit sulfuric sau hoạt hóa để loại bỏ thiếc dư trên bề mặt nhựa.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-987: 20.4 g/L",
+     "Axit sulfuric: 21 mL/L",
+     "Nhiệt độ: 49°C",
+     "Thời gian: 1 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-9810",
+  "name": "Chất giải keo / tăng tốc dạng muối (加速劑)",
+  "name_en": "Peptization",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Giải keo (loại thiếc dư) sau hoạt hóa",
+  "materials": "Nhựa ABS, ABS/PC",
+  "description": "Ổn định cao, tuổi thọ dài, hệ 1 thành phần dạng muối rắn, dễ bảo quản/pha; phù hợp dây chuyền tự động, loại bỏ thiếc nồng độ cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DN-9810: 200-300 mL/L",
+     "Thời gian: 2-10 phút",
+     "Nhiệt độ: 45-60°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DN-091",
+  "name": "Niken hóa học kiềm (cho nhựa)",
+  "name_en": "Electroless nickel",
+  "category": "Xử lý bề mặt nhựa (POP)",
+  "usage_stage": "Mạ niken hóa học lót (trên nhựa)",
+  "materials": "Nhựa đã hoạt hóa (ABS, ABS/PC)",
+  "description": "Mạ niken hóa học kiềm, ổn định/an toàn/dễ vận hành, nhiệt độ và tiêu hao thấp, dùng cho cả mạ treo và mạ quay, lớp phủ mịn đồng đều bám dính tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DN-091 (đậm đặc): 6.4-12.8 %V/V",
+     "DN-092 (chất khử): 6.0-12.0 %V/V",
+     "DN-093 (chất ổn định): 10.0-30.0 %V/V",
+     "Amoniac: 1-4 %V/V",
+     "pH: 8.8-9.2",
+     "Nhiệt độ: 63-71°C",
+     "Thời gian: 24-38 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CU-3",
+  "name": "Chất mạ đồng xyanua",
+  "name_en": "Cyanide copper plating solution",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Mạ đồng xyanua",
+  "materials": "Sắt, đồng, nhôm, kẽm và hợp kim khác (trừ magie)",
+  "description": "Tạo lớp mạ bóng, mịn, tinh thể nhỏ, ít lỗ rỗng. Dùng cho hầu hết kim loại trừ magie, phân tán/nhũ hóa/xà phòng hóa nhiều loại muối khoáng và tạp hữu cơ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng xyanua: 50-70 g/L",
+     "Natri xyanua: 75-96 g/L",
+     "Natri hydroxit: 1-3 g/L",
+     "CU-4: 5-6 mL/L",
+     "CU-3: 5 mL/L",
+     "Dung dịch Nuo Shi: 30-50 mL/L",
+     "pH: 10-12",
+     "Nhiệt độ: 68-72°C",
+     "Thời gian: 6-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "PL-26",
+  "name": "Mạ đồng pyrophosphat",
+  "name_en": "Copper pyrophosphate plating",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Mạ đồng pyrophosphat",
+  "materials": null,
+  "description": "Tạo lớp mạ bóng toàn phần, khả năng san phẳng tốt, dễ đánh bóng, độ dày đồng đều.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng pyrophosphat: 70-80 g/L",
+     "Kali pyrophosphat: 260-300 g/L",
+     "Đồng kim loại: 22-36 g/L",
+     "Amoniac: 2-3 mL/L",
+     "PL-26A: 0.2-0.3 mL/L",
+     "PL-26B: 2-4 mL/L",
+     "pH: 8.6-9.0",
+     "Nhiệt độ: 50-55°C",
+     "Mật độ dòng catot: 2.0-6.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "PL-29",
+  "name": "Dung dịch đậm đặc mạ đồng pyrophosphat",
+  "name_en": "Pyrophosphate copper concentrate",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Mạ đồng pyrophosphat (đậm đặc, cho POP/PCB)",
+  "materials": null,
+  "description": "Độ đồng đều, độ mịn và bám dính vượt trội, bề mặt bóng gương; tiêu hao chất bóng thấp, hiệu suất dòng cao giúp tiết kiệm thời gian mạ; thường dùng cho electroforming, POP và mạ đồng bảng mạch in.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng pyrophosphat: 85 g/L",
+     "Đồng kim loại: 30 g/L",
+     "Kali pyrophosphat: 320 g/L",
+     "Amoniac: 3 mL/L",
+     "Chất bóng đồng thau: 0.05-0.1 mL/L",
+     "pH: 8.2-8.8",
+     "Nhiệt độ: 55-60°C",
+     "Mật độ dòng anot: 1.0-3.0 A/dm²",
+     "Khuấy trộn: sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "810",
+  "name": "Chất mạ đồng axit bóng 810",
+  "name_en": "Bright acid copper plating solution",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Mạ đồng axit bóng",
+  "materials": null,
+  "description": "Dải dòng điện rộng, san phẳng tốt, bóng gương, không rỗ khí khi dùng lâu dài. Tốc độ mạ nhanh, ứng suất nội thấp, độ dẻo cao, dung dịch ổn định, dễ quản lý.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng sulfat: 180-220 g/L",
+     "Axit sulfuric: 60-90 g/L",
+     "Clorua: 70-120 ppm",
+     "810A (chất bóng): 0.3-0.5 mL/L",
+     "810B (chất tạo bóng gương): 0.3-0.5 mL/L",
+     "810MU (bổ sung): 4-8 mL/L",
+     "Nhiệt độ: 23-28°C",
+     "Mật độ dòng: 1.0-3.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "910",
+  "name": "Chất mạ đồng axit bóng 910",
+  "name_en": "Bright acid copper plating solution",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Mạ đồng axit bóng (cho POP/phần cứng kim loại)",
+  "materials": null,
+  "description": "Lên bóng nhanh, san phẳng và khả năng phủ sâu vùng dòng thấp vượt trội, ổn định, dễ vận hành. Lớp mạ mềm dẻo, không rỗ/lỗ kim, chống ăn mòn tốt. Phù hợp POP và mạ đồng axit trên phần cứng kim loại.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng sulfat: 200-220 g/L",
+     "Axit sulfuric: 55-75 g/L",
+     "Ion clorua: 20-80 ppm",
+     "910A (chất bóng): 0.3-0.8 mL/L",
+     "910B (chất bóng): 0.3-0.8 mL/L",
+     "910MU (bổ sung): 8-12 mL/L",
+     "Nhiệt độ: 23-28°C",
+     "Mật độ dòng: 1.0-6.0 A/dm²",
+     "Tiêu hao 910A/910MU: 30-80 mL/1000 Ah",
+     "Tiêu hao 910B: 50-90 mL/1000 Ah"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DC-86",
+  "name": "Chất loại sắt cho bể đồng axit",
+  "name_en": "Acid copper iron removal agent",
+  "category": "Chất mạ đồng",
+  "usage_stage": "Loại tạp sắt trong bể đồng axit",
+  "materials": null,
+  "description": "Loại bỏ tạp sắt bằng cách đồng kết tủa cùng đồng, giảm tỷ lệ lỗi do dư sắt (cứng, giòn, nhám, rỗ, đốm mây trên lớp mạ). Cải thiện độ cứng và mở rộng dải mật độ dòng cho lớp mạ san phẳng tốt hơn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ DC-86: 1-2 mL/L",
+     "Nhiệt độ: 18-30°C",
+     "Mật độ dòng: 1.0-3.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ATL",
+  "name": "Chất mạ niken bán bóng ATL",
+  "name_en": "Semi-bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bán bóng",
+  "materials": null,
+  "description": "Tạo lớp niken bán bóng không lưu huỳnh, độ giãn dài và san phẳng tốt; phù hợp làm lớp lót cho hệ niken nhiều lớp hoặc niken-crom. Ổn định cao, dễ quản lý, dễ chuyển đổi từ quy trình bán bóng khác.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 270-320 g/L",
+     "Niken clorua: 35-45 g/L",
+     "Axit boric: 8-45 g/L",
+     "ATL opener: 0.5-1.8 mL/L",
+     "ATL-03 (chất san phẳng): 0.1-0.25 mL/L",
+     "B supplements: 1.0-2.0 mL/L",
+     "62A (chất thấm ướt): 2.0-5.0 mL/L",
+     "Nhiệt độ: 52-59°C",
+     "pH: 3.8-4.3",
+     "Mật độ dòng anot: 1-3 A/dm²",
+     "Mật độ dòng catot: 3-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-LS1",
+  "name": "Chất mạ niken bán bóng NG-LS1",
+  "name_en": "Semi-bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bán bóng",
+  "materials": null,
+  "description": "San phẳng, phân tán và độ đồng đều tốt; mềm mại ở lớp mạ sâu; độ dai đồng đều, ít rỗ xốp, chống ăn mòn tốt; tiêu hao thấp, tuổi thọ dài, chịu tạp chất cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 250-300 g/L",
+     "Niken clorua: 45-60 g/L",
+     "Axit boric: 38-45 g/L",
+     "NG-LS1 (chất bóng): 0.2-0.6 mL/L",
+     "NR-X5 (chất làm mềm): 6.0 mL/L",
+     "SR-62 (chất thấm ướt): 0.2-0.6 mL/L",
+     "SR-S (chất giữ ẩm): 6 mL/L",
+     "Nhiệt độ: 50-65°C",
+     "pH: 3.9-4.6",
+     "Mật độ dòng: 2-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-66E",
+  "name": "Chất mạ niken bóng NG-66E",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng",
+  "materials": "Thép đã đánh bóng",
+  "description": "Bề mặt bóng bắt mắt, san phẳng vượt trội, độ dẻo tốt, chi phí thấp; ái lực cao với lớp niken bán bóng trong hệ niken nhiều lớp, đạt kết quả tốt trong thử nghiệm CASS, không chứa chất phá hủy tầng ozon.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 225-357 g/L",
+     "Niken clorua: 45-135 g/L",
+     "Axit boric: 41-50 g/L",
+     "NG-610 (chất bóng): 6-15 mL/L",
+     "NG-63 (chất thấm ướt): 1-5 mL/L",
+     "NG-66E (chất tạo bóng): 10-25 mL/L",
+     "Phụ gia bổ sung: 1-4 mL/L",
+     "Nhiệt độ: 57-68°C",
+     "pH: 3.5-4.5",
+     "Mật độ dòng: 2-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-W100",
+  "name": "Chất mạ niken bóng NG-W100",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng (mạ quay/mạ treo)",
+  "materials": null,
+  "description": "Đơn giản, dễ vận hành/bảo trì, bóng đẹp vượt trội; phù hợp cả mạ quay và mạ treo, ổn định trên dải độ dày rộng. Ít phân hủy, giảm tần suất xử lý tinh khiết, tiết kiệm chi phí; công suất mạ tốt, mềm dẻo, không gãy khi uốn hoặc dập sau mạ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 220-280 g/L",
+     "Niken clorua: 40-60 g/L",
+     "Axit boric: 35-55 g/L",
+     "NR-15 (chất làm mềm): 2.0-4.0 mL/L",
+     "NG-W100 (chất bóng): 0.4-0.6 mL/L",
+     "SR-4 (chất thấm ướt): 1.0-3.0 mL/L",
+     "Nhiệt độ: 50-60°C",
+     "pH: 4.0-4.8",
+     "Mật độ dòng: 0.2-1.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-NF",
+  "name": "Chất mạ niken bóng NG-NF",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng (vùng dòng thấp, cho POP)",
+  "materials": "Không chứa formaldehyde",
+  "description": "San phẳng và độ bóng vượt trội tại vùng mật độ dòng thấp; chịu ăn mòn tốt, không cần xử lý hậu kỳ. NG-NF bám tốt với lớp mạ crom thụ động, không chứa formaldehyde nên không hại sức khỏe.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 250-325 g/L",
+     "Niken clorua: 40-60 g/L",
+     "Axit boric: 30-70 g/L",
+     "NG-NF (thành phần chính): 0.3-0.5 mL/L",
+     "Niken NR-4 (chất thấm ướt): 2.0-5.0 mL/L",
+     "Niken SR-4: 0.5-1.5 mL/L",
+     "NR-NC (chất làm mềm): 1-8 A/dm²",
+     "SR-4 (chất thấm ướt): 10-30 mL/1000 amperes",
+     "Mật độ dòng: 1-8 A/dm²",
+     "Nhiệt độ: 50-60°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-6L",
+  "name": "Chất mạ niken bóng NG-6L",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng",
+  "materials": null,
+  "description": "Lên bóng nhanh, san phẳng vượt trội, tính phân tán tốt vùng dòng thấp, ứng suất nội và độ rỗ xốp thấp, chống ăn mòn tốt. Dung dịch rất ổn định, tiêu hao chậm, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 200-240 g/L",
+     "Niken clorua: 55-65 g/L",
+     "Axit boric: 40-50 g/L",
+     "NR-5A (chất làm mềm): 4.0-8.0 mL/L",
+     "NG-6L (chất bóng): 0.3-0.5 mL/L",
+     "Nhiệt độ: 50-60°C",
+     "pH: 4.2-4.8",
+     "Mật độ dòng: 1-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-41",
+  "name": "Chất mạ niken bóng NG-41",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng",
+  "materials": null,
+  "description": "Lên bóng nhanh, san phẳng và phân tán vượt trội vùng dòng thấp, ứng suất nội thấp, độ rỗ xốp thấp, đạt kết quả tốt trong thử phun muối gia tốc axit (CASS).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 200-250 g/L",
+     "Niken clorua: 30-50 g/L",
+     "Axit boric: 30-50 g/L",
+     "NR-5 (chất làm mềm): 0.2-0.3 mL/L",
+     "NG-41 (chất bóng): 1.0-3.0 mL/L",
+     "SR-4 (chất thấm ướt): 3.8-4.8 mL/L",
+     "pH: 3.8-4.8",
+     "Nhiệt độ: 50-60°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NG-46",
+  "name": "Chất mạ niken bóng NG-46",
+  "name_en": "Bright nickel plating solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken bóng",
+  "materials": null,
+  "description": "Lên bóng nhanh, san phẳng và phân tán vượt trội, độ dày lớp mạ đồng đều, ổn định trong bể mạ, khả năng chịu tạp chất cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 200-250 g/L",
+     "Niken clorua: 40-60 g/L",
+     "Axit boric: 30-50 g/L",
+     "NR-7 (chất làm mềm): 5.0-8.0 mL/L",
+     "NG-46 (chất bóng): 0.4-0.6 mL/L",
+     "SR-4 (chất thấm ướt): 1.0-3.0 mL/L",
+     "Nhiệt độ: 50-60°C",
+     "pH: 3.8-4.8"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DRN-618",
+  "name": "Niken vi xốp (Microporous nickel)",
+  "name_en": "Microporous nickel",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken vi xốp (lớp giữa hệ niken-crom)",
+  "materials": null,
+  "description": "Tạo lớp niken mỏng (~1.5-2.5 micron) chứa nhiều vi lỗ, giúp phân tán dòng ăn mòn crom trên diện rộng, tăng đáng kể khả năng chống ăn mòn của lớp mạ tổng thể. Khi dùng cùng DRN-618-ENHANCER, giúp lấp lỗ của lớp niken bóng đơn lớp không có bảo vệ, tăng ái lực với lớp mạ crom tiếp theo.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 225-375 g/L",
+     "Niken clorua: 45-75 g/L",
+     "Axit boric: 41-49 g/L",
+     "NG-61: 20 g/L",
+     "Chất làm mềm niken: 6.8-15 mL/L",
+     "DRN-618: 10-20 mL/L",
+     "DRN-618 DN-ENHANCER: 0.5-1.0 mL/L",
+     "Chất thấm ướt SR-62: 1-3 mL/L",
+     "pH: 3.5-4.3",
+     "Nhiệt độ: 52-66°C",
+     "Mật độ dòng catot: 2.0-6.0 A/dm²",
+     "Mật độ dòng anot: 1.0-3.0 A/dm²",
+     "Điện áp bể: 3.0-18.0 V"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "103",
+  "name": "Niken ứng suất thấp (103)",
+  "name_en": "Low stress Ni",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken ứng suất thấp (cho bảng mạch, bán dẫn)",
+  "materials": "Kim loại quý và các kim loại thông thường",
+  "description": "Quy trình mạ niken axit amino sulfonic ứng suất thấp, độ dẻo và bám dính vượt trội, phù hợp làm lớp lót dưới cùng cho mạ kim loại quý. Dùng cho bảng mạch in, bán dẫn và thiết bị điện tử có độ tin cậy cao.",
+  "modes": [
+   {
+    "name": "Loại sulfat",
+    "params": [
+     "Niken sulfat: 240-330 g/L",
+     "Axit boric: 30-45 g/L",
+     "Chất hoạt hóa anot 103: 6-18 mL/L"
+    ]
+   },
+   {
+    "name": "Loại sulfamat",
+    "params": [
+     "Niken sulfamat: 240-525 g/L",
+     "Phụ gia 103S: 30-45 g/L",
+     "Axit boric: 50-100 g/L",
+     "Chất hoạt hóa anot 103S: 2-18 mL/L"
+    ]
+   },
+   {
+    "name": "Chung",
+    "params": [
+     "pH: 2.5-3.5",
+     "Nhiệt độ: 52-60°C",
+     "Anot: niken khử cực lưu huỳnh hoặc niken carbon",
+     "Mật độ dòng: 1.5-8.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ST-33",
+  "name": "Niken sa tanh (mờ)",
+  "name_en": "Satin nickel",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken trang trí mờ (satin)",
+  "materials": "Thép, đồng và hợp kim đồng",
+  "description": "Lớp mạ không phản chiếu, độc đáo, ổn định, vẻ sa tanh; ái lực cao với các lớp mạ trang trí khác; dùng cho thép, đồng, hợp kim đồng với lớp mạ crom và niken trang trí đồng đều, chống trầy xước và dấu vân tay tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 250-270 g/L",
+     "Niken clorua: 45-60 g/L",
+     "Axit boric: 30-40 g/L",
+     "ST-33A: 4 mL/L",
+     "ST-33B: 3.0-5.0 mL/L",
+     "pH: 4.0-4.5",
+     "Nhiệt độ: 50-60°C",
+     "Mật độ dòng: 1.5-8.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DKF",
+  "name": "Niken ngọc trai (Pearl nickel)",
+  "name_en": "Pearl nickel",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken trang trí (ngọc trai)",
+  "materials": "Trang sức, phụ kiện ống nước, thiết bị y tế, quang học, nội thất",
+  "description": "Kết tinh mịn, vẻ ngoài xám mờ đẹp mắt; lớp mạ đồng đều giúp có được lớp mạ crom, đồng, bạc, vàng đẹp; chịu mài mòn tốt, chống dấu vân tay và trầy xước; tiêu hao ít, dễ vận hành.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 420-435 g/L",
+     "Niken clorua: 24-44 g/L",
+     "Axit boric: 37-42 g/L",
+     "DKR vector: 4-10 mL/L",
+     "DKH (chất phụ trợ): 8-15 mL/L",
+     "DKF fog: 0.3-0.5 mL/L",
+     "Nhiệt độ: 50-55°C",
+     "pH: 4.0-4.5",
+     "Mật độ dòng: 3-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DK6",
+  "name": "Niken ngọc trai DK6",
+  "name_en": "Pearl nickel",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken trang trí (ngọc trai)",
+  "materials": "Thép, đồng và hợp kim đồng",
+  "description": "Dung dịch ổn định, tuổi thọ mạ dài; ái lực tốt với lớp mạ crom trang trí và các lớp mạ khác; áp dụng cho thép, đồng, hợp kim đồng, tạo lớp phủ niken mờ đồng đều, chống trầy xước tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken sulfat: 420-435 g/L",
+     "Niken clorua: 24-44 g/L",
+     "Axit boric: 37-42 g/L",
+     "DKR vector: 4-10 mL/L",
+     "DK6 (chất tạo hạt mờ): 15-25 mL/L",
+     "Nhiệt độ: 50-55°C",
+     "Mật độ dòng: 3-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DK6AL",
+  "name": "Niken ngọc trai DK6AL",
+  "name_en": "Pearl nickel",
+  "category": "Chất mạ niken",
+  "usage_stage": "Mạ niken trang trí (ngọc trai, cho ống nhôm)",
+  "materials": "Thép, đồng, hợp kim đồng; phù hợp lớp mạ trên vành nhôm",
+  "description": "Tạo lớp niken ngọc trai sáng đẹp trên thép, đồng và hợp kim đồng; chịu mài mòn và ăn mòn tốt; phù hợp hoàn thiện in ấn, vecni. Màu mờ có thể điều chỉnh, dùng làm lớp mạ trang trí cuối trên vành nhôm sơn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken: 105-115 g/L",
+     "Clorua: 9-13 g/L",
+     "DK4: 37-42 g/L",
+     "DK6AL: 4-10 mL/L",
+     "DKH: 15-25 mL/L",
+     "Nhiệt độ: 50-55°C",
+     "pH: 4.0-4.5",
+     "Mật độ dòng: 3-8 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CT-990",
+  "name": "Chất loại sắt cho bể niken (dạng lỏng)",
+  "name_en": "Iron removal agent",
+  "category": "Chất mạ niken",
+  "usage_stage": "Loại tạp sắt bể niken bóng",
+  "materials": null,
+  "description": "Loại bỏ hiệu quả tạp sắt trong dung dịch mạ niken bằng cách tạo phức với sắt (III), dùng kết hợp túi anot và bộ lọc, không gây kết tủa trực tiếp; không ảnh hưởng độ dẻo/khả năng san phẳng nhưng ngăn ngừa kết tủa sắt, cải thiện chống ăn mòn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Liều dùng CT-990: 5-10 mL/L",
+     "Cách bổ sung: thêm 5kg axit boric thì thêm 1L CT-990; khi cần tăng thêm 5kg axit boric thì bổ sung 3kg CT-990"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CT-H",
+  "name": "Bột loại tạp sắt cho bể niken",
+  "name_en": "Ron removal powder",
+  "category": "Chất mạ niken",
+  "usage_stage": "Loại tạp sắt bể niken",
+  "materials": null,
+  "description": "Loại bỏ hiệu quả tạp sắt trong dung dịch mạ niken plating bath, thường dùng theo hàm lượng sắt cao/thấp trong bể.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng sắt cao: dùng chất loại sắt 2 g/L",
+     "Hàm lượng sắt thấp: dùng chất loại niken 1 g/L"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DC-999",
+  "name": "Dung dịch loại tạp chất hữu cơ (bể niken)",
+  "name_en": "Impurity removal solution",
+  "category": "Chất mạ niken",
+  "usage_stage": "Loại tạp chất hữu cơ/kim loại bể niken",
+  "materials": null,
+  "description": "Chất phụ gia dạng lỏng có khả năng loại bỏ hiệu quả tạp chất kim loại và hữu cơ trong dung dịch mạ niken bóng/thường; thường dùng để cố định tạp chất trong màng lọc, không thêm trực tiếp vào dung dịch mạ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Liều dùng DC-999: 0.5-1 mL/L"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DP-11",
+  "name": "Chất tăng tốc vùng dòng thấp",
+  "name_en": "Low current accelerator",
+  "category": "Chất mạ niken",
+  "usage_stage": "Tăng tốc mạ vùng dòng thấp cho chi tiết phức tạp",
+  "materials": null,
+  "description": "Dùng cho chi tiết hình dạng phức tạp khó mạ ở vùng dòng thấp; giúp rút ngắn thời gian mạ ở vùng này để đạt độ dày yêu cầu.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Liều dùng DP-11: 0.2-0.5 mL/L"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SR-10",
+  "name": "Chất làm mịn niken vùng dòng thấp",
+  "name_en": "Nickel smoothing agent",
+  "category": "Chất mạ niken",
+  "usage_stage": "Làm mịn/tăng tốc mạ vùng dòng thấp",
+  "materials": null,
+  "description": "Thúc đẩy san phẳng và tăng tốc mạ ở vùng dòng thấp, tiêu hao ít, tuổi thọ dài, không tác dụng phụ; áp dụng cả vùng dòng cao/thấp, tạo độ dày đồng đều và độ bóng vượt trội cho chi tiết phức tạp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Pha ban đầu: 0.1-0.3 mL/L",
+     "Bổ sung sau: 30-60 mL/L"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CR-NS",
+  "name": "Chất hoạt hóa mạ crom bóng",
+  "name_en": "Bright chromium activating agent",
+  "category": "Chất mạ crom",
+  "usage_stage": "Hoạt hóa trước mạ crom",
+  "materials": "Chứa 6% thiếc hoặc hợp kim chì",
+  "description": "Thay thế hoạt hóa bằng axit cromic; ngăn thụ động lớp niken catot khi vừa mạ crom xong; thúc đẩy bám dính giữa niken bóng và crom, tránh hiện tượng thụ động do rửa nước không đủ hoặc để lâu giữa 2 công đoạn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Chất hoạt hóa CR-NS: 10-50 mL/L",
+     "Mật độ dòng: 30-50 mA/dm²",
+     "Nhiệt độ: 25-50°C",
+     "Thời gian: 0.5-3 phút",
+     "Khuấy trộn: sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CR-100",
+  "name": "Chất mạ crom bóng CR-100",
+  "name_en": "Bright chromium additive",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom bóng (crom hóa trị 3 kết hợp)",
+  "materials": null,
+  "description": "Hoạt hóa tự cân bằng tỷ lệ axit cromic/crom hóa trị 3 trong bể; dải mật độ dòng sáng rộng nhưng ít sinh khí hydro; ổn định dung dịch, dễ kiểm soát nồng độ axit cromic anhydride cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Axit cromic: 200-350 g/L",
+     "Axit sulfuric: 0.7-1.5 g/L",
+     "Crom hóa trị 3: 2.0-3.0 g/L",
+     "CR-100: 20 mL/L",
+     "Nhiệt độ: 8-20°C",
+     "Mật độ dòng: 8-20 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CR-112",
+  "name": "Chất mạ crom bóng CR-112 (hỗn hợp axit)",
+  "name_en": "Bright chromium additive",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom bóng trang trí",
+  "materials": null,
+  "description": "Chất mạ crom bóng gốc axit hỗn hợp, dải dòng phủ rộng, hiệu suất catot cao, cân bằng bể tốt mà không cần thêm chất xúc tác axit sulfuric bổ sung. So với dung dịch thông thường, tăng khả năng dẫn điện và cải thiện độ chịu tạp chất; ổn định thành phần bể.",
+  "modes": [
+   {
+    "name": "Công thức nồng độ cao",
+    "params": [
+     "Axit cromic: 300 g/L",
+     "Axit sulfuric: 2.1 g/L",
+     "CR-112F: 30 g/L",
+     "CR-112G: 20 g/L",
+     "Mật độ dòng: 5-25 A/dm²"
+    ]
+   },
+   {
+    "name": "Công thức nồng độ trung bình",
+    "params": [
+     "Axit cromic: 200 g/L",
+     "Axit sulfuric: 1.0 g/L",
+     "CR-112F: 20 g/L",
+     "Nhiệt độ: 35-40°C",
+     "Mật độ dòng: 5-25 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CR-25",
+  "name": "Quy trình mạ crom cứng CR-25",
+  "name_en": "Hard chromium plating process",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom cứng",
+  "materials": null,
+  "description": "Hiệu suất dòng catot cao (đến 25%), tốc độ mạ nhanh gấp 2-3 lần crom truyền thống, phủ tốt ở dòng điện thấp; lớp mạ bóng mịn với độ đồng đều và độ bóng vượt trội, độ cứng 950-1100HV, không nứt/ăn mòn, giảm hao hụt anot chì-thiếc, cải thiện san phẳng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Axit cromic: 250 g/L",
+     "Axit sulfuric: 2.7 g/L",
+     "Nhiệt độ: 50-60°C",
+     "Mật độ dòng catot: 30-75 A/dm²",
+     "Mật độ dòng anot: 15-35 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CR-127",
+  "name": "Quy trình mạ crom cứng CR-127 (không chứa flo)",
+  "name_en": "Hard chromium plating process",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom cứng tốc độ cao",
+  "materials": "Sắt và các bộ phận yêu cầu độ chống mài mòn cao (xi lanh in, con lăn vệ sinh...)",
+  "description": "Quy trình crom cứng không chứa flo, tốc độ mạ cao, hầu như không ăn mòn nền; mài mòn ăn mòn thấp trên các chi tiết yêu cầu vệ sinh, in ấn, gương và các lĩnh vực khác. Độ cứng lớp mạ ổn định đến 1000HV, chi phí vận hành thấp, dải mật độ dòng làm việc lớn, dòng và điều kiện vận hành ổn định, bề mặt bóng mịn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CR-127MU (muối pha chế): 300 g/L",
+     "CR-127SRK (chất thấm ướt): 0.5 mL/L",
+     "Nhiệt độ: 42-60°C",
+     "Mật độ dòng: 10-100 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CP-20",
+  "name": "Chất chống sương mù axit cromic",
+  "name_en": "Chrome anti-fog agent",
+  "category": "Chất mạ crom",
+  "usage_stage": "Chống hơi axit cromic khi mạ crom",
+  "materials": null,
+  "description": "Ức chế sinh sương mù axit cromic để bảo vệ an toàn sức khỏe người vận hành, tạo lớp màng ướt trên bề mặt chi tiết giúp giảm mất mát dung dịch mang theo, tăng độ dẫn điện; dùng lượng rất ít.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ CP-20: 0.05-0.5 mL/L"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "TCW",
+  "name": "Mạ crom hóa trị 3 màu trắng TCW",
+  "name_en": "White trivalent chromium",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom trang trí ba hóa trị (trắng)",
+  "materials": "Phù hợp mọi loại POP, kim loại và mạ trang trí",
+  "description": "Sản phẩm thân thiện môi trường, không cần xử lý nước thải phức tạp như crom 6+. Không có tác động xấu khi mất điện đột ngột; tốc độ mạ nhanh hơn crom 6+ truyền thống; màu sắc và độ san phẳng đồng đều, đẹp mắt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "TCW-MU (muối pha chế): 440-460 g/L",
+     "TCW-ST (chất ổn định): 75-85 mL/L",
+     "TCW-SR (chất giữ ẩm): 2-4 mL/L",
+     "TCW-RG (chất tạo phức): 2-4 mL/L",
+     "Nhiệt độ: 30-38°C",
+     "pH: 2.6-2.8",
+     "Mật độ dòng catot: 10-30 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "TCB",
+  "name": "Mạ crom hóa trị 3 màu đen TCB",
+  "name_en": "Black trivalent chromium",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom trang trí ba hóa trị (đen)",
+  "materials": "Phù hợp mọi loại POP, kim loại và mạ trang trí",
+  "description": "Sản phẩm không chứa crom hóa trị 6, thân thiện môi trường; tốc độ mạ nhanh hơn crom 6+ truyền thống; bề mặt màu đen tổng hợp đồng đều, san phẳng đẹp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "TCB-MU (muối pha chế): 290-320 g/L",
+     "TCB-CC (muối crom đen): 120-150 g/L",
+     "TCB-ST (chất ổn định): 70-80 mL/L",
+     "TCB-AD (phụ gia crom đen): 15-25 mL/L",
+     "TCB-RG (hỗn hợp phức crom đen): 15-25 mL/L",
+     "TCB-SR (chất giữ ẩm): 2-4 mL/L",
+     "Nhiệt độ: 35-45°C",
+     "pH: 2.7-3.0",
+     "Mật độ dòng catot: 10-30 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "THW",
+  "name": "Mạ crom hóa trị 3 màu trắng THW",
+  "name_en": "White trivalent chromium",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom trang trí ba hóa trị (trắng, độ phủ cao)",
+  "materials": null,
+  "description": "Khả năng phủ tốt hơn và mạnh hơn so với crom 6+ thông thường; dùng cho mạ niken trang trí, lớp mạ niken tổng hợp ba hóa trị thu được có độ chống ăn mòn vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "THW-D (muối dẫn điện): 260-340 g/L",
+     "THW-MU (chất bổ sung): 100 mL/L",
+     "THW-H (phụ gia): 10 mL/L",
+     "THW-1 (bổ sung 1): dưới 1000 mL/KAH",
+     "THW-2 (bổ sung 2): 1000 mL/KAH",
+     "THW-3 (bổ sung 3): tùy theo yêu cầu",
+     "THW-SR (chất giữ ẩm): 3 mL/L",
+     "pH: 3.3-3.7",
+     "Nhiệt độ: 43-50°C",
+     "Mật độ dòng catot: 10-30 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "THB",
+  "name": "Mạ crom hóa trị 3 màu đen THB",
+  "name_en": "Black trivalent chromium",
+  "category": "Chất mạ crom",
+  "usage_stage": "Mạ crom trang trí ba hóa trị (đen, cho niken)",
+  "materials": null,
+  "description": "Tạo màu đen bóng đẹp mắt, được dùng như lớp mạ đen thông thường trên nền niken; xử lý crom tổng hợp ba hóa trị đặc biệt hiệu quả cho ứng dụng trang trí đen.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "THB-D (muối dẫn điện): 250 g/L",
+     "THB-MU (chất bổ sung): 10 mL/L",
+     "THB-A (bổ sung A): 500 mL/KAH",
+     "THB-B (bổ sung B): 400-600 mL/KAH",
+     "THB-C (bổ sung C): 1000 mL/KAH",
+     "THB-SR (chất giữ ẩm): 2 mL/L",
+     "pH: 3.4-3.8",
+     "Nhiệt độ: 50-60°C",
+     "Thời gian: 2-5 phút",
+     "Mật độ dòng: 5-10 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SV-2",
+  "name": "Chất mạ bạc bóng SV-2",
+  "name_en": "Bright silver plating additive",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ bạc bóng",
+  "materials": null,
+  "description": "Tạo lớp mạ bóng như gương, độ tinh khiết cao, dải ứng dụng rộng, bề mặt mềm, phù hợp nhiều loại thiết bị. Độ phủ và độ đồng đều tốt, dùng cho tiếp điểm nối, tiếp điểm nặng, phích cắm, ổ cắm và linh kiện tần số cao.",
+  "modes": [
+   {
+    "name": "Mạ treo (Rack)",
+    "params": [
+     "Bạc kim loại: 20-40 g/L",
+     "Kali xyanua (tự do): 90-150 g/L",
+     "Kali hydroxit: 5-10 g/L",
+     "SV-2A: 20 mL/L",
+     "SV-2B: 10 mL/L",
+     "Nhiệt độ: 20-40°C",
+     "pH: 12-12.5",
+     "Mật độ dòng: 0.5-4 A/dm²"
+    ]
+   },
+   {
+    "name": "Mạ quay (Barrel)",
+    "params": [
+     "Bạc kim loại: 20-40 g/L",
+     "Kali xyanua (tự do): 90-150 g/L",
+     "Kali hydroxit: 5-10 g/L",
+     "SV-2A: 20 mL/L",
+     "SV-2B: 10 mL/L",
+     "Nhiệt độ: 18-30°C",
+     "pH: 12-12.5",
+     "Mật độ dòng: 0.2-0.5 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "WS",
+  "name": "Chất chống xỉn màu bạc",
+  "name_en": "Silver anti-tarnish agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Chống xỉn màu sau mạ bạc",
+  "materials": "Trang sức, đồ trang trí, dụng cụ, hộp đựng phẳng/ống",
+  "description": "Chất chống oxy hóa tan trong nước, tạo lớp bảo vệ giúp ngăn oxy hóa lưu huỳnh trên bạc; không độc, không kích ứng, có thể dùng an toàn cho đồ trang sức, dụng cụ và các loại hộp đựng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ WS: 6-10 g/L",
+     "Nhiệt độ: 35-66°C",
+     "Thời gian: 0.5-4.0 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-CC",
+  "name": "Chất mạ vàng chịu mài mòn (axit)",
+  "name_en": "Acid abrasion resistance gold agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ vàng chịu mài mòn (cho PCB, đầu nối)",
+  "materials": "Bảng mạch in, đầu nối, phích cắm",
+  "description": "Chứa muối coban, quy trình mạ vàng axit chịu mài mòn; ổn định và thao tác đơn giản, phù hợp mạ treo, mạ quay, mạ chọn lọc và thiết bị mạ cuộn-cuộn. Độ chống ăn mòn vượt trội, độ cứng lớp phủ 120-190HV, điện trở tiếp xúc thấp (0.6mΩ), hàn tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng vàng: 6-10 g/L",
+     "Dung dịch bổ sung B đã dùng: 600 mL/L",
+     "pH: 3.7-4.2",
+     "Nhiệt độ: 30-40°C",
+     "Mật độ dòng (mạ treo/mạ quay): 0.1-2.5 A/dm²",
+     "Khuấy trộn: khuấy mạnh"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-2",
+  "name": "Mạ vàng 2 (hợp kim vàng-coban)",
+  "name_en": "Gold plated 2",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ vàng trang trí (lớp lót trên niken sáng)",
+  "materials": "Nhựa ABS, POP",
+  "description": "Tạo lớp mạ mịn, bóng gương, màu vàng 24K; đặc biệt phù hợp mạ trên nền niken sáng làm lớp mạ trang trí đáy; phù hợp ứng dụng vận hành trên nhựa ABS hoặc POP.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng vàng: 0.8-2.5 g/L",
+     "Chất bổ sung AU-2B: 600 mL/L",
+     "pH: 3.5-4.0",
+     "Nhiệt độ: 40-60°C",
+     "Mật độ dòng: 0.5-1.2 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-Cl",
+  "name": "Mạ vàng chịu mài mòn (Wear gold)",
+  "name_en": "Wear gold",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ vàng chịu mài mòn (trang sức, đồ trang trí)",
+  "materials": "Trang sức và phụ kiện tương tự",
+  "description": "Quy trình mạ vàng axit, độ tinh khiết 99.9%, độ cứng 140-145HV; độ dẻo và chống mài mòn vượt trội, khả năng vận hành rộng; phát triển riêng cho ứng dụng trang sức và phụ kiện tương tự.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng vàng: 8-12 g/L",
+     "Chất bổ sung: 600 mL/L",
+     "pH: 3.6-4.0",
+     "Nhiệt độ: 30-40°C",
+     "Mật độ dòng: 0.6-1.2 A/dm²",
+     "Khuấy trộn: khuấy mạnh",
+     "Lọc: lọc liên tục"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-14K",
+  "name": "Mạ vàng trang trí 14K",
+  "name_en": "Decorative gold plating 14K",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ vàng trang trí (lớp phủ cuối)",
+  "materials": null,
+  "description": "Quy trình mạ vàng axit, tạo lớp phủ vàng bóng rực rỡ; độ chịu mài mòn và chống ăn mòn vượt trội; độ cứng đạt 200-240HV; ổn định dung dịch cao, dễ vận hành; thường dùng làm lớp mạ trang trí cuối cùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng vàng: 4 g/L",
+     "Chất bổ sung B: 600 mL/L",
+     "pH: 3.5",
+     "Nhiệt độ: 30-40°C",
+     "Mật độ dòng: 0.2-0.4 A/dm² (mạ quay) / 1 A/dm² (mạ treo)",
+     "Lọc: lọc liên tục"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-18K",
+  "name": "Mạ vàng trang trí 18K",
+  "name_en": "Decorative gold plating 18K",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ vàng trang trí (hợp kim đồng)",
+  "materials": null,
+  "description": "Quy trình mạ vàng axit tạo màu vàng nhạt rực rỡ, chống ăn mòn đồng đều vượt trội; màu sắc lớp mạ đáp ứng tiêu chuẩn màu Swiss NIHS.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng vàng: 4 g/L",
+     "Chất bổ sung B: 600 mL/L",
+     "pH: 3.5",
+     "Nhiệt độ: 30-40°C",
+     "Mật độ dòng: 1 A/dm²",
+     "Khuấy trộn: khuấy vừa đến mạnh",
+     "Lọc: lọc liên tục"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "WJ-SP",
+  "name": "Chất thay thế crom (hợp kim đồng-thiếc-kẽm trắng)",
+  "name_en": "Substitute for chromium",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ hợp kim thay thế crom (không xyanua)",
+  "materials": "Đồ trang sức, ABS, POP",
+  "description": "Quy trình mới không xyanua, tạo lớp mạ hợp kim đồng trắng sáng bóng, phù hợp mạ treo. Không gây dị ứng như niken, độ cứng phù hợp tiêu chuẩn ÖKO-TEX 100 cấp 1, chống ăn mòn và hàn tốt, hệ số ma sát thấp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Đồng kim loại: 13.5-14.5 g/L",
+     "Thiếc kim loại: 19-21 g/L",
+     "Kẽm kim loại: 3.8-4.2 g/L",
+     "Xyanua tự do: 50-55 g/L",
+     "KOH: 17-21 g/L",
+     "Nhiệt độ: 60-64°C",
+     "pH: 13.1-13.5",
+     "Mật độ dòng: 1.0-2.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "PN-8020",
+  "name": "Mạ hợp kim paladi-niken",
+  "name_en": "Palladium nickel",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ hợp kim paladi-niken (thay thế paladi nguyên chất)",
+  "materials": null,
+  "description": "Quy trình hợp kim paladi-niken kiềm, vận hành ổn định trong điều kiện kiềm yếu, tạo lớp mạ mềm mại. Độ cứng cao, độ xốp thấp, độ bóng và chống ăn mòn vượt trội; có thể thay thế mạ niken trong ứng dụng trang trí và mạ điện tử.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Chất bổ sung B: 600 mL/L",
+     "Paladi kim loại: 9-11 g/L",
+     "Nhiệt độ: 30-38°C",
+     "Mật độ dòng mạ treo: 1.0-2.0 A/dm²",
+     "Trọng lượng riêng: 6",
+     "Mật độ dòng mạ quay: 0.3-0.7 A/dm²",
+     "pH: 8.5-8.9"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SNC",
+  "name": "Mạ hợp kim thiếc-coban màu đen",
+  "name_en": "Black tin cobalt",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ trang trí màu đen (thiếc-coban)",
+  "materials": null,
+  "description": "Tạo lớp mạ đen đẹp và độc đáo, độ ổn định dung dịch cao; màu sắc lớp mạ đồng đều và nhất quán; độ phủ tốt, phù hợp mạ treo và mạ quay; dễ bảo trì dung dịch.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "SNC (muối thiếc): 10 g/L",
+     "SNC (muối coban): 30 g/L",
+     "SNC (muối dẫn điện): 320 g/L",
+     "SNC-01: 30 mL/L",
+     "SNC-03: 100 mL/L",
+     "Nhiệt độ: 45-56°C",
+     "pH: 8.5-9.0",
+     "Mật độ dòng: 0.5-1.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SNI",
+  "name": "Mạ niken màu đen",
+  "name_en": "Black nickel",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ trang trí màu đen (niken)",
+  "materials": "Phù hợp mạ quay",
+  "description": "Ổn định dung dịch tốt, cải thiện độ chống ăn mòn, màu sắc lớp mạ đồng đều và độ chịu mài mòn tốt; dùng cho mạ quay.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "SNI (muối thiếc): 10 g/L",
+     "SNI (nước niken): 200 g/L",
+     "SNI (muối dẫn điện): 220 g/L",
+     "SNI-03: 15 mL/L",
+     "pH: 7.0-8.5",
+     "Nhiệt độ: 45-56°C",
+     "Thời gian: 1-5 phút",
+     "Mật độ dòng: 0.5-2.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-TB",
+  "name": "Mạ thiếc axit sulfat bóng (G-TB)",
+  "name_en": "Sulfate type of bright acid tin process",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ thiếc axit sulfat bóng cao tốc",
+  "materials": "Phù hợp mạ treo, mạ quay",
+  "description": "Tạo lớp mạ bóng tuyệt đối; độ dẻo và khả năng hàn vượt trội; độ đồng đều bề mặt và chống ăn mòn tốt; phù hợp mạ treo, mạ quay tốc độ cao. Đạt kết quả hàn tốt trong kiểm nghiệm phòng thí nghiệm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thiếc sulfat: 18-38 g/L",
+     "Axit sulfuric 98%: 90-110 mL/L",
+     "G-TB-A: 20-40 mL/L",
+     "G-TB-B: 5-7.5 mL/L",
+     "Nhiệt độ: 16-27°C",
+     "Mật độ dòng: 0.5-4.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-248",
+  "name": "Mạ thiếc axit sulfat mờ (G-248)",
+  "name_en": "Sulfate type of tin plating process",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Mạ thiếc axit sulfat mờ (matte)",
+  "materials": "Phù hợp chi tiết lỗ sâu",
+  "description": "Tạo lớp mạ mờ bề mặt, chống ăn mòn tốt, hiệu suất mạ cao; phân tán tốt trong chi tiết lỗ sâu; dễ tái chế dung dịch, không cần pha chế lại.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thiếc sulfat: 15-29 g/L",
+     "Axit sulfuric 98%: 90-110 mL/L",
+     "G-248: 50-100 mL/L",
+     "Nhiệt độ: 16-27°C",
+     "Mật độ dòng catot: 0.5-4 A/dm²",
+     "Mật độ dòng anot: 1-3 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "EB-C",
+  "name": "Chất đen hóa đồng (kiềm)",
+  "name_en": "Blackening agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Đen hóa bề mặt đồng (kiềm)",
+  "materials": "Phụ kiện ống nước, phần cứng truyền thống, bảng mạch nhiều lớp",
+  "description": "Chất đen hóa đồng dạng kiềm, dùng cho phụ kiện ống nước và phần cứng truyền thống; cải thiện độ kết hợp giữa lớp oxy hóa đồng bên trong với vật liệu điện môi; dùng được cho bảng mạch nhiều lớp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ EB-C: 180 g/L",
+     "Thời gian: 2.5-3.5 phút",
+     "Nhiệt độ: 91-96°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "MB-500",
+  "name": "Chất oxy hóa đồng (đen/nâu) MB-500",
+  "name_en": "Copper blackening agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Oxy hóa bề mặt đồng",
+  "materials": "Đồng và hợp kim đồng",
+  "description": "Tạo lớp phủ oxy hóa đồng dạng tinh thể, tăng cường bám dính giữa đồng và nhựa/vật liệu điện môi trong PCB nhiều lớp.",
+  "modes": [
+   {
+    "name": "Oxy hóa đen",
+    "params": [
+     "Nước khử ion: 700 mL/L",
+     "MB-500A: 100 mL/L",
+     "MB-500B: 80 mL/L",
+     "Thời gian: 2-4 phút",
+     "Nhiệt độ: 80-85°C"
+    ]
+   },
+   {
+    "name": "Oxy hóa nâu",
+    "params": [
+     "Nước khử ion: 700 mL/L",
+     "MB-500A: 100 mL/L",
+     "MB-500B: 220 mL/L",
+     "Thời gian: 2-5 phút",
+     "Nhiệt độ: 60-75°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "C-50",
+  "name": "Chất đen hóa đồng C-50",
+  "name_en": "Copper blackening agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Đen hóa bề mặt đồng (đồ trang trí nhỏ)",
+  "materials": "Đồ trang trí nhỏ, phần cứng xây dựng, đèn...",
+  "description": "Tạo lớp đen hóa với độ chống ăn mòn tốt cho các chi tiết trang trí nhỏ, phần cứng xây dựng, đèn và các sản phẩm tương tự.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Tỷ lệ C-50 : nước = 1:4 (theo thể tích)",
+     "Thời gian: 30-120 giây",
+     "Nhiệt độ: 18-24°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "TR-3",
+  "name": "Chất tạo màu đồng thau (bronze)",
+  "name_en": "Bronze staining agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Tạo màu đen cho đồng thau (bronze)",
+  "materials": "Phần cứng, hàng hóa dây/thanh",
+  "description": "Công thức riêng cho tạo màu đen bề mặt đồng thau, bám dính vượt trội và độ đồng đều cao; dùng được cho gia công dây hoặc thanh; ổn định, tuổi thọ sử dụng dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ TR-3: 150-250 mL/L",
+     "Thời gian: 1-3 phút",
+     "Nhiệt độ: phòng ~70°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "TR-10A",
+  "name": "Chất tạo màu nâu (đồng)",
+  "name_en": "Brown staining agent",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Tạo màu nâu cho đồng",
+  "materials": "Phần cứng, hàng hóa dây/thanh",
+  "description": "Công thức riêng mới cho tạo màu nâu trên lớp mạ đồng, bám dính tốt và đồng đều cao; dùng được cho gia công dây hoặc thanh; ổn định, tuổi thọ dài.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "TR-10A: 50-90 mL/L",
+     "TR-10B: 300-350 mL/L",
+     "Thời gian: 1-3 phút",
+     "Nhiệt độ: phòng ~70°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ZB-02",
+  "name": "Chất tạo màu đen cho hợp kim kẽm",
+  "name_en": "Zinc alloy black agents",
+  "category": "Mạ kim loại quý & tạo màu",
+  "usage_stage": "Tạo màu đen cho hợp kim kẽm (đúc)",
+  "materials": "Hợp kim kẽm đúc",
+  "description": "Tạo lớp phủ oxy hóa đen kết hợp với lớp mạ, cho độ chống ăn mòn vượt trội và độ đồng đều cao; chịu nhiệt tốt sau xử lý (sấy) và chịu rung, giữ màu gốc của lớp phủ hữu cơ bảo vệ sau khi bảo dưỡng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "ZB-02A: 50-90 mL/L",
+     "ZB-02B: 300-350 mL/L",
+     "Thời gian: 1-3 phút",
+     "Nhiệt độ: phòng ~70°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-422LF",
+  "name": "Niken hóa học bán bóng phốt pho cao NI-422LF",
+  "name_en": "High phosphorus semi bright EN",
+  "category": "Mạ niken hóa học (Electroless Nickel)",
+  "usage_stage": "Mạ niken hóa học",
+  "materials": "Ngành công nghiệp dầu khí, hóa chất",
+  "description": "Quy trình niken hóa học bán bóng, phốt pho và mật độ dòng cao; không chì, không cadmium. Chống ăn mòn tốt, đặc biệt phù hợp ngành dầu khí/hóa chất yêu cầu chống ăn mòn điện hóa cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "NI-422LFA: 60 mL/L",
+     "NI-422LFB: 180 mL/L",
+     "pH: 4.0-5.0",
+     "Nhiệt độ: 82-96°C",
+     "Khuấy trộn: quét hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-425",
+  "name": "Niken hóa học phốt pho cao NI-425",
+  "name_en": "High phosphorus EN",
+  "category": "Mạ niken hóa học (Electroless Nickel)",
+  "usage_stage": "Mạ niken hóa học",
+  "materials": "Ngành hàng không, hóa chất",
+  "description": "Ổn định dung dịch vượt trội, chống ăn mòn cao đặc biệt trong ngành hàng không và hóa chất; lớp mạ không nhiễm từ, lỗ xốp tối thiểu.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "NI-425A: 60 mL/L",
+     "NI-425B: 180 mL/L",
+     "pH: 4.0-5.2",
+     "Nhiệt độ: 82-96°C",
+     "Khuấy trộn: quét hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-807LF",
+  "name": "Niken hóa học bóng phốt pho trung bình NI-807LF",
+  "name_en": "Medium phosphorus EN bright nickel",
+  "category": "Mạ niken hóa học (Electroless Nickel)",
+  "usage_stage": "Mạ niken hóa học tốc độ cao",
+  "materials": "Chi tiết hàng không, khuôn, linh kiện điện tử, thủy lực, ô tô",
+  "description": "Quy trình niken hóa học tốc độ cao, không chì, không cadmium, kiểm soát chặt chi phí đơn vị; dùng cho các ngành hàng không, khuôn mẫu, linh kiện điện tử, thủy lực và ô tô.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "NI-807A: 60 mL/L",
+     "NI-807B: 150 mL/L",
+     "pH: 4.7-5.2",
+     "Nhiệt độ: 82-91°C",
+     "Khuấy trộn: quét hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-434",
+  "name": "Niken hóa học bóng NI-434",
+  "name_en": "Bright electroless nickel",
+  "category": "Mạ niken hóa học (Electroless Nickel)",
+  "usage_stage": "Mạ niken hóa học bóng",
+  "materials": null,
+  "description": "Lớp mạ bóng cao, hiệu suất lắng đọng và tốc độ lên bóng vượt trội, tuổi thọ dung dịch dài, độ cứng tương đương crom cứng sau xử lý nhiệt; dễ vận hành.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "NI-434A: 60 mL/L",
+     "NI-434B: 150 mL/L",
+     "pH: 4.0-5.0",
+     "Nhiệt độ: 82-91°C",
+     "Khuấy trộn: quét hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-100",
+  "name": "Niken hóa học tiền xử lý cho nhôm",
+  "name_en": "Chemical nickel plating",
+  "category": "Mạ niken hóa học (Electroless Nickel)",
+  "usage_stage": "Mạ niken hóa học lót trên nhôm",
+  "materials": "Nhôm và hợp kim nhôm",
+  "description": "Chuyên dùng ngăn tái oxy hóa lớp kẽm mỏng (zincate) trên nền nhôm; thay thế cho mạ đồng xyanua trên bề mặt nhôm trong quy trình mạ điện, giảm nhu cầu dùng xyanua và giảm đáng kể tiêu thụ kim loại niken; tăng độ phủ lớp mạ ban đầu trên chi tiết cấu trúc phức tạp; đơn giản, ổn định, không cần xử lý nước thải phức tạp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "NI-100A: 150 mL/L",
+     "NI-100B: 70 mL/L",
+     "NI-100C: 2.0 mL/L",
+     "NI-100 (chất ổn định): theo nhu cầu",
+     "Nhiệt độ: 35-43°C",
+     "pH: 9.6-11.5",
+     "Thời gian: 3-5 phút",
+     "Khuấy trộn: quét hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "KCL-NI 40",
+  "name": "Mạ kẽm-niken axit KCL-NI 40",
+  "name_en": "Acid zinc nickel",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm-niken axit",
+  "materials": "Vít, bulong, phanh ô tô, linh kiện điện tử mạ điện",
+  "description": "Dùng cho chi tiết sắt như vít, bulong, kẹp phanh ô tô và các phụ kiện khác; chống ăn mòn vượt trội so với mạ kẽm truyền thống. Không chứa nitơ; hoạt hóa và lắng đọng rất nhanh, hàm lượng niken đồng đều trong toàn bộ dải mật độ dòng; độ bám dính và độ cứng tốt, tỷ lệ hợp kim trong lớp mạ ổn định, không có vết nút thắt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Ion kẽm: 27-37 g/L (tốt nhất 30)",
+     "Ion niken: 23-31 g/L (tốt nhất 25)",
+     "Tổng ion clorua: 150-220 g/L (tốt nhất 165)",
+     "Axit boric: 17-23 g/L (tốt nhất 20)",
+     "KCL-NIMV: 60-90 mL/L (tốt nhất 70)",
+     "KCL-NIA: 30-70 mL/L (tốt nhất 40)",
+     "KCL-NI B: 20-30 mL/L (tốt nhất 25)",
+     "Chất bóng KCL-NI: 0.1-0.5 mL/L (tốt nhất 0.3)",
+     "KCL-NI ADDITIVE OF20mL/L: 15-30 mL/L (tốt nhất 20)",
+     "KCL-NI L: 1-6 mL/L (tốt nhất 3)",
+     "Nhiệt độ: 30-38°C (tốt nhất 33)",
+     "pH: 4.8-5.4 (tốt nhất 5.3)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NCZ-35",
+  "name": "Mạ kẽm-niken kiềm NCZ-35",
+  "name_en": "Alkaline zinc nickel",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm-niken kiềm",
+  "materials": null,
+  "description": "Chịu nhiệt và chống ăn mòn tốt; lớp mạ óng ánh trong suốt, tương thích với cả thụ động đen và thụ động thường; phù hợp cho cả mạ treo và mạ quay; có ứng dụng bổ sung tăng cường độ chống ăn mòn. Đáp ứng yêu cầu RoHS, không chứa Pb, Cd, Hg, Cr6+, PBB và PBDE.",
+  "modes": [
+   {
+    "name": "Mạ treo (Rack)",
+    "params": [
+     "Zn2+: 5-10 g/L (tốt nhất 8)",
+     "Ni2+: 0.7-1.8 g/L (tốt nhất ~1.2)",
+     "NCZ-35A: 120-140 g/L (tốt nhất 130)",
+     "Natri hydroxit: 0.5-1.5 mL/L (tốt nhất 0.8, dạng NCZ-35 C-Ni)",
+     "Niken (dạng NCZ-35 C-Ni): 16 mL/L"
+    ]
+   },
+   {
+    "name": "Mạ quay (Barrel)",
+    "params": [
+     "Zn2+: 7-12 g/L (tốt nhất 10)",
+     "Ni2+: 1.0-2.0 g/L (tốt nhất ~1.2)",
+     "NCZ-35D: 110-130 g/L (tốt nhất 125)",
+     "Natri hydroxit: 0.5-1.5 mL/L (dạng NCZ-35 C-Ni)",
+     "Niken (dạng NCZ-35 C-Ni): 16 mL/L",
+     "NCZ-35D (bổ sung): 70-100 mL/L (tốt nhất 80)"
+    ]
+   },
+   {
+    "name": "Chung",
+    "params": [
+     "Nhiệt độ: 23-28°C (tốt nhất 25)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ULTRA III",
+  "name": "Thụ động crom ba hóa trị xanh/trắng ULTRA III",
+  "name_en": "Trivalent blue and white",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động sau mạ kẽm-niken",
+  "materials": "Lớp mạ kẽm-niken (mạ treo hoặc mạ quay)",
+  "description": "Thụ động crom ba hóa trị xanh, dùng cho cả mạ treo và mạ quay lớp mạ kẽm-niken; tạo lớp bảo vệ óng ánh bóng, chứa 12-15% niken; chịu nhiệt và tăng cường độ chống ăn mòn khi kết hợp chất bịt kín (sealing agent) sau xử lý; lớp phủ chất bịt kín vẫn giữ nguyên màu gốc sau bảo dưỡng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Nồng độ ULTRA III: 80-100 mL/L (tốt nhất 90)",
+     "Nhiệt độ: 18-30°C (tốt nhất 25)",
+     "pH: 2.0-3.0 (tốt nhất 2.5)",
+     "Khuấy trộn: cơ học hoặc sục khí",
+     "Nhiệt độ sấy: 80-100°C (tốt nhất 100)",
+     "Thời gian: 30-90 giây (tốt nhất 60)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ELV-C5000",
+  "name": "Chất thụ động crom 3 ngũ sắc chống ăn mòn cao (kẽm-niken)",
+  "name_en": "Trivalent high corrosion resistance iridescent passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động sau mạ kẽm-niken",
+  "materials": "Lớp mạ kẽm-niken (12-15% niken), mạ treo và mạ quay",
+  "description": "Thụ động crom 3 ngũ sắc cho lớp mạ kẽm-niken (12-15% Ni), chịu nhiệt và chịu nhiệt độ cao tốt; có thể kết hợp chất bịt kín hữu cơ để tăng chống ăn mòn mà vẫn giữ màu gốc.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "ELV-C5000: 100-150mL/L (tốt nhất 120)",
+     "pH: 2.0-2.8 (tốt nhất 2.3)",
+     "Nhiệt độ: 60-70°C (tốt nhất 65)",
+     "Thời gian: 60 giây",
+     "Khuấy trộn: sục khí hoặc khuấy cơ học"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ELV-B1000",
+  "name": "Chất thụ động crom 3 màu đen (kẽm-niken)",
+  "name_en": "Trivalent chromium black passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động đen sau mạ kẽm-niken",
+  "materials": "Lớp mạ kẽm-niken (10-16% niken), mạ treo và mạ quay",
+  "description": "Thụ động crom 3 màu đen đẹp, chống ăn mòn tốt cho lớp mạ kẽm-niken (10-16% Ni); nên dùng kèm chất bịt kín DF-9035 hoặc DF-9742 để đạt hiệu quả tối ưu.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "ELV-B1001: 80-120mL/L",
+     "ELV-B1002: 80-120mL/L",
+     "Thời gian: 60-150 giây",
+     "pH: 1.4-1.9",
+     "Nhiệt độ: 15-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ZK-830",
+  "name": "Phụ gia mạ kẽm axit (clorua, hệ kali/amoni) ZK-830",
+  "name_en": "Acid zinc additives (chloride, potassium/ammonium system)",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm axit clorua",
+  "materials": "Vít, bulong, đinh tán, chi tiết lỗ mù (blind-hole)",
+  "description": "Dải mật độ dòng rộng, san phẳng vượt trội, hiệu suất dòng gần 100%, mạ sâu tốt, ổn định cao, dùng chung được hệ kali và amoni; ít giòn hydro, phù hợp mạ trực tiếp thép đúc/nhiệt luyện, vít, bulong, đinh tán và chi tiết lỗ mù.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kẽm kim loại: 15-37.5 g/L",
+     "Tổng clorua: 120-157.5 g/L",
+     "Axit boric: 22.5-37.5 g/L",
+     "ZK-838R: 20-40 mL/L",
+     "ZK-835G: 2.0 mL/L",
+     "pH: 4.8-6.0",
+     "Nhiệt độ: 20-49°C",
+     "Điện áp: 2-9V"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "KG-66",
+  "name": "Phụ gia mạ kẽm axit (hệ kali) KG-66",
+  "name_en": "Acid zinc additives (potassium system)",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm axit (hệ kali)",
+  "materials": null,
+  "description": "Dải mật độ dòng rộng, san phẳng vượt trội, hiệu suất dòng gần 100%, mạ sâu tốt, ổn định cao, dễ rửa chất bóng, thụ động giữ được độ sáng sau sấy.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kẽm kim loại: 25-30 g/L",
+     "Kali clorua: 220-260 g/L",
+     "Axit boric: 20-30 g/L",
+     "KG-66A: 20-40 mL/L",
+     "KG-66B: 0.5-2.0 mL/L",
+     "pH: 5.0-6.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "XG-9",
+  "name": "Phụ gia mạ kẽm axit (hệ amoni) XG-9",
+  "name_en": "Acid zinc additives (ammonium system)",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm axit (hệ amoni)",
+  "materials": null,
+  "description": "Vận hành ở 50°C vẫn cho lớp mạ bóng; công thức không dung môi an toàn hơn; tạo màu đồng đều, dùng được mạ treo và mạ quay; ứng suất nội thấp, không giòn/bong tróc ở vùng dòng cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kẽm clorua: 35-50 g/L",
+     "Amoni clorua: 200-240 g/L",
+     "XG-9A (chất làm mềm): 20-30 mL/L",
+     "XG-9B (chất bóng): 1.0-2.0 mL/L",
+     "pH: 5.5-6.2",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NCZ-48",
+  "name": "Phụ gia mạ kẽm kiềm không xyanua NCZ-48",
+  "name_en": "Alkaline cyanide-free zinc additives",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm kiềm không xyanua",
+  "materials": null,
+  "description": "Dùng trực tiếp không cần chất khởi động riêng, chất lượng ổn định; tạo thụ động xanh óng ánh; ứng suất nội thấp, độ dẻo và bám dính tốt, tinh thể mịn; chống ăn mòn cao, phủ và phân tán tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kẽm kim loại: 8-16 g/L",
+     "Natri hydroxit: 110-150 g/L",
+     "NCZ-48A (chất khởi động): 12-20 mL/L",
+     "NCZ-48B (chất bóng): 0.5-1.5 mL/L",
+     "NCZ-48C (chất tinh lọc): 1-3 mL/L",
+     "NCZ-48R (chất điều chỉnh): 0-20 mL/L",
+     "Nhiệt độ: 20-45°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NCZ-49",
+  "name": "Phụ gia mạ kẽm kiềm không xyanua NCZ-49",
+  "name_en": "Alkaline cyanide-free zinc additives",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm kiềm không xyanua",
+  "materials": null,
+  "description": "Tương tự NCZ-48: dùng trực tiếp, chất lượng ổn định, thụ động xanh óng ánh, ứng suất nội thấp, độ dẻo/bám dính tốt, chống ăn mòn cao, phủ và phân tán tốt.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kẽm kim loại: 8-16 g/L",
+     "Natri hydroxit: 110-150 g/L",
+     "NCZ-49A (chất khởi động): 12-20 mL/L",
+     "NCZ-49B (chất bóng): 1.0-3.0 mL/L",
+     "NCZ-49C (chất tinh lọc): 1-3 mL/L",
+     "NCZ-49R (chất điều chỉnh): 0-20 mL/L",
+     "Nhiệt độ: 20-45°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NCZ-46",
+  "name": "Phụ gia mạ kẽm kiềm không xyanua NCZ-46",
+  "name_en": "Alkaline cyanide-free zinc additives",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Mạ kẽm kiềm không xyanua",
+  "materials": null,
+  "description": "Bóng đều ở nhiều dải mật độ dòng, độ bóng tương đương mạ kẽm axit; hệ thống pha chế đơn giản, không cần hoạt hóa đặc biệt, dùng ngay sau pha bể vẫn cho kết quả ổn định; ứng suất nội thấp, độ dẻo tốt, bám dính cao không phồng rộp, tốc độ lắng nhanh, phủ/san phẳng tốt.",
+  "modes": [
+   {
+    "name": "Chung (theo tài liệu, giống công thức NCZ-49)",
+    "params": [
+     "Kẽm kim loại: 8-16 g/L",
+     "Natri hydroxit: 110-150 g/L",
+     "NCZ-49A (chất khởi động): 12-20 mL/L",
+     "NCZ-49B (chất bóng): 1.0-3.0 mL/L",
+     "NCZ-49C (chất tinh lọc): 1-3 mL/L",
+     "NCZ-49R (chất điều chỉnh): 0-20 mL/L",
+     "Nhiệt độ: 20-45°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHW-13",
+  "name": "Chất thụ động crom 3 màu trắng bạc CHW-13",
+  "name_en": "Trivalent chromium passivation agent silver",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu trắng bạc)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Hoàn toàn không chứa crom 6+; dùng cho cả mạ treo và mạ quay, tạo màu trắng đồng đều.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHW-13: 30-50 mL/L",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 20-30°C",
+     "Thời gian: 10-30 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "BK-3",
+  "name": "Chất thụ động crom 3 xanh trắng chống ăn mòn cao (bạc) BK-3",
+  "name_en": "Trivalent high corrosion resistance blue white passivating agent (silver)",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (xanh trắng)",
+  "materials": "Mạ thủ công hoặc tự động",
+  "description": "Sản phẩm thân thiện môi trường, không crom 6+, tạo màu xanh trắng đồng đều sáng bóng; phù hợp cả vận hành thủ công và tự động; kết hợp kẽm kiềm xyanua NCZ-48 đạt phun muối trên 96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "BK-3: 50-100 mL/L",
+     "Thời gian: 10-40 giây",
+     "pH: 1.5-2.0",
+     "Nhiệt độ: 18-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "BK-6",
+  "name": "Chất thụ động crom 3 xanh trắng BK-6",
+  "name_en": "Trivalent chromium blue white passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (xanh trắng)",
+  "materials": null,
+  "description": "Liều dùng đơn giản, dải thông số vận hành rộng, chấp nhận pH rộng; nhiệt độ vận hành từ thấp đến phòng; màu đồng đều, không ố vàng khi lưu kho hay trên chi tiết phẳng lớn/phức tạp; chống ăn mòn tốt (mạ treo tới 144h, mạ quay tới 72h muối trung tính).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "BK-6: 30-70 mL/L",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 15-35°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "BK-25L",
+  "name": "Chất thụ động crom 3 xanh trắng BK-25L",
+  "name_en": "Trivalent chromium blue white passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (xanh trắng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Hoàn toàn không chứa crom 6+, dùng cho cả mạ treo và mạ quay, màu xanh trắng đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính khoảng 25 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "BK-25L: 30-70 mL/L",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 20-30°C",
+     "Thời gian: 10-30 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "BK-25",
+  "name": "Chất thụ động crom 3 xanh trắng BK-25",
+  "name_en": "Trivalent chromium blue white passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (xanh trắng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Tương tự BK-25L; thời gian xuất hiện gỉ trắng trong thử muối trung tính khoảng 25-48 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "BK-25: 30-70 mL/L",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 20-30°C",
+     "Thời gian: 10-30 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "BK-96",
+  "name": "Chất thụ động crom 3 xanh trắng chống ăn mòn cao BK-96",
+  "name_en": "Trivalent high corrosion resistance blue white passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (xanh trắng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Chống ăn mòn cao, thời gian xuất hiện gỉ trắng trong thử muối trung tính 72-120 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "BK-96: 30-70 mL/L",
+     "Thời gian: 10-30 giây",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-36",
+  "name": "Chất thụ động crom 3 ngũ sắc chống ăn mòn cao CRT-36",
+  "name_en": "Trivalent high corrosion resistance iridescent passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (ngũ sắc)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Hoàn toàn không chứa crom 6+, tạo màu ngũ sắc đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 96-192 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-36: 80-120 mL/L",
+     "Thời gian: 20-40 giây",
+     "pH: 1.8-2.2",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-150",
+  "name": "Chất thụ động crom 3 ngũ sắc chống ăn mòn cao CRT-150",
+  "name_en": "Trivalent high corrosion resistance iridescent passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (ngũ sắc)",
+  "materials": "Lớp mạ kẽm",
+  "description": "Vận hành nhiệt độ thấp, tiết kiệm điện; đạt độ chống ăn mòn tương đương thụ động vàng crom 6+; đáp ứng tiêu chuẩn 'End of Life Vehicle' (ELV).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-150: 80-150 mL/L",
+     "Thời gian: 60-120 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-35°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHB-215",
+  "name": "Chất thụ động crom 3 màu đen CHB-215",
+  "name_en": "Trivalent chromium black passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu đen)",
+  "materials": "Kẽm axit và kẽm kiềm không xyanua",
+  "description": "Không chứa crom 6+, công thức riêng cho kẽm axit và kẽm kiềm không xyanua; khác thụ động gốc muối niken thông thường; có khả năng sửa vết va chạm/ma sát trên lớp thụ động mạ treo hoặc mạ tự động; kết hợp CHB-19 đạt 72-120h gỉ trắng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHB-215: 150-200 mL/L",
+     "Thời gian: 25-40 giây",
+     "pH: 1.8-2.3",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHB-315",
+  "name": "Chất thụ động crom 3 màu đen bóng CHB-315",
+  "name_en": "Trivalent chromium black passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu đen bóng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không chứa crom 6+; dùng cho cả mạ treo và mạ quay, tạo màu đen bóng đồng đều; kết hợp CHB-19 đạt 48-96h gỉ trắng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHB-315: 150-200 mL/L",
+     "Thời gian: 25-40 giây",
+     "pH: 1.8-2.3",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHB-60",
+  "name": "Chất thụ động crom 3 màu đen bóng CHB-60",
+  "name_en": "Trivalent chromium black passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu đen bóng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không chứa crom 6+; dùng cho cả mạ treo và mạ quay, tạo màu đen bóng đồng đều; kết hợp CHB-19 đạt 48-96h gỉ trắng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHB-60: 150-200 mL/L",
+     "Thời gian: 25-40 giây",
+     "pH: 1.8-2.3",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHB-89",
+  "name": "Chất thụ động crom 3 màu đen (kẽm kiềm không xyanua, mạ treo) CHB-89",
+  "name_en": "Trivalent chromium black passivating agent (alkaline cyanide-free hanging plating)",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu đen)",
+  "materials": "Mạ treo",
+  "description": "Không chứa crom 6+, chuyên cho kẽm axit/kẽm kiềm không xyanua mạ treo; kết hợp chất bịt kín đạt 72-120h gỉ trắng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHB-89A: 80-120 mL/L",
+     "CHB-89B: 60-100 mL/L",
+     "Thời gian: 60-90 giây",
+     "pH: 2.0-2.5",
+     "Nhiệt độ: 25-35°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CHB-19",
+  "name": "Chất bịt kín (finishing) crom 3 chống ăn mòn cao CHB-19",
+  "name_en": "Trivalent chromium high corrosion resistant finishing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín sau thụ động đen CHB",
+  "materials": "Dùng kèm dòng CHB (thụ động đen crom 3)",
+  "description": "Chất bịt kín hậu xử lý không crom 6+, tăng độ đen/độ bóng, tăng độ bền mài mòn và chống ăn mòn của lớp thụ động; là hậu xử lý chuyên dùng cho dòng sản phẩm CHB; không chứa nhựa (resin).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CHB-19: 100-200 mL/L",
+     "Thời gian: 5-20 giây",
+     "pH: 4.0-5.0",
+     "Nhiệt độ: 25-50°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-120",
+  "name": "Chất bịt kín cho mạ kẽm DF-120",
+  "name_en": "Galvanized sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín sau thụ động xanh/trắng",
+  "materials": "Mọi loại điện phân (dùng sau nhúng xanh hoặc thụ động trắng)",
+  "description": "Lớp phủ hậu xử lý sau thụ động, chống ăn mòn vượt trội, không tổn hao nhiệt đáng kể; dùng sau nhúng xanh hoặc thụ động trắng như công đoạn bịt kín cuối cùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DF-120: 200-300 mL/L",
+     "Thời gian: 5-10 giây",
+     "pH: 9.0-10.0"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-120S",
+  "name": "Chất bịt kín cho mạ kẽm DF-120S",
+  "name_en": "Galvanized sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín sau thụ động xanh/trắng",
+  "materials": "Mọi loại điện phân",
+  "description": "Tương tự DF-120, dùng sau nhúng xanh hoặc thụ động trắng như công đoạn bịt kín cuối cùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DF-120S: 200-500 mL/L",
+     "Thời gian: 10-50 giây",
+     "pH: 8.0-9.0"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-55S",
+  "name": "Chất bịt kín DF-55S",
+  "name_en": "Sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín sau thụ động crom 3",
+  "materials": "Mọi loại điện phân",
+  "description": "Lớp phủ hậu xử lý sau thụ động crom 3, chống ăn mòn vượt trội, không tổn hao nhiệt đáng kể.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DF-55S: 200-300 mL/L",
+     "Thời gian: 10-30 giây",
+     "Nhiệt độ: 10-50°C",
+     "pH: 8.0-9.0"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9032",
+  "name": "Chất bịt kín trong suốt gốc nước DF-9032",
+  "name_en": "Water-based transparent sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc nước (trong suốt)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Thành phần hoàn toàn không crom 6+ và không kim loại nặng; dùng bịt kín sau mạ kẽm hoặc hợp kim kẽm (mạ treo/mạ quay), có thể dùng trực tuyến (in-line) hoặc offline; chống ăn mòn vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 14-28%",
+     "Độ nhớt: 9-11s",
+     "Thời gian nhúng (thuận/nghịch): 10-35 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 10-30 giây",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9035",
+  "name": "Chất bịt kín trong suốt gốc nước DF-9035",
+  "name_en": "Water-based transparent sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc nước (trong suốt)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Tương tự DF-9032; hàm lượng rắn thấp hơn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 8-16%",
+     "Độ nhớt: 10-15s",
+     "Thời gian nhúng (thuận/nghịch): 10-30 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 30 phút",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9742",
+  "name": "Chất bịt kín màu đen gốc nước DF-9742",
+  "name_en": "Water-based black sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc nước (màu đen)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Không crom 6+, không kim loại nặng; dùng bịt kín màu đen sau mạ kẽm/hợp kim kẽm, có thể trực tuyến hoặc offline; chống ăn mòn vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 8-16%",
+     "Độ nhớt: 9-11s",
+     "Thời gian nhúng (thuận/nghịch): 10-30 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 30 phút",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9745",
+  "name": "Chất bịt kín màu đen gốc nước DF-9745",
+  "name_en": "Water-based black sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc nước (màu đen)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Tương tự DF-9742; hàm lượng rắn cao hơn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 14-28%",
+     "Độ nhớt: 9-11s",
+     "Thời gian nhúng (thuận/nghịch): 10-30 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 30 phút",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SUPER NaNO.1",
+  "name": "Chất bịt kín màu đen gốc nước SUPER NaNO.1",
+  "name_en": "Water-based black sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc nước (màu đen)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Tương tự dòng DF-97xx, cho chống ăn mòn vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 14-28%",
+     "Độ nhớt: 9-11s",
+     "Thời gian nhúng (thuận/nghịch): 10-30 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 30 phút",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9185",
+  "name": "Chất bịt kín màu đen gốc dầu DF-9185",
+  "name_en": "Oil-based black sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc dầu (màu đen)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Không crom 6+, không kim loại nặng; dùng bịt kín màu đen gốc dầu sau mạ kẽm/hợp kim kẽm, trực tuyến hoặc offline; chống ăn mòn vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 8-16%",
+     "Độ nhớt: 10-15s",
+     "Thời gian nhúng (thuận/nghịch): 10-30 giây",
+     "Tốc độ ly tâm: 100-400rpm",
+     "Nhiệt độ sấy: 80-180°C",
+     "Thời gian sấy: 30 phút",
+     "Nhiệt độ đóng rắn: 185-200°C",
+     "Thời gian đóng rắn: trên 120 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-9092",
+  "name": "Chất bịt kín trong suốt gốc dầu DF-9092",
+  "name_en": "Oil-based transparent sealing agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Bịt kín gốc dầu (trong suốt)",
+  "materials": "Mạ kẽm hoặc mạ treo/quay hợp kim kẽm",
+  "description": "Cùng dòng chất bịt kín gốc dầu; ảnh gốc bị che khuất một phần nên bảng thông số không đầy đủ - cần đối chiếu thêm với nhà cung cấp trước khi dùng sản xuất.",
+  "modes": [
+   {
+    "name": "Chung (chưa đầy đủ, ảnh gốc bị che)",
+    "params": [
+     "Xem thêm cùng nhóm DF-9185 (gốc dầu) - cần xác nhận lại thông số cụ thể với nhà cung cấp"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-R",
+  "name": "Chất thụ động crom 3 màu đỏ CRT-R",
+  "name_en": "Trivalent red zinc passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu đỏ)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không crom 6+, dùng cho cả mạ treo và mạ quay, tạo màu đỏ đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 48-96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-RA: 40-60 mL/L",
+     "CRT-RB: 100-200 mL/L",
+     "Thời gian: 30-60 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-Y",
+  "name": "Chất thụ động crom 3 màu vàng CRT-Y",
+  "name_en": "Trivalent yellow zinc passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu vàng)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không crom 6+, dùng cho cả mạ treo và mạ quay, tạo màu vàng đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 48-96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-YA: 40-60 mL/L",
+     "CRT-YB: 100-200 mL/L",
+     "Thời gian: 30-60 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-G",
+  "name": "Chất thụ động crom 3 màu xanh lá CRT-G",
+  "name_en": "Trivalent green zinc passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu xanh lá)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không crom 6+, dùng cho cả mạ treo và mạ quay, tạo màu xanh lá đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 48-96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-GA: 40-60 mL/L",
+     "CRT-GB: 100-200 mL/L",
+     "Thời gian: 30-60 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-YG",
+  "name": "Chất thụ động crom 3 màu vàng-xanh CRT-YG",
+  "name_en": "Trivalent yellow-green zinc passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (vàng-xanh)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Không crom 6+, dùng cho cả mạ treo và mạ quay, tạo màu vàng-xanh đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 48-96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-YGA: 40-60 mL/L",
+     "CRT-YGB: 50-100 mL/L",
+     "Thời gian: 30-60 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-P",
+  "name": "Chất thụ động crom 3 màu tím CRT-P",
+  "name_en": "Trivalent purple zinc passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 3 (màu tím)",
+  "materials": null,
+  "description": "Hoàn toàn không crom 6+, tạo màu tím đồng đều; thời gian xuất hiện gỉ trắng trong thử muối trung tính 48-96 giờ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-PA: 40-60 mL/L",
+     "CRT-PB: 100-200 mL/L",
+     "Thời gian: 20-60 giây",
+     "pH: 1.6-2.0",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "FC-100",
+  "name": "Chất thụ động crom 6 ngũ sắc FC-100",
+  "name_en": "Hexavalent iridescent passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 6 (ngũ sắc)",
+  "materials": "Mạ treo và mạ quay",
+  "description": "Vận hành đơn giản, dùng cho cả mạ treo và mạ quay, tạo màu ngũ sắc đồng đều.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "FC-100: 10-20 mL/L",
+     "Rửa thủ công: 8-10 giây",
+     "Rửa tự động: 6-8 giây",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "FC-200",
+  "name": "Chất thụ động crom 6 màu tím FC-200",
+  "name_en": "Hexavalent purple passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 6 (màu tím)",
+  "materials": "Vùng đỏ lớn (large red area)",
+  "description": "Vận hành đơn giản, tiêu hao thấp và tiết kiệm chi phí; tạo màu tím đồng đều, phủ tốt cả vùng đỏ diện tích lớn.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "FC-200: 30-40 mL/L",
+     "Thời gian: 15-20 giây",
+     "Nhiệt độ: 20-30°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SW-02",
+  "name": "Chất thụ động crom 6 màu bạc SW-02",
+  "name_en": "Hexavalent silver passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 6 (màu bạc-trắng)",
+  "materials": "Mạ kẽm hoặc hợp kim kẽm",
+  "description": "Tạo màu bạc-trắng đồng đều; an toàn, đáng tin cậy, tiêu hao thấp và tiết kiệm chi phí.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "SW-02: 10-15 mL/L",
+     "Rửa thủ công: 5-10 giây",
+     "Rửa tự động: 8-10 giây",
+     "Nhiệt độ: 20-35°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "Z-A",
+  "name": "Chất thụ động crom 6 màu đen Z-A",
+  "name_en": "Hexavalent black passivating agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 6 (màu đen)",
+  "materials": "Mạ kẽm và hợp kim kẽm",
+  "description": "Tạo lớp thụ động đen bóng đồng đều; ổn định hóa học tốt, bền lâu khi sử dụng; chịu được dải rộng ứng dụng cho cả mạ kẽm và hợp kim kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Z-A (tác nhân đen crom 6): 40-60 mL/L",
+     "Z-B (tác nhân đen crom 6): 30-50 mL/L",
+     "Nhiệt độ: phòng",
+     "Thời gian ngâm (mạ treo): 30-60 giây",
+     "Thời gian ngâm (mạ quay): 10-30 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "464",
+  "name": "Chất thụ động crom 6 màu xanh rêu (army green) 464",
+  "name_en": "Hexavalent army green passivation agent",
+  "category": "Mạ kẽm-niken & thụ động hóa",
+  "usage_stage": "Thụ động crom 6 (xanh rêu)",
+  "materials": "Mạ kẽm và hợp kim kẽm",
+  "description": "Tạo lớp phủ thụ động màu xanh rêu trang trí đồng đều, bóng; ổn định hóa học tốt, dùng bền lâu; dải ứng dụng rộng cho cả mạ kẽm và hợp kim kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "464: 20-50 mL/L",
+     "Thời gian: 30-60 giây",
+     "pH: 0.8-1.2",
+     "Nhiệt độ: 20-30°C",
+     "Khuấy trộn: thủ công hoặc sục khí"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "PE-424",
+  "name": "Chất bóc lớp mạ bằng điện phân (giá thép không gỉ) PE-424",
+  "name_en": "Electrolysis depleting agent for coating",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc lớp mạ bằng điện phân (anot)",
+  "materials": "Giá mạ thép không gỉ, mạ crom/niken/hợp kim niken-sắt/đồng/kẽm/cadmium",
+  "description": "Chất bóc lớp mạ điện phân anot, bóc nhanh lớp mạ trên giá thép không gỉ (crom, niken, hợp kim niken-sắt, đồng, kẽm, cadmium); không ăn mòn sơn cách điện và đầu giá cách điện, hiệu quả kéo dài; tốc độ bóc nhanh (30-40 micron/phút ở 60°C, 50A/dm²); không sinh mùi khó chịu, an toàn khi dùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "PE-424MU (chất bổ sung): 120g/L",
+     "Mật độ dòng: 50A/dm² (ASD)",
+     "Nhiệt độ: phòng - 60°C",
+     "pH: 6-7",
+     "Anot: thép không gỉ (304/316)",
+     "Catot/Bể: PVC hoặc thép lót nhựa / thép không gỉ, thạch anh hoặc titan"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-456",
+  "name": "Bột bóc niken cho chi tiết đồng DU-456",
+  "name_en": "Nickel removal powder for copper work piece",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc lớp niken trên nền đồng",
+  "materials": "Hợp kim niken-sắt trên nền đồng/hợp kim đồng",
+  "description": "Dùng phương pháp hóa học bóc lớp mạ niken hoặc hợp kim niken-sắt trên nền đồng/hợp kim đồng; ưu điểm nhiệt độ vận hành thấp và tốc độ bóc nhanh, không ăn mòn nền, tuổi thọ dung dịch dài, không cần đánh bóng lại sau bóc.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Axit sulfuric (tỷ trọng 1.84): 120g/L",
+     "Thời gian: 25-75°C, 60 phút (không quá 75°C)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "NI-12",
+  "name": "Bột bóc niken NI-12",
+  "name_en": "Nickel removal powder",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc lớp niken (bột hòa tan trong nước)",
+  "materials": "Nền sắt, có khả năng bóc niken/đồng/kẽm/cadmium/thiếc chì",
+  "description": "Bột màu vàng nhạt hòa tan trong nước, kháng phồng rộp tốt khi lưu kho; không ăn mòn nền sắt nên có thể tái mạ (rework); 60g bột NI-12 hòa tan được khoảng 15g lớp mạ niken tương đương diện tích 15µm x 10dm²; không rủi ro tuổi thọ.",
+  "modes": [
+   {
+    "name": "Bóc lớp niken",
+    "params": [
+     "NI-12: 100-120 g/L",
+     "Nhiệt độ: 70-80°C"
+    ]
+   },
+   {
+    "name": "Bóc lớp thiếc/chì",
+    "params": [
+     "NI-12: 55-65 g/L",
+     "Nhiệt độ: 70-80°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CB-A",
+  "name": "Chất bóc điện phân cho nền sắt CB-A",
+  "name_en": "Electrolytic divest stripping agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc điện phân lớp mạ niken/hợp kim niken-sắt",
+  "materials": "Nền sắt (workpiece)",
+  "description": "Bóc điện phân lớp mạ niken hoặc hợp kim niken-sắt trên chi tiết nền sắt; ưu điểm nhiệt độ vận hành thấp và tốc độ bóc nhanh, không tốn nhiều thời gian gia công.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CB-A: 500 mL/L",
+     "Nhiệt độ: phòng",
+     "pH: 4-7",
+     "Điện áp: 8-10V"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "N-2",
+  "name": "Chất bóc niken bằng điện phân N-2",
+  "name_en": "Nickel electrolytic stripping agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc điện phân lớp niken",
+  "materials": "Chi tiết có hình dạng phức tạp",
+  "description": "Bóc lớp mạ niken sáng bán bóng bằng điện phân với hiệu suất tốt; tuân thủ môi trường, không cyanua; không ảnh hưởng đến hình dạng chi tiết dù nhúng lâu, giữ được độ carry-over và tuổi thọ tối thiểu.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Dùng trực tiếp",
+     "Nhiệt độ: 20-25°C",
+     "Điện áp: 2-6V",
+     "Tấm/giá: thép không gỉ"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "C-2",
+  "name": "Chất bóc đồng bằng điện phân C-2",
+  "name_en": "Copper electrolytic stripping agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc điện phân lớp đồng",
+  "materials": null,
+  "description": "Bóc lớp mạ đồng bằng điện phân với hiệu suất tốt; thân thiện môi trường, không cyanua; không ăn mòn nền.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Dùng trực tiếp",
+     "Nhiệt độ: 45-55°C",
+     "pH: 8.5-10.5",
+     "Điện áp: 6-8V hoặc tương đương"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-1111",
+  "name": "Chất bóc thiếc hàn (solder) G-1111",
+  "name_en": "Solder stripping agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc thiếc hàn (solder) - đơn liều",
+  "materials": null,
+  "description": "Tác nhân liều đơn hiệu quả bóc cao, cũng bóc được loại solder đặc biệt; công thức tiên tiến, không chứa florua.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Dùng trực tiếp",
+     "Nhiệt độ: 25-32°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "Ag-06",
+  "name": "Chất bóc/tẩy bạc (không xyanua) Ag-06",
+  "name_en": "Silver stripping / deplating agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc/tẩy lớp mạ bạc",
+  "materials": "Nền đồng hoặc hợp kim đồng",
+  "description": "Chất bóc bạc không xyanua, có thể bóc bằng điện phân hoặc dùng làm muối bù (make-up) bể tẩy; không rủi ro ăn mòn nền đồng/hợp kim đồng.",
+  "modes": [
+   {
+    "name": "Bóc điện phân (J)",
+    "params": [
+     "Ag-06: 75g/L",
+     "Ag-S: 50mL/L",
+     "KOH: 36g/L",
+     "pH: 10.5-11.5",
+     "Nhiệt độ: 30-50°C",
+     "Mật độ dòng: 1-10A/dm²"
+    ]
+   },
+   {
+    "name": "Muối bù cho bể tẩy (I)",
+    "params": [
+     "Ag-06 (muối bù): 250g/L",
+     "Nhiệt độ: 25°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SEL-N",
+  "name": "Chất tẩy/bóc vàng (kèm niken) SEL-N",
+  "name_en": "Golden depleting agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc lớp mạ vàng và niken",
+  "materials": "Nền đồng",
+  "description": "Bóc nhanh lớp mạ vàng và niken trên nền đồng; ổn định dung dịch cao, tuổi thọ dài; không rủi ro ăn mòn nền.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "SEL-N: 10-15 mL/L",
+     "Kali xyanua: 45-60 g/L",
+     "Nhiệt độ: 20-40°C",
+     "Tốc độ bóc: 1.5 m/phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-700",
+  "name": "Chất bóc sơn G-700",
+  "name_en": "Paint stripper",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc sơn / lớp phủ polymer",
+  "materials": "Thép, nhôm, thủy tinh",
+  "description": "Không chứa dung môi gốc dầu mỏ và halogen hữu cơ độc hại với môi trường; bóc hiệu quả nhiều loại sơn và lớp phủ gồm sơn phủ polymer, sơn tĩnh điện epoxy; điểm sôi cao giúp giảm bay hơi; không ăn mòn thép, nhôm, thủy tinh; chứa chất ức chế ăn mòn, quản lý dễ dàng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Dùng trực tiếp",
+     "Nhiệt độ: 60-80°C",
+     "Vật liệu bể: thép không gỉ (304, 316)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GT-93",
+  "name": "Chất tẩy bóc sơn (dung môi nước) GT-93",
+  "name_en": "Paint peeling agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc sơn (nitrocellulose, alkyd, peroxide, acrylic, PU, epoxy, sơn nướng)",
+  "materials": "Phần cứng, thiết bị, đồ chơi, xe cộ - kim loại và phi kim",
+  "description": "Chất tẩy sơn hòa tan trong nước, bóc được nitrocellulose, alkyd, peroxide, acrylic, PU, epoxy và sơn nướng cùng nhiều loại khác; không độc, dùng được cho phần cứng kim loại, thiết bị, đồ chơi, xe cộ; ứng dụng bằng phun hoặc nhúng ở nhiệt độ phòng, bóc nhanh khi dùng dạng tấm hoặc khối, phù hợp nhúng hoặc phun.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Dùng trực tiếp",
+     "Nhiệt độ: phòng",
+     "Thời gian: 60-120 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ST-89",
+  "name": "Chất đánh bóng điện phân cho thép không gỉ ST-89",
+  "name_en": "Electrolytic polishing agent for stainless steel",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Đánh bóng điện phân thép không gỉ",
+  "materials": "Thép không gỉ",
+  "description": "Ổn định giao diện tốt trong dung dịch axit chịu mài mòn mạnh; tốc độ đánh bóng nhanh, loại bỏ gỉ hiệu quả; phân tán dầu tốt, đồng đều, tránh ô nhiễm dầu khi rửa nước sau đó.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Axit sulfuric: 30%",
+     "Axit phosphoric: 55%",
+     "Nhiệt độ: phòng - 80°C",
+     "Thời gian: 2-10 phút",
+     "Mật độ dòng: 10-15A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-63",
+  "name": "Chất tẩy/bóc vàng AU-63",
+  "name_en": "Golden deplating agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Bóc lớp mạ vàng",
+  "materials": null,
+  "description": "Vận hành đơn giản, hiệu suất bóc tuyệt vời, không rủi ro ăn mòn nền.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "AU-63 (muối bù): 250 mL/L",
+     "Natri xyanua: 13 g/L",
+     "pH: 12",
+     "Nhiệt độ: 65°C (60-70)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "UD-903",
+  "name": "Chất tạo bóng hóa học cho chi tiết đồng UD-903",
+  "name_en": "Chemical brightener for copper work piece",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Đánh bóng hóa học đồng",
+  "materials": "Đồng và hợp kim đồng (đồng thau, đồng đỏ, đồng thanh, vàng giả)",
+  "description": "Dung dịch lỏng trong suốt chứa axit hữu cơ và vô cơ; tấn công bề mặt nền kim loại tạo lớp bảo vệ để tránh oxy hóa/xỉn màu do không khí; hiệu quả trên nhiều hợp kim đồng khác nhau, tuổi thọ dài, ít mang theo dung dịch, ít ảnh hưởng hình dạng/kích thước chi tiết.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "UD-903 (dung môi bổ sung): 30-40 phút nhúng"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CUB-01",
+  "name": "Chất chống gỉ bảo vệ đồng CUB-01",
+  "name_en": "Cu anti-rust protecting agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Chống gỉ hậu xử lý bề mặt đồng",
+  "materials": "Đồng, đồng thau, đồng thanh và các lớp mạ điện màu khác (mạ vàng giả, mạ cổ, kim loại phi sắt)",
+  "description": "Hấp phụ lên bề mặt kim loại tạo lớp bảo vệ chống oxy hóa/xỉn màu do không khí và các chất có hại; bám dính cao trong quá trình gia công/lắp ráp hậu mạ, ít ảnh hưởng hình dạng/kích thước chi tiết; đơn giản, vận hành dễ, chi phí thấp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CUB-01: 10%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-3 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CU-56HF",
+  "name": "Chất chống gỉ bảo vệ đồng CU-56HF",
+  "name_en": "Cu anti-rust protecting agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Chống gỉ hậu mạ đồng hóa học",
+  "materials": "Bề mặt đồng sau mạ hóa học",
+  "description": "Lớp phủ bảo vệ đồng tan trong nước, chống oxy hóa lớp mạ đồng hóa học/đồng/hợp kim đồng; tạo lớp phủ trong suốt cải thiện chống ăn mòn bề mặt; miễn phốt phát/crom, an toàn môi trường; có thể loại bỏ dễ dàng bằng rửa nước sau cùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CU-56HF: 10-25 mL/L",
+     "Nhiệt độ: 25-60°C",
+     "Thời gian: 30-90 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CW-M",
+  "name": "Chất chống thấm nước (kỵ nước) CW-M",
+  "name_en": "Water repellent agent",
+  "category": "Chất tẩy bóc / khác",
+  "usage_stage": "Hậu xử lý chống ố/kỵ nước (mạ treo)",
+  "materials": "Sau mạ treo",
+  "description": "Dùng cho chống gỉ ngắn hạn sau mạ treo; tăng độ bóng, chống thấm nước và bôi trơn; ngăn tạo tĩnh điện và cải thiện chống dấu vân tay.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CW-M: 20-30 mL/L",
+     "Nhiệt độ: phòng - 60°C",
+     "Thời gian: 30-60 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-1012",
+  "name": "Chất tẩy dầu điện phân (không phốt pho) DU-1012",
+  "name_en": "Electro-cleaner (phosphorus free)",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu điện phân",
+  "materials": "Đồng và hợp kim đồng",
+  "description": "Bột tẩy dầu điện phân đa năng, nhũ hóa và độ dẫn điện tuyệt vời, thời gian sử dụng dài; đặc biệt hiệu quả cho tẩy dầu và điện phân đồng thau/hợp kim đồng, giảm bớt hiện tượng ố xỉn trên bề mặt.",
+  "modes": [
+   {
+    "name": "Hợp kim đồng",
+    "params": [
+     "DU-1012: 30-70 g/L",
+     "Thời gian: 2-10 phút",
+     "Mật độ dòng: 4-10 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-284",
+  "name": "Chất tẩy dầu điện phân (kiềm nhẹ) DU-284",
+  "name_en": "Electro-cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu điện phân",
+  "materials": "Sắt",
+  "description": "Chất tẩy dầu điện phân kiềm nhẹ, độ dẫn điện bề mặt tuyệt vời khi rửa nước, chịu axit/kiềm và ổn định nhiệt cao.",
+  "modes": [
+   {
+    "name": "Sắt",
+    "params": [
+     "DU-284: 20-40 g/L",
+     "Thời gian: 1-3 phút",
+     "Nhiệt độ: 50-70°C",
+     "Mật độ dòng: 1.0-3.0 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DU-1010",
+  "name": "Chất tẩy dầu ngâm gốc axit DU-1010",
+  "name_en": "Acidic soak cleaner",
+  "category": "Chất tẩy dầu mỡ",
+  "usage_stage": "Tẩy dầu ngâm gốc axit",
+  "materials": "Kim loại đúc, chi tiết lắp ráp",
+  "description": "Chất tẩy dầu gốc axit, dùng phun hoặc nhúng trong công đoạn tẩy dầu; giảm ô nhiễm ion trong quá trình tẩy dầu đúc kẽm, tương thích hệ 'no-clean', dễ hoạt hóa và giảm mang theo ion trong lắp ráp.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "DU-1010: 10-30 %V/V",
+     "Nhiệt độ: 38-49°C",
+     "Thời gian: 30 giây - 5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "TL",
+  "name": "Mạ niken bán bóng cấu trúc cột TL",
+  "name_en": "Semi bright nickel plating (columnar structure)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ niken bán bóng (lớp lót hệ niken-crom nhiều lớp)",
+  "materials": null,
+  "description": "Tạo lớp niken bán bóng cấu trúc cột, không lưu huỳnh, độ giãn dài và lực san phẳng vượt trội; phù hợp làm lớp phủ ban đầu trong hệ mạ nhiều lớp niken-crom; độ dày kép niken-crom cho khả năng chống ăn mòn tốt trong 'CASS test' và 'Coated Chamber test'; độ ổn định và dung sai cao.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Niken ion: 50-120 g/L",
+     "Niken clorua: 10-60 g/L",
+     "Axit boric: 48-52 g/L",
+     "TL-01 (chất khởi động): 9-12 mL/L",
+     "ATL-03 (chất san phẳng): 0.5-1.2 mL/L",
+     "DA-25 (chất điều chỉnh): 0.2-0.5 mL/L",
+     "SR-62 (chất thấm ướt): 1.0-2.0 mL/L",
+     "Mật độ dòng anot: 3.8-4.2 A/dm²",
+     "Mật độ dòng catot: 0.2-10 A/dm²",
+     "Nhiệt độ: 52-59°C",
+     "pH: 3.8-4.2"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "1003HSX",
+  "name": "Niken bán bóng dùng anot tan 1003HSX",
+  "name_en": "Semi bright nickel soluble anode",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ niken bán bóng (anot tan)",
+  "materials": "Kim loại thường và kim loại không quý",
+  "description": "Ứng suất nội thấp, bán bóng và độ dẻo tuyệt vời; đặc biệt phù hợp làm lớp lót dưới cùng cho các kim loại quý và kim loại thông thường khác.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Kim loại niken: 50-1200 g/L",
+     "Axit boric: 110-120 g/L",
+     "1003HSX (chất kích hoạt anot): 70-100 mL/L",
+     "1003HSX Additive: 35-50 mL/L",
+     "62A (chất thấm ướt): 1.0-2.0 mL/L",
+     "Nhiệt độ: 55-60°C",
+     "pH: 3.8-4.0",
+     "Khuấy trộn: càng nhanh càng tốt"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-2001",
+  "name": "Chất mạ vàng tốc độ cao AU-2001",
+  "name_en": "High speed gold plating agent",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ vàng tốc độ cao (Reel-to-Reel)",
+  "materials": null,
+  "description": "Phù hợp mọi kiểu mạ vàng chọn lọc, đáp ứng yêu cầu tính chất cơ-điện của công đoạn Reel-to-Reel; độ dày lớp mạ đạt độ tinh khiết hợp kim vàng-coban 99.7-99.8%, độ cứng 170-180HV, điện trở tiếp xúc 0.6mΩ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Vàng: 1-12 g/L",
+     "pH: 4.2-4.8",
+     "Nhiệt độ: 46-55°C",
+     "Mật độ dòng catot: 0.5-10 A/dm²",
+     "Khuấy trộn: mạnh"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "AU-GHL",
+  "name": "Chất mạ vàng cứng axit tốc độ cao AU-GHL",
+  "name_en": "High speed acidic hard gold plating agent",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ vàng cứng axit tốc độ cao",
+  "materials": null,
+  "description": "Phù hợp mọi kiểu mạ vàng cứng, đáp ứng yêu cầu tính chất cơ-điện và phân tán vượt trội với hiệu suất cao; độ tinh khiết hợp kim vàng-coban đạt 99.7-99.8%, độ cứng 130-220HV, điện trở tiếp xúc 0.6mΩ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Vàng: 1-6 g/L",
+     "pH: 4.3-4.7",
+     "Nhiệt độ: 46-55°C",
+     "Mật độ dòng catot (tối đa): 0.5-20 A/dm²",
+     "Khuấy trộn: mạnh"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "JS-5",
+  "name": "Mạ bạc tốc độ cao JS-5",
+  "name_en": "High speed silver plating",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ bạc tốc độ cao",
+  "materials": "Chất bán dẫn, đầu nối, mạch tích hợp, bộ chuyển đổi",
+  "description": "Quy trình mạ bạc tốc độ cao trung tính; độ bám dính và độ sáng bóng cao ở nồng độ 0.4-0.8 GAM; hàn tốt và chịu ăn mòn cao, đặc biệt phù hợp cho chất bán dẫn, đầu nối, mạch tích hợp và bộ chuyển đổi.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "JS-5B (bổ sung): 600-700 mL/L",
+     "Bạc kim loại: 50-100 g/L",
+     "JS-5R: 5-10 mL/L",
+     "JS-5S: 5 mL/L",
+     "pH: 8.0-9.0",
+     "Nhiệt độ: 50-75°C",
+     "Mật độ dòng: 30-150 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "Ag-WS",
+  "name": "Chất chống xỉn màu bạc Ag-WS",
+  "name_en": "Silver anti-tarnish agent",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Chống xỉn màu sau mạ bạc",
+  "materials": "Đồ trang sức, dụng cụ, vật dụng và hộp chứa hình trụ",
+  "description": "Chất chống oxy hóa tan trong nước dùng cho lớp mạ bạc; nhúng tạo lớp bảo vệ ngăn xỉn màu/oxy hóa do sulfua hoặc tác nhân khác; chứa chất ức chế oxy hóa hoạt tính, không độc không kích ứng, an toàn dùng cho trang sức, đồ dùng, vật dụng và hộp chứa hình trụ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Ag-WS: 35-65 mL/L",
+     "Nhiệt độ: 40-45°C",
+     "Thời gian: 0.5-4.0 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "1405",
+  "name": "Mạ thiếc nguyên chất bóng tốc độ cao 1405",
+  "name_en": "High speed bright pure tin",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ thiếc nguyên chất bóng tốc độ cao",
+  "materials": "Ngành điện tử",
+  "description": "Hệ phụ gia hữu cơ độc quyền, tạo lớp mạ bóng gương với khả năng hàn tuyệt vời; đáp ứng phương pháp thử MIL-STD-883C mục 208F và 2003 tiêu chuẩn MIL-202F.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "A-300: 167 mL/L",
+     "A-70: 200 mL/L",
+     "1405: 70 mL/L",
+     "C2: 10 mL/L",
+     "Kẽm: 50 g/L",
+     "Mật độ dòng: 5-30 A/dm²",
+     "Nhiệt độ: 18-40°C"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "1405L",
+  "name": "Mạ thiếc nguyên chất bóng (mạ liên kết) 1405L",
+  "name_en": "Bright pure tin (interconnect plating)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ thiếc nguyên chất bóng (interconnect)",
+  "materials": null,
+  "description": "Hệ phụ gia hữu cơ độc quyền, làm sáng lượng chất hữu cơ rất thấp trong lớp mạ thiếc trung bình - tốc độ cao; đạt lớp mạ bán bóng đến bóng cao với khả năng hàn tuyệt vời và độ đồng đều bề mặt xuất sắc.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "A-300: 50 mL/L",
+     "A-70: 150 mL/L",
+     "1405L: 100 mL/L",
+     "Nhiệt độ: 14-35°C",
+     "Mật độ dòng: 0.2-3.2 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "HMM",
+  "name": "Mạ thiếc nguyên chất phun tốc độ cao HMM",
+  "name_en": "High speed spray type pure tin",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ thiếc nguyên chất dạng phun tốc độ cao",
+  "materials": null,
+  "description": "Hệ phụ gia hữu cơ độc quyền tạo lớp mạ bóng ít sinh bọt trong điều kiện mạ tốc độ cao; sản phẩm có độ dẻo và khả năng hàn xuất sắc, bề mặt lắng đọng đồng đều.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "A-70 Axit 70%: 140 mL/L",
+     "A-300: 60 mL/L",
+     "HMM: 40 mL/L",
+     "Mật độ dòng: 18-40 A/dm²",
+     "Khuấy trộn: mạnh"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "HMM2",
+  "name": "Mạ thiếc nguyên chất phun tốc độ cao HMM2",
+  "name_en": "High speed spray pure tin",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ thiếc nguyên chất dạng phun tốc độ cao",
+  "materials": null,
+  "description": "Là chất trung hòa thông qua rửa nước, đảm bảo tính đồng đều dòng vận hành cao, ổn định bảo dưỡng thiết bị; quan trọng trong cải thiện quá trình đóng rắn qua hệ thống borat.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "A-70 Axit 70%: 100 mL/L",
+     "A-300: 250 mL/L",
+     "HMM2: 40 mL/L",
+     "Nhiệt độ: 40-50°C",
+     "Mật độ dòng: 5-30 A/dm²",
+     "Khuấy trộn: mạnh"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-EAP",
+  "name": "Hậu xử lý chống xỉn màu sau mạ thiếc G-EAP",
+  "name_en": "Tin electrolysis post-treatment (anti-tarnish)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Hậu xử lý chống oxy hóa sau mạ thiếc điện phân",
+  "materials": null,
+  "description": "Tác nhân chống xỉn màu điện phân, dùng làm lớp phủ bảo vệ sau công đoạn nhúng hoặc mạ thiếc điện phân.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "G-EAP: 6 g/L",
+     "pH: 9-11",
+     "Nhiệt độ: 18-30°C",
+     "Mật độ dòng: 1-1.5 A/dm²"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CU-56",
+  "name": "Chất bảo vệ đồng tan trong nước CU-56",
+  "name_en": "Copper protection agent (water-soluble)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Chống oxy hóa bề mặt đồng (điện phân, hóa học)",
+  "materials": "Đồng, đồng thau và hợp kim đồng",
+  "description": "Chất bảo vệ đồng tan trong nước, ngăn oxy hóa lớp mạ đồng điện phân/hóa học, đồng hoặc hợp kim đồng; lớp phủ không màu, trong suốt, cải thiện chống ăn mòn bề mặt đồng; không chứa crom, an toàn môi trường; có thể loại bỏ bằng rửa nước sau cùng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CU-56: 50-125 mL/L",
+     "Nhiệt độ: 25-60°C",
+     "Thời gian: 30-90 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-5710",
+  "name": "Xử lý ăn mòn vi mô trước mạ bạc hóa học G-5710",
+  "name_en": "Chemical silver plating (micro-etch pretreatment)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ bạc hóa học - bước ăn mòn vi mô",
+  "materials": "Nền đồng",
+  "description": "Dung dịch đơn giản, thân thiện môi trường; cải thiện khả năng hàn; ngăn hiện tượng nhiễm chéo trong công đoạn tiếp theo.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Hàm lượng rắn: 5%v/v",
+     "Axit sulfuric (96-98%): 0.25%v/v",
+     "Hydro peroxit (35%): 10.00%v/v",
+     "Nước: 84.75%v/v",
+     "Nhiệt độ: 25-40°C",
+     "Thời gian: 1 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-5720",
+  "name": "Mạ bạc hóa học G-5720",
+  "name_en": "Chemical silver plating",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ bạc hóa học (immersion)",
+  "materials": "Vật liệu PCB",
+  "description": "Vận hành đơn giản, thân thiện môi trường; tương thích với mọi vật liệu PCB.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "G-5720: dùng trực tiếp (100%v/v)",
+     "Nhiệt độ: 32-48°C",
+     "Thời gian: 30-45 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "G-5730",
+  "name": "Mạ bạc hóa học G-5730",
+  "name_en": "Chemical silver plating",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ bạc hóa học (immersion, thành phần đơn)",
+  "materials": "Bề mặt PCB",
+  "description": "Là dung dịch một thành phần đơn giản; hiệu quả loại bỏ oxit; giảm ô nhiễm chéo trong công đoạn tiếp theo; tiết kiệm chi phí, dễ vận hành.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "G-5720 (nền): 90-110 mL/L",
+     "G-5730: 10%v/v",
+     "Nhiệt độ: 50-60°C",
+     "Thời gian: 2-3 phút",
+     "pH: 6.4-6.7"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "GOLD 1",
+  "name": "Mạ vàng hóa học GOLD 1",
+  "name_en": "Chemical gold plating",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Mạ vàng hóa học (immersion, cho PCB)",
+  "materials": "Lớp mạ niken hóa học trên bảng mạch (PCB)",
+  "description": "Lớp mạ vàng tạo bề mặt tương đương 24K; tương thích với mọi vật liệu PCB; lớp mạ bóng mịn tinh thể, không bị hiện tượng sáng quá (over-brightened); nếu thay thế GOLD1 bằng sản phẩm khác dễ gây hiện tượng bề mặt nền bị sáng quá mức.",
+  "modes": [
+   {
+    "name": "Chung (một phần thông số bị mờ trong ảnh gốc)",
+    "params": [
+     "pH: 5.5-6.5",
+     "Cần đối chiếu thêm nồng độ vàng, nhiệt độ và thời gian cụ thể với nhà cung cấp trước khi sản xuất"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "W-AIS",
+  "name": "Chất chống thay thế bạc (anti-galvanic) W-AIS",
+  "name_en": "Anti silver replacement plating",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Tiền xử lý trước mạ chọn lọc bạc",
+  "materials": "Bảng mạch dẫn (circuit guide plate) đã mạ đồng trước",
+  "description": "Là tiền xử lý của công đoạn mạ chọn lọc; ngăn hiện tượng thay thế bạc (silver replacement) trên nền; áp dụng cho bảng mạch dẫn đã mạ đồng trước.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "W-AIS: 0.1 g/L",
+     "Kali xyanua: 0.1 g/L",
+     "Nhiệt độ: phòng",
+     "Thời gian: 5-20 giây"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DF-23",
+  "name": "Bột phụ trợ lọc (phụ kiện) DF-23",
+  "name_en": "Filter additive powder (supplementary)",
+  "category": "Mạ vật liệu điện tử",
+  "usage_stage": "Phụ trợ/vật tư đi kèm (không phải hóa chất pha bể)",
+  "materials": null,
+  "description": "Bột phụ gia trợ lọc dùng kèm hệ thống lọc dung dịch mạ; không có bảng thông số pha chế riêng trong tài liệu gốc.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Không có bảng thông số vận hành cụ thể trong tài liệu gốc (vật tư/phụ kiện đi kèm)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "ZRT-955",
+  "name": "Chất xử lý nano-ceramic ZRT-955",
+  "name_en": "Nano-ceramic treatment agent",
+  "category": "Xử lý trước môi trường / Phosphat hóa môi trường",
+  "usage_stage": "Xử lý nano trước sơn (thay thế phosphat hóa)",
+  "materials": "Kim loại nặng và các bề mặt kim loại thường",
+  "description": "Dung dịch thân thiện môi trường, không phốt pho, không nitơ, không kim loại nặng; tạo màng nano cải thiện độ bám dính và chống ố (anti-tarnish) trên bề mặt kim loại cùng lớp sơn phủ.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "ZRT-955: 20-40 mL/L",
+     "pH: 4.0-5.2",
+     "Khuấy trộn: sục khí",
+     "Nước: nước sạch (nước máy)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "SRT-856",
+  "name": "Chất xử lý silica thân thiện môi trường SRT-856",
+  "name_en": "Silica environmentally treatment agent",
+  "category": "Xử lý trước môi trường / Phosphat hóa môi trường",
+  "usage_stage": "Xử lý trước sơn (tăng bám dính + chống ố muối)",
+  "materials": null,
+  "description": "Dung dịch thân thiện môi trường mới, thay thế lớp phosphat hóa; không chỉ tăng bám dính giữa kim loại và lớp sơn mà còn tăng khả năng chống phun muối.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "SRT-856: 50-80 g/L",
+     "Thời gian: 30-180 giây",
+     "Nhiệt độ: dưới 40°C",
+     "Khuấy trộn: sục khí",
+     "Nước: nước sạch (nước máy)"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-650",
+  "name": "Màng crom 3 CRT-650",
+  "name_en": "Trivalent chromium film",
+  "category": "Xử lý trước môi trường / Phosphat hóa môi trường",
+  "usage_stage": "Tạo màng crom 3 trước sơn (tăng bám dính)",
+  "materials": "Nhôm đúc, đồng đúc, kẽm mạ",
+  "description": "Tăng cường độ bám dính giữa sơn và kim loại; đồng thời cải thiện độ chống ăn mòn của lớp phosphat hóa; dễ vận hành, chỉ cần nhúng, không cần thay đổi tốc độ hay thời gian xử lý; không có chất nền kim loại nào cần thay đổi ngay lập tức.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-650: 200 mL/L",
+     "pH: 3.8-4.0",
+     "Thời gian: 0.5-3 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "CRT-652",
+  "name": "Màng crom 3 CRT-652",
+  "name_en": "Trivalent chromium film",
+  "category": "Xử lý trước môi trường / Phosphat hóa môi trường",
+  "usage_stage": "Tạo màng crom 3 trước sơn (nhôm, kẽm đúc)",
+  "materials": "Nhôm đúc, kẽm mạ, hợp kim magie (không có phốt pho/crom 6)",
+  "description": "Tăng cường độ bám dính giữa sơn và kim loại; tiết kiệm năng lượng, vận hành ở nhiệt độ phòng; không cần thay đổi tốc độ lắng đọng hay rút ngắn thời gian xử lý; thân thiện môi trường, không phốt pho/nickel/mangan/kẽm/coban và hữu cơ độc hại; áp dụng cho nhôm, kẽm mạ và hợp kim magie.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "CRT-652: 200 mL/L",
+     "pH: 3.5-4.2",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-238",
+  "name": "Chất tạo màng phosphat kẽm DL-238",
+  "name_en": "Zinc phosphate coating agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa kẽm (chuẩn bị nhuộm màu điện phân)",
+  "materials": null,
+  "description": "Phù hợp cho công đoạn nhuộm màu điện phân và các loại tạo màu khác trên nền phosphat kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 10-20PT",
+     "Nồng độ kiểm tra: 28-36PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 1-3 phút",
+     "Độ dày màng: 1-5µm"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-227",
+  "name": "Chất tạo màng phosphat kẽm DL-227",
+  "name_en": "Zinc phosphate coating agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa kẽm (chống gỉ)",
+  "materials": null,
+  "description": "Chống gỉ vượt trội. Vận hành bằng phun hoặc nhúng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 6-8%",
+     "Nồng độ kiểm tra: 30-40PT",
+     "Nhiệt độ: 80-90°C",
+     "Thời gian: 5-8 phút",
+     "Độ dày màng: 10-15µm"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-202",
+  "name": "Chất tạo màng phosphat kẽm DL-202",
+  "name_en": "Zinc phosphate coating",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa kẽm (nền cho sơn bột/sơn lỏng)",
+  "materials": null,
+  "description": "Phù hợp làm lớp nền cho cả sơn dạng bột và sơn dạng lỏng. Vận hành bằng phun hoặc nhúng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 6-7%",
+     "Nồng độ kiểm tra: 25-35PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 5-10 phút",
+     "Độ dày màng: 5µm"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-214",
+  "name": "Chất tạo màng phosphat mangan DL-214",
+  "name_en": "Manganese phosphate coating",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa mangan (chống mài mòn)",
+  "materials": "Bánh răng, xi lanh, piston",
+  "description": "Tinh thể mịn, chống mài mòn tốt, phù hợp cho bánh răng, xi lanh, piston; hiệu quả hấp thụ dầu vượt trội (giữ dầu bôi trơn).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 14-20%",
+     "Nồng độ kiểm tra: 50-80PT",
+     "Nhiệt độ: 85-96°C",
+     "Thời gian: 8-10 phút",
+     "Độ dày màng: 10-20µm"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-208",
+  "name": "Chất bổ sung/tái tạo bể (make-up) DL-208",
+  "name_en": "Make-up agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Bổ sung/tái tạo bể phosphat (dùng kèm DL-218)",
+  "materials": null,
+  "description": "Dùng kết hợp với DL-218 để bổ sung/tái tạo bể phosphat.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 6-8%",
+     "Nồng độ kiểm tra: 24-32PT",
+     "Nhiệt độ: 75-85°C",
+     "Thời gian: 3-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-218",
+  "name": "Chất bổ sung (supply agent) DL-218",
+  "name_en": "Supply agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Bổ sung bể phosphat (dây kéo, ống, dập nguội)",
+  "materials": "Phần cứng kim loại (dây kéo, ống, dập nguội biến dạng)",
+  "description": "Dùng cho công đoạn tạo lớp vecni/bôi trơn kéo dây, ống và biến dạng dập nguội phần cứng kim loại.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 6-8%",
+     "Nồng độ kiểm tra: 30-38PT",
+     "Nhiệt độ: 75-85°C",
+     "Thời gian: 5-8 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-702",
+  "name": "Phosphat hóa nhôm DL-702",
+  "name_en": "Aluminum phosphate",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa nhôm (chống xỉn màu)",
+  "materials": "Nhôm",
+  "description": "Phù hợp tạo màu phủ trên nhôm với khả năng chống xỉn màu mạnh; lớp đáy của màng phủ có màu vàng gold.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 3-5%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-501",
+  "name": "Chất tẩy dầu kiềm trung bình, nhiều bọt DL-501",
+  "name_en": "High foam medium alkali",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu kiềm trước phosphat hóa",
+  "materials": null,
+  "description": "Loại tẩy dầu ngâm thông dụng, không ăn mòn nền.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 5-6%",
+     "Nồng độ kiểm tra: 30-36PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 3-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-531",
+  "name": "Chất tẩy dầu kiềm trung bình, ít bọt DL-531",
+  "name_en": "Low foam medium alkali",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu kiềm trước phosphat hóa (phun/nhúng)",
+  "materials": null,
+  "description": "Tăng cường độ đặc (densification) của màng phosphat, loại ít bọt, không ăn mòn nền. Vận hành bằng phun hoặc nhúng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 5-6%",
+     "Nồng độ kiểm tra: 27-33PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-559",
+  "name": "Chất tẩy dầu kiềm mạnh, nhiều bọt DL-559",
+  "name_en": "High foam strong alkali",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu kiềm mạnh (hiệu quả với flux)",
+  "materials": null,
+  "description": "Khả năng làm sạch rất mạnh, đặc biệt hiệu quả với chất trợ hàn (flux).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 5-6%",
+     "Nồng độ kiểm tra: 48-57PT",
+     "Nhiệt độ: RT-60°C",
+     "Thời gian: 3-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-569",
+  "name": "Chất tẩy dầu kiềm mạnh, ít bọt DL-569",
+  "name_en": "Low foam strong alkali",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu kiềm mạnh (tăng độ đặc màng phosphat)",
+  "materials": null,
+  "description": "Màng phosphat đạt độ đặc vượt trội; loại ít bọt, khả năng làm sạch mạnh.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 5-6%",
+     "Nồng độ kiểm tra: 38-45PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-676",
+  "name": "Chất tẩy dầu gốc axit DL-676",
+  "name_en": "Acid degreaser",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu gốc axit trước phosphat hóa",
+  "materials": null,
+  "description": "Tốc độ tẩy dầu nhanh gốc axit, hiệu suất xử lý vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 2-5%",
+     "Nồng độ kiểm tra: 25-35PT",
+     "Nhiệt độ: phòng",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-275",
+  "name": "Phosphat hóa sắt (màu xanh da trời) DL-275",
+  "name_en": "Iron phosphate",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phosphat hóa sắt (màu xanh da trời)",
+  "materials": "Sắt/thép",
+  "description": "Màng phosphat tạo thành có màu xanh da trời (sky blue). Vận hành bằng phun hoặc nhúng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 3-6%",
+     "Nồng độ kiểm tra: 8-16PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-256",
+  "name": "Phosphat hóa sắt 3 trong 1 (tẩy dầu + tạo màng) DL-256",
+  "name_en": "Iron phosphate (3-in-1)",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy dầu + phosphat hóa sắt (gộp công đoạn)",
+  "materials": "Sắt/thép",
+  "description": "Sản phẩm 3 trong 1, có thể đồng thời hoàn thành công đoạn tẩy dầu và tạo màng phosphat trong 1 bước; màng phosphat tạo thành có màu xanh dương hoặc ngũ sắc (iridescent). Vận hành bằng phun hoặc nhúng.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 3-6%",
+     "Nồng độ kiểm tra: 8-16PT",
+     "Nhiệt độ: RT-50°C",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-233",
+  "name": "Chất tạo đen ở nhiệt độ phòng DL-233",
+  "name_en": "Blackness agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tạo màu đen ở nhiệt độ phòng (dùng kèm DL-227)",
+  "materials": "Mọi loại thép",
+  "description": "Tạo màu đen cho mọi loại thép ở nhiệt độ phòng, dùng kết hợp với DL-227.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 5-7%",
+     "Nồng độ kiểm tra: 8-10PT",
+     "Nhiệt độ: phòng",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-100",
+  "name": "Chất bôi trơn gốc phosphat DL-100",
+  "name_en": "Lubricant (phosphate-based)",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Bôi trơn cho công đoạn dập nguội (cold forging)",
+  "materials": null,
+  "description": "Chất bôi trơn dạng phosphat, dùng cho công đoạn biến dạng dập nguội (cold forging).",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 1-10%",
+     "pH: 8-10",
+     "Nhiệt độ: 75-90°C",
+     "Thời gian: 2-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-691",
+  "name": "Chất tẩy gỉ sắt (iron remover) DL-691",
+  "name_en": "Iron remover",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tẩy gỉ sắt",
+  "materials": null,
+  "description": "Loại bỏ nhanh vết gỉ sét với hiệu quả vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 1-10%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-305",
+  "name": "Chất trung hòa (điều chỉnh tỷ lệ axit) DL-305",
+  "name_en": "Neutralization agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Điều chỉnh độ axit bể phosphat kẽm DL-202",
+  "materials": null,
+  "description": "Dùng để điều chỉnh tỷ lệ axit, kết hợp với chất tạo màng phosphat kẽm DL-202.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 1-10%",
+     "Nồng độ kiểm tra: 0.2-0.3PT",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-801",
+  "name": "Chất xúc tiến (accelerant) DL-801",
+  "name_en": "Accelerant agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Xúc tiến lắng đọng màng phosphat, rút ngắn thời gian xử lý",
+  "materials": null,
+  "description": "Thúc đẩy quá trình lắng đọng màng phosphat, rút ngắn thời gian xử lý; dùng kết hợp với chất tạo màng phosphat kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 0.2-0.5%"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-301",
+  "name": "Chất điều chỉnh bề mặt (hoạt hóa trước phosphat) DL-301",
+  "name_en": "Surface-adjusted agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Hoạt hóa bề mặt trước phosphat hóa (làm mịn tinh thể)",
+  "materials": null,
+  "description": "Hoạt hóa bề mặt, thúc đẩy kết tinh mịn và tăng khả năng bảo vệ vật liệu; dùng kết hợp với chất tạo màng phosphat kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 0.2-0.3%",
+     "Nồng độ kiểm tra: 0.5-2PT",
+     "Nhiệt độ: RT-30°C",
+     "Thời gian: 1-10 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-901",
+  "name": "Chất bóc sơn DL-901",
+  "name_en": "Paint-stripper",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Bóc sơn trước xử lý",
+  "materials": null,
+  "description": "Loại bỏ sơn nhanh với hiệu quả vượt trội.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: nguyên chất (dùng trực tiếp)",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-090",
+  "name": "Dầu chống gỉ DL-090",
+  "name_en": "Anti-rust oil",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Phủ dầu chống gỉ sau phosphat hóa",
+  "materials": null,
+  "description": "Phủ dầu nhanh tạo bảo vệ vượt trội cho vật liệu; phù hợp tốt hơn khi dùng cùng chất tạo màng phosphat kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: nguyên chất (dùng trực tiếp)",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-190",
+  "name": "Chất chống gỉ DL-190",
+  "name_en": "Anti-rust agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Chống gỉ sau phosphat hóa",
+  "materials": null,
+  "description": "Bảo vệ vật liệu chống gỉ vượt trội; phù hợp tốt hơn khi dùng cùng chất tạo màng phosphat kẽm.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 1-10%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-911",
+  "name": "Chất tạo đen cho thép nhiệt luyện DL-911",
+  "name_en": "Blackness agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Tạo màu đen cho thép đã nhiệt luyện (dùng kèm agent A tỷ lệ 1:1)",
+  "materials": "Thép đã qua nhiệt luyện (heat-treated steel)",
+  "description": "Tạo màu đen ở nhiệt độ phòng cho mọi loại thép đã qua nhiệt luyện, dùng kết hợp với agent A theo tỷ lệ 1:1.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 1-10%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-3 phút"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-932B",
+  "name": "Chất ức chế khói axit (bể tẩy gỉ axit) DL-932B",
+  "name_en": "Depressant agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Ức chế khói axit trong bể tẩy gỉ (pickling)",
+  "materials": null,
+  "description": "Thêm vào bể tẩy gỉ axit (acid pickling tank), ức chế hiệu quả sự sinh khói axit.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 0.05-0.5%"
+    ]
+   }
+  ]
+ },
+ {
+  "code": "DL-933",
+  "name": "Chất ức chế khói axit (bể tẩy gỉ sulfat) DL-933",
+  "name_en": "Depressant agent",
+  "category": "Phốt phát hóa bề mặt (Phosphate Conversion Coating)",
+  "usage_stage": "Ức chế khói axit trong bể tẩy gỉ sulfat (pickling)",
+  "materials": null,
+  "description": "Thêm vào bể tẩy gỉ sulfat (sulfate pickling tank), ức chế hiệu quả sự sinh khói axit; có thể dùng chung với DL-932B.",
+  "modes": [
+   {
+    "name": "Chung",
+    "params": [
+     "Thể tích pha bể: 0.05-0.5%",
+     "Nhiệt độ: phòng",
+     "Thời gian: 1-5 phút"
+    ]
+   }
+  ]
+ }
+]

@@ -3,8 +3,9 @@
 Chay bang tay:  docker compose exec backend python -m app.core.seed
 
 Idempotent: doi chieu theo ma / ten, co roi thi bo qua, khong ghi de du lieu
-dang co. Rieng letterhead (company_profile) duoc tao tu dong luc backend khoi
-dong vi khong co no thi khong in duoc phieu.
+dang co. San pham cong ty lay tu danh muc (app.core.product_catalog), seed
+khong tao ma moi. Rieng letterhead (company_profile) duoc tao tu dong luc
+backend khoi dong vi khong co no thi khong in duoc phieu.
 """
 from __future__ import annotations
 
@@ -15,6 +16,7 @@ from sqlalchemy.orm import Session
 
 from app import models
 from app.core.database import SessionLocal
+from app.core.product_catalog import product_lookup, resolve_code
 
 COMPANY_PROFILE = {
     "logo_path": "img/logo-dlvc.png",
@@ -26,16 +28,6 @@ COMPANY_PROFILE = {
 }
 
 SEED_CUSTOMER = "Nhà máy Z-113"
-
-# (ma, ten) - san pham cong ty duoc nhac trong phieu mau
-SEED_PRODUCTS = [
-    ("NCZ-48A", "NCZ-48A"),
-    ("NCZ-48B", "NCZ-48B"),
-    ("NCZ-48C", "NCZ-48C"),
-    ("NCZ-48R", "NCZ-48R"),
-    ("CHB-60", "CHB-60"),
-    ("CR-3GD", "CR-3GD"),
-]
 
 SEED_LAB_CHEMICALS = [("HNO3", "Axit nitric")]
 
@@ -192,16 +184,10 @@ def _ensure_customer(db: Session, name: str) -> models.Customer:
     return customer
 
 
-def _ensure_products(db: Session) -> dict[str, models.CompanyProduct]:
-    result = {}
-    for code, name in SEED_PRODUCTS:
-        product = db.query(models.CompanyProduct).filter_by(code=code).first()
-        if not product:
-            product = models.CompanyProduct(code=code, name=name)
-            db.add(product)
-            db.flush()
-        result[code] = product
-    return result
+def _product_id(products: dict[str, models.CompanyProduct], code: str) -> int | None:
+    """San pham trong danh muc (NCZ-48A -> NCZ-48); khong co thi chi in chu, khong tao ma moi."""
+    product = resolve_code(code, products)
+    return product.id if product else None
 
 
 def _ensure_lab_chemicals(db: Session) -> dict[str, models.LabChemical]:
@@ -244,7 +230,7 @@ def _add_steps(db: Session, process: models.TestProcess, steps_data, products, l
             position += 1
             db.add(models.TestProcessStepChemical(
                 step_id=step.id, position=position,
-                product_id=products[code].id, display_name=code,
+                product_id=_product_id(products, code), display_name=code,
             ))
         for code, display_name in data.get("lab_chemicals", []):
             position += 1
@@ -279,7 +265,7 @@ def _steps_as_json(steps_data, products, lab_chemicals):
         temp_mode, temp_min, temp_max = data.get("temp", ("none", None, None))
         ph_min, ph_max = data.get("ph", (None, None))
         chemicals = [
-            {"product_id": products[code].id, "lab_chemical_id": None, "display_name": code}
+            {"product_id": _product_id(products, code), "lab_chemical_id": None, "display_name": code}
             for code in data.get("products", [])
         ] + [
             {"product_id": None, "lab_chemical_id": lab_chemicals[code].id, "display_name": name}
@@ -303,7 +289,7 @@ def _steps_as_json(steps_data, products, lab_chemicals):
 
 def seed_test_processes(db: Session) -> None:
     z113 = _ensure_customer(db, SEED_CUSTOMER)
-    products = _ensure_products(db)
+    products = product_lookup(db)
     lab_chemicals = _ensure_lab_chemicals(db)
 
     created = []

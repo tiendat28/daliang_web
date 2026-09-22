@@ -10,12 +10,6 @@ from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 
-class ProcessStage(str, enum.Enum):
-    pre_treatment = "pre_treatment"   # Tien xu ly
-    plating = "plating"               # Ma
-    post_plating = "post_plating"     # Sau ma
-
-
 class DocumentCategory(str, enum.Enum):
     msds = "msds"                            # MSDS
     coa = "coa"                              # COA
@@ -63,41 +57,41 @@ class CustomerFieldProduct(Base):
 
 
 class CompanyProduct(Base):
-    """Bang 2: SP Cty"""
+    """Bang 2: SP Cty - danh muc san pham, nap tu app/data/company_products.json."""
     __tablename__ = "company_products"
 
     id = Column(Integer, primary_key=True, index=True)
     code = Column(String(100), unique=True, nullable=False, index=True)
-    name = Column(String(255), nullable=False)
-    field = Column(String(255))
-    usage_purpose = Column(String(255))
-    process_stage = Column(Enum(ProcessStage))
-    price = Column(Float)
+    name = Column(String(255), nullable=False)   # ten tieng Viet
+    name_en = Column(String(255))
+    category = Column(String(255))                # Nhom phan loai
+    usage_stage = Column(String(255))             # Giai doan su dung
+    materials = Column(String(255))               # Vat lieu ap dung
+    description = Column(Text)                    # Cong dung
 
-    components = relationship(
-        "CompanyProductComponent", back_populates="product",
-        cascade="all, delete-orphan", order_by="CompanyProductComponent.id",
+    modes = relationship(
+        "CompanyProductMode", back_populates="product",
+        cascade="all, delete-orphan", order_by="CompanyProductMode.position",
     )
     sampling_records = relationship("ChemicalSampling", back_populates="company_product")
 
 
-class CompanyProductComponent(Base):
-    """Mot dong trong bang thong so cua san pham.
+class CompanyProductMode(Base):
+    """Mot che do su dung cua san pham (vd "Thep - Nhung nong") kem bang thong so van hanh.
 
-    Mot ma co the gom nhieu thanh phan (vd 810 co 810A, 810B, 810C), va cac
-    thong so pH / nhiet do / thoi gian cung la mot dong o day - dung nhu bang
-    giay phong thi nghiem dang dung. Tat ca deu la chu tu do co san don vi
-    ("100 ml/L", "1.8", "30 oC", "60 giay") nen khong co cot don vi rieng.
+    Ma chi co mot cach dung thi co dung mot che do "Chung". Thong so la chu tu do,
+    moi phan tu mot dong, dang "Nhiet do: 50-75 oC" - de nguyen van nhu tai lieu
+    nha cung cap vi moi ma ghi mot kieu, khong tach duoc thanh cot co dinh.
     """
-    __tablename__ = "company_product_components"
+    __tablename__ = "company_product_modes"
 
     id = Column(Integer, primary_key=True, index=True)
-    product_id = Column(Integer, ForeignKey("company_products.id", ondelete="CASCADE"), nullable=False)
-    component = Column(String(255))      # Thanh phan: "CHB-89A", "pH", "Nhiet do"
-    standard = Column(String(100))       # Tieu chuan: "100 ml/L"
-    spec_range = Column(String(100))     # Pham vi: "80-120 ml/L"
+    product_id = Column(Integer, ForeignKey("company_products.id", ondelete="CASCADE"), nullable=False, index=True)
+    position = Column(Integer, nullable=False)
+    name = Column(String(255), nullable=False)
+    params = Column(JSONB, nullable=False, default=list)
 
-    product = relationship("CompanyProduct", back_populates="components")
+    product = relationship("CompanyProduct", back_populates="modes")
 
 
 class LabChemical(Base):

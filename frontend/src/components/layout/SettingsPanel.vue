@@ -10,7 +10,6 @@ import {
 } from '../../api/resources'
 import { exportMultiTablePdf } from '../../utils/pdfReport'
 import { currentPeriod, todayStamp } from '../../utils/format'
-import { processStageLabel } from '../../constants/processStages'
 import { downloadWorkbook } from '../../utils/excelReport'
 import {
   addLabChemicalsSheet, addIndicatorsSheet, addEquipmentSheet, addChemicalOrdersSheet, addGenericSheet,
@@ -75,11 +74,16 @@ async function buildCustomers() {
 
 async function buildCompanyProducts() {
   const list = await companyProductsApi.list()
-  const headers = ['STT', 'Mã', 'Tên', 'Lĩnh vực', 'Công dụng', 'Nồng độ', 'Đơn vị', 'Công đoạn', 'Giá']
-  const rows = list.map((p, i) => [
-    i + 1, p.code, p.name, p.field || '', p.usage_purpose || '', p.concentration || '',
-    p.unit || '', processStageLabel(p.process_stage), p.price ?? '',
-  ])
+  // Mỗi chế độ sử dụng một dòng, giống bảng tổng hợp gốc (mã lặp lại ở các dòng sau)
+  const headers = ['STT', 'Mã', 'Tên tiếng Việt', 'Tên tiếng Anh', 'Nhóm phân loại', 'Giai đoạn sử dụng', 'Vật liệu áp dụng', 'Công dụng', 'Chế độ sử dụng', 'Thông số vận hành']
+  const rows = []
+  list.forEach((p, i) => {
+    const modes = p.modes.length ? p.modes : [{ name: '', params: [] }]
+    modes.forEach((m, mi) => rows.push([
+      mi === 0 ? i + 1 : '', p.code, p.name, p.name_en || '', p.category || '',
+      p.usage_stage || '', p.materials || '', p.description || '', m.name, m.params.join('; '),
+    ]))
+  })
   return { headers, rows }
 }
 
@@ -302,18 +306,12 @@ async function handleImportFile(e) {
       })),
     })))
     tally(await restoreList(data.company_products, companyProductsApi.create, p => ({
-      code: p.code, name: p.name, field: p.field, usage_purpose: p.usage_purpose,
-      process_stage: p.process_stage, price: p.price,
-      // Ban sao luu cu giu thong so thanh cot rieng tren san pham -> doi thanh
-      // cac dong cua bang thong so, giong migration ben database.
-      components: p.components?.length
-        ? p.components.map(c => ({ component: c.component, standard: c.standard, spec_range: c.spec_range }))
-        : [
-            { component: p.code, spec_range: [p.concentration, p.unit].filter(Boolean).join(' ') },
-            { component: 'pH', spec_range: p.ph },
-            { component: 'Nhiệt độ', spec_range: p.temperature },
-            { component: 'Thời gian', spec_range: p.duration },
-          ].filter(c => c.spec_range),
+      // Bản sao lưu trước danh mục mới dùng field/usage_purpose - đổi sang cột mới
+      // cho khỏi mất chữ; bảng thông số kiểu cũ thì bỏ, danh mục mới đã có sẵn.
+      code: p.code, name: p.name || p.code, name_en: p.name_en,
+      category: p.category ?? p.field, usage_stage: p.usage_stage,
+      materials: p.materials, description: p.description ?? p.usage_purpose,
+      modes: (p.modes || []).map(m => ({ name: m.name, params: m.params })),
     })))
     tally(await restoreList(data.lab_chemicals, labChemicalsApi.create, c => ({
       code: c.code, name: c.name, type: c.type, box_count: c.box_count,

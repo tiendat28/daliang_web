@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session, joinedload
 from app.core.database import get_db
 from app import models, schemas
 from app.api.common import get_or_404
+from app.core.product_catalog import product_lookup, resolve_code
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
 
@@ -15,6 +16,8 @@ def _sync_fields(db: Session, customer: models.Customer, fields_in):
         db.delete(f)
     db.flush()
 
+    # NCZ-49A (thanh phan) khop voi ma NCZ-49 trong danh muc
+    products = product_lookup(db) if any(f.product_codes for f in fields_in) else {}
     for f_in in fields_in:
         field = models.CustomerField(field_name=f_in.field_name, customer=customer)
         db.add(field)
@@ -23,7 +26,7 @@ def _sync_fields(db: Session, customer: models.Customer, fields_in):
             code = code.strip()
             if not code:
                 continue
-            product = db.query(models.CompanyProduct).filter_by(code=code).first()
+            product = resolve_code(code, products)
             db.add(models.CustomerFieldProduct(
                 customer_field_id=field.id,
                 company_product_id=product.id if product else None,

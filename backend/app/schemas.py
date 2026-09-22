@@ -4,7 +4,7 @@ from typing import Any, Optional, List
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from app.models import ProcessStage, DocumentCategory, TemperatureMode, TestProcessStatus
+from app.models import DocumentCategory, TemperatureMode, TestProcessStatus
 
 # Cac schema *Out doc thang tu doi tuong SQLAlchemy
 ORM_CONFIG = ConfigDict(from_attributes=True)
@@ -51,13 +51,24 @@ class CustomerOut(CustomerBase):
 
 
 # ---------- Company Product ----------
-class CompanyProductComponentBase(BaseModel):
-    component: Optional[str] = None     # "CHB-89A", "pH", "Nhiet do"
-    standard: Optional[str] = None      # "100 ml/L"
-    spec_range: Optional[str] = None    # "80-120 ml/L"
+class CompanyProductModeBase(BaseModel):
+    name: str = "Chung"                  # "Thep - Nhung nong", "Mạ treo (Rack)"
+    params: List[str] = []               # moi phan tu mot dong "Nhiet do: 50-75 oC"
+
+    # Form gui len o ten che do de trong -> coi la che do "Chung"; dong thong so
+    # trong thi bo, de khong in ra dong rong tren the san pham.
+    @field_validator("name", mode="before")
+    @classmethod
+    def _blank_name_is_general(cls, value):
+        return (value or "").strip() or "Chung"
+
+    @field_validator("params", mode="before")
+    @classmethod
+    def _drop_blank_params(cls, value):
+        return [str(p).strip() for p in (value or []) if str(p or "").strip()]
 
 
-class CompanyProductComponentOut(CompanyProductComponentBase):
+class CompanyProductModeOut(CompanyProductModeBase):
     id: int
     model_config = ORM_CONFIG
 
@@ -65,21 +76,15 @@ class CompanyProductComponentOut(CompanyProductComponentBase):
 class CompanyProductBase(BaseModel):
     code: str
     name: str
-    field: Optional[str] = None
-    usage_purpose: Optional[str] = None
-    process_stage: Optional[ProcessStage] = None
-    price: Optional[float] = None
-
-    # O chon de trong gui len "" chu khong phai null; coi nhu chua chon thay vi
-    # bat nguoi dung phai chon mot cong doan.
-    @field_validator("process_stage", mode="before")
-    @classmethod
-    def _blank_stage_is_none(cls, value):
-        return None if value == "" else value
+    name_en: Optional[str] = None
+    category: Optional[str] = None
+    usage_stage: Optional[str] = None
+    materials: Optional[str] = None
+    description: Optional[str] = None
 
 
 class CompanyProductWrite(CompanyProductBase):
-    components: List[CompanyProductComponentBase] = []
+    modes: List[CompanyProductModeBase] = []
 
 
 class CompanyProductCreate(CompanyProductWrite):
@@ -92,7 +97,7 @@ class CompanyProductUpdate(CompanyProductWrite):
 
 class CompanyProductOut(CompanyProductBase):
     id: int
-    components: List[CompanyProductComponentOut] = []
+    modes: List[CompanyProductModeOut] = []
     model_config = ORM_CONFIG
 
 

@@ -45,7 +45,9 @@ chemical-manager/
 │       │   ├── config.py           # đọc biến môi trường
 │       │   ├── database.py         # engine, session, Base
 │       │   ├── migrations.py       # thêm cột mới cho bảng đã tồn tại
+│       │   ├── product_catalog.py  # nạp danh mục SP công ty từ data/company_products.json
 │       │   └── seed.py             # dữ liệu mẫu + letterhead mặc định
+│       ├── data/                   # company_products.json (214 mã) + script đổi từ Excel
 │       ├── templates/              # mẫu Jinja2 của tờ A4 (dùng chung cho web và PDF)
 │       ├── static/                 # font của tờ in (Tinos, Noto Serif TC) + logo
 │       ├── services/
@@ -90,7 +92,7 @@ chemical-manager/
 | `customers` | Bảng 1 – KH | |
 | `customer_fields` | (lĩnh vực của KH) | 1 KH – n lĩnh vực |
 | `customer_field_products` | (SP dùng theo lĩnh vực) | tự map sang `company_products` nếu trùng mã |
-| `company_products` / `company_product_components` | Bảng 2 – SP Cty | `process_stage`: pre_treatment / plating / post_plating; 1 mã có nhiều thành phần (810 → 810A, 810B, 810C), pH / nhiệt độ / thời gian cũng là một dòng thành phần |
+| `company_products` / `company_product_modes` | Bảng 2 – SP Cty | mã, tên Việt/Anh, nhóm phân loại, giai đoạn, vật liệu, công dụng; mỗi mã có n chế độ sử dụng, mỗi chế độ một danh sách thông số (jsonb, mỗi phần tử một dòng "Nhiệt độ: 50-75°C"). Danh mục gốc: `app/data/company_products.json` |
 | `lab_chemicals` | Bảng 3 – HC PTN | `box_count` × `volume_per_box` = `total_volume`; `remaining_volume` là phần "Lẻ" đang dùng |
 | `indicators` | Chất chỉ thị | |
 | `equipment` / `equipment_variants` | Bảng 4 – Thiết bị | 1 thiết bị có nhiều phân loại |
@@ -202,7 +204,16 @@ thanh bên trên màn hẹp. Tờ A4 xem trước luôn nền sáng, kể cả k
 2. **Chưa** có đăng nhập/phân quyền — ứng dụng dùng nội bộ, mở tự do.
 3. Khách hàng: nhập lĩnh vực + danh sách mã SP dùng dạng text (cách nhau bởi
    dấu phẩy); hệ thống tự dò và liên kết (FK) tới `company_products` nếu mã
-   trùng khớp, không trùng thì lưu dạng text tự do.
+   trùng khớp — hoặc là thành phần của một mã (NCZ-49A → NCZ-49) — không
+   trùng thì lưu dạng text tự do.
+4. Danh mục SP công ty lấy từ file Excel tổng hợp. Sửa Excel xong thì dựng lại
+   JSON rồi nạp lại (ghi đè mã trùng, xoá mã không còn trong file, các bảng
+   đang trỏ tới mã bị xoá được chuyển sang mã gốc):
+   ```bash
+   python backend/app/data/build_company_products.py "San pham cong ty.xlsx"   # cần openpyxl
+   docker compose exec backend python -m app.core.product_catalog
+   ```
+   Database còn kiểu SP cũ thì lần khởi động đầu tiên backend tự làm việc này.
 
 ## 8. Hướng mở rộng (chưa làm)
 
