@@ -8,13 +8,18 @@ import { useCrudResource } from '../composables/useCrudResource'
 import { useSearchedRows } from '../composables/useSearchedRows'
 import { PROCESS_STAGES, processStageLabel } from '../constants/processStages'
 
+// Các thông số kỹ thuật là chữ tự do, đơn vị viết luôn trong ô nên không còn
+// cột "Đơn vị" riêng — xem thêm ghi chú ở models.py.
 const columns = [
   { key: 'code', label: 'Mã', sortable: true },
   { key: 'name', label: 'Tên' },
   { key: 'field', label: 'Lĩnh vực', filterable: true },
+  { key: 'usage_purpose', label: 'Công dụng' },
   { key: 'process_stage', label: 'Công đoạn', filterable: true, format: processStageLabel },
   { key: 'concentration', label: 'Nồng độ' },
-  { key: 'unit', label: 'Đơn vị' },
+  { key: 'temperature', label: 'Nhiệt độ' },
+  { key: 'duration', label: 'Thời gian' },
+  { key: 'ph', label: 'pH' },
   { key: 'price', label: 'Giá' },
 ]
 
@@ -22,15 +27,20 @@ const fields = [
   { key: 'code', label: 'Mã sản phẩm' },
   { key: 'name', label: 'Tên sản phẩm' },
   { key: 'field', label: 'Lĩnh vực' },
-  { key: 'usage_purpose', label: 'Công dụng' },
-  { key: 'concentration', label: 'Nồng độ' },
-  { key: 'unit', label: 'Đơn vị' },
+  { key: 'usage_purpose', label: 'Công dụng', full: true },
   { key: 'process_stage', label: 'Công đoạn', type: 'select', options: PROCESS_STAGES },
+  { key: 'concentration', label: 'Nồng độ', placeholder: 'VD: 5 ml/L' },
+  { key: 'temperature', label: 'Nhiệt độ', placeholder: 'VD: 50°C' },
+  { key: 'duration', label: 'Thời gian', placeholder: 'VD: 10 giây, 10 phút' },
+  { key: 'ph', label: 'pH', placeholder: 'VD: 1.8' },
   { key: 'price', label: 'Giá', type: 'number' },
 ]
 
 function emptyForm() {
-  return { code: '', name: '', field: '', usage_purpose: '', concentration: '', unit: '', process_stage: '', price: null }
+  return {
+    code: '', name: '', field: '', usage_purpose: '', process_stage: '',
+    concentration: '', temperature: '', duration: '', ph: '', price: null,
+  }
 }
 
 const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
@@ -38,7 +48,10 @@ const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = us
   { confirmRemove: row => `Xoá sản phẩm "${row.name}"?` },
 )
 
-const displayRows = useSearchedRows(rows, r => [r.code, r.name, r.field, r.process_stage, r.concentration, r.unit])
+const displayRows = useSearchedRows(rows, r => [
+  r.code, r.name, r.field, r.usage_purpose, r.process_stage,
+  r.concentration, r.temperature, r.duration, r.ph,
+])
 </script>
 
 <template>

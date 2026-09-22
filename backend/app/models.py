@@ -71,8 +71,12 @@ class CompanyProduct(Base):
     name = Column(String(255), nullable=False)
     field = Column(String(255))
     usage_purpose = Column(String(255))
+    # Cac thong so ky thuat deu la chuoi tu do co san don vi trong do
+    # ("5 ml/L", "50oC", "10 phut", "1.8") nen khong con cot don vi rieng.
     concentration = Column(String(100))
-    unit = Column(String(50))
+    temperature = Column(String(100))
+    duration = Column(String(100))
+    ph = Column(String(50))
     process_stage = Column(Enum(ProcessStage))
     price = Column(Float)
 

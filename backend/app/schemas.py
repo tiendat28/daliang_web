@@ -56,8 +56,10 @@ class CompanyProductBase(BaseModel):
     name: str
     field: Optional[str] = None
     usage_purpose: Optional[str] = None
-    concentration: Optional[str] = None
-    unit: Optional[str] = None
+    concentration: Optional[str] = None     # "5 ml/L"
+    temperature: Optional[str] = None       # "50oC"
+    duration: Optional[str] = None          # "10s", "10 phut"
+    ph: Optional[str] = None                # "1.8"
     process_stage: Optional[ProcessStage] = None
     price: Optional[float] = None
 

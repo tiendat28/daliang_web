@@ -39,6 +39,7 @@ function numberOrNull(value) {
       <textarea
         v-else-if="field.type === 'textarea'"
         :value="modelValue[field.key]"
+        :placeholder="field.placeholder"
         rows="3"
         class="w-full field-input focus:outline-none focus:ring-2 focus:ring-brand-400"
         @input="updateField(field.key, $event.target.value)"
@@ -48,6 +49,7 @@ function numberOrNull(value) {
         v-else
         :type="field.type || 'text'"
         :value="modelValue[field.key]"
+        :placeholder="field.placeholder"
         class="w-full field-input focus:outline-none focus:ring-2 focus:ring-brand-400"
         @input="updateField(field.key, field.type === 'number' ? numberOrNull($event.target.value) : $event.target.value)"
       />

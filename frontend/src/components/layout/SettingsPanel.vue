@@ -301,9 +301,12 @@ async function handleImportFile(e) {
         product_codes: (f.products || []).map(p => p.product_code_text).filter(Boolean),
       })),
     })))
+    // Ban sao luu cu con cot don vi rieng -> ghep vao nong do nhu ben database
     tally(await restoreList(data.company_products, companyProductsApi.create, p => ({
       code: p.code, name: p.name, field: p.field, usage_purpose: p.usage_purpose,
-      concentration: p.concentration, unit: p.unit, process_stage: p.process_stage, price: p.price,
+      concentration: [p.concentration, p.unit].filter(Boolean).join(' '),
+      temperature: p.temperature, duration: p.duration, ph: p.ph,
+      process_stage: p.process_stage, price: p.price,
     })))
     tally(await restoreList(data.lab_chemicals, labChemicalsApi.create, c => ({
       code: c.code, name: c.name, type: c.type, box_count: c.box_count,
