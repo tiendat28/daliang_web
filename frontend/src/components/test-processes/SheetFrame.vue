@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Loader2 } from 'lucide-vue-next'
-import { PAGE_WIDTH, PAGE_HEIGHT } from '../../constants/testProcess'
+import { PAGE_WIDTH, PAGE_HEIGHT, DEFAULT_ZOOM } from '../../constants/testProcess'
 
 // Khung xem trước tờ A4. HTML do backend dựng (cùng template với bản PDF) nên
 // xem thế nào in ra thế ấy; ở đây chỉ lo việc thu nhỏ cho vừa chỗ trống.
@@ -9,34 +9,29 @@ import { PAGE_WIDTH, PAGE_HEIGHT } from '../../constants/testProcess'
 const props = defineProps({
   html: { type: String, default: '' },
   loading: { type: Boolean, default: false },
-  zoom: { type: String, default: 'fit' },   // 'fit' vừa khung | 'width' vừa bề ngang | 'full' 100%
+  // Số phần trăm (25…100) hoặc 'width' để co vừa bề ngang (dùng trên điện thoại)
+  zoom: { type: [Number, String], default: DEFAULT_ZOOM },
   // false: khung cao theo tờ giấy và để trang cha cuộn (dùng trên điện thoại)
   fill: { type: Boolean, default: true },
   emptyText: { type: String, default: 'Chưa đủ dữ liệu để xem trước' },
 })
 
 const box = ref(null)
-const size = ref({ width: 0, height: 0 })
+const boxWidth = ref(0)
 let observer = null
 
 onMounted(() => {
   // contentRect đã trừ sẵn phần đệm của khung nên đây là chỗ trống thật cho tờ giấy
-  observer = new ResizeObserver(([entry]) => {
-    size.value = { width: entry.contentRect.width, height: entry.contentRect.height }
-  })
+  observer = new ResizeObserver(([entry]) => { boxWidth.value = entry.contentRect.width })
   observer.observe(box.value)
 })
 
 onBeforeUnmount(() => observer?.disconnect())
 
 const scale = computed(() => {
-  if (props.zoom === 'full') return 1
-  const { width, height } = size.value
-  if (!width) return 0.5
-  const byWidth = width / PAGE_WIDTH
-  if (props.zoom === 'width') return Math.min(byWidth, 1)
-  if (!height) return 0.5
-  return Math.min(byWidth, height / PAGE_HEIGHT, 1)
+  if (props.zoom !== 'width') return props.zoom / 100
+  if (!boxWidth.value) return DEFAULT_ZOOM / 100
+  return Math.min(boxWidth.value / PAGE_WIDTH, 1)
 })
 </script>
 

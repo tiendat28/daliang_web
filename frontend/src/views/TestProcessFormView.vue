@@ -9,7 +9,7 @@ import ZoomToggle from '../components/test-processes/ZoomToggle.vue'
 import MenuButton from '../components/layout/MenuButton.vue'
 import { testProcessesApi, processTemplatesApi, customersApi } from '../api/resources'
 import { useStepEditorLookups } from '../composables/useStepEditorLookups'
-import { STATUSES, emptyStep, normalizeStep } from '../constants/testProcess'
+import { STATUSES, emptyStep, normalizeStep, DEFAULT_ZOOM } from '../constants/testProcess'
 import { currentPeriod } from '../utils/format'
 import { fromMonthInput, toMonthInput } from '../utils/testProcessFormat'
 import { numOrNull, stepPayload, textOrNull } from '../utils/testProcessPayload'
@@ -46,7 +46,7 @@ const savedSnapshot = ref('')
 
 const sheetHtml = ref('')
 const sheetLoading = ref(false)
-const zoom = ref('fit')
+const zoom = ref(DEFAULT_ZOOM)
 
 function buildPayload() {
   return {

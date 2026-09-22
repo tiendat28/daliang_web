@@ -9,7 +9,7 @@ import SheetFrame from './SheetFrame.vue'
 import StepCards from './StepCards.vue'
 import DropdownMenu from './DropdownMenu.vue'
 import ZoomToggle from './ZoomToggle.vue'
-import { STATUSES, statusMeta } from '../../constants/testProcess'
+import { STATUSES, statusMeta, DEFAULT_ZOOM } from '../../constants/testProcess'
 import { formatProcessMeta } from '../../utils/testProcessFormat'
 
 // Khung chi tiết một lưu trình. Trên máy tính là cột bên phải của màn hình danh
@@ -25,7 +25,7 @@ const emit = defineEmits([
   'back', 'edit', 'duplicate', 'remove', 'status', 'save-template', 'letterhead', 'download', 'print',
 ])
 
-const zoom = ref('fit')
+const zoom = ref(DEFAULT_ZOOM)
 const mobileTab = ref('sheet')   // 'sheet' | 'steps'
 
 watch(() => props.process?.id, () => { mobileTab.value = 'sheet' })

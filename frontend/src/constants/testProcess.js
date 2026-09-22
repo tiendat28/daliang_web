@@ -36,10 +36,17 @@ export const PAGE_HEIGHT = 1123
 // Phần đầu trang (lề trên + khối letterhead) dùng cho khung xem trước letterhead
 export const LETTERHEAD_HEIGHT = 132
 
-export const ZOOM_OPTIONS = [
-  { value: 'fit', label: 'Vừa khung' },
-  { value: 'full', label: '100%' },
-]
+// Các mức thu phóng của khung xem trước, theo thứ tự tăng dần (nút - và +)
+export const ZOOM_LEVELS = [25, 50, 75, 80, 90, 100]
+// 50% là mức gần vừa khung xem trước trên máy tính nhất trong danh sách trên
+export const DEFAULT_ZOOM = 50
+
+/** Mức kế tiếp theo hướng `step` (-1 hoặc 1); đụng đầu/cuối thì giữ nguyên. */
+export function stepZoom(zoom, step) {
+  const index = ZOOM_LEVELS.indexOf(zoom)
+  const next = (index === -1 ? ZOOM_LEVELS.indexOf(DEFAULT_ZOOM) : index) + step
+  return ZOOM_LEVELS[next] ?? zoom
+}
 
 /** Một bước trống, dùng cho nút "Thêm bước". */
 export function emptyStep(operation = '') {
