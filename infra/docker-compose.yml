@@ -1,0 +1,84 @@
+# Chay ca he thong:  docker compose -f infra/docker-compose.yml up -d --build
+# (hoac dung trong thu muc infra: docker compose up -d --build)
+#
+# Ten project GIU "chemical-manager" de dung lai dung volume du lieu cu
+# (chemical-manager_db_data) - doi ten o day la Docker tao DB trong moi.
+name: chemical-manager
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-labuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-labpass}
+      POSTGRES_DB: ${POSTGRES_DB:-labdb}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ../backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-labuser}:${POSTGRES_PASSWORD:-labpass}@db:5432/${POSTGRES_DB:-labdb}
+      UVICORN_RELOAD: "1"            # tu tai lai khi sua code (chi luc dev)
+      JWT_SECRET: ${JWT_SECRET:-}
+      TWO_FACTOR_ENABLED: ${TWO_FACTOR_ENABLED:-false}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      MAIL_FROM: ${MAIL_FROM:-Daliang VN <noreply@daliang.com>}
+      PORTAL_URL: ${PORTAL_URL:-http://localhost:5173}
+    depends_on:
+      - db
+    ports:
+      - "8001:8000"
+    volumes:
+      - ../backend:/app
+
+  # Cong noi bo (Vue + Tailwind) - http://localhost:5173 hoac qua nginx
+  portal:
+    build: ../apps/portal
+    restart: unless-stopped
+    environment:
+      API_PROXY_TARGET: http://backend:8000
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../apps/portal:/app
+      - /app/node_modules
+
+  # Website cong khai - http://localhost:5174 hoac qua nginx
+  landing:
+    build: ../apps/landing
+    restart: unless-stopped
+    environment:
+      API_PROXY_TARGET: http://backend:8000
+    depends_on:
+      - backend
+    ports:
+      - "5174:5174"
+    volumes:
+      - ../apps/landing:/app
+      - /app/node_modules
+
+  # Dinh tuyen 2 ten mien: SITE_HOST -> landing, PORTAL_HOST -> portal, /api -> backend
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    environment:
+      SITE_HOST: ${SITE_HOST:-daliang.localhost}
+      PORTAL_HOST: ${PORTAL_HOST:-noibo.daliang.localhost}
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+    depends_on:
+      - portal
+      - landing
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  db_data:

@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daliang VN — Hoá chất xi mạ công nghiệp</title>
+<meta name="description" content="Daliang VN cung cấp hoá chất tiền xử lý, phụ gia mạ và thụ động cho ngành xi mạ, kèm phòng thí nghiệm và hỗ trợ kỹ thuật.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+SC:wght@500;700&display=swap">
+<!--
+  ============================================================
+  HƯỚNG DẪN ĐIỀN THÔNG TIN
+  1. Thông tin công ty (địa chỉ, hotline, email, bản đồ…): sửa khối COMPANY trong <script> cuối file.
+  2. Danh sách sản phẩm: sửa mảng PRODUCTS trong <script>.
+  3. Giấy tờ / chứng nhận: sửa mảng DOCS trong <script>.
+  4. Nội dung chữ 3 ngôn ngữ: sửa đối tượng I18N trong <script> (vi / en / zh).
+  5. Ảnh: thay các khối có class "ph" bằng thẻ <img>.
+  Mọi chỗ cần điền đều nằm trong ngoặc vuông [ ... ]  — tìm "[" để thấy hết.
+  ============================================================
+-->
+<style>
+:root{
+  --dark:#0b3336; --ink:#0f172a; --body:#334155; --muted:#5b6b7f; --line:#e2e8f0;
+  --teal:#0b7d72; --teal-d:#085e56; --mint:#5eead4; --soft:#d3f4ee;
+  --grad:linear-gradient(135deg,#0b7d72,#0e6f8a);
+  --bg:linear-gradient(135deg,#e4f5ef 0%,#eef1fb 55%,#f2ecfb 100%);
+  --pad:clamp(20px,6.5vw,96px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Be Vietnam Pro","Noto Sans SC",system-ui,sans-serif;color:var(--body);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+html[lang="zh"] body{font-family:"Noto Sans SC","Be Vietnam Pro",system-ui,sans-serif}
+a{color:var(--teal)}a:hover{color:var(--teal-d)}
+img{max-width:100%;display:block}
+h1,h2,h3{color:var(--ink);margin:0;letter-spacing:-.01em}
+button,input,textarea{font:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+.wrap{padding-left:var(--pad);padding-right:var(--pad);max-width:1440px;margin:0 auto}
+.icon{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* header */
+.top{background:var(--dark);background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px}
+.nav{height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-mark{width:40px;height:40px;border-radius:12px;background:var(--grad);display:inline-flex;align-items:center;justify-content:center;color:#fff}
+.brand-mark .icon{width:20px;height:20px;stroke-width:2}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text b{font-size:17px;letter-spacing:.06em;color:#fff}
+.brand-text span{font-size:11px;color:#a7d8d1;font-weight:500}
+.menu{display:flex;gap:32px}
+.menu a{color:#e4f3f1;text-decoration:none;font-size:15px;font-weight:500}
+.menu a:hover{color:var(--mint)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang{display:flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.12)}
+.lang button{height:34px;min-width:44px;padding:0 10px;border:0;border-radius:8px;background:transparent;color:#cfe9e5;font-size:13px;font-weight:600;cursor:pointer}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--dark);font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-mint{background:var(--mint);color:var(--dark)}.btn-mint:hover{color:var(--dark);box-shadow:0 8px 24px rgba(94,234,212,.35)}
+.btn-line{border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:600}.btn-line:hover{color:#fff;background:rgba(255,255,255,.06)}
+.btn-grad{background:var(--grad);color:#fff}.btn-grad:hover{color:#fff;box-shadow:0 8px 24px rgba(11,125,114,.3)}
+.btn-sm{height:44px;padding:0 20px;font-size:14px;border-radius:12px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;align-items:center;justify-content:center;cursor:pointer}
+.mobile-menu{display:none;flex-direction:column;padding:8px 0 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.mobile-menu a{color:#e4f3f1;text-decoration:none;font-size:16px;font-weight:500;padding:12px 0}
+.mobile-menu.open{display:flex}
+
+/* hero */
+.hero{display:flex;align-items:center;justify-content:space-between;gap:64px;padding-top:72px;padding-bottom:96px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;max-width:600px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--mint);font-size:14px;font-weight:600;letter-spacing:.04em}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--mint)}
+.hero h1{font-size:clamp(34px,4.2vw,54px);line-height:1.12;color:#fff;letter-spacing:-.02em}
+.hero p{margin:0;font-size:18px;line-height:1.65;color:#c7e3df}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.hero-visual{width:560px;flex-shrink:0;border-radius:28px;padding:28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.hero-visual-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;color:#e4f3f1;font-weight:600;font-size:14px}
+.hero-visual svg{width:100%;height:auto}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.steps div{padding:12px;border-radius:14px;background:rgba(255,255,255,.08);display:flex;flex-direction:column;gap:4px}
+.steps small{color:var(--mint);font-size:12px;font-weight:700;letter-spacing:.06em}
+.steps span{color:#fff;font-size:14px;font-weight:600}
+
+/* sections */
+section{scroll-margin-top:20px}
+.sec{padding-top:110px}
+.sec-title{display:flex;flex-direction:column;gap:10px}
+.sec-title.center{align-items:center;text-align:center}
+.sec-title small{color:var(--teal);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sec-title h2{font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;line-height:1.2}
+.sec-title p{margin:0;font-size:16px;color:var(--muted);line-height:1.6;max-width:640px}
+.ph{border-radius:24px;background:repeating-linear-gradient(135deg,#e6efee 0 12px,#eff5f4 12px 24px);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;font-weight:500;border:1px dashed #b9cfcc;text-align:center;padding:16px}
+
+.about{display:flex;gap:72px;align-items:center}
+.about .ph{width:540px;height:440px;flex-shrink:0}
+.about-body{flex:1;display:flex;flex-direction:column;gap:22px}
+.values{display:flex;flex-direction:column;gap:16px;margin-top:6px}
+.value{display:flex;gap:16px;align-items:flex-start}
+.value i,.svc i{width:44px;height:44px;border-radius:14px;background:var(--soft);color:#0f5f56;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.value i .icon{width:22px;height:22px}
+.value b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+.value span{font-size:15px;color:var(--muted);line-height:1.55}
+
+.products-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{height:40px;padding:0 18px;border-radius:999px;font-size:14px;font-weight:600;background:#fff;color:var(--body);border:1px solid var(--line);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--dark);color:#fff;border-color:var(--dark)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:32px}
+.pcard{background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px;border:1px solid #e3ecec;box-shadow:0 8px 24px rgba(15,23,42,.04);transition:box-shadow .2s,transform .2s}
+.pcard:hover{box-shadow:0 14px 34px rgba(11,125,114,.14);transform:translateY(-2px)}
+.pcard-img{height:150px;border-radius:16px;background:linear-gradient(160deg,#eaf7f4,#f1effb);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.pcard-img .icon{width:48px;height:48px;stroke-width:1.4}
+.pcard-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:var(--ink)}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-pre{background:#d3f4ee;color:#0f5f56}.b-add{background:#ece8fb;color:#5b3fb0}.b-pas{background:#e0f0fb;color:#0b5a85}
+.pcard h3{font-size:19px}
+.pcard p{margin:0;font-size:14px;color:var(--muted);line-height:1.55;flex-grow:1}
+.pcard-links{display:flex;gap:14px;border-top:1px solid #eef2f6;padding-top:14px;flex-wrap:wrap}
+.pcard-links a{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;text-decoration:none}
+.pcard-links a.dl{color:var(--body)}.pcard-links a.dl:hover{color:var(--teal)}
+.pcard-links .push{margin-left:auto}
+.empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:24px}
+
+.certs{border-radius:32px;background:var(--bg);padding:56px;display:flex;gap:56px}
+.certs-side{width:400px;flex-shrink:0;display:flex;flex-direction:column;gap:20px}
+.lookup{background:#fff;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.lookup label{font-size:15px;font-weight:700;color:var(--ink)}
+.lookup-row{display:flex;gap:8px}
+.lookup input{flex:1;min-width:0;height:48px;padding:0 14px;border-radius:12px;border:1px solid #cfdcdc;font-size:16px}
+.lookup button{height:48px;padding:0 18px;border:0;border-radius:12px;background:var(--dark);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.lookup small{font-size:13px;color:var(--muted)}
+.lookup-result{font-size:14px;color:var(--body)}
+.docs{flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.doc{background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.doc .ph{height:120px;border-radius:14px;font-size:13px}
+.doc-body{display:flex;gap:12px;align-items:flex-start}
+.doc-body .icon{color:var(--teal);width:20px;height:20px;margin-top:2px}
+.doc-body b{display:block;color:var(--ink);font-size:15px;line-height:1.4}
+.doc-body span{font-size:13px;color:var(--muted)}
+.doc a{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;text-decoration:none}
+
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:36px}
+.svc{border-radius:22px;padding:26px;border:1px solid #e3ecec;display:flex;flex-direction:column;gap:14px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.svc:hover{border-color:#9fd6ce;box-shadow:0 10px 28px rgba(11,125,114,.1)}
+.svc i{width:52px;height:52px;border-radius:16px;background:var(--grad);color:#fff}
+.svc i .icon{width:24px;height:24px}
+.svc h3{font-size:18px}
+.svc p{margin:0;font-size:14px;color:var(--muted);line-height:1.6}
+
+.contact{display:flex;gap:40px;padding-bottom:110px}
+.contact-form{flex:1;display:flex;flex-direction:column;gap:24px}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:600;color:var(--ink)}
+.field input,.field textarea{padding:0 14px;height:48px;border-radius:12px;border:1px solid #cfdcdc;font-size:16px;background:#fff;color:var(--ink)}
+.field textarea{height:auto;padding:12px 14px;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px rgba(11,125,114,.15)}
+form .btn{grid-column:1/-1;width:100%}
+.form-note{grid-column:1/-1;font-size:14px;color:var(--teal);font-weight:600;min-height:20px}
+.contact-side{width:600px;flex-shrink:0;display:flex;flex-direction:column;gap:16px}
+.map{height:340px;border-radius:24px;overflow:hidden;background:#e8f1ef;position:relative}
+.map iframe{width:100%;height:100%;border:0}
+.quick{display:none;gap:10px}
+.quick a{flex:1;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none}
+.quick .call{background:var(--dark);color:#fff}.quick .dir{background:#e6f4f1;color:#0f5f56}
+.info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.info>div{background:#f4f8f8;border-radius:18px;padding:16px;display:flex;gap:12px}
+.info .icon{color:var(--teal);width:20px;height:20px}
+.info small{display:block;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.info span,.info a{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;word-break:break-word}
+
+footer{background:var(--dark);padding-top:48px;padding-bottom:40px}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot p{margin:14px 0 0;color:#a9cfc9;font-size:14px;line-height:1.6;max-width:360px}
+.foot-col{display:flex;flex-direction:column;gap:10px}
+.foot-col b{color:#fff;font-size:14px}
+.foot-col a{color:#a9cfc9;text-decoration:none;font-size:14px}.foot-col a:hover{color:var(--mint)}
+.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:32px;padding-top:20px;color:#86b3ad;font-size:13px}
+
+/* responsive */
+@media (max-width:1200px){
+  .hero{flex-direction:column;align-items:stretch;gap:40px}
+  .hero-visual{width:100%;max-width:640px}
+  .about{flex-direction:column;align-items:stretch;gap:32px}
+  .about .ph{width:100%;height:320px}
+  .certs{flex-direction:column;padding:40px}
+  .certs-side{width:100%}
+  .contact{flex-direction:column}
+  .contact-side{width:100%}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1024px){
+  .menu,.nav-right .btn-sm{display:none}
+  .burger{display:inline-flex}
+  .grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .nav{height:64px}
+  .brand-mark{width:34px;height:34px}
+  .lang button{min-width:40px;padding:0 6px}
+  .hero{padding-top:36px;padding-bottom:48px}
+  .hero-cta .btn{width:100%}
+  .hero-visual{padding:16px;border-radius:22px}
+  .hero-visual-head span:last-child{display:none}
+  .steps span{font-size:13px}
+  .sec{padding-top:56px}
+  .grid3,.docs,.info{grid-template-columns:1fr}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .svc{padding:16px}.svc i{width:44px;height:44px}
+  .certs{border-radius:0;margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);padding:40px var(--pad)}
+  .filters{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px}
+  .filters button{flex-shrink:0}
+  form{grid-template-columns:1fr}
+  .map{height:220px;border-radius:20px}
+  .quick{display:flex}
+  .contact{padding-bottom:56px}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7 15h10"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6"/><path d="M9 17h6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M3 20h18"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-nav" viewBox="0 0 24 24"><path d="M12 3l7 18-7-4-7 4z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <nav class="nav" aria-label="Menu chính">
+      <a class="brand" href="#top" aria-label="Daliang VN">
+        <span class="brand-mark"><svg class="icon"><use href="#i-drop"/></svg></span>
+        <span class="brand-text"><b>DALIANG</b><span data-i18n="brandSub">Hoá chất xi mạ</span></span>
+      </a>
+      <div class="menu">
+        <a href="#about" data-i18n="nav.about">Giới thiệu</a>
+        <a href="#products" data-i18n="nav.products">Sản phẩm</a>
+        <a href="#certs" data-i18n="nav.certs">Chứng nhận</a>
+        <a href="#services" data-i18n="nav.services">Dịch vụ</a>
+        <a href="#contact" data-i18n="nav.contact">Liên hệ</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang" role="group" aria-label="Ngôn ngữ / Language / 语言">
+          <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+        <a class="btn btn-mint btn-sm" href="#contact" data-i18n="nav.quote">Nhận báo giá</a>
+        <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><svg class="icon" style="width:20px;height:20px"><use href="#i-menu"/></svg></button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" data-i18n="nav.about">Giới thiệu</a>
+      <a href="#products" data-i18n="nav.products">Sản phẩm</a>
+      <a href="#certs" data-i18n="nav.certs">Chứng nhận</a>
+      <a href="#services" data-i18n="nav.services">Dịch vụ</a>
+      <a href="#contact" data-i18n="nav.contact">Liên hệ</a>
+    </div>
+
+    <div class="hero" id="top">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="hero.eyebrow">Hoá chất xi mạ công nghiệp</span>
+        <h1 data-i18n="hero.h1">Hoá chất cho bề mặt kim loại bền, sáng và đạt chuẩn</h1>
+        <p data-i18n="hero.lead">Daliang VN cung cấp hoá chất tiền xử lý, phụ gia mạ và thụ động — kèm phòng thí nghiệm phân tích mẫu và kỹ sư hỗ trợ tận dây chuyền.</p>
+        <div class="hero-cta">
+          <a class="btn btn-mint" href="#products"><span data-i18n="hero.cta1">Xem sản phẩm</span><svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#contact" data-i18n="hero.cta2">Gửi yêu cầu tư vấn</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-head"><span data-i18n="hero.visual">Một dây chuyền — đủ hoá chất cho từng bể</span><span style="font-size:12px;color:#9fd6ce;font-weight:500">[Có thể thay bằng ảnh thật]</span></div>
+        <svg viewBox="0 0 530 290" role="img" aria-label="Plating line" id="tanks"></svg>
+        <div class="steps">
+          <div><small data-i18n="step1">BƯỚC 1</small><span data-i18n="grp.pre">Tiền xử lý</span></div>
+          <div><small data-i18n="step2">BƯỚC 2</small><span data-i18n="grp.add">Phụ gia mạ</span></div>
+          <div><small data-i18n="step3">BƯỚC 3</small><span data-i18n="grp.pas">Thụ động</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="wrap sec">
+    <div class="about">
+      <div class="ph">[Ảnh nhà máy / phòng thí nghiệm]</div>
+      <div class="about-body">
+        <div class="sec-title">
+          <small data-i18n="about.eyebrow">Về Daliang VN</small>
+          <h2 data-i18n="about.title">Đối tác hoá chất cho ngành xi mạ</h2>
+          <p data-i18n="about.text">[Đoạn giới thiệu công ty: năm thành lập, nhà máy, thị trường chính, định hướng.]</p>
+        </div>
+        <div class="values">
+          <div class="value"><i><svg class="icon"><use href="#i-flask"/></svg></i><div><b data-i18n="v1.t">Phòng thí nghiệm riêng</b><span data-i18n="v1.d">Phân tích mẫu dung dịch, pha chế thử trước khi giao hàng.</span></div></div>
+          <div class="value"><i><svg class="icon"><use href="#i-tool"/></svg></i><div><b data-i18n="v2.t">Kỹ sư hỗ trợ tại xưởng</b><span data-i18n="v2.d">Hướng dẫn vận hành bể, xử lý lỗi lớp mạ ngay tại dây chuyền.</span></div></div>
+          <div class="value"><i><svg class="icon"><use href="#i-file"/></svg></i><div><b data-i18n="v3.t">Hồ sơ đầy đủ</b><span data-i18n="v3.d">Phiếu an toàn hoá chất (MSDS) và tài liệu kỹ thuật (TDS) cho từng mã hàng.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="wrap sec">
+    <div class="products-head">
+      <div class="sec-title">
+        <small data-i18n="prod.eyebrow">Sản phẩm</small>
+        <h2 data-i18n="prod.title">Hoá chất theo từng công đoạn</h2>
+      </div>
+      <div class="filters" role="group" aria-label="Lọc sản phẩm">
+        <button type="button" data-filter="all" aria-pressed="true" data-i18n="grp.all">Tất cả</button>
+        <button type="button" data-filter="pre" aria-pressed="false" data-i18n="grp.pre">Tiền xử lý</button>
+        <button type="button" data-filter="add" aria-pressed="false" data-i18n="grp.add">Phụ gia mạ</button>
+        <button type="button" data-filter="pas" aria-pressed="false" data-i18n="grp.pas">Thụ động</button>
+      </div>
+    </div>
+    <div class="grid3" id="product-grid"></div>
+  </section>
+
+  <section id="certs" class="wrap sec">
+    <div class="certs">
+      <div class="certs-side">
+        <div class="sec-title">
+          <small data-i18n="certs.eyebrow">Giấy tờ &amp; chứng nhận</small>
+          <h2 data-i18n="certs.title">Minh bạch pháp lý, đủ hồ sơ an toàn</h2>
+        </div>
+        <div class="lookup">
+          <label for="msds-code" data-i18n="certs.lookup">Tra cứu MSDS / TDS theo mã sản phẩm</label>
+          <div class="lookup-row">
+            <input id="msds-code" type="text" placeholder="VD: NI-534C" autocomplete="off">
+            <button type="button" id="msds-btn" data-i18n="certs.find">Tìm</button>
+          </div>
+          <div class="lookup-result" id="msds-result" aria-live="polite"></div>
+          <small data-i18n="certs.langs">Tài liệu có sẵn tiếng Việt, Anh, Trung.</small>
+        </div>
+      </div>
+      <div class="docs" id="docs"></div>
+    </div>
+  </section>
+
+  <section id="services" class="wrap sec">
+    <div class="sec-title center">
+      <small data-i18n="svc.eyebrow">Dịch vụ</small>
+      <h2 data-i18n="svc.title">Không chỉ bán hoá chất</h2>
+      <p data-i18n="svc.sub">Đội kỹ thuật đồng hành từ khâu chạy thử đến vận hành ổn định.</p>
+    </div>
+    <div class="grid4">
+      <div class="svc"><i><svg class="icon"><use href="#i-chart"/></svg></i><h3 data-i18n="s1.t">Tư vấn quy trình</h3><p data-i18n="s1.d">Chọn hoá chất và thông số bể phù hợp với vật liệu, yêu cầu lớp mạ.</p></div>
+      <div class="svc"><i><svg class="icon"><use href="#i-flask"/></svg></i><h3 data-i18n="s2.t">Phân tích mẫu dung dịch</h3><p data-i18n="s2.d">Gửi mẫu về phòng thí nghiệm, nhận kết quả và hướng điều chỉnh.</p></div>
+      <div class="svc"><i><svg class="icon"><use href="#i-drop"/></svg></i><h3 data-i18n="s3.t">Pha chế theo yêu cầu</h3><p data-i18n="s3.d">Điều chỉnh công thức theo dây chuyền và tiêu chuẩn của khách.</p></div>
+      <div class="svc"><i><svg class="icon"><use href="#i-truck"/></svg></i><h3 data-i18n="s4.t">Giao hàng hoá chất</h3><p data-i18n="s4.d">Xe và tài xế được huấn luyện vận chuyển hàng nguy hiểm.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap sec">
+    <div class="contact">
+      <div class="contact-form">
+        <div class="sec-title">
+          <small data-i18n="ct.eyebrow">Liên hệ</small>
+          <h2 data-i18n="ct.title">Cần tư vấn hoặc báo giá?</h2>
+          <p data-i18n="ct.sub">Để lại thông tin, bộ phận kỹ thuật sẽ gọi lại trong giờ làm việc.</p>
+        </div>
+        <div class="quick">
+          <a class="call" id="quick-call" href="#"><svg class="icon"><use href="#i-phone"/></svg><span data-i18n="ct.call">Gọi ngay</span></a>
+          <a class="dir" id="quick-dir" href="#" target="_blank" rel="noopener"><svg class="icon"><use href="#i-nav"/></svg><span data-i18n="ct.dir">Chỉ đường</span></a>
+        </div>
+        <!-- Form: gắn action tới API của bạn (VD: POST /api/v1/contact) — hiện chỉ hiển thị thông báo mẫu -->
+        <form id="contact-form" novalidate>
+          <div class="field"><label for="f-name" data-i18n="f.name">Họ và tên</label><input id="f-name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="f-co" data-i18n="f.co">Công ty</label><input id="f-co" name="company" autocomplete="organization"></div>
+          <div class="field"><label for="f-phone" data-i18n="f.phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel"></div>
+          <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email"></div>
+          <div class="field full"><label for="f-prod" data-i18n="f.prod">Sản phẩm quan tâm</label><input id="f-prod" name="product"></div>
+          <div class="field full"><label for="f-msg" data-i18n="f.msg">Nội dung</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+          <button class="btn btn-grad" type="submit" data-i18n="f.send">Gửi yêu cầu</button>
+          <div class="form-note" id="form-note" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="contact-side">
+        <div class="map" id="map"></div>
+        <div class="info">
+          <div><svg class="icon"><use href="#i-pin"/></svg><div><small data-i18n="i.addr">Địa chỉ</small><span id="c-addr"></span></div></div>
+          <div><svg class="icon"><use href="#i-phone"/></svg><div><small>Hotline</small><a id="c-phone" href="#"></a></div></div>
+          <div><svg class="icon"><use href="#i-mail"/></svg><div><small>Email</small><a id="c-mail" href="#"></a></div></div>
+          <div><svg class="icon"><use href="#i-clock"/></svg><div><small data-i18n="i.hours">Giờ làm việc</small><span id="c-hours"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark"><svg class="icon"><use href="#i-drop"/></svg></span><span class="brand-text"><b>DALIANG</b><span data-i18n="brandSub">Hoá chất xi mạ</span></span></a>
+        <p><span id="c-name"></span><br><span id="c-foot"></span></p>
+      </div>
+      <div class="foot-col"><b data-i18n="nav.products">Sản phẩm</b><a href="#products" data-i18n="grp.pre">Tiền xử lý</a><a href="#products" data-i18n="grp.add">Phụ gia mạ</a><a href="#products" data-i18n="grp.pas">Thụ động</a></div>
+      <div class="foot-col"><b data-i18n="ft.company">Công ty</b><a href="#about" data-i18n="nav.about">Giới thiệu</a><a href="#certs" data-i18n="nav.certs">Chứng nhận</a><a href="#services" data-i18n="nav.services">Dịch vụ</a></div>
+      <div class="foot-col"><b data-i18n="ft.support">Hỗ trợ</b><a href="#certs" data-i18n="ft.msds">Tra cứu MSDS</a><a href="#contact" data-i18n="nav.contact">Liên hệ</a><a href="#" data-i18n="ft.privacy">Chính sách bảo mật</a></div>
+    </div>
+    <div class="copy">© <span id="year"></span> Daliang VN.</div>
+  </div>
+</footer>
+
+<script>
+/* ================= 1. THÔNG TIN CÔNG TY — điền vào đây ================= */
+const COMPANY = {
+  name:    "Công ty TNHH Hoá chất Daliang VN",
+  address: "[Địa chỉ nhà máy / văn phòng]",
+  taxId:   "[Mã số thuế]",
+  phone:   "[Số điện thoại]",        // VD: "0909 123 456"
+  email:   "[email@daliang.com]",
+  hours:   { vi: "[Thứ 2 – Thứ 7, 7:30 – 17:00]", en: "[Mon – Sat, 7:30 – 17:00]", zh: "[周一至周六 7:30 – 17:00]" },
+  mapQuery:"",                          // Để trống = hiện khung chờ. VD: "Công ty TNHH Hóa chất Daliang VN" hoặc địa chỉ đầy đủ
+};
+
+/* ================= 2. SẢN PHẨM — group: pre | add | pas ================= */
+const PRODUCTS = [
+  { code:"[Mã SP]", group:"pre", name:{vi:"Tẩy dầu kiềm", en:"Alkaline degreaser", zh:"碱性除油剂"},
+    desc:{vi:"Làm sạch dầu mỡ trên thép, kẽm, đồng trước khi mạ.", en:"Removes oil and grease from steel, zinc and copper before plating.", zh:"电镀前清除钢、锌、铜表面的油脂。"}, msds:"#", tds:"#" },
+  { code:"[Mã SP]", group:"pre", name:{vi:"Tẩy gỉ axit", en:"Acid pickling agent", zh:"酸性除锈剂"},
+    desc:{vi:"Loại bỏ gỉ và lớp oxit, hạn chế ăn mòn nền.", en:"Removes rust and oxide scale while limiting base-metal attack.", zh:"去除锈迹和氧化层，减少对基材的腐蚀。"}, msds:"#", tds:"#" },
+  { code:"NI-534C", group:"add", name:{vi:"Phụ gia mạ niken", en:"Nickel plating additive", zh:"镀镍添加剂"},
+    desc:{vi:"[Mô tả ngắn công dụng]", en:"[Short description]", zh:"[简要说明]"}, msds:"#", tds:"#" },
+  { code:"CU-4", group:"add", name:{vi:"Phụ gia mạ đồng", en:"Copper plating additive", zh:"镀铜添加剂"},
+    desc:{vi:"[Mô tả ngắn công dụng]", en:"[Short description]", zh:"[简要说明]"}, msds:"#", tds:"#" },
+  { code:"CRT-650", group:"pas", name:{vi:"[Tên sản phẩm]", en:"[Product name]", zh:"[产品名称]"},
+    desc:{vi:"[Mô tả ngắn công dụng]", en:"[Short description]", zh:"[简要说明]"}, msds:"#", tds:"#" },
+  { code:"[Mã SP]", group:"pas", name:{vi:"[Tên sản phẩm]", en:"[Product name]", zh:"[产品名称]"},
+    desc:{vi:"[Mô tả ngắn công dụng]", en:"[Short description]", zh:"[简要说明]"}, msds:"#", tds:"#" },
+];
+
+/* ================= 3. GIẤY TỜ / CHỨNG NHẬN ================= */
+const DOCS = [
+  { icon:"file",   title:{vi:"Giấy chứng nhận đăng ký doanh nghiệp", en:"Business registration certificate", zh:"企业注册证书"}, sub:"[Mã số doanh nghiệp]", url:"#" },
+  { icon:"shield", title:{vi:"Giấy chứng nhận đủ điều kiện sản xuất, kinh doanh hoá chất", en:"Chemical production & trading eligibility certificate", zh:"化学品生产经营资格证书"}, sub:"[Số giấy — cơ quan cấp]", url:"#" },
+  { icon:"check",  title:{vi:"Chứng nhận hệ thống quản lý", en:"Management system certification", zh:"管理体系认证"}, sub:"[ISO 9001 / ISO 14001 — nếu có]", url:"#" },
+  { icon:"layers", title:{vi:"Kết quả thử nghiệm / kiểm định", en:"Test & inspection reports", zh:"检测报告"}, sub:"[Tên phòng thử nghiệm, năm]", url:"#" },
+];
+
+/* ================= 4. NỘI DUNG 3 NGÔN NGỮ ================= */
+const I18N = {
+  vi: {
+    title:"Daliang VN — Hoá chất xi mạ công nghiệp", brandSub:"Hoá chất xi mạ",
+    "nav.about":"Giới thiệu","nav.products":"Sản phẩm","nav.certs":"Chứng nhận","nav.services":"Dịch vụ","nav.contact":"Liên hệ","nav.quote":"Nhận báo giá",
+    "hero.eyebrow":"Hoá chất xi mạ công nghiệp","hero.h1":"Hoá chất cho bề mặt kim loại bền, sáng và đạt chuẩn",
+    "hero.lead":"Daliang VN cung cấp hoá chất tiền xử lý, phụ gia mạ và thụ động — kèm phòng thí nghiệm phân tích mẫu và kỹ sư hỗ trợ tận dây chuyền.",
+    "hero.cta1":"Xem sản phẩm","hero.cta2":"Gửi yêu cầu tư vấn","hero.visual":"Một dây chuyền — đủ hoá chất cho từng bể",
+    step1:"BƯỚC 1",step2:"BƯỚC 2",step3:"BƯỚC 3",
+    tanks:["Tẩy dầu","Rửa nước","Tẩy gỉ","Hoạt hoá","Mạ","Thụ động"],
+    "grp.all":"Tất cả","grp.pre":"Tiền xử lý","grp.add":"Phụ gia mạ","grp.pas":"Thụ động",
+    "about.eyebrow":"Về Daliang VN","about.title":"Đối tác hoá chất cho ngành xi mạ","about.text":"[Đoạn giới thiệu công ty: năm thành lập, nhà máy, thị trường chính, định hướng.]",
+    "v1.t":"Phòng thí nghiệm riêng","v1.d":"Phân tích mẫu dung dịch, pha chế thử trước khi giao hàng.",
+    "v2.t":"Kỹ sư hỗ trợ tại xưởng","v2.d":"Hướng dẫn vận hành bể, xử lý lỗi lớp mạ ngay tại dây chuyền.",
+    "v3.t":"Hồ sơ đầy đủ","v3.d":"Phiếu an toàn hoá chất (MSDS) và tài liệu kỹ thuật (TDS) cho từng mã hàng.",
+    "prod.eyebrow":"Sản phẩm","prod.title":"Hoá chất theo từng công đoạn","prod.detail":"Chi tiết","prod.empty":"Chưa có sản phẩm trong nhóm này.",
+    "certs.eyebrow":"Giấy tờ & chứng nhận","certs.title":"Minh bạch pháp lý, đủ hồ sơ an toàn","certs.lookup":"Tra cứu MSDS / TDS theo mã sản phẩm",
+    "certs.find":"Tìm","certs.langs":"Tài liệu có sẵn tiếng Việt, Anh, Trung.","certs.view":"Xem bản scan","certs.notfound":"Không tìm thấy mã này. Vui lòng liên hệ để được gửi tài liệu.","certs.found":"Tìm thấy:",
+    "svc.eyebrow":"Dịch vụ","svc.title":"Không chỉ bán hoá chất","svc.sub":"Đội kỹ thuật đồng hành từ khâu chạy thử đến vận hành ổn định.",
+    "s1.t":"Tư vấn quy trình","s1.d":"Chọn hoá chất và thông số bể phù hợp với vật liệu, yêu cầu lớp mạ.",
+    "s2.t":"Phân tích mẫu dung dịch","s2.d":"Gửi mẫu về phòng thí nghiệm, nhận kết quả và hướng điều chỉnh.",
+    "s3.t":"Pha chế theo yêu cầu","s3.d":"Điều chỉnh công thức theo dây chuyền và tiêu chuẩn của khách.",
+    "s4.t":"Giao hàng hoá chất","s4.d":"Xe và tài xế được huấn luyện vận chuyển hàng nguy hiểm.",
+    "ct.eyebrow":"Liên hệ","ct.title":"Cần tư vấn hoặc báo giá?","ct.sub":"Để lại thông tin, bộ phận kỹ thuật sẽ gọi lại trong giờ làm việc.","ct.call":"Gọi ngay","ct.dir":"Chỉ đường",
+    "f.name":"Họ và tên","f.co":"Công ty","f.phone":"Số điện thoại","f.prod":"Sản phẩm quan tâm","f.msg":"Nội dung","f.send":"Gửi yêu cầu",
+    "f.ph.name":"Nguyễn Văn A","f.ph.co":"Tên công ty","f.ph.phone":"09xx xxx xxx","f.ph.prod":"VD: phụ gia mạ niken","f.ph.msg":"Mô tả dây chuyền, vật liệu, nhu cầu…","f.ph.mail":"ban@congty.com",
+    "f.ok":"Cảm ơn bạn! Chúng tôi sẽ liên hệ lại sớm.","f.err":"Vui lòng nhập họ tên và số điện thoại.",
+    "i.addr":"Địa chỉ","i.hours":"Giờ làm việc","map.ph":"[Nhúng Google Maps — điền mapQuery trong COMPANY]",
+    "ft.company":"Công ty","ft.support":"Hỗ trợ","ft.msds":"Tra cứu MSDS","ft.privacy":"Chính sách bảo mật","ft.tax":"MST"
+  },
+  en: {
+    title:"Daliang VN — Industrial electroplating chemicals", brandSub:"Plating chemicals",
+    "nav.about":"About","nav.products":"Products","nav.certs":"Certificates","nav.services":"Services","nav.contact":"Contact","nav.quote":"Get a quote",
+    "hero.eyebrow":"Industrial electroplating chemicals","hero.h1":"Chemicals for durable, bright and compliant metal finishes",
+    "hero.lead":"Daliang VN supplies pretreatment chemicals, plating additives and passivation — backed by an in-house lab and on-site engineering support.",
+    "hero.cta1":"View products","hero.cta2":"Request consultation","hero.visual":"One line — the right chemical for every tank",
+    step1:"STEP 1",step2:"STEP 2",step3:"STEP 3",
+    tanks:["Degreasing","Rinsing","Pickling","Activation","Plating","Passivation"],
+    "grp.all":"All","grp.pre":"Pretreatment","grp.add":"Plating additives","grp.pas":"Passivation",
+    "about.eyebrow":"About Daliang VN","about.title":"Your chemical partner for metal finishing","about.text":"[Company introduction: year founded, plant, main markets, direction.]",
+    "v1.t":"In-house laboratory","v1.d":"Bath analysis and trial formulation before every delivery.",
+    "v2.t":"On-site engineers","v2.d":"Bath operation guidance and plating defect troubleshooting right at your line.",
+    "v3.t":"Complete documentation","v3.d":"Safety data sheets (MSDS) and technical data sheets (TDS) for every product.",
+    "prod.eyebrow":"Products","prod.title":"Chemicals for every process step","prod.detail":"Details","prod.empty":"No products in this group yet.",
+    "certs.eyebrow":"Documents & certificates","certs.title":"Transparent, compliant and fully documented","certs.lookup":"Look up MSDS / TDS by product code",
+    "certs.find":"Search","certs.langs":"Documents available in Vietnamese, English and Chinese.","certs.view":"View scan","certs.notfound":"Code not found. Please contact us and we will send the documents.","certs.found":"Found:",
+    "svc.eyebrow":"Services","svc.title":"More than chemical supply","svc.sub":"Our engineers support you from trial runs to stable production.",
+    "s1.t":"Process consulting","s1.d":"Choosing chemicals and bath parameters for your substrate and finish requirements.",
+    "s2.t":"Bath analysis","s2.d":"Send samples to our lab and receive results with adjustment advice.",
+    "s3.t":"Custom formulation","s3.d":"Formulas tailored to your line and quality standards.",
+    "s4.t":"Chemical delivery","s4.d":"Vehicles and drivers trained for dangerous goods transport.",
+    "ct.eyebrow":"Contact","ct.title":"Need advice or a quotation?","ct.sub":"Leave your details and our technical team will call you back during business hours.","ct.call":"Call now","ct.dir":"Directions",
+    "f.name":"Full name","f.co":"Company","f.phone":"Phone number","f.prod":"Product of interest","f.msg":"Message","f.send":"Send request",
+    "f.ph.name":"John Nguyen","f.ph.co":"Company name","f.ph.phone":"+84 …","f.ph.prod":"e.g. nickel plating additive","f.ph.msg":"Describe your line, substrate and needs…","f.ph.mail":"you@company.com",
+    "f.ok":"Thank you! We will contact you shortly.","f.err":"Please enter your name and phone number.",
+    "i.addr":"Address","i.hours":"Business hours","map.ph":"[Google Maps embed — set mapQuery in COMPANY]",
+    "ft.company":"Company","ft.support":"Support","ft.msds":"MSDS lookup","ft.privacy":"Privacy policy","ft.tax":"Tax ID"
+  },
+  zh: {
+    title:"大良越南 — 工业电镀化学品", brandSub:"电镀化学品",
+    "nav.about":"关于我们","nav.products":"产品","nav.certs":"资质证书","nav.services":"服务","nav.contact":"联系我们","nav.quote":"获取报价",
+    "hero.eyebrow":"工业电镀化学品","hero.h1":"为金属表面带来耐久、光亮且合规的化学品",
+    "hero.lead":"大良越南提供前处理、电镀添加剂及钝化化学品，并配有实验室样品分析与现场工程师技术支持。",
+    "hero.cta1":"查看产品","hero.cta2":"咨询我们","hero.visual":"一条产线 — 每个槽都有合适的化学品",
+    step1:"第一步",step2:"第二步",step3:"第三步",
+    tanks:["除油","水洗","酸洗","活化","电镀","钝化"],
+    "grp.all":"全部","grp.pre":"前处理","grp.add":"电镀添加剂","grp.pas":"钝化",
+    "about.eyebrow":"关于大良越南","about.title":"电镀行业的化学品合作伙伴","about.text":"[公司简介：成立年份、工厂、主要市场、发展方向。]",
+    "v1.t":"自有实验室","v1.d":"交货前进行槽液分析与试配。",
+    "v2.t":"现场工程师支持","v2.d":"在产线现场指导槽液操作，处理镀层缺陷。",
+    "v3.t":"文件齐全","v3.d":"每个产品均提供安全技术说明书（MSDS）和技术资料（TDS）。",
+    "prod.eyebrow":"产品","prod.title":"覆盖各工序的化学品","prod.detail":"详情","prod.empty":"该类别暂无产品。",
+    "certs.eyebrow":"资质与证书","certs.title":"合法合规，安全资料齐全","certs.lookup":"按产品编号查询 MSDS / TDS",
+    "certs.find":"查询","certs.langs":"提供越南语、英语、中文版本。","certs.view":"查看扫描件","certs.notfound":"未找到该编号，请联系我们索取资料。","certs.found":"查询结果：",
+    "svc.eyebrow":"服务","svc.title":"不只是供应化学品","svc.sub":"技术团队从试产到稳定生产全程陪伴。",
+    "s1.t":"工艺咨询","s1.d":"根据基材和镀层要求选择化学品及槽液参数。",
+    "s2.t":"槽液分析","s2.d":"将样品送至实验室，获取结果和调整建议。",
+    "s3.t":"定制配方","s3.d":"根据客户产线和标准调整配方。",
+    "s4.t":"化学品配送","s4.d":"车辆与司机均接受危险品运输培训。",
+    "ct.eyebrow":"联系我们","ct.title":"需要咨询或报价？","ct.sub":"留下您的信息，技术部将在工作时间内回电。","ct.call":"立即致电","ct.dir":"路线导航",
+    "f.name":"姓名","f.co":"公司","f.phone":"电话","f.prod":"感兴趣的产品","f.msg":"留言内容","f.send":"提交",
+    "f.ph.name":"张三","f.ph.co":"公司名称","f.ph.phone":"+84 …","f.ph.prod":"例如：镀镍添加剂","f.ph.msg":"请描述产线、基材及需求…","f.ph.mail":"you@company.com",
+    "f.ok":"感谢您！我们会尽快与您联系。","f.err":"请填写姓名和电话。",
+    "i.addr":"地址","i.hours":"工作时间","map.ph":"[嵌入谷歌地图 — 请在 COMPANY 中设置 mapQuery]",
+    "ft.company":"公司","ft.support":"支持","ft.msds":"MSDS 查询","ft.privacy":"隐私政策","ft.tax":"税号"
+  }
+};
+
+/* ================= LOGIC (không cần sửa) ================= */
+const ICON = n => `<svg class="icon"><use href="#i-${n}"/></svg>`;
+const GROUP_CLASS = { pre:"b-pre", add:"b-add", pas:"b-pas" };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let lang = "vi", filter = "all";
+
+function t(k){ return (I18N[lang] && I18N[lang][k]) ?? I18N.vi[k] ?? k; }
+
+function drawTanks(){
+  const cols = ["#7dd3c0","#bfe3f5","#f6c98a","#c7b8f5","#5eead4","#93c5fd"];
+  let s = "";
+  t("tanks").forEach((name, i) => {
+    const x = 20 + i * 84;
+    s += `<rect x="${x}" y="120" width="70" height="120" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.35)"/>`
+       + `<rect x="${x+5}" y="150" width="60" height="85" rx="5" fill="${cols[i]}" opacity="0.8"/>`
+       + `<text x="${x+35}" y="266" text-anchor="middle" fill="#d9efec" font-size="12">${esc(name)}</text>`;
+  });
+  s += `<path d="M10 70 H520" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><rect x="250" y="56" width="60" height="28" rx="6" fill="#5eead4"/>`
+     + `<path d="M280 84 V140" stroke="#5eead4" stroke-width="2" stroke-dasharray="4 4"/><rect x="266" y="140" width="28" height="36" rx="4" fill="#e2e8f0" stroke="#0b3336"/>`;
+  document.getElementById("tanks").innerHTML = s;
+}
+
+function renderProducts(){
+  const list = PRODUCTS.filter(p => filter === "all" || p.group === filter);
+  const grid = document.getElementById("product-grid");
+  if (!list.length){ grid.innerHTML = `<p class="empty">${esc(t("prod.empty"))}</p>`; return; }
+  grid.innerHTML = list.map(p => `
+    <article class="pcard">
+      <div class="pcard-img">${ICON("drop")}</div>
+      <div class="pcard-meta"><span class="badge ${GROUP_CLASS[p.group]}">${esc(t("grp."+p.group))}</span><span class="code">${esc(p.code)}</span></div>
+      <h3>${esc(p.name[lang] || p.name.vi)}</h3>
+      <p>${esc(p.desc[lang] || p.desc.vi)}</p>
+      <div class="pcard-links">
+        <a href="#contact">${esc(t("prod.detail"))} ${ICON("arrow")}</a>
+        <a class="dl push" href="${esc(p.msds)}">${ICON("download")}MSDS</a>
+        <a class="dl" href="${esc(p.tds)}">${ICON("download")}TDS</a>
+      </div>
+    </article>`).join("");
+}
+
+function renderDocs(){
+  document.getElementById("docs").innerHTML = DOCS.map(d => `
+    <div class="doc">
+      <div class="ph">[Ảnh giấy tờ]</div>
+      <div class="doc-body">${ICON(d.icon)}<div><b>${esc(d.title[lang] || d.title.vi)}</b><span>${esc(d.sub)}</span></div></div>
+      <a href="${esc(d.url)}" target="_blank" rel="noopener">${ICON("eye")}${esc(t("certs.view"))}</a>
+    </div>`).join("");
+}
+
+function renderCompany(){
+  const tel = COMPANY.phone.replace(/[^\d+]/g, "");
+  document.getElementById("c-addr").textContent = COMPANY.address;
+  const ph = document.getElementById("c-phone"); ph.textContent = COMPANY.phone; ph.href = tel ? "tel:" + tel : "#";
+  const ml = document.getElementById("c-mail"); ml.textContent = COMPANY.email; ml.href = COMPANY.email.includes("@") && !COMPANY.email.startsWith("[") ? "mailto:" + COMPANY.email : "#";
+  document.getElementById("c-hours").textContent = COMPANY.hours[lang] || COMPANY.hours.vi;
+  document.getElementById("c-name").textContent = COMPANY.name;
+  document.getElementById("c-foot").textContent = `${COMPANY.address} · ${t("ft.tax")} ${COMPANY.taxId}`;
+  document.getElementById("quick-call").href = tel ? "tel:" + tel : "#";
+  const q = COMPANY.mapQuery.trim();
+  document.getElementById("quick-dir").href = q ? "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(q) : "#";
+  const map = document.getElementById("map");
+  if (q){
+    if (!map.querySelector("iframe") || map.dataset.q !== q + lang){
+      map.dataset.q = q + lang;
+      map.innerHTML = `<iframe title="Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${encodeURIComponent(q)}&hl=${lang === "zh" ? "zh-CN" : lang}&z=15&output=embed"></iframe>`;
+    }
+  } else {
+    map.innerHTML = `<div class="ph" style="height:100%;border-radius:0">${esc(t("map.ph"))}</div>`;
+  }
+}
+
+function applyLang(next){
+  lang = I18N[next] ? next : "vi";
+  document.documentElement.lang = lang;
+  document.title = t("title");
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  [["f-name","f.ph.name"],["f-co","f.ph.co"],["f-phone","f.ph.phone"],["f-prod","f.ph.prod"],["f-msg","f.ph.msg"],["f-mail","f.ph.mail"]]
+    .forEach(([id,k]) => document.getElementById(id).placeholder = t(k));
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  drawTanks(); renderProducts(); renderDocs(); renderCompany();
+  document.getElementById("msds-result").textContent = "";
+  try { localStorage.setItem("dl-lang", lang); } catch(e) {}
+  const url = new URL(location.href); url.searchParams.set("lang", lang); history.replaceState(null, "", url);
+}
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+  filter = b.dataset.filter;
+  document.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderProducts();
+}));
+
+const burger = document.querySelector(".burger"), mm = document.getElementById("mobile-menu");
+burger.addEventListener("click", () => { const o = mm.classList.toggle("open"); burger.setAttribute("aria-expanded", o); });
+mm.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { mm.classList.remove("open"); burger.setAttribute("aria-expanded", false); }));
+
+function lookup(){
+  const code = document.getElementById("msds-code").value.trim().toUpperCase();
+  const out = document.getElementById("msds-result");
+  if (!code) { out.textContent = ""; return; }
+  const p = PRODUCTS.find(x => x.code.toUpperCase() === code);
+  if (!p) { out.textContent = t("certs.notfound"); return; }
+  out.innerHTML = `<b>${esc(t("certs.found"))} ${esc(p.code)} — ${esc(p.name[lang] || p.name.vi)}</b><br>`
+    + `<a href="${esc(p.msds)}">MSDS</a> · <a href="${esc(p.tds)}">TDS</a>`;
+}
+document.getElementById("msds-btn").addEventListener("click", lookup);
+document.getElementById("msds-code").addEventListener("keydown", e => { if (e.key === "Enter") lookup(); });
+
+document.getElementById("contact-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const note = document.getElementById("form-note");
+  const f = e.target;
+  if (!f.name.value.trim() || !f.phone.value.trim()) { note.style.color = "#b42318"; note.textContent = t("f.err"); return; }
+  // TODO: gửi dữ liệu lên máy chủ, VD: fetch("/api/v1/contact", {method:"POST", body: new FormData(f)})
+  note.style.color = ""; note.textContent = t("f.ok"); f.reset();
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+let start = new URLSearchParams(location.search).get("lang");
+if (!start) { try { start = localStorage.getItem("dl-lang"); } catch(e) {} }
+applyLang(start || "vi");
+</script>
+</body>
+</html>

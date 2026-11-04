@@ -21,4 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Dua DB len ban moi nhat roi moi mo API (Alembic, xem migrations/).
+# PORT do Railway cap; UVICORN_RELOAD=1 chi dat o docker-compose de dev tu tai lai code.
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*' ${UVICORN_RELOAD:+--reload}"]

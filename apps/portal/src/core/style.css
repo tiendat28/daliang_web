@@ -1,0 +1,608 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  @apply bg-app-gradient dark:bg-none dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-medium transition-colors duration-200;
+  font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+}
+
+.field-input {
+  @apply rounded-xl border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 px-3 py-2 text-sm min-w-0 max-w-full;
+}
+
+/* Safari trên iOS gán cho ô ngày/tháng một bề rộng tối thiểu riêng và bỏ qua
+   width của mình, nên ô bị tràn khỏi cột và đè lên ô bên cạnh. Bỏ giao diện
+   mặc định thì ô co đúng theo cột (vẫn mở bộ chọn ngày của máy như cũ). */
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+}
+
+.field-label {
+  @apply block text-sm font-medium text-slate-600 dark:text-slate-300;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(148 163 184 / 0.6) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(148 163 184 / 0.6);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(148 163 184 / 0.9);
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  body {
+    background: white !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #print-report,
+  #print-report * {
+    visibility: visible;
+  }
+  #print-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+/* Be Vietnam Pro — font của module "Lưu trình test mẫu". File nằm trong repo
+   (frontend/public/fonts/) chứ không lấy từ CDN, vì máy ở công ty có thể không
+   có internet. Mỗi cỡ chữ có 2 bản: chữ Việt có dấu và chữ Latin. */
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-400-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-500-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-600-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-700-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/be-vietnam-pro/BeVietnamPro-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- Lớp dùng lại trong module "Lưu trình test mẫu" ----------
+   Giá trị lấy từ docs/mockup; bản tối theo kiểu slate của các trang cũ.
+   Riêng tờ A4 xem trước luôn nền sáng vì nó là tờ giấy in. */
+
+.lt-surface {
+  @apply bg-white dark:bg-slate-800 rounded-3xl shadow-lt-panel;
+}
+
+.lt-label {
+  @apply text-[12.5px] font-semibold text-lt-label dark:text-slate-300;
+}
+
+.lt-field {
+  @apply h-[38px] box-border rounded-[10px] border border-lt-line dark:border-slate-600
+         bg-white dark:bg-slate-700 px-3 text-[13.5px] text-lt-ink dark:text-slate-100
+         outline-none focus:border-lt-teal dark:focus:border-lt-teal;
+}
+
+/* Ô số nhỏ của cặp "từ – đến" */
+.lt-num {
+  @apply h-9 box-border rounded-[9px] border border-lt-line dark:border-slate-600
+         bg-white dark:bg-slate-700 px-2 text-center text-[13.5px] text-lt-ink dark:text-slate-100
+         outline-none focus:border-lt-teal dark:focus:border-lt-teal;
+}
+
+.lt-btn {
+  @apply flex items-center gap-1.5 h-9 px-3 rounded-[10px] border border-lt-line dark:border-slate-600
+         bg-white dark:bg-slate-700 text-[12.5px] font-medium text-lt-body dark:text-slate-200
+         hover:bg-lt-wash dark:hover:bg-slate-600 disabled:opacity-50 shrink-0;
+}
+
+.lt-btn-primary {
+  @apply flex items-center gap-1.5 h-9 px-3.5 rounded-[10px] bg-lt-gradient text-white
+         text-[12.5px] font-semibold shadow-lt-accent hover:brightness-105 disabled:opacity-60 shrink-0;
+}
+
+.lt-btn-ghost {
+  @apply flex items-center justify-center w-[34px] h-[34px] rounded-[10px] border border-lt-line
+         dark:border-slate-600 bg-white dark:bg-slate-700 text-lt-body dark:text-slate-200
+         hover:bg-lt-wash dark:hover:bg-slate-600 shrink-0;
+}
+
+.lt-chip {
+  @apply px-2 py-[3px] rounded-[7px] bg-lt-chip dark:bg-slate-700 border border-lt-chipline
+         dark:border-slate-600 text-[11.5px] font-medium text-lt-chipink dark:text-slate-200;
+}
+
+/* Một dòng trong menu thả xuống */
+.lt-menu-item {
+  @apply w-full flex items-center gap-2 px-2 py-2 rounded-lg text-left text-[12.5px]
+         text-lt-body dark:text-slate-200 hover:bg-lt-wash dark:hover:bg-slate-700;
+}
+
+.lt-menu-item-danger {
+  @apply w-full flex items-center gap-2 px-2 py-2 rounded-lg text-left text-[12.5px]
+         text-lt-voidink hover:bg-lt-void/60;
+}
+
+/* ---------- Khung cong noi bo (ban thiet ke Admin.dc.html / Login.dc.html) ----------
+ * Dung chung cho dang nhap, dau trang, trang quan tri. Mau o theme.extend.colors.dl. */
+.dl-label {
+  @apply text-sm font-semibold text-dl-ink dark:text-slate-100;
+}
+/* O nhap co icon ben trai: <label class="dl-field"><Icon/><input/></label> */
+.dl-field {
+  @apply flex items-center gap-2.5 h-[52px] px-4 rounded-[14px] border border-dl-field bg-white text-dl-muted
+         dark:bg-slate-800 dark:border-slate-600 focus-within:border-dl-teal focus-within:ring-[3px] focus-within:ring-dl-teal/15;
+}
+.dl-field input {
+  @apply border-0 outline-none flex-1 min-w-0 text-[15px] text-dl-ink bg-transparent dark:text-slate-100 placeholder:text-slate-400;
+}
+.dl-btn {
+  @apply inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-dl-grad text-white text-sm font-semibold
+         whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.dl-btn-line {
+  @apply inline-flex items-center justify-center gap-2 h-9 px-4 rounded-xl bg-white text-dl-ink border border-dl-line text-sm
+         font-semibold whitespace-nowrap cursor-pointer dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600;
+}
+.dl-btn-lg {
+  @apply h-[52px] rounded-[14px] text-base font-bold;
+}
+.dl-card {
+  @apply bg-white dark:bg-slate-800 rounded-2xl sm:rounded-[20px] p-3.5 sm:p-5 shadow-dl-card;
+}
+.dl-stat-card {
+  @apply relative min-h-[96px] sm:min-h-[116px] bg-white dark:bg-slate-800 rounded-2xl sm:rounded-[20px] p-3.5 sm:p-5 shadow-dl-card;
+}
+.dl-stat-card strong {
+  @apply block mt-1 text-xl sm:text-[30px] leading-none font-bold text-dl-ink dark:text-slate-100 pr-9 sm:pr-11;
+}
+.dl-stat-card small {
+  @apply block mt-1 text-xs text-dl-muted dark:text-slate-400;
+}
+.dl-stat-label {
+  @apply block text-xs sm:text-sm text-dl-muted dark:text-slate-400 pr-9 sm:pr-11;
+}
+.dl-stat-icon {
+  @apply absolute top-3.5 right-3.5 sm:top-5 sm:right-5 w-8 h-8 sm:w-10 sm:h-10 rounded-xl inline-flex items-center justify-center;
+}
+.role-tab {
+  @apply h-10 px-3.5 rounded-xl bg-dl-grey text-dl-body text-sm font-semibold whitespace-nowrap;
+}
+.role-tab-active {
+  @apply bg-dl-dark text-white;
+}
+.permission-box {
+  @apply w-6 h-6 mx-auto rounded-[7px] border border-dl-line inline-flex items-center justify-center text-transparent;
+}
+.permission-box-on {
+  @apply bg-dl-teal border-dl-teal text-white;
+}
+.dl-badge {
+  @apply inline-flex items-center h-6 px-2.5 rounded-full text-xs font-semibold whitespace-nowrap;
+}
+.dl-th {
+  @apply text-left text-xs font-semibold text-dl-muted py-2.5 px-3 border-b border-dl-line whitespace-nowrap dark:border-slate-700;
+}
+.dl-td {
+  @apply py-[11px] px-3 border-b border-dl-rule text-[13px] text-dl-body align-middle dark:border-slate-700 dark:text-slate-300;
+}
+.dl-icon-btn {
+  @apply w-8 h-8 rounded-[10px] border border-dl-line bg-white text-dl-body inline-flex items-center justify-center
+         hover:border-dl-teal hover:text-dl-teal dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300;
+}
+
+/* ---------- Hệ thống giao diện dùng chung (Daliang Design System) ----------
+ * Tái sử dụng cho Kho (Warehouse), Điều phối xe (Dispatch), Kế toán (Accounting), v.v. */
+
+/* Banner thông báo */
+.alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.alert-success {
+  @apply bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/70;
+}
+.alert-error {
+  @apply bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800/70;
+}
+
+/* Tiêu đề & Header trang */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.route-badge {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  @apply text-slate-500 dark:text-slate-400;
+}
+.page-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  @apply text-slate-900 dark:text-slate-100;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  width: 280px;
+  padding: 0 14px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  @apply bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-400;
+}
+.search-box input {
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  flex-grow: 1;
+  background: transparent;
+  @apply text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500;
+}
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  @apply bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/60;
+}
+
+/* Nút bấm chuẩn */
+.btn-primary {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0b7d72, #0e6f8a);
+  color: #ffffff;
+  border: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(11, 125, 114, 0.2);
+  transition: opacity 0.15s;
+}
+.btn-primary:hover {
+  opacity: 0.95;
+}
+.btn-secondary {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  @apply bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60;
+}
+.btn-pick {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  @apply bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/60;
+}
+.btn-assign {
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  @apply bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/60;
+}
+
+/* Lưới thẻ KPI */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.kpi-card {
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  @apply bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_rgba(15,23,42,0.05)];
+}
+.kpi-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.kpi-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.kpi-label {
+  font-size: 13px;
+  font-weight: 500;
+  @apply text-slate-500 dark:text-slate-400;
+}
+.kpi-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  @apply text-slate-900 dark:text-slate-100;
+}
+.kpi-subtext {
+  font-size: 12px;
+  @apply text-slate-500 dark:text-slate-400;
+}
+.kpi-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Thẻ chứa chính */
+.main-card {
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  @apply bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_rgba(15,23,42,0.05)];
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  @apply text-slate-900 dark:text-slate-100;
+}
+
+/* Huy hiệu trạng thái */
+.status-badge, .status-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Ô nhập liệu chuẩn cho Modal & Form */
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  @apply text-slate-700 dark:text-slate-300;
+}
+.form-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+  @apply bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-emerald-500 dark:focus:border-emerald-400 placeholder:text-slate-400 dark:placeholder:text-slate-500;
+}
+textarea.form-input {
+  height: auto;
+  padding: 8px 12px;
+}
+
+/* Bảng dữ liệu tuỳ chỉnh */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 4px;
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.custom-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 12px;
+  white-space: nowrap;
+  @apply text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700;
+}
+.custom-table td {
+  padding: 11px 12px;
+  font-size: 13px;
+  vertical-align: middle;
+  @apply text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-700/60;
+}
+.custom-table tr:hover td {
+  @apply bg-slate-50/60 dark:bg-slate-700/40;
+}
+
+/* Thanh tiến độ */
+.progress-bar-wrap {
+  width: 80px;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  @apply bg-slate-100 dark:bg-slate-700;
+}
+.progress-bar-fill {
+  height: 6px;
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+
+@media (max-width: 640px) {
+  .top-header { gap: 10px; }
+  .page-title { font-size: 20px; }
+  .header-right { width: 100%; gap: 8px; }
+  .search-box { width: 100%; flex: 1 1 100%; height: 38px; }
+  .btn-primary, .btn-secondary, .btn-pick { height: 36px; padding: 0 12px; font-size: 13px; gap: 6px; }
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .kpi-card { padding: 14px; border-radius: 16px; }
+  .kpi-value { font-size: 20px; }
+  .kpi-icon-wrap { width: 34px; height: 34px; border-radius: 10px; }
+  .main-card { padding: 14px; border-radius: 16px; }
+  .card-header { flex-wrap: wrap; gap: 8px; }
+  .custom-table th, .custom-table td { padding: 8px 10px; font-size: 12px; }
+
+}
+

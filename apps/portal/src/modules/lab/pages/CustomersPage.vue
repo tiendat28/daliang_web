@@ -1,0 +1,116 @@
+<script setup>
+import DataTable from '@/core/components/DataTable.vue'
+import Modal from '@/core/components/Modal.vue'
+import FormActions from '@/core/components/FormActions.vue'
+import { customersApi } from '@/core/api/common'
+import { Plus, Trash2 } from 'lucide-vue-next'
+import { useCrudResource } from '@/core/composables/useCrudResource'
+import { useSearchedRows } from '@/core/composables/useSearchedRows'
+
+const columns = [
+  { key: 'name', label: 'Tên KH', sortable: true },
+  { key: 'address', label: 'Địa chỉ' },
+  { key: 'field_names', label: 'Lĩnh vực' },
+  { key: 'field_products', label: 'SP dùng' },
+]
+
+function emptyForm() {
+  return { name: '', address: '', note: '', fields: [{ field_name: '', product_codes: '' }] }
+}
+
+const { rows, showModal, editingId, form, openAdd, openEdit, save, remove } = useCrudResource(
+  customersApi, emptyForm,
+  {
+    mapRowToForm: row => ({
+      name: row.name,
+      address: row.address,
+      note: row.note,
+      fields: row.fields.length
+        ? row.fields.map(f => ({ field_name: f.field_name, product_codes: f.products.map(p => p.product_code_text).join(', ') }))
+        : [{ field_name: '', product_codes: '' }],
+    }),
+    buildPayload: form => ({
+      ...form,
+      fields: form.fields
+        .filter(f => f.field_name)
+        .map(f => ({
+          field_name: f.field_name,
+          product_codes: f.product_codes.split(',').map(c => c.trim()).filter(Boolean),
+        })),
+    }),
+    confirmRemove: row => `Xoá khách hàng "${row.name}"?`,
+  },
+)
+
+const displayRows = useSearchedRows(rows, r => [
+  r.name, r.address, r.note,
+  ...r.fields.map(f => f.field_name),
+  ...r.fields.flatMap(f => f.products.map(p => p.product_code_text)),
+])
+
+function addField() {
+  form.value.fields.push({ field_name: '', product_codes: '' })
+}
+
+function removeField(i) {
+  form.value.fields.splice(i, 1)
+}
+</script>
+
+<template>
+  <DataTable :columns="columns" :rows="displayRows" title="Khách hàng" @add="openAdd" @edit="openEdit" @delete="remove">
+    <template #cell-field_names="{ row }">
+      <div v-for="f in row.fields" :key="f.id" class="text-xs text-slate-500 mb-1">{{ f.field_name }}</div>
+    </template>
+    <template #cell-field_products="{ row }">
+      <div v-for="f in row.fields" :key="f.id" class="text-xs text-slate-500 mb-1">
+        {{ f.products.map(p => p.product_code_text).join(', ') }}
+      </div>
+    </template>
+  </DataTable>
+
+  <Modal :show="showModal" :title="editingId ? 'Sửa khách hàng' : 'Thêm khách hàng'" @close="showModal = false">
+    <form class="space-y-4" @submit.prevent="save">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="min-w-0">
+          <label class="field-label mb-1">Tên khách hàng</label>
+          <input v-model="form.name" class="w-full field-input" />
+        </div>
+        <div class="min-w-0">
+          <label class="field-label mb-1">Địa chỉ</label>
+          <input v-model="form.address" class="w-full field-input" />
+        </div>
+      </div>
+
+      <div>
+        <label class="field-label mb-2">Lĩnh vực & sản phẩm dùng</label>
+        <div v-for="(f, i) in form.fields" :key="i" class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50">
+          <div class="flex gap-2 mb-2">
+            <input v-model="f.field_name" placeholder="Lĩnh vực (VD: Kẽm axit)" class="flex-1 field-input" />
+            <button type="button" class="text-red-400" @click="removeField(i)">
+              <Trash2 class="w-4 h-4" />
+            </button>
+          </div>
+          <!-- Giu nguyen chuoi nguoi dung go, chi tach theo dau phay luc luu (buildPayload) -->
+          <input
+            v-model="f.product_codes"
+            placeholder="Mã SP dùng, cách nhau bởi dấu phẩy (VD: ZK835, ZK838)"
+            class="w-full field-input"
+          />
+        </div>
+        <button type="button" class="flex items-center gap-1 text-sm text-brand-600" @click="addField">
+          <Plus class="w-4 h-4" /> Thêm lĩnh vực
+        </button>
+      </div>
+
+      <div>
+        <label class="field-label mb-1">Ghi chú</label>
+        <textarea v-model="form.note" rows="2" class="w-full field-input" />
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <FormActions @cancel="showModal = false" />
+      </div>
+    </form>
+  </Modal>
+</template>

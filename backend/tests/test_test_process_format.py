@@ -3,7 +3,7 @@ from datetime import date
 
 import pytest
 
-from app.services.test_process_format import (
+from app.modules.lab.services.test_process_format import (
     apply_formula_markers,
     format_chemical,
     format_concentration,

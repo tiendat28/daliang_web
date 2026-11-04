@@ -1,12 +1,12 @@
-"""To phieu A4: dung trang, lap tieu de bang, ten file PDF."""
 import re
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 import pytest
 
-from app.services.test_process_sheet import (
+from app.modules.lab.services.test_process_sheet import (
     COMPACT_ROW_THRESHOLD,
     build_sheet_context,
     pdf_filename,
@@ -14,6 +14,13 @@ from app.services.test_process_sheet import (
     render_sheet_pdf,
 )
 from tests.conftest import make_chemical, make_concentration, make_process, make_step
+
+has_pdf_tools = False
+try:
+    import weasyprint  # noqa: F401
+    has_pdf_tools = shutil.which("pdfinfo") is not None and shutil.which("pdftotext") is not None
+except Exception:
+    has_pdf_tools = False
 
 TABLE_HEADERS = ("STT", "HẠNG MỤC", "THỜI GIAN", "NHIỆT ĐỘ", "pH", "NỒNG ĐỘ", "HÓA CHẤT")
 
@@ -88,25 +95,29 @@ def test_html_giu_chi_so_duoi():
     assert "HNO<sub>3</sub>" in render_sheet_html(process, None, screen=True)
 
 
-def test_html_xem_truoc_dung_url_tuyet_doi_con_pdf_dung_file():
+def test_html_xem_truoc_dung_url_api_con_pdf_dung_file():
+    # Xem truoc: iframe srcdoc lay goc URL cua trang cha (cung ten mien voi API)
     process = make_process([make_step(1, "A")])
-    assert "http" in render_sheet_html(process, None, screen=True)
+    assert "/api/v1/static/" in render_sheet_html(process, None, screen=True)
     assert "file://" in render_sheet_html(process, None, screen=False)
 
 
 # ---------- PDF ----------
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_10_buoc_vua_1_trang():
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(10)), None))
     assert len(pages) == 1
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_16_buoc_van_vua_1_trang():
     """Tren 12 buoc thi hang thap xuong 8mm de co vua 1 trang."""
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(16)), None))
     assert len(pages) == 1
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_25_buoc_sang_trang_2_va_lap_tieu_de_bang():
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(25)), None))
     assert len(pages) == 2
@@ -115,6 +126,7 @@ def test_pdf_25_buoc_sang_trang_2_va_lap_tieu_de_bang():
         assert header in pages[1], f"trang 2 khong lap lai cot {header}"
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_25_buoc_khong_cat_doi_hang():
     """Moi buoc phai xuat hien dung 1 lan, tren dung 1 trang."""
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(25)), None))
@@ -125,6 +137,7 @@ def test_pdf_25_buoc_khong_cat_doi_hang():
         assert len(hits) == 1, f"Công đoạn {index} nam tren {len(hits)} trang"
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_khong_tach_nguoi_lap_khoi_ho_ten():
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(25)), None))
     for text in pages:
@@ -132,12 +145,14 @@ def test_pdf_khong_tach_nguoi_lap_khoi_ho_ten():
             assert "Vũ Thị Oanh" in text, "ho ten bi day sang trang khac"
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_letterhead_chi_o_trang_1():
     pages = pdf_pages(render_sheet_pdf(make_process(steps_range(25)), None))
     assert "DALIANG CHEMICAL VIETNAM CO.,LTD" in pages[0]
     assert "DALIANG CHEMICAL VIETNAM CO.,LTD" not in pages[1]
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_in_dung_noi_dung_cua_phieu_mau():
     steps = [
         make_step(1, "Tiền xử lí"),
@@ -160,6 +175,7 @@ def test_pdf_in_dung_noi_dung_cua_phieu_mau():
     assert "pH" in text and "PH" not in text.replace("pH", "")
 
 
+@pytest.mark.skipif(not has_pdf_tools, reason="weasyprint and poppler tools required")
 def test_pdf_hien_duoc_chu_trung_khong_ra_o_vuong():
     text = pdf_pages(render_sheet_pdf(make_process([make_step(1, "A")]), None))[0]
     assert "越南大亮化工有限公司" in text

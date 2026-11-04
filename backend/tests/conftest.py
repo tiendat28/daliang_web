@@ -86,44 +86,83 @@ def sample_steps():
 
 # Cac bang test duoc don sach giua moi test. Xep theo thu tu xoa duoc (con truoc cha).
 MANAGED_TABLES = (
-    "test_process_step_concentrations",
-    "test_process_step_chemicals",
-    "test_process_steps",
-    "test_processes",
-    "process_templates",
-    "company_profile",
+    "dispatch.delivery_trips",
+    "dispatch.drivers",
+    "dispatch.vehicles",
+    "warehouse.dispatch_items",
+    "warehouse.dispatches",
+    "warehouse.receipt_items",
+    "warehouse.receipts",
+    "warehouse.stock_items",
+    "warehouse.audits",
+    "warehouse.locations",
+    "accounting.invoice_items",
+    "accounting.vouchers",
+    "accounting.invoices",
+    "accounting.bank_accounts",
+    "hr.attendance",
+    "hr.leave_requests",
+    "hr.contracts",
+    "hr.certificates",
+    "hr.employees",
+    "hr.departments",
+    "lab.test_process_step_concentrations",
+    "lab.test_process_step_chemicals",
+    "lab.test_process_steps",
+    "lab.test_processes",
+    "lab.process_templates",
+    "common.company_profile",
+    "website.contact_leads",
+    "auth.users",
+    "auth.roles",
+    "auth.refresh_tokens",
+    "auth.password_resets",
+    "system.audit_logs",
 )
+
+TEST_ADMIN = {"identifier": "admin@test.local", "password": "matkhau-test-123"}
 
 
 def _test_database_url() -> str:
     from app.core.config import settings
 
     url = make_url(settings.database_url)
-    return str(url.set(database=f"{url.database}_test"))
+    return url.set(database=f"{url.database}_test").render_as_string(hide_password=False)
 
 
 @pytest.fixture(scope="session")
 def test_engine():
-    from app import models  # noqa: F401 - nap model de create_all biet co nhung bang nao
-    from app.core.database import Base
-    from app.core.migrations import run_startup_migrations
+    try:
+        from alembic import command
+        from alembic.config import Config
+    except ImportError:
+        pytest.skip("Alembic chưa được cài đặt; bỏ qua các bài test cần database.")
 
     url = make_url(_test_database_url())
     assert url.database.endswith("_test"), "Test phai chay tren DB co duoi _test"
 
     # Tao DB test neu chua co (CREATE DATABASE khong chay trong transaction)
-    admin = create_engine(str(url.set(database="postgres")), isolation_level="AUTOCOMMIT")
-    with admin.connect() as conn:
-        exists = conn.execute(
-            text("SELECT 1 FROM pg_database WHERE datname = :name"), {"name": url.database}
-        ).scalar()
-        if not exists:
-            conn.execute(text(f'CREATE DATABASE "{url.database}"'))
-    admin.dispose()
+    # Truyen thang URL: str(url) cua SQLAlchemy 2 che mat khau thanh "***"
+    try:
+        admin = create_engine(url.set(database="postgres"), isolation_level="AUTOCOMMIT")
+        with admin.connect() as conn:
+            exists = conn.execute(
+                text("SELECT 1 FROM pg_database WHERE datname = :name"), {"name": url.database}
+            ).scalar()
+            if not exists:
+                conn.execute(text(f'CREATE DATABASE "{url.database}"'))
+        admin.dispose()
 
-    engine = create_engine(str(url), pool_pre_ping=True)
-    Base.metadata.create_all(bind=engine)
-    run_startup_migrations(engine)
+        # Dung DB test bang chinh cac migration cua Alembic - cung duong voi DB that
+        config = Config(str(Path(__file__).resolve().parent.parent / "alembic.ini"))
+        config.set_main_option("script_location", str(Path(__file__).resolve().parent.parent / "migrations"))
+        config.set_main_option("sqlalchemy.url", url.render_as_string(hide_password=False))
+        command.upgrade(config, "head")
+
+        engine = create_engine(url, pool_pre_ping=True)
+    except Exception as exc:
+        pytest.skip(f"Không thể kết nối cơ sở dữ liệu test ({exc}); bỏ qua test cần database.")
+
     yield engine
     engine.dispose()
 
@@ -143,23 +182,60 @@ def db_session(test_engine):
         session.close()
 
 
+def _make_user(db, email, password, permission_codes, require_2fa=False, employee_code=None):
+    """Tai khoan tren DB test voi mot vai tro rieng giu dung cac quyen cho truoc."""
+    from app.core.security import hash_password
+    from app.modules.auth import models as auth_models
+
+    permissions = db.query(auth_models.Permission).filter(auth_models.Permission.code.in_(permission_codes)).all()
+    role = auth_models.Role(code=f"test_{len(db.query(auth_models.Role).all())}", name="Vai trò test",
+                            require_2fa=require_2fa, permissions=permissions)
+    user = auth_models.User(email=email, full_name="Người test", password_hash=hash_password(password),
+                            employee_code=employee_code, roles=[role])
+    db.add(user)
+    db.commit()
+    return user
+
+
 @pytest.fixture
-def client(db_session):
-    """TestClient dung DB test thay cho DB that."""
+def anon_client(db_session):
+    """TestClient chua dang nhap, dung DB test thay cho DB that."""
     from fastapi.testclient import TestClient
 
     from app.core.database import get_db
     from app.main import app
+    from app.modules.auth.permissions import sync_permissions
+    from app.modules.system import service as audit_service
 
+    sync_permissions(db_session)
+    db_session.commit()
     app.dependency_overrides[get_db] = lambda: db_session
+    real_factory = audit_service.audit_session_factory
+    audit_service.audit_session_factory = sessionmaker(bind=db_session.get_bind())
     with TestClient(app) as test_client:
         yield test_client
+    audit_service.audit_session_factory = real_factory
     app.dependency_overrides.clear()
 
 
 @pytest.fixture
+def make_user(db_session):
+    return lambda email, password, permissions, require_2fa=False, employee_code=None: _make_user(
+        db_session, email, password, permissions, require_2fa, employee_code)
+
+
+@pytest.fixture
+def client(anon_client, make_user):
+    """TestClient da dang nhap bang tai khoan toan quyen ("*", khong bat 2FA)."""
+    make_user(TEST_ADMIN["identifier"], TEST_ADMIN["password"], ["*"])
+    response = anon_client.post("/api/v1/auth/login", json=TEST_ADMIN)
+    assert response.status_code == 200 and response.json()["step"] == "done", response.text
+    return anon_client
+
+
+@pytest.fixture
 def process_payload():
-    """Body toi thieu hop le cho POST /test-processes."""
+    """Body toi thieu hop le cho POST /api/v1/lab/test-processes."""
     def build(**overrides):
         payload = {
             "customer_name": "Nhà máy Z-113",

@@ -2,7 +2,10 @@
 
 Chay trong container backend (co WeasyPrint + poppler + Pillow):
 
-    docker compose exec -T backend python /app/../docs/luu-trinh-test-mau/compare_sheet.py
+    docker compose -f infra/docker-compose.yml run --rm -v "$(pwd)/docs:/docs" backend \
+        python /docs/luu-trinh-test-mau/compare_sheet.py
+
+(Git Bash tren Windows: them MSYS_NO_PATHCONV=1 truoc lenh va dung $(pwd -W).)
 
 Sinh ra trong thu muc dich:
   - ban-in.pdf        file PDF cua luu trinh
@@ -29,15 +32,19 @@ OUT_DIR = DOCS_DIR / "_compare"   # .gitignore - anh sinh ra de doi chieu
 
 
 def render(process_id: int) -> Path:
-    from app.api.test_processes import get_company_profile, get_process_or_404
     from app.core.database import SessionLocal
-    from app.services.test_process_sheet import render_sheet_pdf
+    from app.modules import load_all_modules
+    from app.modules.common.services.company_profile import get_or_create_profile
+    from app.modules.lab.routers.test_processes import get_process_or_404
+    from app.modules.lab.services.test_process_sheet import render_sheet_pdf
+
+    load_all_modules()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     pdf_path = OUT_DIR / "ban-in.pdf"
     with SessionLocal() as db:
         process = get_process_or_404(db, process_id)
-        pdf_path.write_bytes(render_sheet_pdf(process, get_company_profile(db)))
+        pdf_path.write_bytes(render_sheet_pdf(process, get_or_create_profile(db)))
     return pdf_path
 
 
