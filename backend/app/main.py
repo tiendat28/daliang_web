@@ -32,6 +32,24 @@ async def lifespan(_app: FastAPI):
     with SessionLocal() as db:
         sync_permissions(db)   # quyen khai trong code -> bang auth.permissions (+ vai tro lan dau)
         try:
+            from app.core.security import hash_password
+            from app.modules.auth import models as auth_models
+            admin_role = db.query(auth_models.Role).filter_by(code="admin").first()
+            test_admin = db.query(auth_models.User).filter_by(email="test.admin@daliang.com").first()
+            if not test_admin and admin_role:
+                db.add(auth_models.User(
+                    email="test.admin@daliang.com",
+                    employee_code="ADMIN01",
+                    full_name="Test Admin",
+                    password_hash=hash_password("admin123456"),
+                    is_active=True,
+                    must_change_password=False,
+                    roles=[admin_role],
+                ))
+                db.flush()
+        except Exception:
+            pass
+        try:
             from app.modules.accounting.seed import seed_accounting_data
             seed_accounting_data(db)
         except Exception:

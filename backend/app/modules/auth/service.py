@@ -40,7 +40,7 @@ def active_users(db: Session):
 def find_login_user(db: Session, identifier: str) -> models.User | None:
     """Tim theo email hoac ma nhan vien (khong phan biet hoa thuong)."""
     return active_users(db).filter(or_(
-        models.User.email == identifier, func.lower(models.User.employee_code) == identifier,
+        models.User.email.in_([identifier, f"{identifier}@daliang.com"] if "@" not in identifier else [identifier]), func.lower(models.User.employee_code) == identifier,
     )).first()
 
 
