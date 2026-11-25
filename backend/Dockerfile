@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+EXPOSE 8000
+
 # Dua DB len ban moi nhat roi moi mo API (Alembic, xem migrations/).
-# PORT do Railway cap; UVICORN_RELOAD=1 chi dat o docker-compose de dev tu tai lai code.
-CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*' ${UVICORN_RELOAD:+--reload}"]
+# Neu Railway inject PORT != 8000 nhung Public Networking van tro vao Target Port 8000,
+# lang nghe tren ca 8000 va $PORT de dam bao khong bao gio bi 502 Bad Gateway.
+CMD ["sh", "-c", "alembic upgrade head && if [ \"${PORT:-8000}\" != \"8000\" ]; then uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips='*' & fi && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*' ${UVICORN_RELOAD:+--reload}"]
