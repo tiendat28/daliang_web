@@ -131,6 +131,41 @@ def replace_catalog(db: Session) -> dict:
     return summary
 
 
+def sync_catalog_missing_fields(db: Session) -> int:
+    """Bo sung ten, cong dung, thong so van hanh tu company_products.json cho cac ma
+    dang bi trong trong DB (khong xoa ma nao va khong ghi de du lieu da co)."""
+    existing = product_lookup(db)
+    updated = 0
+    for item in load_catalog():
+        key = normalize_code(item["code"])
+        product = existing.get(key)
+        if product is None:
+            product = models.CompanyProduct()
+            _apply(product, item)
+            db.add(product)
+            existing[key] = product
+            updated += 1
+            continue
+
+        changed = False
+        if not product.name or normalize_code(product.name) == key:
+            if item.get("name") and normalize_code(item["name"]) != key:
+                product.name = item["name"]
+                changed = True
+        for field in ("name_en", "category", "usage_stage", "materials", "description"):
+            val = getattr(product, field)
+            if (val is None or str(val).strip() == "") and item.get(field):
+                setattr(product, field, item[field])
+                changed = True
+        if not product.modes and item.get("modes"):
+            product.modes = build_modes(item["modes"])
+            changed = True
+        if changed:
+            updated += 1
+    db.flush()
+    return updated
+
+
 def main() -> None:
     from app.modules import load_all_modules
     load_all_modules()   # de cac module kip dang ky hook noi lai tham chieu

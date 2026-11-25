@@ -16,7 +16,7 @@ from app.core.database import SessionLocal, engine
 from app.modules import load_all_modules, module_routers
 from app.modules.auth.permissions import sync_permissions
 from app.modules.common import models as common_models
-from app.modules.common.services.catalog import replace_catalog
+from app.modules.common.services.catalog import replace_catalog, sync_catalog_missing_fields
 from app.modules.common.services.company_profile import seed_company_profile
 from app.modules.system.service import AuditMiddleware
 from app.modules.website.seed import seed_website
@@ -34,7 +34,11 @@ async def lifespan(_app: FastAPI):
         locked = db.execute(text("SELECT pg_try_advisory_lock(20261125)")).scalar()
         if locked:
             try:
-                if db.query(common_models.CompanyProduct).count() == 0:
+                has_empty_desc = db.query(common_models.CompanyProduct).filter(
+                    (common_models.CompanyProduct.description.is_(None))
+                    | (common_models.CompanyProduct.description == "")
+                ).first() is not None
+                if db.query(common_models.CompanyProduct).count() == 0 or has_empty_desc:
                     replace_catalog(db)
                     db.commit()
                 seed_company_profile(engine)

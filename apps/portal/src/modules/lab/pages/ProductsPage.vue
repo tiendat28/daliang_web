@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { Plus, Search, X, Pencil } from 'lucide-vue-next'
 import Modal from '@/core/components/Modal.vue'
 import FormActions from '@/core/components/FormActions.vue'
@@ -100,6 +100,51 @@ const filteredRows = computed(() => {
 const countLabel = computed(() => filteredRows.value.length === rows.value.length
   ? `${rows.value.length} mã`
   : `${filteredRows.value.length} / ${rows.value.length} mã`)
+
+// Chia thẻ sản phẩm vào các cột dọc (Masonry) theo chiều cao ước lượng để
+// thẻ dưới luôn đẩy sát lên ngay dưới đáy thẻ trên, triệt tiêu khoảng trống thừa.
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1440)
+function onResize() {
+  windowWidth.value = window.innerWidth
+}
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => window.removeEventListener('resize', onResize))
+
+const columnCount = computed(() => {
+  if (windowWidth.value < 768) return 1
+  if (windowWidth.value < 1280) return 2
+  return 3
+})
+
+function estimateCardWeight(p) {
+  let weight = 110
+  if (p.usage_stage) weight += 24
+  if (p.materials) weight += 24
+  if (p.description) weight += 36 + Math.ceil(p.description.length / 45) * 20
+  if (p.modes?.length) {
+    weight += 28
+    for (const m of p.modes) {
+      weight += 38 + (m.rows?.length || 0) * 28
+    }
+  }
+  return weight
+}
+
+const masonryColumns = computed(() => {
+  const count = columnCount.value
+  const cols = Array.from({ length: count }, () => [])
+  const heights = Array.from({ length: count }, () => 0)
+
+  for (const item of filteredRows.value) {
+    let minIdx = 0
+    for (let i = 1; i < count; i++) {
+      if (heights[i] < heights[minIdx]) minIdx = i
+    }
+    cols[minIdx].push(item)
+    heights[minIdx] += estimateCardWeight(item)
+  }
+  return cols
+})
 
 // ---------- Form ----------
 const errorMessage = ref('')
@@ -227,9 +272,14 @@ function onHeaderWheel(e) {
 
     <!-- Vùng cuộn riêng cho danh sách thẻ: thẳng hàng 2 bên (px-4 sm:px-6) với khối trên, cuộn lên sẽ ẩn ngay tại mép dưới của khối trên -->
     <div ref="scrollContainer" class="flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 pt-1 pb-6">
-      <div v-if="filteredRows.length" class="grid gap-4 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 items-start">
+      <div v-if="filteredRows.length" class="flex gap-4 items-start">
+        <div
+          v-for="(colItems, colIdx) in masonryColumns"
+          :key="colIdx"
+          class="flex-1 min-w-0 flex flex-col gap-4"
+        >
         <article
-          v-for="p in filteredRows"
+          v-for="p in colItems"
           :key="p.id"
           class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden flex flex-col"
         >
@@ -302,6 +352,7 @@ function onHeaderWheel(e) {
             </div>
           </div>
         </article>
+        </div>
       </div>
 
       <div v-else-if="rows.length" class="text-center py-16 text-slate-400">
