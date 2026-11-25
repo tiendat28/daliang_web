@@ -24,14 +24,20 @@ const resources = [
   { key: 'reports', label: 'Báo cáo phân tích', icon: FileCheck2, tone: 'slate', permission: 'lab.analysis_reports.view', api: analysisReportsApi },
 ]
 
+function asList(val) {
+  if (Array.isArray(val)) return val
+  if (Array.isArray(val?.items)) return val.items
+  return []
+}
+
 const visibleResources = computed(() => resources.filter(resource => can(resource.permission)))
 const statCards = computed(() => visibleResources.value.map(resource => ({
   ...resource,
-  value: data.value[resource.key]?.length ?? 0,
+  value: asList(data.value[resource.key]).length,
 })))
 
 const productGroups = computed(() => {
-  const products = data.value.products || []
+  const products = asList(data.value.products)
   const groups = new Map()
   products.forEach(product => {
     const label = product.category || 'Chưa phân nhóm'
@@ -43,12 +49,12 @@ const productGroups = computed(() => {
     .map(([label, count]) => ({ label, count, percent: products.length ? Math.round(count / products.length * 100) : 0 }))
 })
 
-const recentLogs = computed(() => [...(data.value.workLogs || [])]
+const recentLogs = computed(() => [...asList(data.value.workLogs)]
   .sort((a, b) => String(b.log_date || '').localeCompare(String(a.log_date || '')))
   .slice(0, 5))
 
 const processSummary = computed(() => {
-  const processes = data.value.processes || []
+  const processes = asList(data.value.processes)
   const groups = { draft: 0, in_progress: 0, completed: 0, cancelled: 0 }
   processes.forEach(process => {
     const status = String(process.status || 'draft').toLowerCase()
