@@ -3,6 +3,7 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import FloatingContact from './components/FloatingContact.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import SiteIconSprite from './components/SiteIconSprite.vue'
 import { loadSite, setLang } from './useSite'
@@ -17,4 +18,5 @@ onMounted(loadSite)
   <SiteIconSprite />
   <router-view />
   <SiteFooter />
+  <FloatingContact />
 </template>
